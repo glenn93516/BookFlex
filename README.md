@@ -33,7 +33,7 @@
 
 1. 곽온겸: python, javascript, sql
 2. 김민혁: Java, Python, sql
-3. 우희정:
+3. 우희정: Java, Javascript, MySql, Vue.js, HTML
 4. 이강림:
 5. 조명희:
 
