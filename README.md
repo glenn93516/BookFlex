@@ -28,3 +28,15 @@
 3. 우희정: 임베디드시스템공학과, Java
 4. 이강림: 전자공학부, python
 5. 조명희: 기계공학, python
+
+#### 기술 스택
+
+1. 곽온겸: python, javascript, sql
+2. 김민혁:
+3. 우희정:
+4. 이강림:
+5. 조명희:
+
+
+
+**팀 Notion** : https://www.notion.so/About-Us-a1f265727fc74e0aa53549c8369dd408
