@@ -32,9 +32,9 @@
 #### 기술 스택
 
 1. 곽온겸: python, javascript, sql
-2. 김민혁: python > C > Java > C++, Django, SpringBoot, MySQL, Vue, HTML/CSS/JS
+2. 김민혁: 
 3. 우희정:
-4. 이강림:
+4. 이강림: python > C > Java > C++, Django, SpringBoot, MySQL, Vue, HTML/CSS/JS
 5. 조명희:
 
 
