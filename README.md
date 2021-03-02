@@ -32,8 +32,8 @@
 #### 기술 스택
 
 1. 곽온겸: python, javascript, sql
-2. 김민혁:
-3. 우희정:
+2. 김민혁: 
+3. 우희정: Java, Javascript, MySql, Vue.js, HTML
 4. 이강림:
 5. 조명희:
 
