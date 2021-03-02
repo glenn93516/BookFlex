@@ -34,7 +34,7 @@
 1. 곽온겸: python, javascript, sql
 2. 김민혁: Java, Python, sql
 3. 우희정: Java, Javascript, MySql, Vue.js, HTML
-4. 이강림:
+4. 이강림: python > C > Java > C++, Django, SpringBoot, MySQL, Vue, HTML/CSS/JS
 5. 조명희: Python, JavaScript, mySQL, C
 
 **팀 Notion** : https://www.notion.so/About-Us-a1f265727fc74e0aa53549c8369dd408
