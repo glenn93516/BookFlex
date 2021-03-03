@@ -37,11 +37,11 @@
 4. 이강림: python > C > Java > C++, Django, SpringBoot, MySQL, Vue, HTML/CSS/JS
 5. 조명희: Python, JavaScript, mySQL, C
 
-**팀 Notion** : https://www.notion.so/About-Us-a1f265727fc74e0aa53549c8369dd408
+**팀 Notion** : https://www.notion.so/SSAFY-BOARD-3d9e61c188cf4892a5b2d5bafbc4f06d
 
 #### 추천 노래
 
-1. 곽온겸:
+1. 곽온겸: 조성진 - Piano Concerto in E minor, Op. 11 
 2. 김민혁: 아이유 - eight
 3. 우희정: 성시경 - 희재
 4. 이강림: Busted - Year 3000 (출발비디오여행 오프닝곡)
