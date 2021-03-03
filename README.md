@@ -37,7 +37,7 @@
 4. 이강림: python > C > Java > C++, Django, SpringBoot, MySQL, Vue, HTML/CSS/JS
 5. 조명희: Python, JavaScript, mySQL, C
 
-**팀 Notion** : https://www.notion.so/About-Us-a1f265727fc74e0aa53549c8369dd408
+**팀 Notion** : https://www.notion.so/SSAFY-BOARD-3d9e61c188cf4892a5b2d5bafbc4f06d
 
 #### 추천 노래
 
