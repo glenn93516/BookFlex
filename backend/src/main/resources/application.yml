@@ -1,0 +1,34 @@
+server:
+  port: 9987
+  servlet:
+    context-path: /api
+
+
+spring:
+  profiles:
+    active: local
+    include:
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
+--- # 개발
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/field_dev?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
+    username: ssafy
+    password: ssafy
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+--- # 배포 환경
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://field-ensemble.cqwzhdgaabxu.ap-northeast-2.rds.amazonaws.com:3306/fieldproject?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
+    username: ssafy
+    password: ssafyssafy
+    driver-class-name: com.mysql.cj.jdbc.Driver
