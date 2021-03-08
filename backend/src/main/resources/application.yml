@@ -3,7 +3,6 @@ server:
   servlet:
     context-path: /api
 
-
 spring:
   profiles:
     active: local
@@ -14,6 +13,18 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 
+logging:
+  level:
+    com.ssafy.backend: debug
+
+jwt:
+  header: Authorization
+  secret: Fieldproject1@#
+  token-validity-in-seconds: 3600000
+
+mybatis:
+  mapper-locations: classpath:/mappers/*.xml
+  type-aliases-package: com.ssafy.backend.dto
 
 --- # 개발
 spring:
