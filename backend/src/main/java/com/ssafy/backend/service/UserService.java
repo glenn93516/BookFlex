@@ -25,8 +25,14 @@ public class UserService {
 
     @Transactional
     public UserDto join(UserDto userDto) {
-        if (userMapper.findUserByUserEmail(userDto.getUserEmail()).isPresent()) {
+        if (userMapper.findUserByUserEmail(userDto.getUserEmail()).isPresent() || userMapper.findUserByUserNickname(userDto.getUserNickname()).isPresent()) {
             throw new DuplicatedUsernameException("이미 가입된 유저입니다");
+        }
+
+        // TODO: 유저 프로필 이미지 저장하는 로직 추가 필요
+
+        if (userDto.getUserGender() != null) {
+            userDto.setUserGender(userDto.getUserGender().toUpperCase()); // 성별 FEMALE, MALE 대문자
         }
 
         userDto.setUserPassword(passwordEncoder.encode(userDto.getPassword()));
@@ -48,6 +54,11 @@ public class UserService {
 
     public UserDto findByUserId(Long userId) {
         return userMapper.findUserByUserId(userId)
+                .orElseThrow(() -> new UserNotFoundException("없는 유저입니다."));
+    }
+
+    public UserDto findUserByUserNickname(String userNickname) {
+        return userMapper.findUserByUserNickname(userNickname)
                 .orElseThrow(() -> new UserNotFoundException("없는 유저입니다."));
     }
 }

@@ -10,4 +10,5 @@ public interface UserMapper {
     Optional<UserDto> findUserByUserEmail(String userEmail);
     Optional<UserDto> findUserByUserId(Long userId);
     void save(UserDto userDto);
+    Optional<UserDto> findUserByUserNickname(String userNickname);
 }

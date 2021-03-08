@@ -5,19 +5,25 @@
 
 <mapper namespace="com.ssafy.backend.mapper.UserMapper">
     <select id="findUserByUserEmail" resultType="UserDto">
-        SELECT user_id userId, user_email userEmail, user_password userPassword, user_role userRole
+        SELECT user_id userId, user_email userEmail, user_password userPassword, user_nickname userNickname, user_job userJob, user_gender userGender, user_profile_img userProfileImg, user_birth userBirth
         FROM user
         WHERE user_email = #{userEmail}
     </select>
 
     <select id="findUserByUserId" resultType="UserDto">
-        SELECT user_id userId, user_email userEmail, user_password userPassword, user_role userRole
+        SELECT user_id userId, user_email userEmail, user_password userPassword, user_nickname userNickname, user_job userJob, user_gender userGender, user_profile_img userProfileImg, user_birth userBirth
         FROM user
         WHERE user_id = #{userId}
     </select>
+
+    <select id="findUserByUserNickname" resultType="UserDto">
+        SELECT user_id userId, user_email userEmail, user_password userPassword, user_nickname userNickname, user_job userJob, user_gender userGender, user_profile_img userProfileImg, user_birth userBirth
+        FROM user
+        WHERE user_nickname = #{userNickname}
+    </select>
     
     <insert id="save" parameterType="UserDto">
-        INSERT INTO user (user_email, user_password, user_nickname)
-        VALUES ( #{userEmail}, #{userPassword}, #{userNickname} )
+        INSERT INTO user (user_email, user_password, user_nickname, user_job, user_gender, user_profile_img, user_birth)
+        VALUES ( #{userEmail}, #{userPassword}, #{userNickname} , #{userJob}, #{userGender}, #{userProfileImg}, #{userBirth})
     </insert>
 </mapper>

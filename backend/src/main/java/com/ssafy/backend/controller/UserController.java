@@ -85,4 +85,23 @@ public class UserController {
 
         return responseEntity;
     }
+
+    @GetMapping("/{userNickname}")
+    public ResponseEntity findUserByUserNickname(@PathVariable String userNickname) {
+        ResponseEntity responseEntity = null;
+        try {
+            UserDto findUser = userService.findUserByUserNickname(userNickname);
+
+            SingleDataResponse<UserDto> response = responseService.getSingleDataResponse(true, "조회 성공", findUser);
+
+            responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (UserNotFoundException exception) {
+            logger.debug(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        return responseEntity;
+    }
 }
