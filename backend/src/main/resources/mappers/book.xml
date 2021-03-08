@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backend.mapper.BookMapper">
+    <insert id="insertBook" parameterType="BookDto">
+        insert into book (book_isbn, book_title, book_author, book_publisher, book_contents, book_date, book_cover)
+        values (#{book_isbn}, #{book_title}, #{book_author}, #{book_publisher}, #{book_contents}, #{book_date},#{book_cover})
+    </insert>
+    <update id="updateBook" parameterType="BookDto">
+        update book
+        set book_title = #{book_title}, book_author = #{book_author}, book_publisher = #{book_publisher}, book_contents= #{book_contents}, book_date= #{book_date}, book_cover= #{book_cover}
+        where book_isbn = #{book_isbn}
+    </update>
+    <delete id="deleteBook" parameterType="long">
+        delete from book where book_isbn = #{book_isbn}
+    </delete>
+    <select id="selectBook" parameterType="long" resultType="BookDto">
+        select book_isbn, book_title, book_author, book_publisher, book_contents, book_date, book_cover
+        from book
+        where book_isbn = #{book_isbn}
+    </select>
+</mapper>
