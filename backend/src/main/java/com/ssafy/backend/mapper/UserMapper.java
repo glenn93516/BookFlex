@@ -12,4 +12,5 @@ public interface UserMapper {
     void save(UserDto userDto);
     void update(UserDto userDto);
     Optional<UserDto> findUserByUserNickname(String userNickname);
+    void deleteOne(Long userId);
 }

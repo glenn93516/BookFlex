@@ -32,4 +32,8 @@
         INSERT INTO user (user_email, user_password, user_nickname, user_job, user_gender, user_profile_img, user_birth)
         VALUES ( #{userEmail}, #{userPassword}, #{userNickname} , #{userJob}, #{userGender}, #{userProfileImg}, #{userBirth})
     </insert>
+
+    <delete id="deleteOne">
+        DELETE FROM user WHERE user_id = #{userId};
+    </delete>
 </mapper>

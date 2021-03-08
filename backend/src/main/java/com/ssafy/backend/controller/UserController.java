@@ -93,6 +93,31 @@ public class UserController {
         return responseEntity;
     }
 
+    /**
+     * 유저 정보 삭제 (회원 탈퇴)
+     */
+    @DeleteMapping
+    public ResponseEntity deleteUser(final Authentication authentication) {
+        ResponseEntity responseEntity = null;
+
+        try {
+            Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
+
+            userService.deleteOne(userId);
+
+            BaseResponse response = responseService.getBaseResponse(true, "삭제 성공");
+
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (UserNotFoundException exception) {
+            logger.debug(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        return responseEntity;
+    }
+
     @GetMapping
     public ResponseEntity findUserByUsername(final Authentication authentication) {
         ResponseEntity responseEntity = null;

@@ -83,4 +83,9 @@ public class UserService {
         userMapper.update(findUser);
         return findUser.getUserId();
     }
+
+    @Transactional
+    public void deleteOne(Long userId) {
+        userMapper.deleteOne(userId);
+    }
 }
