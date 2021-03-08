@@ -1,9 +1,12 @@
 package com.ssafy.backend.service;
 
 import com.ssafy.backend.dto.BookDto;
+import com.ssafy.backend.dto.ReviewDto;
 import com.ssafy.backend.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BookServiceImpl implements BookService{
@@ -29,5 +32,10 @@ public class BookServiceImpl implements BookService{
     @Override
     public BookDto selectBook(long book_isbn) throws Exception {
         return mapper.selectBook(book_isbn);
+    }
+
+    @Override
+    public List<ReviewDto> selectReviewList(long book_isbn) throws Exception {
+        return mapper.selectReviewList(book_isbn);
     }
 }

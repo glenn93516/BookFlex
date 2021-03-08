@@ -20,4 +20,9 @@
         from book
         where book_isbn = #{book_isbn}
     </select>
+    <select id="selectReviewList" parameterType="long" resultType="ReviewDto">
+        select review_id, book_isbn, review_content, review_rating
+        from review
+        where book_isbn = #{book_isbn}
+    </select>
 </mapper>

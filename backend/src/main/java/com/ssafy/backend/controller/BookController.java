@@ -1,6 +1,7 @@
 package com.ssafy.backend.controller;
 
 import com.ssafy.backend.dto.BookDto;
+import com.ssafy.backend.dto.ReviewDto;
 import com.ssafy.backend.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -47,7 +49,7 @@ public class BookController {
             BookDto book = bookService.selectBook(book_isbn);
             if(book != null) {
                 result.put("success", "success");
-                result.put("Book", book);
+                result.put("data", book);
                 entity = new ResponseEntity<>(result, HttpStatus.OK);
             }else {
                 result.put("success", "fail");
@@ -100,6 +102,27 @@ public class BookController {
 //                entity = new ResponseEntity<>(result, HttpStatus.OK);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+            result.put("success", "error");
+            entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
+        return entity;
+    }
+
+    //책 리뷰 조회
+    @GetMapping(value = "/{book_isbn}/review")
+    private ResponseEntity getReviewList(@PathVariable(name = "book_isbn") long book_isbn){
+        ResponseEntity entity = null;
+        Map result = new HashMap();
+        List<ReviewDto> list = null;
+        try {
+            list = bookService.selectReviewList(book_isbn);
+            result.put("success", "success");
+            result.put("data", list);
+            entity = new ResponseEntity<>(result, HttpStatus.OK);
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
             result.put("success", "error");
             entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
