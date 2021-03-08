@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backend.mapper.NoticeMapper">
+
+    <insert id="writeNotice" parameterType="NoticeDto">
+        INSERT INTO notice (notice_title, notice_content, notice_date, user_id)
+        VALUES (#{noticeTitle}, #{noticeContent}, now(), #{userId})
+    </insert>
+
+    <select id="listNotice" resultType="NoticeDto">
+        SELECT notice_id noticeId, notice_title noticeTitle, notice_content noticeContent, notice_date noticeDate, user_id userId
+        FROM notice
+    </select>
+
+    <select id="getNotice" resultType="NoticeDto">
+        SELECT notice_id noticeId, notice_title noticeTitle, notice_content noticeContent, notice_date noticeDate, user_id userId
+        FROM notice
+        WHERE notice_id = #{noticeId}
+    </select>
+
+    <update id="modifyNotice" parameterType="NoticeDto">
+        UPDATE notice
+        SET notice_title = #{noticeTitle}, notice_content = #{noticeContent}, user_id = #{userId}
+        WHERE notice_id = #{noticeId}
+    </update>
+
+    <delete id="deleteNotice">
+        DELETE FROM notice
+        WHERE notice_id = #{noticeId}
+    </delete>
+
+</mapper>
