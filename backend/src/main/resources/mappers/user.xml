@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backend.mapper.UserMapper">
+    <select id="findUserByUserEmail" resultType="UserDto">
+        SELECT user_id userId, user_email userEmail, user_password userPassword, user_role userRole
+        FROM user
+        WHERE user_email = #{userEmail}
+    </select>
+
+    <select id="findUserByUserId" resultType="UserDto">
+        SELECT user_id userId, user_email userEmail, user_password userPassword, user_role userRole
+        FROM user
+        WHERE user_id = #{userId}
+    </select>
+    
+    <insert id="save" parameterType="UserDto">
+        INSERT INTO user (user_email, user_password, user_nickname)
+        VALUES ( #{userEmail}, #{userPassword}, #{userNickname} )
+    </insert>
+</mapper>

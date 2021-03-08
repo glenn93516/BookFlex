@@ -19,7 +19,7 @@ logging:
 
 jwt:
   header: Authorization
-  secret: Fieldproject1@#
+  secret: ssafy-Fieldproject-ensemble-backend-api-server-secret1@#
   token-validity-in-seconds: 3600000
 
 mybatis:
