@@ -20,8 +20,8 @@ public class BookController {
     private BookService bookService;
 
     //책 등록
-    @PostMapping(value = "/")
-    private ResponseEntity create(@RequestBody BookDto book) {
+    @PostMapping(value = "")
+    private ResponseEntity createBook(@RequestBody BookDto book) {
         ResponseEntity entity = null;
         Map result = new HashMap();
         try {
@@ -42,7 +42,7 @@ public class BookController {
 
     //책 정보 조회
     @GetMapping(value = "/{book_isbn}")
-    private ResponseEntity detail(@PathVariable(name = "book_isbn") long book_isbn) {
+    private ResponseEntity detailBook(@PathVariable(name = "book_isbn") long book_isbn) {
         ResponseEntity entity = null;
         Map result = new HashMap();
         try {
@@ -66,7 +66,7 @@ public class BookController {
 
     //책 정보 수정
     @PutMapping(value = "/{book_isbn}")
-    private ResponseEntity update(@RequestBody BookDto book, @PathVariable(name = "book_isbn") long book_isbn) {
+    private ResponseEntity updateBook(@RequestBody BookDto book, @PathVariable(name = "book_isbn") long book_isbn) {
         ResponseEntity entity = null;
         Map result = new HashMap();
         book.setBook_isbn(book_isbn);
@@ -89,7 +89,7 @@ public class BookController {
 
     //책 정보 삭제
     @DeleteMapping(value = "/{book_isbn}")
-    private ResponseEntity delete(@PathVariable(name = "book_isbn") long book_isbn) {
+    private ResponseEntity deleteBook(@PathVariable(name = "book_isbn") long book_isbn) {
         ResponseEntity entity = null;
         Map result = new HashMap();
         try {
@@ -121,6 +121,32 @@ public class BookController {
             result.put("data", list);
             entity = new ResponseEntity<>(result, HttpStatus.OK);
 
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            result.put("success", "error");
+            entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        }
+        return entity;
+    }
+
+    //책 검색
+    @GetMapping(value = "")
+    private ResponseEntity getSearchList(@RequestParam(defaultValue="title") String search, @RequestParam(defaultValue="") String word){
+        ResponseEntity entity = null;
+        Map result = new HashMap();
+        List<BookDto> list = null;
+        try {
+            if(search.equals("title")){
+                list = bookService.selectTitleList(word);
+            }else if(search.equals("author")){
+                list = bookService.selectAuthorList(word);
+            }else if(search.equals("contents")) {
+                list = bookService.selectContentsList(word);
+            }
+            result.put("success", "success");
+            result.put("data", list);
+            entity = new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

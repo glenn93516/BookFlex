@@ -38,4 +38,19 @@ public class BookServiceImpl implements BookService{
     public List<ReviewDto> selectReviewList(long book_isbn) throws Exception {
         return mapper.selectReviewList(book_isbn);
     }
+
+    @Override
+    public List<BookDto> selectTitleList(String word) throws Exception {
+        return mapper.selectTitleList(word);
+    }
+
+    @Override
+    public List<BookDto> selectAuthorList(String word) throws Exception {
+        return mapper.selectAuthorList(word);
+    }
+
+    @Override
+    public List<BookDto> selectContentsList(String word) throws Exception {
+        return mapper.selectContentsList(word);
+    }
 }

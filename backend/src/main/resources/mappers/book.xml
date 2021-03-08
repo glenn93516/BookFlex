@@ -25,4 +25,21 @@
         from review
         where book_isbn = #{book_isbn}
     </select>
+    <select id="selectTitleList" resultType="BookDto">
+        select book_isbn, book_title, book_author, book_publisher, book_contents, book_date, book_cover
+        from book
+        where book_title like CONCAT('%', #{word}, "%")
+    </select>
+
+    <select id="selectAuthorList" resultType="BookDto">
+        select book_isbn, book_title, book_author, book_publisher, book_contents, book_date, book_cover
+        from book
+        where book_author like CONCAT('%', #{word}, "%")
+    </select>
+
+    <select id="selectContentsList" resultType="BookDto">
+        select  book_isbn, book_title, book_author, book_publisher, book_contents, book_date, book_cover
+        from book
+        where book_contents like CONCAT('%', #{word}, "%")
+    </select>
 </mapper>
