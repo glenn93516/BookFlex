@@ -61,4 +61,26 @@ public class UserService {
         return userMapper.findUserByUserNickname(userNickname)
                 .orElseThrow(() -> new UserNotFoundException("없는 유저입니다."));
     }
+
+    @Transactional
+    public Long updateUser(UserDto findUser, UserDto modifyUser) {
+        if (modifyUser.getUserGender() != null) {
+            findUser.setUserGender(findUser.getUserGender().toUpperCase()); // 성별 FEMALE, MALE 대문자
+        }
+        if (modifyUser.getUserBirth() != null) {
+            findUser.setUserBirth(modifyUser.getUserBirth());
+        }
+        if (modifyUser.getUserJob() != null) {
+            findUser.setUserJob(modifyUser.getUserJob());
+        }
+        if (modifyUser.getUserNickname() != null) {
+            findUser.setUserNickname(modifyUser.getUserNickname());
+        }
+        if (modifyUser.getPassword() != null) {
+            findUser.setUserPassword(passwordEncoder.encode(findUser.getUserPassword())); // 비밀번호
+        }
+
+        userMapper.update(findUser);
+        return findUser.getUserId();
+    }
 }

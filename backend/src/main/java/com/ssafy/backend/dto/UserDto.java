@@ -25,6 +25,7 @@ public class UserDto implements UserDetails {
     private String userProfileImg; // 프로필 사진 URL
     private LocalDate userBirth; // 생일
 
+
     // 이하 코드는 security 를 위한 용도
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<? extends GrantedAuthority> authorities;

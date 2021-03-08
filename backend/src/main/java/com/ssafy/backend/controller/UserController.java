@@ -66,6 +66,33 @@ public class UserController {
         return responseEntity;
     }
 
+    /**
+     * 유저 정보 수정
+     * TODO: 유저 프로필 이미지 수정은 따로 만들 예정
+     */
+    @PutMapping
+    public ResponseEntity modifyUser(final Authentication authentication, @RequestBody UserDto modifyUser) {
+        ResponseEntity responseEntity = null;
+
+        try {
+            Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
+            UserDto findUser = userService.findByUserId(userId);
+
+            userService.updateUser(findUser, modifyUser);
+
+            BaseResponse response = responseService.getBaseResponse(true, "수정 성공");
+
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (UserNotFoundException exception) {
+            logger.debug(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        return responseEntity;
+    }
+
     @GetMapping
     public ResponseEntity findUserByUsername(final Authentication authentication) {
         ResponseEntity responseEntity = null;
