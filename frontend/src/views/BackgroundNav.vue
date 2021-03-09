@@ -42,6 +42,8 @@
           <b-dropdown-item href="#" style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"><span style="font-size: 0.8rem;">로그아웃</span></b-dropdown-item>
             <hr>
           <b-dropdown-item href="#" style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"><span style="font-size: 0.8rem;">나의서재</span></b-dropdown-item>
+            <hr>
+          <b-dropdown-item href="/signup/1" style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"><span style="font-size: 0.8rem;">회원가입(temp)</span></b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-navbar>

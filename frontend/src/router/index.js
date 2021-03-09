@@ -32,7 +32,16 @@ const routes = [
             path: '2',
             name: 'CheckEmail',
             component: () => import('../components/Signup/CheckEmail.vue'),
-            props: true,
+          },
+          {
+            path: '3',
+            name: 'InputName',
+            component: () => import('../components/Signup/InputName.vue'),
+          },
+          {
+            path: '4',
+            name: 'SubmitPref',
+            component: () => import('../components/Signup/SubmitPref.vue'),
           },
         ]
       },
