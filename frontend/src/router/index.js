@@ -24,9 +24,15 @@ const routes = [
         component: () => import('../components/Signup/Signup.vue'),
         children: [
           {
-            path: 'checkemail',
+            path: '1',
+            name: 'SubmitEmail',
+            component: () => import('../components/Signup/SubmitEmail.vue'),
+          },
+          {
+            path: '2',
             name: 'CheckEmail',
             component: () => import('../components/Signup/CheckEmail.vue'),
+            props: true,
           },
         ]
       },
