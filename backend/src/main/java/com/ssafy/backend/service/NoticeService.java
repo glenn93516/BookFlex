@@ -14,21 +14,31 @@ public class NoticeService {
 
     private final NoticeMapper noticeMapper;
 
-    public void writeNotice(NoticeDto noticeDto){
-        noticeMapper.writeNotice(noticeDto);
+    @Transactional
+    public List<NoticeDto> listNotice() throws Exception {
+        return noticeMapper.selectNoticeList();
     }
 
-    public List<NoticeDto> listNotice(){
-        return noticeMapper.listNotice();
+    @Transactional
+    public NoticeDto getNotice(Long noticeId) throws Exception {
+        return noticeMapper.selectNotice(noticeId);
     }
 
-    public NoticeDto getNotice(int noticeId){
-        return noticeMapper.getNotice(noticeId);
+    @Transactional
+    public int writeNotice(NoticeDto noticeDto) throws Exception {
+        if(noticeDto.getNoticeTitle() == null || noticeDto.getNoticeContent() == null) {
+            throw new Exception("제목 또는 내용이 비어있습니다.");
+        }
+        return noticeMapper.insertNotice(noticeDto);
     }
 
-    public void modifyNotice(NoticeDto noticeDto){ noticeMapper.modifyNotice(noticeDto); }
+    @Transactional
+    public int modifyNotice(NoticeDto noticeDto) throws Exception {
+        return noticeMapper.updateNotice(noticeDto);
+    }
 
-    public void deleteNotice(int noticeId){
-        noticeMapper.deleteNotice(noticeId);
+    @Transactional
+    public int deleteNotice(Long noticeId) throws Exception {
+        return noticeMapper.deleteNotice(noticeId);
     }
 }
