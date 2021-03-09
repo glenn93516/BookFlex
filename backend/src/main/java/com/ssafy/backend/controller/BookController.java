@@ -2,7 +2,12 @@ package com.ssafy.backend.controller;
 
 import com.ssafy.backend.dto.BookDto;
 import com.ssafy.backend.dto.ReviewDto;
+import com.ssafy.backend.dto.response.BaseResponse;
+import com.ssafy.backend.dto.response.ListDataResponse;
+import com.ssafy.backend.dto.response.SingleDataResponse;
 import com.ssafy.backend.service.BookService;
+import com.ssafy.backend.service.ResponseService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,142 +21,125 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/book")
 public class BookController {
 
     @Autowired
-    private BookService bookService;
-
-    private Logger logger = LoggerFactory.getLogger(BookController.class);
+    private final BookService bookService;
+    private final ResponseService responseService;
+    private final Logger logger = LoggerFactory.getLogger(BookController.class);
 
     //책 등록
     @PostMapping(value = "")
     private ResponseEntity createBook(@RequestBody BookDto book) {
-        ResponseEntity entity = null;
-        Map result = new HashMap();
+        ResponseEntity responseEntity = null;
         try {
             if(bookService.insertBook(book) == 1) {
-                result.put("success", true);
-                result.put("message","도서 등록 성공");
-                entity = new ResponseEntity(result, HttpStatus.CREATED);
+                BaseResponse response = responseService.getBaseResponse(true, "도서 등록 성공");
+                responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
             }
-        } catch (DataIntegrityViolationException e){
-            logger.debug(e.getMessage());
-            result.put("success", false);
-            result.put("message","Duplicate");
-            entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
-        catch (Exception e) {
-//            e.printStackTrace();
-            logger.debug(e.getMessage());
-            result.put("success", false);
-            result.put("message","error");
-            entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+//        catch (DataIntegrityViolationException exception){
+//            logger.debug(exception.getMessage());
+//            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+//            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+//        }
+        catch (Exception exception) {
+            logger.debug(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-        return entity;
+        return responseEntity;
     }
 
     //책 정보 조회
     @GetMapping(value = "/{book_isbn}")
     private ResponseEntity detailBook(@PathVariable(name = "book_isbn") long book_isbn) {
-        ResponseEntity entity = null;
-        Map result = new HashMap();
+        ResponseEntity responseEntity = null;
         BookDto book = null;
         try {
             book = bookService.selectBook(book_isbn);
             if(book != null){
-                result.put("success", true);
-                result.put("message","도서 조회 성공");
-                result.put("data", book);
-                entity = new ResponseEntity<>(result, HttpStatus.OK);
-            }else{
-                result.put("success", false);
-                result.put("message","일치 도서 없음");
-                entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+                SingleDataResponse<BookDto> response = responseService.getSingleDataResponse(true, "도서 상세 조회 성공", book);
+                responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
             }
-        } catch (Exception e) {
-            logger.debug(e.getMessage());
-            result.put("success", false);
-            result.put("message","error");
-            entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            else{
+                SingleDataResponse<BookDto> response = responseService.getSingleDataResponse(false, "일치 도서 없음", null);
+                responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+            }
+        } catch (Exception exception) {
+            logger.debug(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-        return entity;
+        return responseEntity;
     }
 
     //책 정보 수정
     @PutMapping(value = "/{book_isbn}")
     private ResponseEntity updateBook(@RequestBody BookDto book, @PathVariable(name = "book_isbn") long book_isbn) {
-        ResponseEntity entity = null;
-        Map result = new HashMap();
+        ResponseEntity responseEntity = null;
         book.setBook_isbn(book_isbn);
         try {
             if (bookService.updateBook(book) == 1) {
-                result.put("success", true);
-                result.put("message","도서 수정 성공");
-                entity = new ResponseEntity<>(result, HttpStatus.OK);
-            }else {
-                result.put("success", false);
-                result.put("message","일치 도서 없음");
-                entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+                BaseResponse response = responseService.getBaseResponse(true, "도서 수정 성공");
+                responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
             }
-        } catch (Exception e) {
-            logger.debug(e.getMessage());
-            result.put("success", false);
-            result.put("message", "error");
-            entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            else {
+                BaseResponse response = responseService.getBaseResponse(false, "일치 도서 없음");
+                responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+            }
+        } catch (Exception exception) {
+            logger.debug(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-        return entity;
+        return responseEntity;
     }
 
     //책 정보 삭제
     @DeleteMapping(value = "/{book_isbn}")
     private ResponseEntity deleteBook(@PathVariable(name = "book_isbn") long book_isbn) {
-        ResponseEntity entity = null;
-        Map result = new HashMap();
+        ResponseEntity responseEntity = null;
         try {
             if (bookService.deleteBook(book_isbn)== 1) {
-                result.put("success", true);
-                entity = new ResponseEntity<>(result, HttpStatus.OK);
+                BaseResponse response = responseService.getBaseResponse(true, "도서 삭제 성공");
+                responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
             }
             else {
-                result.put("success", false);
-                result.put("message","일치 도서 없음");
-                entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+                BaseResponse response = responseService.getBaseResponse(false, "일치 도서 없음");
+                responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
             }
-        } catch (Exception e) {
-            logger.debug(e.getMessage());
-            result.put("success", false);
-            result.put("message", "error");
-            entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+        } catch (Exception exception) {
+            logger.debug(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-        return entity;
+        return responseEntity;
     }
 
     //책 리뷰 조회
     @GetMapping(value = "/{book_isbn}/review")
     private ResponseEntity getReviewList(@PathVariable(name = "book_isbn") long book_isbn){
-        ResponseEntity entity = null;
-        Map result = new HashMap();
+        ResponseEntity responseEntity = null;
         List<ReviewDto> list = null;
         try {
             list = bookService.selectReviewList(book_isbn);
-            result.put("success", "success");
-            result.put("data", list);
-            entity = new ResponseEntity<>(result, HttpStatus.OK);
-
-        } catch (Exception e) {
-            logger.debug(e.getMessage());
-            result.put("success", false);
-            result.put("message", "error");
-            entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            ListDataResponse<ReviewDto> response = responseService.getListDataResponse(true, "도서 리뷰 조회 성공", list);
+            responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+        } catch (Exception exception) {
+            logger.debug(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-        return entity;
+        return responseEntity;
     }
 
     //책 검색
     @GetMapping(value = "")
     private ResponseEntity getSearchList(@RequestParam(defaultValue="title") String search, @RequestParam(defaultValue="") String word){
-        ResponseEntity entity = null;
+        ResponseEntity responseEntity = null;
         Map result = new HashMap();
         List<BookDto> list = null;
         try {
@@ -162,15 +150,13 @@ public class BookController {
             }else if(search.equals("contents")) {
                 list = bookService.selectContentsList(word);
             }
-            result.put("success", "success");
-            result.put("data", list);
-            entity = new ResponseEntity<>(result, HttpStatus.OK);
-        } catch (Exception e) {
-            logger.debug(e.getMessage());
-            result.put("success", false);
-            result.put("message", "error");
-            entity = new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+            ListDataResponse<BookDto> response = responseService.getListDataResponse(true, "도서 검색 성공", list);
+            responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+        } catch (Exception exception) {
+            logger.debug(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-        return entity;
+        return responseEntity;
     }
 }
