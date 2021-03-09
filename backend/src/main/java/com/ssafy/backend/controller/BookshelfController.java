@@ -82,7 +82,7 @@ public class BookshelfController {
         return responseEntity;
     }
 
-    @PreAuthorize("hasRole('USER_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "유저 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
     })
@@ -105,7 +105,7 @@ public class BookshelfController {
         return responseEntity;
     }
 
-    @PreAuthorize("hasRole('USER_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "유저 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
     })
