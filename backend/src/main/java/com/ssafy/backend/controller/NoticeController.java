@@ -9,6 +9,7 @@ import com.ssafy.backend.service.ResponseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class NoticeController {
     private final NoticeService noticeService;
     private final ResponseService responseService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity writeNotice(@RequestBody NoticeDto noticeDto){
         ResponseEntity responseEntity = null;
@@ -69,6 +71,7 @@ public class NoticeController {
         return responseEntity;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{noticeId}")
     public ResponseEntity modifyNotice(@RequestBody NoticeDto noticeDto){
         ResponseEntity responseEntity = null;
@@ -85,6 +88,7 @@ public class NoticeController {
         return responseEntity;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{noticeId}")
     public ResponseEntity deleteNotice(@PathVariable("noticeId") int noticeId){
         ResponseEntity responseEntity = null;
