@@ -18,9 +18,20 @@ const routes = [
         name: 'Login',
         component: () => import('../components/Login/Login.vue')
       },
+      {
+        path:'/signup',
+        name: 'Signup',
+        component: () => import('../components/Signup/Signup.vue'),
+        children: [
+          {
+            path: 'checkemail',
+            name: 'CheckEmail',
+            component: () => import('../components/Signup/CheckEmail.vue'),
+          },
+        ]
+      },
     ]
   },
-
 ]
 
 const router = new VueRouter({
@@ -28,5 +39,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+// router guard로 이메일 인증 건너뛰기 막아줘야함
 
 export default router
