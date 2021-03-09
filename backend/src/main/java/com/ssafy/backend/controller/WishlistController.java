@@ -46,9 +46,7 @@ public class WishlistController {
         String wishlist_date = format.format(time);
         WishlistDto wishlist = new WishlistDto();
         wishlist.setWishlist_date(wishlist_date);
-
         wishlist.setBook_isbn(book_isbn);
-
         Long user_id = ((UserDto) authentication.getPrincipal()).getUserId();
         wishlist.setUser_id(user_id);
 
@@ -64,8 +62,8 @@ public class WishlistController {
 //            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 //        }
         catch (Exception exception) {
-//            logger.debug(exception.getMessage());
-            exception.printStackTrace();
+            logger.debug(exception.getMessage());
+//            exception.printStackTrace();
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
@@ -113,5 +111,4 @@ public class WishlistController {
         }
         return responseEntity;
     }
-
 }
