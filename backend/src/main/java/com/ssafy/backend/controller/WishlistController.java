@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -37,6 +38,7 @@ public class WishlistController {
     private final Logger logger = LoggerFactory.getLogger(WishlistController.class);
 
     //위시리스트 등록
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping(value = "/{book_isbn}")
     public ResponseEntity addWishlist(@PathVariable(name = "book_isbn") long book_isbn, @ApiIgnore final Authentication authentication) {
         ResponseEntity responseEntity = null;
@@ -71,6 +73,7 @@ public class WishlistController {
     }
 
     //위시리스트 삭제
+    @PreAuthorize("hasRole('ROLE_USER')")
     @DeleteMapping(value = "/{wishlist_id}")
     public ResponseEntity deleteWishlist(@PathVariable(name = "wishlist_id") long wishlist_id, @ApiIgnore final Authentication authentication) {
         ResponseEntity responseEntity = null;
@@ -95,6 +98,7 @@ public class WishlistController {
     }
 
     //위시리스트 조회
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value = "")
     public ResponseEntity getWishList(@ApiIgnore final Authentication authentication){
         ResponseEntity responseEntity = null;
