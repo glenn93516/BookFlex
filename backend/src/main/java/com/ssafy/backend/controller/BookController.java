@@ -15,7 +15,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +36,8 @@ public class BookController {
     //도서 등록
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "")
-    public ResponseEntity createBook(@RequestBody BookDto book) {
+    public ResponseEntity createBook(@RequestBody BookDto book, @ApiIgnore final Authentication authentication) {
+//  public ResponseEntity createBook(@RequestBody BookDto book) {
         ResponseEntity responseEntity = null;
         try {
             if(bookService.insertBook(book) == 1) {
@@ -79,9 +82,10 @@ public class BookController {
     }
 
     //책 정보 수정
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{book_isbn}")
-    public ResponseEntity updateBook(@RequestBody BookDto book, @PathVariable(name = "book_isbn") long book_isbn) {
+    public ResponseEntity updateBook(@RequestBody BookDto book, @PathVariable(name = "book_isbn") long book_isbn, @ApiIgnore final Authentication authentication) {
+//  public ResponseEntity updateBook(@RequestBody BookDto book, @PathVariable(name = "book_isbn") long book_isbn) {
         ResponseEntity responseEntity = null;
         book.setBook_isbn(book_isbn);
         try {
@@ -102,9 +106,10 @@ public class BookController {
     }
 
     //책 정보 삭제
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{book_isbn}")
-    public ResponseEntity deleteBook(@PathVariable(name = "book_isbn") long book_isbn) {
+    public ResponseEntity deleteBook(@PathVariable(name = "book_isbn") long book_isbn, @ApiIgnore final Authentication authentication) {
+//    public ResponseEntity deleteBook(@PathVariable(name = "book_isbn") long book_isbn) {
         ResponseEntity responseEntity = null;
         try {
             if (bookService.deleteBook(book_isbn)== 1) {
