@@ -41,9 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/*/login", "/*/user/**").permitAll() // 로그인, 회원가입 권한 없이 허용
-//                .anyRequest().hasRole("USER")
-                .anyRequest().permitAll() // TODO: 현재 회원가입이 자꾸 막혀서 임시방편으로 전부 허용
+                .antMatchers("/*/login", "/*/join").permitAll() // 로그인, 회원가입 권한 없이 허용
+                .antMatchers("/*/user**", "/*/user/**").hasRole("USER")
+                .anyRequest().hasRole("USER")
 
                 .and()
                 .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
@@ -51,13 +51,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 
                 .and()
-                .addFilterBefore(new JwtFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class); // ID, Password 검사 전에 jwt 필터 먼저 수행
+                .addFilterBefore(new JwtFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class) // ID, Password 검사 전에 jwt 필터 먼저 수행
+                .cors();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        // swagger 관련 요청은 security filter에서 예외
         web
                 .ignoring()
-                .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**"); // swagger 관련 요청은 허용
+                .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**", "/configuration/**");
     }
 }
