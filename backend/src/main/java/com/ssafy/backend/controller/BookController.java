@@ -58,7 +58,7 @@ public class BookController {
         return responseEntity;
     }
 
-    //책 정보 조회
+    //도서 정보 조회
     @GetMapping(value = "/{book_isbn}")
     public ResponseEntity detailBook(@PathVariable(name = "book_isbn") long book_isbn) {
         ResponseEntity responseEntity = null;
@@ -81,7 +81,7 @@ public class BookController {
         return responseEntity;
     }
 
-    //책 정보 수정
+    //도서 정보 수정
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{book_isbn}")
     public ResponseEntity updateBook(@RequestBody BookDto book, @PathVariable(name = "book_isbn") long book_isbn, @ApiIgnore final Authentication authentication) {
@@ -105,7 +105,7 @@ public class BookController {
         return responseEntity;
     }
 
-    //책 정보 삭제
+    //도서 정보 삭제
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{book_isbn}")
     public ResponseEntity deleteBook(@PathVariable(name = "book_isbn") long book_isbn, @ApiIgnore final Authentication authentication) {
@@ -128,7 +128,7 @@ public class BookController {
         return responseEntity;
     }
 
-    //책 리뷰 조회
+    //도서 리뷰 조회
     @GetMapping(value = "/{book_isbn}/review")
     public ResponseEntity getReviewList(@PathVariable(name = "book_isbn") long book_isbn){
         ResponseEntity responseEntity = null;
@@ -145,7 +145,7 @@ public class BookController {
         return responseEntity;
     }
 
-    //책 검색
+    //도서 검색
     @GetMapping(value = "")
     public ResponseEntity getSearchList(@RequestParam(defaultValue="title") String search, @RequestParam(defaultValue="") String word){
         ResponseEntity responseEntity = null;
