@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -31,8 +32,9 @@ public class BookController {
     private final Logger logger = LoggerFactory.getLogger(BookController.class);
 
     //도서 등록
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "")
-    private ResponseEntity createBook(@RequestBody BookDto book) {
+    public ResponseEntity createBook(@RequestBody BookDto book) {
         ResponseEntity responseEntity = null;
         try {
             if(bookService.insertBook(book) == 1) {
@@ -55,7 +57,7 @@ public class BookController {
 
     //책 정보 조회
     @GetMapping(value = "/{book_isbn}")
-    private ResponseEntity detailBook(@PathVariable(name = "book_isbn") long book_isbn) {
+    public ResponseEntity detailBook(@PathVariable(name = "book_isbn") long book_isbn) {
         ResponseEntity responseEntity = null;
         BookDto book = null;
         try {
@@ -77,8 +79,9 @@ public class BookController {
     }
 
     //책 정보 수정
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "/{book_isbn}")
-    private ResponseEntity updateBook(@RequestBody BookDto book, @PathVariable(name = "book_isbn") long book_isbn) {
+    public ResponseEntity updateBook(@RequestBody BookDto book, @PathVariable(name = "book_isbn") long book_isbn) {
         ResponseEntity responseEntity = null;
         book.setBook_isbn(book_isbn);
         try {
@@ -99,8 +102,9 @@ public class BookController {
     }
 
     //책 정보 삭제
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "/{book_isbn}")
-    private ResponseEntity deleteBook(@PathVariable(name = "book_isbn") long book_isbn) {
+    public ResponseEntity deleteBook(@PathVariable(name = "book_isbn") long book_isbn) {
         ResponseEntity responseEntity = null;
         try {
             if (bookService.deleteBook(book_isbn)== 1) {
@@ -121,7 +125,7 @@ public class BookController {
 
     //책 리뷰 조회
     @GetMapping(value = "/{book_isbn}/review")
-    private ResponseEntity getReviewList(@PathVariable(name = "book_isbn") long book_isbn){
+    public ResponseEntity getReviewList(@PathVariable(name = "book_isbn") long book_isbn){
         ResponseEntity responseEntity = null;
         List<ReviewDto> list = null;
         try {
@@ -138,7 +142,7 @@ public class BookController {
 
     //책 검색
     @GetMapping(value = "")
-    private ResponseEntity getSearchList(@RequestParam(defaultValue="title") String search, @RequestParam(defaultValue="") String word){
+    public ResponseEntity getSearchList(@RequestParam(defaultValue="title") String search, @RequestParam(defaultValue="") String word){
         ResponseEntity responseEntity = null;
         Map result = new HashMap();
         List<BookDto> list = null;
