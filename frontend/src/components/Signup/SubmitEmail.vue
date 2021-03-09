@@ -1,7 +1,26 @@
 <template>
   <div>
     <p class="noticeMessage">가입하실 이메일 주소를 입력해주세요.</p>
-  <router-link :to="{ name: 'CheckEmail', params: { ProgressNum: 1 }}">확인</router-link>
+    <b-form-input
+      v-model="email"
+      class="id-input"
+      style="border: 0;
+      border-bottom: 1px solid;
+      border-radius: 0;
+      "
+      placeholder="이메일 (example@gmail.com)"
+    >
+    </b-form-input>
+    <div style="color: red; margin-bottom: -24px;" v-show="isVisible">
+      이메일 양식이 올바르지 않습니다.
+    </div>
+    <br>
+    <router-link
+      class="btn btn-primary btn-block" 
+      :to="{ name: 'CheckEmail' }"
+    >
+      확인
+    </router-link>
   </div>
 </template>
 
@@ -9,7 +28,7 @@
 export default {
   data() {
     return {
-      progress: 1,
+      progress: 0,
     }
   },
   created() {
@@ -17,8 +36,7 @@ export default {
   },
   methods: {
     serveProgressData() {
-      console.log(this.progress)
-      console.log('this.progress')
+      console.log('여기는 서브밋')
       return this.progress
     }
   }
