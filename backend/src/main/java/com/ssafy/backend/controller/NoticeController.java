@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -67,6 +68,7 @@ public class NoticeController {
         return responseEntity;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiImplicitParams({@ApiImplicitParam(name = "Authorization", value = "관리자 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")})
     @ApiOperation(value = "공지사항 작성")
     @PostMapping
@@ -90,6 +92,7 @@ public class NoticeController {
         return responseEntity;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiImplicitParams({@ApiImplicitParam(name = "Authorization", value = "관리자 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")})
     @ApiOperation(value = "공지사항 수정")
     @PutMapping("/{noticeId}")
@@ -113,6 +116,7 @@ public class NoticeController {
         return responseEntity;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @ApiImplicitParams({@ApiImplicitParam(name = "Authorization", value = "관리자 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")})
     @ApiOperation(value = "공지사항 삭제")
     @DeleteMapping("/{noticeId}")
