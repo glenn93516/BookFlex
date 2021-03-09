@@ -68,7 +68,7 @@ public class NoticeController {
         return responseEntity;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiImplicitParams({@ApiImplicitParam(name = "Authorization", value = "관리자 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")})
     @ApiOperation(value = "공지사항 작성")
     @PostMapping
@@ -92,7 +92,7 @@ public class NoticeController {
         return responseEntity;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiImplicitParams({@ApiImplicitParam(name = "Authorization", value = "관리자 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")})
     @ApiOperation(value = "공지사항 수정")
     @PutMapping("/{noticeId}")
@@ -116,7 +116,7 @@ public class NoticeController {
         return responseEntity;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiImplicitParams({@ApiImplicitParam(name = "Authorization", value = "관리자 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")})
     @ApiOperation(value = "공지사항 삭제")
     @DeleteMapping("/{noticeId}")
