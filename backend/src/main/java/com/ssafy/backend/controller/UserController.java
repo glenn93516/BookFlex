@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -81,6 +82,7 @@ public class UserController {
             @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "회원 정보 수정", notes = "유저 프로필 사진, 유저 이메일을 제외한 회원 정보 수정")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping
     public ResponseEntity modifyUser(@ApiIgnore final Authentication authentication,
                                      @ApiParam(value = "수정된 회원 정보", required = true) @RequestBody UserDto modifyUser) {
@@ -112,6 +114,7 @@ public class UserController {
             @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "회원 탈퇴")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @DeleteMapping
     public ResponseEntity deleteUser(@ApiIgnore final Authentication authentication) {
         ResponseEntity responseEntity = null;
@@ -138,6 +141,7 @@ public class UserController {
             @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
     })
     @ApiOperation(value = "회원 정보 조회", notes = "로그인한 유저 정보 반환", response = UserDto.class)
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping
     public ResponseEntity findUserByUserId(@ApiIgnore final Authentication authentication) {
         ResponseEntity responseEntity = null;

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -38,12 +40,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable() // 기본 설정 사용 안함
                 .csrf().disable() // csrf 사용 안함
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션 사용 안함
-
-                .and()
-                .authorizeRequests()
-                .antMatchers("/*/login", "/*/join").permitAll() // 로그인, 회원가입 권한 없이 허용
-                .antMatchers("/*/user**", "/*/user/**").hasRole("USER")
-                .anyRequest().hasRole("USER")
+//                메서드별 권한 설정을 위해 아래는 주석 처리
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/*/login", "/*/join").permitAll() // 로그인, 회원가입 권한 없이 허용
+//                .antMatchers("/*/user**", "/*/user/**").hasRole("USER")
+//                .anyRequest().hasRole("USER")
 
                 .and()
                 .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
