@@ -30,7 +30,7 @@ public class BookController {
     private final ResponseService responseService;
     private final Logger logger = LoggerFactory.getLogger(BookController.class);
 
-    //책 등록
+    //도서 등록
     @PostMapping(value = "")
     private ResponseEntity createBook(@RequestBody BookDto book) {
         ResponseEntity responseEntity = null;
