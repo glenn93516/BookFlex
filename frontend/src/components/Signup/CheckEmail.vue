@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <p class="noticeMessage">가입하실 이메일 주소를 입력해주세요.</p>
+  <div style="color: black;">
+    이곳은 체크 이메일입니다
+    {{ ProgressNum }}
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-    }
-  }
+  props: {
+    ProgressNum: Number,
+  },
+
 }
 </script>
 
 <style>
-  .noticeMessage {
-    color: rgb(108, 160, 29);
-    margin-top: 20px;
-  }
+ 
 </style>
