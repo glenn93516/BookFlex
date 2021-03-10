@@ -43,6 +43,11 @@ const routes = [
             name: 'SubmitPref',
             component: () => import('../components/Signup/SubmitPref.vue'),
           },
+          {
+            path: '5',
+            name: 'SignupComplete',
+            component: () => import('../components/Signup/SignupComplete.vue'),
+          },
         ]
       },
     ]

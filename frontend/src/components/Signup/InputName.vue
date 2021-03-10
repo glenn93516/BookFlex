@@ -52,7 +52,17 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      progressNum: 2,
+    }
+  },
+  methods: {
+    serveProgressData() {
+      console.log("여기는 인풋폼")
+      return this.progressNum
+    },
+  }
 }
 </script>
 
