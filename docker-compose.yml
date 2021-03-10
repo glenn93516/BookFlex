@@ -1,0 +1,29 @@
+version: '3'
+services:
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    stdin_open: true
+
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+    ports:
+      - '80:80'
+      - '443:443'
+
+  backend:
+    build:
+      dockerfile: Dockerfile
+      context: ./backend
+    container_name: app_backend
+    volumes:
+      - ./backend:/app
