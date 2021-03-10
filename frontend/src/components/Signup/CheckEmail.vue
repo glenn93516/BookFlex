@@ -1,8 +1,8 @@
 <template>
   <div style="color: black;">
-    <p class="noticeMessage">{{ timeMin }}분 이내에 발급받은 인증 번호를 입력해주세요.</p>
+    <p class="noticeMessage" style="margin-top: 20px;">{{ timeMin }}분 이내에 발급받은 인증 번호를 입력해주세요.</p>
     <div>
-      <h1 id="timer">{{ resTimeData }}</h1>
+      <h1 id="timer" class="text-center">{{ resTimeData }}</h1>
       <b-form-input
         v-model="confirmSubmit"
         class="number-input"
@@ -14,13 +14,13 @@
       >
       </b-form-input>
       <a href="#" class="my-1" style="display: block; font-size: 0.9rem;" @click="resend">인증메일 재발송하기</a>
-      <b-button
+      <!-- <b-button
         variant="success"
         @click="isCorrect"
         :active="!timeOut"  
       >
         확인
-      </b-button>
+      </b-button> -->
       <router-link
         class="btn btn-primary btn-block" 
         :to="{ name: 'InputName' }"
@@ -90,5 +90,8 @@ export default {
 </script>
 
 <style>
- 
+  .number-input[type="text"]:focus {
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
+    outline: 0 none;
+  }
 </style>

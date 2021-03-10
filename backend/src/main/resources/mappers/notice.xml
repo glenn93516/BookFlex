@@ -5,23 +5,23 @@
 
 <mapper namespace="com.ssafy.backend.mapper.NoticeMapper">
 
-    <insert id="writeNotice" parameterType="NoticeDto">
-        INSERT INTO notice (notice_title, notice_content, notice_date, user_id)
-        VALUES (#{noticeTitle}, #{noticeContent}, now(), #{userId})
-    </insert>
-
-    <select id="listNotice" resultType="NoticeDto">
+    <select id="selectNoticeList" resultType="NoticeDto">
         SELECT notice_id noticeId, notice_title noticeTitle, notice_content noticeContent, notice_date noticeDate, user_id userId
         FROM notice
     </select>
 
-    <select id="getNotice" resultType="NoticeDto">
+    <select id="selectNotice" resultType="NoticeDto">
         SELECT notice_id noticeId, notice_title noticeTitle, notice_content noticeContent, notice_date noticeDate, user_id userId
         FROM notice
         WHERE notice_id = #{noticeId}
     </select>
 
-    <update id="modifyNotice" parameterType="NoticeDto">
+    <insert id="insertNotice" parameterType="NoticeDto">
+        INSERT INTO notice (notice_title, notice_content, notice_date, user_id)
+        VALUES (#{noticeTitle}, #{noticeContent}, now(), #{userId})
+    </insert>
+
+    <update id="updateNotice" parameterType="NoticeDto">
         UPDATE notice
         SET notice_title = #{noticeTitle}, notice_content = #{noticeContent}, user_id = #{userId}
         WHERE notice_id = #{noticeId}

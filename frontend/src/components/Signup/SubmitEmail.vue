@@ -48,4 +48,8 @@ export default {
     color: rgb(108, 160, 29);
     margin-top: 20px;
   }
+  .id-input[type="text"]:focus {
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
+  outline: 0 none;
+  }
 </style>

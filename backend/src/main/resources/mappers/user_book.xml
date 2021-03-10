@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backend.mapper.UserBookMapper">
+
+    <insert id="insertUserBook" parameterType="UserBookDto">
+        INSERT INTO user_book (user_book_id, user_id, book_isbn)
+        VALUES (#{userBookId}, #{userId}, #{bookIsbn})
+    </insert>
+
+    <select id="selectUserBookList" resultType="UserBookDto">
+        SELECT user_book_id userBookId, user_id userId, book_isbn bookIsbn
+        FROM user_book
+        WHERE user_id = #{userId}
+    </select>
+
+    <delete id="deleteUserBook">
+        DELETE FROM user_book
+        WHERE user_book_id = #{userBookId}
+    </delete>
+
+</mapper>
