@@ -20,17 +20,17 @@
       <!--progressbar들어갈 위치-->
       <div>
         <b-progress 
-        class="mt-5"
-        :value="progressPercent"
-        height="2rem"
-        max="100" 
-        show-progress 
-        animated
-        style="
-          background-color: white;
-          border-radius: 10px / 10px;
-          box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.16);
-        "
+          class="mt-5"
+          :value="progressPercent"
+          height="2rem"
+          max="100" 
+          show-progress 
+          animated
+          style="
+            background-color: white;
+            border-radius: 10px / 10px;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.16);
+          "
         ></b-progress>
       </div>
     </div>
@@ -53,7 +53,7 @@ export default {
     getProgress() {
       console.log(" getProgress 실행!")
       const ProgressData = this.$refs.progress.serveProgressData()
-      this.progressPercent = ProgressData * 20
+      this.progressPercent = ProgressData * 25
       console.log(this.progressPercent)
     },
     sendLogin() {
