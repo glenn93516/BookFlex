@@ -63,7 +63,7 @@ public class BookshelfController {
 
     @ApiOperation(value = "읽음 조회")
     @GetMapping("/{userNickname}")
-    public ResponseEntity selectUserBookList(@ApiParam(value = "유저 닉네임", required = true) @PathVariable("userNickname") String userNickname){
+    public ResponseEntity selectUserBookList(@ApiParam(value = "조회할 유저 닉네임", required = true) @PathVariable("userNickname") String userNickname){
         ResponseEntity responseEntity = null;
         try {
             UserDto findUser = userService.findUserByUserNickname(userNickname);
@@ -111,7 +111,7 @@ public class BookshelfController {
     })
     @ApiOperation(value = "읽음 삭제")
     @DeleteMapping("/{userBookId}")
-    public ResponseEntity deleteUserBook(@ApiParam(value = "읽음 아이디", required = true) @PathVariable("userBookId") Long userBookId){
+    public ResponseEntity deleteUserBook(@ApiParam(value = "읽음 아이디", required = true, example = "123") @PathVariable("userBookId") Long userBookId){
         ResponseEntity responseEntity = null;
         try {
             bookshelfService.deleteUserBook(userBookId);
