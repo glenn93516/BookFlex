@@ -24,7 +24,7 @@
     >
       <router-link 
         :to="{ name: 'SubmitGender'}" 
-        class="btn btn-primary"
+        class="btn btn-success"
       >
         <span style="display: inline-block; margin: 15px 0;">
           네, 좋아요😊
@@ -32,7 +32,7 @@
       </router-link>
       <router-link 
         :to="{ name: 'Login'}" 
-        class="btn btn-primary"
+        class="btn btn-danger"
       >
         귀찮아요
         <br>
@@ -46,7 +46,10 @@
 export default {
   data() {
     return {
-      progress: 4,
+      pageData: {
+        progress: 4,
+        size: "back-md"
+      },
     }
   },
   created() {
@@ -56,10 +59,10 @@ export default {
     signupComplete() {
       this.$emit('nowPage', "signupComplete")
     },
-    serveProgressData() {
-      console.log('여기는 서브밋')
-      return this.progress
-    }
+    servePageInfo() {
+      console.log("여기는 회원가입완료")
+      return this.pageData
+    },
   }
 }
 </script>

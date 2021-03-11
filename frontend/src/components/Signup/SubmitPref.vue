@@ -8,7 +8,7 @@
     <div class="checkvalues">
       선택된 항목: {{ checkedValues }}
     </div>
-    <router-link :to="{ name: 'SignupComplete' }" class="btn btn-primary btn-block">다음으로 넘어가기(임시)</router-link>
+    <router-link :to="{ name: 'SignupComplete' }" class="btn btn-success btn-block">다음으로 넘어가기(임시)</router-link>
   </div>
 </template>
 
@@ -21,7 +21,10 @@ export default {
   },
   data() {
     return {
-      progressNum: 3,
+      pageData: {
+        progress: 3,
+        size: "back-md"
+      },
       // options에 리스트 형태로 분류목록을 담아주면 됩니다.
       // text는 보여지는 부분, value는 동작 단위의 id값입니다.(같은 id는 같이 클릭됨)
       options: [
@@ -39,9 +42,9 @@ export default {
     }
   },
   methods: {
-    serveProgressData() {
+    servePageInfo() {
       console.log("여기는 선호장르")
-      return this.progressNum
+      return this.pageData
     },
     catchData(option) {
       console.log(option)

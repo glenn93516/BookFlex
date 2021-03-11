@@ -22,7 +22,7 @@
         확인
       </b-button> -->
       <router-link
-        class="btn btn-primary btn-block" 
+        class="btn btn-success btn-block" 
         :to="{ name: 'InputName' }"
       >
         다음으로 넘어가기(임시)
@@ -37,7 +37,10 @@ export default {
   },
   data() {
     return {
-      progressNum: 1,
+      pageData: {
+        progress: 1,
+        size: "back-md"
+      },
 
       timeMin: 10, // 10분
       timeCounter: 600,
@@ -48,11 +51,10 @@ export default {
     }
   },
   methods: {
-    serveProgressData() {
+    servePageInfo() {
       console.log("여기는 체크")
-      return this.progressNum
+      return this.pageData
     },
-
     start() {
       this.timeOut = false
       this.polling = setInterval(() => {

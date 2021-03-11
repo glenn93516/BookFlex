@@ -16,7 +16,7 @@
     </div>
     <br>
     <router-link
-      class="btn btn-primary btn-block" 
+      class="btn btn-success btn-block" 
       :to="{ name: 'CheckEmail' }"
     >
       확인
@@ -28,17 +28,20 @@
 export default {
   data() {
     return {
-      progress: 0,
+      pageData: {
+        progress: 0,
+        size: "back-sm"
+      },
     }
   },
   created() {
 
   },
   methods: {
-    serveProgressData() {
-      console.log('여기는 서브밋')
-      return this.progress
-    }
+    servePageInfo() {
+      console.log("여기는 서브밋이메일")
+      return this.pageData
+    },
   }
 }
 </script>

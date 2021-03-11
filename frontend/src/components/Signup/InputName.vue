@@ -52,7 +52,7 @@
     </b-button> -->
     <router-link 
       :to="{ name: 'SubmitPref' }" 
-      class="btn btn-primary btn-block"
+      class="btn btn-success btn-block"
       style="margin-top: 16px;"
     >
       다음으로 넘어가기(임시)
@@ -64,13 +64,16 @@
 export default {
   data() {
     return {
-      progressNum: 2,
+      pageData: {
+        progress: 2,
+        size: "back-md"
+      },
     }
   },
   methods: {
-    serveProgressData() {
-      console.log("여기는 인풋폼")
-      return this.progressNum
+    servePageInfo() {
+      console.log("여기는 인풋 네임")
+      return this.pageData
     },
   }
 }

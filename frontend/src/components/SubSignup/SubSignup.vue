@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex; justify-content: center;">
     <div>
-      <div class="signupbackground">
+      <div id="signupbackground" :class="size">
         <header style="display: flex; justify-content: space-between; align-items: center;">
           <h1 
             class="signupHeader mb-0"
@@ -58,13 +58,23 @@ export default {
       progressPercent: 0,
       urlName: "",
       signupTitle: true,
+      size: "back-md"
     }
   },
   methods: {
-    getProgress() {
-      console.log(" getProgress 실행!")
-      const ProgressData = this.$refs.progress.serveProgressData()
-      this.progressPercent = ProgressData * 25
+    getPageInfo() {
+      console.log(" getPageInfo 실행!")
+      const PageData = this.$refs.progress.servePageInfo()
+      if (PageData.progress > 0) {
+        this.progressPercent = PageData.progress * 25
+        const progressGraph = document.querySelector('.progress-bar')
+        progressGraph.innerHTML = this.progressPercent
+      } else {
+        this.progressPercent = 2
+        const progressGraph = document.querySelector('.progress-bar')
+        progressGraph.innerHTML = ""
+      }
+      this.size = PageData.size
       console.log(this.progressPercent)
       if (this.progressPercent == 100) {
         this.signupTitle = false
@@ -77,12 +87,12 @@ export default {
     },
   },
   mounted() {
-    this.getProgress()
+    this.getPageInfo()
   },
   watch: {
     $route(to) {
       this.urlName = to.name // url이름이 필요할 때 사용(불필요하면 지우도 괜찮음)
-      setTimeout(this.getProgress, 50)
+      setTimeout(this.getPageInfo, 50)
     }
   },
 }
@@ -93,10 +103,9 @@ export default {
     color: rgb(108, 160, 29);
     margin-top: 20px;
   }
-  .signupbackground {
+  #signupbackground {
     margin-top: 15vh;
     width: 550px;
-    height: 400px;
     background-color: white;
     border-radius: 30px / 30px;
     margin-right: 0px;
@@ -104,6 +113,15 @@ export default {
     padding-top: 40px;
     padding-left: 75px;
     padding-right: 75px;
+  }
+  .back-lg {
+    height: 500px;
+  }
+  .back-md {
+    height: 400px;
+  }
+  .back-sm {
+    height: 300px;
   }
   .signupHeader {
   color: black;

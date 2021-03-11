@@ -1,14 +1,13 @@
 <template>
   <div>
-    <br>
-    <h4>현재 혹은 희망하시는 직종을 선택해주세요.</h4>
+    <h5>현재 혹은 희망하시는 직종을 선택해주세요.</h5>
     <div v-for="(option, idx) in options" :key="idx" class="custom-control">
       <Checkbox :option="option" @serveData="catchData"/>
     </div>
     <div class="checkvalues">
       선택된 항목: {{ checkedValues }}
     </div>
-    <router-link :to="{ name: 'SubmitPic' }" class="btn btn-primary btn-block">다음으로 넘어가기(임시)</router-link>
+    <router-link :to="{ name: 'SubmitPic' }" class="btn btn-success btn-block">다음으로 넘어가기(임시)</router-link>
   </div>
 </template>
 
@@ -21,7 +20,10 @@ export default {
   },
   data() {
     return {
-      progressNum: 2,
+      pageData: {
+        progress: 2,
+        size: "back-lg"
+      },
       // options에 리스트 형태로 분류목록을 담아주면 됩니다.
       // text는 보여지는 부분, value는 동작 단위의 id값입니다.(같은 id는 같이 클릭됨)
       options: [
@@ -39,9 +41,8 @@ export default {
     }
   },
   methods: {
-    serveProgressData() {
-      console.log("여기는 나의 직업")
-      return this.progressNum
+    servePageInfo() {
+      return this.pageData
     },
     catchData(option) {
       console.log(option)

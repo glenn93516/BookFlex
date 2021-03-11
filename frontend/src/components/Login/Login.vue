@@ -100,7 +100,7 @@ export default {
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
   outline: 0 none;
 }
-.form-control {
+.id-input {
   font-size: 1.3rem;
 }
 .invalid-feedback{
