@@ -1,22 +1,9 @@
 <template>
-  <div style="
-    background-color: rgba(61, 16, 5, 0.1); 
-    height: 100vh;
-    width: 100vw;
-    color: white;
-  "
-  >
+  <div class="background">
     <b-navbar 
       variant="faded" 
       type="light" 
-      style="
-        display: flex;
-        align-items: center;
-        justify-content: space-between !important;
-        padding-top: 0;
-        padding-bottom: 0;
-        margin: 0 40px;
-      "
+      class="background-nav"
     >
       <b-navbar-brand href="#">
         <img src="@/assets/book_logo.png" alt="book logo" height="55px">
@@ -126,5 +113,18 @@ export default {
     margin-top: 5px;
     margin-bottom: 5px;
     background-color: white;
+  }
+  .background{
+    background-color: rgba(61, 16, 5, 0.1); 
+    height: 100vh;
+    width: 100vw;
+  }
+  .background-nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0 40px;
   }
 </style>
