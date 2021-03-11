@@ -31,7 +31,8 @@
         >
       </b-form-input>
       <a href="#" class="mb-1 mt-2" style="display: block; font-size: 0.9rem;">비밀번호를 잊어버리셨나요?</a>
-      <a href="#" class="my-1" style="display: block; font-size: 0.9rem;">회원이 아니신가요?</a>
+      <!-- signup/1이 아니라 signup으로 보내게 수정해줘야함 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+      <a href="/signup/1" class="my-1" style="display: block; font-size: 0.9rem;">회원이 아니신가요?</a>
       <b-button block class="mt-3 btn-success" style="border-radius: 15px / 15px; font-weight: bold; font-size: 1.2rem;">로그인</b-button>
     </div>
   </div>
@@ -50,6 +51,9 @@ export default {
       const regExp = /^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
       return regExp.test(email); // 형식에 맞는 경우 true 리턴	
     },
+    goToSignup() {
+      this.$router.push({ name: "SubmitEmail" })
+    }
   },
   watch: {
     // email 입력값이 변경될 때 마다 실행

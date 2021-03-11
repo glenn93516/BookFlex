@@ -24,9 +24,61 @@ const routes = [
         component: () => import('../components/Signup/Signup.vue'),
         children: [
           {
-            path: 'checkemail',
+            path: '1',
+            name: 'SubmitEmail',
+            component: () => import('../components/Signup/SubmitEmail.vue'),
+          },
+          {
+            path: '2',
             name: 'CheckEmail',
             component: () => import('../components/Signup/CheckEmail.vue'),
+          },
+          {
+            path: '3',
+            name: 'InputName',
+            component: () => import('../components/Signup/InputName.vue'),
+          },
+          {
+            path: '4',
+            name: 'SubmitPref',
+            component: () => import('../components/Signup/SubmitPref.vue'),
+          },
+          {
+            path: '5',
+            name: 'SignupComplete',
+            component: () => import('../components/Signup/SignupComplete.vue'),
+          },
+        ]
+      },
+      {
+        path:'/subsignup',
+        name: 'SubSignup',
+        component: () => import('../components/SubSignup/SubSignup.vue'),
+        children: [
+          {
+            path: '1',
+            name: 'SubmitGender',
+            component: () => import('../components/SubSignup/SubmitGender.vue'),
+          },
+          {
+            path: '2',
+            name: 'SubmitBirth',
+            component: () => import('../components/SubSignup/SubmitBirth.vue'),
+          },
+          {
+            path: '3',
+            name: 'SubmitJob',
+            component: () => import('../components/SubSignup/SubmitJob.vue'),
+          },
+          {
+            path: '4',
+            name: 'SubmitPic',
+            component: () => import('../components/SubSignup/SubmitPic.vue'),
+          },
+          {
+            path: '5',
+            name: 'SubSignComplete',
+            component: () => import('../components/SubSignup/SubSignComplete.vue'),
           },
         ]
       },
