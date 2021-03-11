@@ -52,7 +52,7 @@ public class NoticeController {
 
     @ApiOperation(value = "공지사항 상세조회")
     @GetMapping("/{noticeId}")
-    public ResponseEntity selectNotice(@ApiParam(value = "공지사항 아이디", required = true) @PathVariable("noticeId") Long noticeId){
+    public ResponseEntity selectNotice(@ApiParam(value = "공지사항 아이디", required = true, example = "123") @PathVariable("noticeId") Long noticeId){
         ResponseEntity responseEntity = null;
         try {
             NoticeDto noticeDto = noticeService.getNotice(noticeId);
@@ -120,7 +120,7 @@ public class NoticeController {
     @ApiImplicitParams({@ApiImplicitParam(name = "Authorization", value = "관리자 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")})
     @ApiOperation(value = "공지사항 삭제")
     @DeleteMapping("/{noticeId}")
-    public ResponseEntity deleteNotice(@ApiParam(value = "공지사항 아이디", required = true) @PathVariable("noticeId") Long noticeId){
+    public ResponseEntity deleteNotice(@ApiParam(value = "공지사항 아이디", required = true, example = "123") @PathVariable("noticeId") Long noticeId){
         ResponseEntity responseEntity = null;
         try {
             noticeService.deleteNotice(noticeId);

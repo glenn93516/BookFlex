@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `fieldproject`.`notice` (
                                                        `notice_id` BIGINT NOT NULL AUTO_INCREMENT,
                                                        `notice_title` VARCHAR(255) NOT NULL,
     `notice_content` TEXT NOT NULL,
-    `notice_date` DATETIME NOT NULL,
+    `notice_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `user_id` BIGINT NULL,
     PRIMARY KEY (`notice_id`),
     INDEX `notice_user_fk_idx` (`user_id` ASC) VISIBLE,
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `fieldproject`.`notice` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fieldproject`.`wishlist` (
                                                          `wishlist_id` BIGINT NOT NULL AUTO_INCREMENT,
-                                                         `wishlist_date` DATETIME NOT NULL,
+                                                         `wishlist_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                                          `user_id` BIGINT NULL,
                                                          `book_isbn` BIGINT NULL,
                                                          PRIMARY KEY (`wishlist_id`),
