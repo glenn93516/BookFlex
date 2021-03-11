@@ -3,13 +3,19 @@
     <div>
       <div class="signupbackground">
         <header style="display: flex; justify-content: space-between; align-items: center;">
-          <h1 class="signupHeader mb-0">회원가입</h1>  
+          <h1 
+            class="signupHeader mb-0"
+            v-show="signupTitle"
+          >
+            회원가입
+          </h1>  
           <img 
             width="30px" 
             height="30px" 
             src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik0yNTYsMEMxMTQuNTA4LDAsMCwxMTQuNDk3LDAsMjU2YzAsMTQxLjQ5MywxMTQuNDk3LDI1NiwyNTYsMjU2YzE0MS40OTIsMCwyNTYtMTE0LjQ5NywyNTYtMjU2DQoJCQlDNTEyLDExNC41MDcsMzk3LjUwMywwLDI1NiwweiBNMjU2LDQ3MmMtMTE5LjM4NCwwLTIxNi05Ni42MDctMjE2LTIxNmMwLTExOS4zODUsOTYuNjA3LTIxNiwyMTYtMjE2DQoJCQljMTE5LjM4NCwwLDIxNiw5Ni42MDcsMjE2LDIxNkM0NzIsMzc1LjM4NSwzNzUuMzkzLDQ3MiwyNTYsNDcyeiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMzQzLjU4NiwzMTUuMzAyTDI4NC4yODQsMjU2bDU5LjMwMi01OS4zMDJjNy44MS03LjgxLDcuODExLTIwLjQ3MywwLjAwMS0yOC4yODRjLTcuODEyLTcuODExLTIwLjQ3NS03LjgxLTI4LjI4NCwwDQoJCQlMMjU2LDIyNy43MTZsLTU5LjMwMy01OS4zMDJjLTcuODA5LTcuODExLTIwLjQ3NC03LjgxMS0yOC4yODQsMGMtNy44MSw3LjgxMS03LjgxLDIwLjQ3NCwwLjAwMSwyOC4yODRMMjI3LjcxNiwyNTYNCgkJCWwtNTkuMzAyLDU5LjMwMmMtNy44MTEsNy44MTEtNy44MTIsMjAuNDc0LTAuMDAxLDI4LjI4NGM3LjgxMyw3LjgxMiwyMC40NzYsNy44MDksMjguMjg0LDBMMjU2LDI4NC4yODRsNTkuMzAzLDU5LjMwMg0KCQkJYzcuODA4LDcuODEsMjAuNDczLDcuODExLDI4LjI4NCwwQzM1MS4zOTgsMzM1Ljc3NSwzNTEuMzk3LDMyMy4xMTIsMzQzLjU4NiwzMTUuMzAyeiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K" 
             @click="sendLogin"
             class="cancel-btn"
+            v-show="signupTitle"
           />
         </header>
         <router-view ref="progress"></router-view>
@@ -47,6 +53,7 @@ export default {
     return {
       progressPercent: 0,
       urlName: "",
+      signupTitle: true,
     }
   },
   methods: {
@@ -55,6 +62,9 @@ export default {
       const ProgressData = this.$refs.progress.serveProgressData()
       this.progressPercent = ProgressData * 25
       console.log(this.progressPercent)
+      if (this.progressPercent == 100) {
+        this.signupTitle = false
+      }
     },
     sendLogin() {
       this.$router.push({ name: 'Login' })
