@@ -1,12 +1,23 @@
 package com.ssafy.backend.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel
 public class BookDto {
+    @ApiModelProperty(value = "isbn")
     private long book_isbn;
+    @ApiModelProperty(value = "제목")
     private String book_title;
+    @ApiModelProperty(value = "저자")
     private String book_author;
+    @ApiModelProperty(value = "출판사")
     private String book_publisher;
+    @ApiModelProperty(value = "목차")
     private String book_contents;
+    @ApiModelProperty(value = "출간일")
     private String book_date;
+    @ApiModelProperty(value = "표지 이미지")
     private String book_cover;
 
     public BookDto() {}

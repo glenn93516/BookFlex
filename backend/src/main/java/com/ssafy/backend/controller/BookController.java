@@ -7,6 +7,8 @@ import com.ssafy.backend.dto.response.ListDataResponse;
 import com.ssafy.backend.dto.response.SingleDataResponse;
 import com.ssafy.backend.service.BookService;
 import com.ssafy.backend.service.ResponseService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +38,10 @@ public class BookController {
     private final Logger logger = LoggerFactory.getLogger(BookController.class);
 
     // 도서 등록
-    @ApiOperation(value = "도서 등록", notes = "더미데이터 삽입용도")
+    @ApiOperation(value = "도서 등록", notes = "더미데이터 삽입용도. 관리자 계정으로만 사용 가능")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "")
     public ResponseEntity createBook(@ApiParam(value = "등록할 책 정보", required = true) @RequestBody BookDto book,
@@ -88,7 +93,10 @@ public class BookController {
     }
 
     // 도서 정보 수정
-    @ApiOperation(value = "도서 정보 수정", notes = "더미 데이터 수정용")
+    @ApiOperation(value = "도서 정보 수정", notes = "더미 데이터 수정용. 관리자 계정으로만 사용 가능")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{book_isbn}")
     public ResponseEntity updateBook(@ApiParam(value = "수정한 책 정보", required = true) @RequestBody BookDto book,
@@ -115,7 +123,10 @@ public class BookController {
     }
 
     // 도서 정보 삭제
-    @ApiOperation(value = "도서 정보 삭제", notes = "더미 데이터 삭제용")
+    @ApiOperation(value = "도서 정보 삭제", notes = "더미 데이터 삭제용. 관리자 계정으로만 사용 가능")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{book_isbn}")
     public ResponseEntity deleteBook(@ApiParam(value = "삭제할 책 isbn", required = true, example = "8954672213") @PathVariable(name = "book_isbn") long book_isbn,

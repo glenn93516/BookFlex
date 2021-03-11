@@ -1,6 +1,8 @@
 package com.ssafy.backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,17 +16,27 @@ import java.util.Collection;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel
 public class UserDto implements UserDetails {
+    @ApiModelProperty(value = "유저 아이디(PK)")
     private Long userId; // 회원 고유 아이디
-    private String userEmail; // 이메일
+    @ApiModelProperty(value = "이메일")
+    private String userEmail;
+    @ApiModelProperty(value = "비밀번호")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String userPassword; // 비밀번호
-    private String userNickname; // 닉네임
-    private String userJob; // 직업
-    private String userGender; // 성별 (female / male)
-    private String userRole; // 권한 (ROLE_ADMIN / ROLE_USER)
-    private String userProfileImg; // 프로필 사진 URL
-    private LocalDate userBirth; // 생일
+    private String userPassword;
+    @ApiModelProperty(value = "닉네임")
+    private String userNickname;
+    @ApiModelProperty(value = "직업")
+    private String userJob;
+    @ApiModelProperty(value = "성별 (FEMALE, MALE)")
+    private String userGender;
+    @ApiModelProperty(value = "유저 권한 (ROLE_ADMIN, ROLE_USER)")
+    private String userRole;
+    @ApiModelProperty(value = "프로필 이미지 url")
+    private String userProfileImg;
+    @ApiModelProperty(value = "생일")
+    private LocalDate userBirth;
 
 
     // 이하 코드는 security 를 위한 용도
