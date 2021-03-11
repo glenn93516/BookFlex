@@ -7,7 +7,7 @@
             class="signupHeader mb-0"
             v-show="signupTitle"
           >
-            회원가입
+            추가항목
           </h1>  
           <img 
             width="30px" 
@@ -18,6 +18,10 @@
             v-show="signupTitle"
           />
         </header>
+        <p class="noticeMessage" style="font-size: 12px" v-show="signupTitle">
+          추가 항목은 프로필 수정 페이지에서 추가 입력 및 수정이 가능합니다.
+        </p>
+
         <router-view ref="progress"></router-view>
         <!-- <SubmitEmail ref="progress"/> -->
 
@@ -83,6 +87,10 @@ export default {
 </script>
 
 <style>
+  .noticeMessage {
+    color: rgb(108, 160, 29);
+    margin-top: 20px;
+  }
   .signupbackground {
     margin-top: 15vh;
     width: 550px;
