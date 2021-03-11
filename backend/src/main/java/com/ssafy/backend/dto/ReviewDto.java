@@ -1,9 +1,17 @@
 package com.ssafy.backend.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel
 public class ReviewDto {
+    @ApiModelProperty(value = "리뷰 ID (PK)")
     private long review_id;
+    @ApiModelProperty(value = "책 isbn")
     private long book_isbn;
+    @ApiModelProperty(value = "리뷰 내용")
     private String review_content;
+    @ApiModelProperty(value = "리뷰 점수 (0~10 정수)")
     private int review_rating;
 
     public ReviewDto() {

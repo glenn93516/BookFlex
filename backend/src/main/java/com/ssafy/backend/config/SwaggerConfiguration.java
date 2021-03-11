@@ -1,6 +1,7 @@
 package com.ssafy.backend.config;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -31,7 +32,9 @@ public class SwaggerConfiguration {
 		responseMessages.add(new ResponseMessageBuilder().code(200).message("Success").build());
 		responseMessages.add(new ResponseMessageBuilder().code(500).message("Server Error").responseModel(new ModelRef("Error")).build());
 		responseMessages.add(new ResponseMessageBuilder().code(404).message("Page Not Found").build());
-		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).groupName(version).select()
+		return new Docket(DocumentationType.SWAGGER_2)
+					.protocols(Collections.singleton("https"))
+					.host("j4f004.p.ssafy.io").apiInfo(apiInfo()).groupName(version).select()
 					.apis(RequestHandlerSelectors.basePackage("com.ssafy.backend.controller"))
 					.paths(postPaths()).build()
 					.useDefaultResponseMessages(false)
