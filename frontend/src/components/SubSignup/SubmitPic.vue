@@ -22,14 +22,16 @@
 export default {
   data() {
     return {
-      progressNum: 3,
+      pageData: {
+        progress: 3,
+        size: "back-md"
+      },
       profileImage: null,
     }
   },
   methods: {
-    serveProgressData() {
-      console.log("여기는 프로필 입력")
-      return this.progressNum
+    servePageInfo() {
+      return this.pageData
     },
   }
 }

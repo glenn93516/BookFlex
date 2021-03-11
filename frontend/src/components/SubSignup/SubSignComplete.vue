@@ -30,13 +30,16 @@ export default {
   data() {
     return {
       birthdate: '',
-      progress: 4,
+      pageData: {
+        progress: 4,
+        size: "back-md"
+      },
     }
   },
   methods: {
-    serveProgressData() {
-      return this.progress
-    }
+    servePageInfo() {
+      return this.pageData
+    },
   }
 }
 </script>

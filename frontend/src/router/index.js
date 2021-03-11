@@ -14,6 +14,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/BackgroundNav.vue'),
     children: [
       {
+        path:'/',
+        name: 'MainBook',
+        component: () => import('../views/MainBook.vue')
+      },
+      {
         path:'/login',
         name: 'Login',
         component: () => import('../components/Login/Login.vue')

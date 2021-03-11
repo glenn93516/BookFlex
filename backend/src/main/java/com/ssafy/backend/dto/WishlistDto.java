@@ -1,9 +1,17 @@
 package com.ssafy.backend.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel
 public class WishlistDto {
+    @ApiModelProperty(value = "위시리스트 ID (PK)")
     private long wishlist_id;
+    @ApiModelProperty(value = "위시리스트 등록일")
     private String wishlist_date;
+    @ApiModelProperty(value = "유저 id")
     private long user_id;
+    @ApiModelProperty(value = "책 isbn")
     private long book_isbn;
 
     public WishlistDto() {}
