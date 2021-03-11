@@ -129,17 +129,4 @@ export default {
     margin-bottom: 5px;
     background-color: white;
   }
-  .background{
-    background-color: rgba(61, 16, 5, 0.1); 
-    height: 100vh;
-    width: 100vw;
-  }
-  .background-nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin: 0 40px;
-  }
 </style>
