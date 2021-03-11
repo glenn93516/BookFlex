@@ -68,6 +68,8 @@ export default {
       console.log(this.progressPercent)
       if (this.progressPercent == 100) {
         this.signupTitle = false
+      } else {
+        this.signupTitle = true
       }
     },
     sendLogin() {
