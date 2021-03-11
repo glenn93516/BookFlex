@@ -1,0 +1,54 @@
+server:
+  port: 9987
+  servlet:
+    context-path: /api
+
+spring:
+  profiles:
+    active: local
+    include:
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dev.leekangrim@gmail.com
+    password:
+    smtp:
+      auth: true
+      starttls:
+        enable: true
+
+logging:
+  level:
+    com.ssafy.backend: debug
+
+jwt:
+  header: Authorization
+  secret: ssafy-Fieldproject-ensemble-backend-api-server-secret1@#
+  token-validity-in-seconds: 3600000
+
+mybatis:
+  mapper-locations: classpath:/mappers/*.xml
+  type-aliases-package: com.ssafy.backend.dto
+
+--- # 개발
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/fieldproject?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
+    username: ssafy
+    password: ssafy
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+--- # 배포 환경
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://field-ensemble.cqwzhdgaabxu.ap-northeast-2.rds.amazonaws.com:3306/fieldproject?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
+    username: ssafy
+    password: ssafyssafy
+    driver-class-name: com.mysql.cj.jdbc.Driver

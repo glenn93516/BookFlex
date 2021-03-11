@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backend.mapper.WishlistMapper">
+    <insert id="insertWishlist" parameterType="WishlistDto">
+        insert into wishlist (wishlist_date, user_id, book_isbn)
+        values (#{wishlist_date}, #{user_id}, #{book_isbn})
+    </insert>
+    <delete id="deleteWishlist" parameterType="map">
+        delete from wishlist where wishlist_id = #{wishlist_id} and user_id = #{user_id}
+    </delete>
+    <select id="selectWishlistList" parameterType="long" resultType="WishlistDto">
+        select wishlist_id, wishlist_date, user_id, book_isbn
+        from wishlist
+        where user_id = #{user_id}
+    </select>
+</mapper>
