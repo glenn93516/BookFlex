@@ -12,33 +12,16 @@
         margin-top: 10px;
       "
     >
-      회원가입이 완료되었습니다!</h3>
-    <p class="noticeMessage" style="margin-top: 15px;">
-      조금 더 정확한 추천을 위해 선택항목을 입력해주세요.
+      보다 더 정확한 추천서비스를 <br> 제공할 수 있게 되었어요</h3>
+    <p class="noticeMessage" style="margin-top: 15px; font-size: 12px">
+      추가 항목은 프로필 수정 페이지에서 추가 입력 및 수정이 가능합니다.
     </p>
-    <div
-      style="
-        display: flex;
-        justify-content: space-around;
-      "
+    <router-link
+      class="btn btn-success btn-block" 
+      :to="{ name: 'Login' }"
     >
-      <router-link 
-        :to="{ name: 'SubmitGender'}" 
-        class="btn btn-primary"
-      >
-        <span style="display: inline-block; margin: 15px 0;">
-          네, 좋아요😊
-        </span>
-      </router-link>
-      <router-link 
-        :to="{ name: 'Login'}" 
-        class="btn btn-primary"
-      >
-        귀찮아요
-        <br>
-        다음에 할게요
-      </router-link>
-    </div>
+      둘러보기
+    </router-link>
   </div>
 </template>
 
@@ -46,18 +29,12 @@
 export default {
   data() {
     return {
+      birthdate: '',
       progress: 4,
     }
   },
-  created() {
-    this.signupComplete()
-  },
   methods: {
-    signupComplete() {
-      this.$emit('nowPage', "signupComplete")
-    },
     serveProgressData() {
-      console.log('여기는 서브밋')
       return this.progress
     }
   }
@@ -65,8 +42,7 @@ export default {
 </script>
 
 <style>
-  .noticeMessage {
-    color: rgb(108, 160, 29);
-    margin-top: 20px;
+  .gender-radio{
+    display: inline-block;
   }
 </style>

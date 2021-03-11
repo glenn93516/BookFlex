@@ -5,7 +5,7 @@
       type="light" 
       class="background-nav"
     >
-      <b-navbar-brand href="#">
+      <b-navbar-brand href="/">
         <img src="@/assets/book_logo.png" alt="book logo" height="55px">
       </b-navbar-brand>
       <b-navbar-nav>
@@ -26,10 +26,12 @@
           <template #button-content>
             <b-avatar size="2.5rem" src="@/assets/푸들.png"></b-avatar>
           </template>
+          <b-dropdown-item href="/login" style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"><span style="font-size: 0.8rem;">로그인</span></b-dropdown-item>
+            <hr class="list-hr">
           <b-dropdown-item href="#" style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"><span style="font-size: 0.8rem;">로그아웃</span></b-dropdown-item>
-            <hr>
+            <hr class="list-hr">
           <b-dropdown-item href="#" style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"><span style="font-size: 0.8rem;">나의서재</span></b-dropdown-item>
-            <hr>
+            <hr class="list-hr">
           <b-dropdown-item href="/signup/1" style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"><span style="font-size: 0.8rem;">회원가입(temp)</span></b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
@@ -60,6 +62,19 @@ export default {
 </script>
 
 <style>
+  .background{
+    background-color: rgba(61, 16, 5, 0.1); 
+    height: 100vh;
+    width: 100vw;
+  }
+  .background-nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0 40px;
+  }
 /*여기입니다요 id가 이거래 .. 선택자로 찍어버렸어 약간 포크 */
   #__BVID__10 > ul{
     background-color: #5c463d;
@@ -107,7 +122,7 @@ export default {
     color: rgba(255, 255, 255, 0.9);
     
   }
-  hr {
+  .list-hr {
     margin-left: 15px;
     margin-right: 15px;
     margin-top: 5px;

@@ -94,4 +94,8 @@ export default {
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
     outline: 0 none;
   }
+  .noticeMessage {
+    color: rgb(108, 160, 29);
+    margin-top: 20px;
+  }
 </style>
