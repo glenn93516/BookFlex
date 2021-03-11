@@ -1,14 +1,15 @@
 <template>
   <div>
     <br>
-    <p class="describeP">선호 또는 관심있는 장르를 선택해 주세요.</p>
+    <p class="describeP">추가 항목은 프로필 수정 페이지에서 추가 입력 / 수정이 가능합니다 :)</p>
+    <h4>현재 혹은 희망하시는 직종을 선택해주세요.</h4>
     <div v-for="(option, idx) in options" :key="idx" class="custom-control">
       <Checkbox :option="option" @serveData="catchData"/>
     </div>
     <div class="checkvalues">
       선택된 항목: {{ checkedValues }}
     </div>
-    <router-link :to="{ name: 'SignupComplete' }" class="btn btn-primary btn-block">다음으로 넘어가기(임시)</router-link>
+    <router-link class="btn btn-primary btn-block">다음으로 넘어가기(임시)</router-link>
   </div>
 </template>
 
@@ -21,26 +22,26 @@ export default {
   },
   data() {
     return {
-      progressNum: 3,
+      progressNum: 2,
       // options에 리스트 형태로 분류목록을 담아주면 됩니다.
       // text는 보여지는 부분, value는 동작 단위의 id값입니다.(같은 id는 같이 클릭됨)
       options: [
-          { text: '역사', value: '0', isChecked: false},
-          { text: '철학', value: '1', isChecked: false},
-          { text: '종교', value: '2', isChecked: false},
-          { text: '사회과학', value: '3', isChecked: false},
-          { text: '순수과학', value: '4', isChecked: false},
-          { text: '기술과학', value: '5', isChecked: false},
-          { text: '예술', value: '6', isChecked: false},
-          { text: '언어', value: '7', isChecked: false},
-          { text: '문학', value: '8', isChecked: false},
+          { text: '경영/사무', value: '0', isChecked: false},
+          { text: '영업/상담', value: '1', isChecked: false},
+          { text: '생산/제조', value: '2', isChecked: false},
+          { text: 'IT/개발', value: '3', isChecked: false},
+          { text: '전문직', value: '4', isChecked: false},
+          { text: '교육', value: '5', isChecked: false},
+          { text: '미디어', value: '6', isChecked: false},
+          { text: '건설', value: '7', isChecked: false},
+          { text: '디자인', value: '8', isChecked: false},
       ],
       checkedValues: [ ],
     }
   },
   methods: {
     serveProgressData() {
-      console.log("여기는 선호장르")
+      console.log("여기는 나의 직업")
       return this.progressNum
     },
     catchData(option) {
@@ -73,7 +74,7 @@ export default {
   }
   .describeP {
     color: #5a9b00;
-    font-size: 14px;
+    font-size: 13px;
     margin-top: -5px;
   }
   .checkPref {
