@@ -1,7 +1,6 @@
 <template>
   <div>
     <br>
-    <p class="describeP">추가 항목은 프로필 수정 페이지에서 추가 입력 / 수정이 가능합니다 :)</p>
     <h4>현재 혹은 희망하시는 직종을 선택해주세요.</h4>
     <div v-for="(option, idx) in options" :key="idx" class="custom-control">
       <Checkbox :option="option" @serveData="catchData"/>
@@ -9,7 +8,7 @@
     <div class="checkvalues">
       선택된 항목: {{ checkedValues }}
     </div>
-    <router-link class="btn btn-primary btn-block">다음으로 넘어가기(임시)</router-link>
+    <router-link :to="{ name: 'SubmitPic' }" class="btn btn-primary btn-block">다음으로 넘어가기(임시)</router-link>
   </div>
 </template>
 
