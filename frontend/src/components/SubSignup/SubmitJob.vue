@@ -1,13 +1,10 @@
 <template>
   <div>
-    <h5>현재 혹은 희망하시는 직종을 선택해주세요.</h5>
+    <h5 style="margin-top: -5px; margin-bottom: 18px">현재 혹은 희망하시는 직종을 선택해주세요.</h5>
     <div v-for="(option, idx) in options" :key="idx" class="custom-control">
       <Checkbox :option="option" @serveData="catchData"/>
     </div>
-    <div class="checkvalues">
-      선택된 항목: {{ checkedValues }}
-    </div>
-    <router-link :to="{ name: 'SubmitPic' }" class="btn btn-success btn-block">다음으로 넘어가기(임시)</router-link>
+    <router-link :to="{ name: 'SubmitPic' }" class="btn btn-success btn-block job-btn">다음으로 넘어가기</router-link>
   </div>
 </template>
 
@@ -22,7 +19,7 @@ export default {
     return {
       pageData: {
         progress: 2,
-        size: "back-lg"
+        size: "back-md"
       },
       // options에 리스트 형태로 분류목록을 담아주면 됩니다.
       // text는 보여지는 부분, value는 동작 단위의 id값입니다.(같은 id는 같이 클릭됨)
@@ -48,19 +45,16 @@ export default {
       console.log(option)
       this.options[option.value].isChecked = option.isChecked
       console.log(this.options)
+      if (option.isChecked) {
+        this.checkedValues.push(option.text)
+      } else {
+        const idx = this.checkedValues.indexOf(option.text)
+        this.checkedValues.splice(idx, 1)
+      }
+      console.log(this.checkedValues)
     }
   },
   watch: {
-    options: function () {
-      let checkarr = []
-      for (var option in this.options) {
-        if (option.isChecked) {
-          checkarr.push(option.text)
-        }
-      }
-      console.log('-----------', checkarr)
-      this.checkedValues = checkarr
-    }
   },
 }
 </script>
@@ -81,30 +75,32 @@ export default {
     display: none;
   }
   .check {
-    height: 15px;
-    width: 15px;
+    height: 17px;
+    width: 17px;
     background-color: white;
-    border: solid;
+    border: 1px solid;
     border-color: rgb(121, 121, 121);
-    border-radius: 5px/ 5px;
-    margin-left: 5px;
+    border-radius: 20px/ 20px;
+    margin-left: 0px;
     margin-bottom: 0px;
+    margin-top: 0px;
   }
   .checked {
-    height: 15px;
-    width: 15px;
-    background-color: rgb(138, 255, 92);
-    border: solid;
+    height: 17px;
+    width: 17px;
+    border: 0px solid;
     border-color: rgb(145, 145, 145);
     border-radius: 5px/ 5px;
-    margin-left: 5px;
+    margin-left: 0px;
     margin-bottom: 0px;
   }
   .realLabel {
     margin-left: 5px;
   }
   .checkvalues {
-    margin-top: -5px;
     margin-bottom: 10px;
+  }
+  .job-btn {
+    margin-top: -11px;
   }
 </style>
