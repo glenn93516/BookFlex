@@ -3,7 +3,8 @@
     <p class="noticeMessage">가입하실 이메일 주소를 입력해주세요.</p>
     <b-form-input
       v-model="email"
-      class="id-input"
+      id="id-input"
+      :class="emailStatus"
       style="border: 0;
       border-bottom: 1px solid;
       border-radius: 0;
@@ -11,12 +12,13 @@
       placeholder="이메일 (example@gmail.com)"
     >
     </b-form-input>
-    <div style="color: red; margin-bottom: -24px;" v-show="isVisible">
+    <div style="color: red; margin-bottom: -24px;" v-show="emailStatus === 'is-invalid'">
       이메일 양식이 올바르지 않습니다.
     </div>
     <br>
     <router-link
-      class="btn btn-success btn-block" 
+      id="next-btn"
+      :class="btnStatus" 
       :to="{ name: 'CheckEmail' }"
     >
       확인
@@ -32,16 +34,39 @@ export default {
         progress: 0,
         size: "back-sm"
       },
+      email: "",
+      // 현재 이메일이 유효한지 아닌지 (is-valid, is-invalid)
+      emailStatus: "",
+      btnStatus: "btn btn-success btn-block",
     }
   },
   created() {
 
   },
+  watch: {
+    email() {
+      this.isValidEmail()
+    }
+  },
   methods: {
     servePageInfo() {
-      console.log("여기는 서브밋이메일")
       return this.pageData
     },
+    isValidEmail() {
+      const reg_email = /^([0-9a-zA-Z_\\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+      if (this.email && !reg_email.test(this.email)) {
+        this.emailStatus = "is-invalid"
+        this.btnStatus = "btn btn-success btn-block disabled"
+      } else {
+        if (this.email.length > 0) {
+          this.emailStatus = "is-valid"
+          this.btnStatus = "btn btn-success btn-block"
+        } else {
+          this.emailStatus = ""
+          this.btnStatus = "btn btn-success btn-block disabled"
+        }
+      }
+    }
   }
 }
 </script>
@@ -51,8 +76,11 @@ export default {
     color: rgb(108, 160, 29);
     margin-top: 20px;
   }
-  .id-input[type="text"]:focus {
-  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
-  outline: 0 none;
+  #id-input[type="text"]:focus {
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
+    outline: 0 none;
+  }
+  #next-btn{
+    margin-top: 20px;
   }
 </style>
