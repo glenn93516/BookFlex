@@ -24,7 +24,7 @@
 
     <update id="update" parameterType="UserDto">
         UPDATE user
-        SET user_password = #{userPassword}, user_nickname = #{userNickname}, user_job = #{userJob}, user_birth = #{userBirth}, user_gender = #{userGender}
+        SET user_password = #{userPassword}, user_nickname = #{userNickname}, user_job = #{userJob}, user_birth = #{userBirth}, user_gender = #{userGender}, user_profile_img = #{userProfileImg}
         WHERE user_id = #{userId}
     </update>
     
