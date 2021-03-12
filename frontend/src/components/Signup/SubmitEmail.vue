@@ -27,6 +27,8 @@
 </template>
 
 <script>
+let emailValid = "btn btn-success btn-block"
+let emailInvalid = "btn btn-success btn-block disabled"
 export default {
   data() {
     return {
@@ -37,7 +39,7 @@ export default {
       email: "",
       // 현재 이메일이 유효한지 아닌지 (is-valid, is-invalid)
       emailStatus: "",
-      btnStatus: "btn btn-success btn-block",
+      btnStatus: emailInvalid,
     }
   },
   created() {
@@ -56,14 +58,14 @@ export default {
       const reg_email = /^([0-9a-zA-Z_\\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
       if (this.email && !reg_email.test(this.email)) {
         this.emailStatus = "is-invalid"
-        this.btnStatus = "btn btn-success btn-block disabled"
+        this.btnStatus = emailInvalid
       } else {
         if (this.email.length > 0) {
           this.emailStatus = "is-valid"
-          this.btnStatus = "btn btn-success btn-block"
+          this.btnStatus = emailValid
         } else {
           this.emailStatus = ""
-          this.btnStatus = "btn btn-success btn-block disabled"
+          this.btnStatus = emailInvalid
         }
       }
     }
@@ -76,11 +78,15 @@ export default {
     color: rgb(108, 160, 29);
     margin-top: 20px;
   }
-  #id-input[type="text"]:focus {
+  /* #id-input[type="text"]:focus {
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
     outline: 0 none;
-  }
+  } */
   #next-btn{
     margin-top: 20px;
+  }
+  .form-control:focus{
+    border-color: none;
+    box-shadow: none;
   }
 </style>
