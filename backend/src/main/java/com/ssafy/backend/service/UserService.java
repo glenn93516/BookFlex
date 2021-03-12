@@ -29,8 +29,6 @@ public class UserService {
             throw new DuplicatedUsernameException("이미 가입된 유저입니다");
         }
 
-        // TODO: 유저 프로필 이미지 저장하는 로직 추가 필요
-
         if (userDto.getUserGender() != null) {
             userDto.setUserGender(userDto.getUserGender().toUpperCase()); // 성별 FEMALE, MALE 대문자
         }
@@ -78,6 +76,9 @@ public class UserService {
         }
         if (modifyUser.getPassword() != null) {
             findUser.setUserPassword(passwordEncoder.encode(findUser.getUserPassword())); // 비밀번호
+        }
+        if (modifyUser.getUserProfileImg() != null) {
+            findUser.setUserProfileImg(modifyUser.getUserProfileImg());
         }
 
         userMapper.update(findUser);

@@ -9,6 +9,7 @@ import com.ssafy.backend.exception.LoginFailedException;
 import com.ssafy.backend.exception.UserNotFoundException;
 import com.ssafy.backend.service.ResponseService;
 import com.ssafy.backend.service.UserService;
+import com.ssafy.backend.utils.Uploader;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +25,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
@@ -31,6 +36,7 @@ public class UserController {
 
     private final UserService userService;
     private final ResponseService responseService;
+    private final Uploader uploader;
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @ApiOperation(value = "회원 가입")
@@ -76,7 +82,7 @@ public class UserController {
 
     /**
      * 유저 정보 수정
-     * TODO: 유저 프로필 이미지 수정은 따로 만들 예정
+     * 프로필 사진 등록 & 수정
      */
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
@@ -85,12 +91,19 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping
     public ResponseEntity modifyUser(@ApiIgnore final Authentication authentication,
-                                     @ApiParam(value = "수정된 회원 정보", required = true) @RequestBody UserDto modifyUser) {
+                                     @ApiParam(value = "수정된 회원 정보", required = true) UserDto modifyUser) {
         ResponseEntity responseEntity = null;
 
         try {
             Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
             UserDto findUser = userService.findByUserId(userId);
+            // 프로필 사진 S3에 등록
+            if (modifyUser.getUserProfileImgFile() != null) {
+                String unique = "profile_" + findUser.getUserId() + "_" + LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+                String url = uploader.upload(modifyUser.getUserProfileImgFile(), "user", unique);
+
+                modifyUser.setUserProfileImg(url);
+            }
 
             userService.updateUser(findUser, modifyUser);
 
@@ -98,10 +111,13 @@ public class UserController {
 
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (UserNotFoundException exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
 
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        } catch (IOException | IllegalArgumentException exception) {
+            logger.info(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
         }
 
         return responseEntity;
