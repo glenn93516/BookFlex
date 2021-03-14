@@ -55,6 +55,7 @@ export default {
   } */
   .custom-file-label::after {
     content: 'B';
+  }
   .img-btn {
     margin-top: 5.3rem;
   }
