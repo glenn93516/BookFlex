@@ -6,11 +6,11 @@
           :state="Boolean(profileImage)"
           placeholder="Choose a file or drop it here..."
           drop-placeholder="Drop file here..."
+          style="margin-top: 30px; margin-bottom: 10px;"
         ></b-form-file>
-          <div class="mt-3">Selected file: {{ profileImage ? profileImage.name : '' }}</div>
 
         <router-link
-          class="btn btn-success btn-block" 
+          class="btn btn-success btn-block img-btn" 
           :to="{ name: 'SubSignComplete' }"
         >
           확인
@@ -38,5 +38,7 @@ export default {
 </script>
 
 <style>
-
+  .img-btn {
+    margin-top: 5.3rem;
+  }
 </style>

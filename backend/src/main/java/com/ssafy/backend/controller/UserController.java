@@ -162,9 +162,6 @@ public class UserController {
         return responseEntity;
     }
 
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
-    })
     @ApiOperation(value = "닉네임으로 회원 조회", notes = "조회 성공시 해당 유저 정보 반환", response = UserDto.class)
     @GetMapping("/{userNickname}")
     public ResponseEntity findUserByUserNickname(

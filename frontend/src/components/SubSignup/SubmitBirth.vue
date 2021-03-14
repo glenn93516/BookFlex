@@ -8,7 +8,7 @@
     >
     </b-form-datepicker>
     <router-link
-      class="btn btn-success btn-block" 
+      class="btn btn-success btn-block birth-btn" 
       :to="{ name: 'SubmitJob' }"
     >
       확인
@@ -38,5 +38,8 @@ export default {
 <style>
   .gender-radio{
     display: inline-block;
+  }
+  .birth-btn {
+    margin-top: 5.8rem;
   }
 </style>
