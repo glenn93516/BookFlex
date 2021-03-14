@@ -50,15 +50,12 @@ export default {
 </script>
 
 <style>
-<<<<<<< frontend/src/components/SubSignup/SubmitPic.vue
   /* .custom-file-input:lang(ko) ~ .custom-file-label::after {
     content: 'B';
   } */
   .custom-file-label::after {
     content: 'B';
-=======
   .img-btn {
     margin-top: 5.3rem;
->>>>>>> frontend/src/components/SubSignup/SubmitPic.vue
   }
 </style>
