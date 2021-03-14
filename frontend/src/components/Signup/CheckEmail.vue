@@ -1,6 +1,11 @@
 <template>
   <div style="color: black;">
-    <p class="noticeMessage" style="margin-top: 20px;">{{ timeMin }}분 이내에 발급받은 인증 번호를 입력해주세요.</p>
+    <p 
+      class="noticeMessage" 
+      style="margin-top: 20px;"
+    >
+      {{ timeMin }}분 이내에 발급받은 인증 번호를 입력해주세요.
+    </p>
     <div>
       <h1 id="timer" class="text-center">{{ resTimeData }}</h1>
       <b-form-input
@@ -13,7 +18,14 @@
         placeholder="6자리 입력"
       >
       </b-form-input>
-      <a href="#" class="my-1" style="display: block; font-size: 0.9rem;" @click="resend">인증메일 재발송하기</a>
+      <a 
+        href="#" 
+        class="my-1" 
+        style="display: block; font-size: 0.9rem;" 
+        @click="resend"
+      >
+        인증메일 재발송하기
+      </a>
       <!-- <b-button
         variant="success"
         @click="isCorrect"
@@ -21,13 +33,14 @@
       >
         확인
       </b-button> -->
-      <router-link
-        class="btn btn-success btn-block" 
-        :to="{ name: 'InputName' }"
-      >
-        다음으로 넘어가기(임시)
-      </router-link>
     </div>
+      <b-btn 
+        class="btn-success btn-block next-btn" 
+        @click="goToInputName" 
+        @keydown.enter="goToInputName"
+      >
+        다음으로 넘어가기
+      </b-btn>
   </div>
 </template>
 
@@ -41,13 +54,13 @@ export default {
         progress: 1,
         size: "back-md"
       },
-
       timeMin: 10, // 10분
       timeCounter: 600,
       resTimeData: "10 : 00",
       timeOut: false,
       mailNum: "",
       inputNum: "",
+      confirmSubmit: "",
     }
   },
   methods: {
@@ -85,6 +98,10 @@ export default {
     },
     beforeDestroy() {
       clearInterval(this.polling);
+    },
+    goToInputName() {
+      // 조건에 따라(axios요청 결과 일치여부확인, 불일치시 alert 띄우기)
+      this.$router.push({ name : 'InputName' })
     }
   }
 
@@ -99,5 +116,11 @@ export default {
   .noticeMessage {
     color: rgb(108, 160, 29);
     margin-top: 20px;
+  }
+  .next-btn {
+    margin-top: 2rem;
+  }
+  #timer {
+    margin: 2rem;
   }
 </style>

@@ -6,6 +6,7 @@
       :state="Boolean(profileImage)"
       :placeholder="photoName"
       drop-placeholder="Drop file here..."
+      style="margin-top: 30px; margin-bottom: 10px;"
     >
     </b-form-file>
       <!-- <div class="mt-3">Selected file: {{ profileImage ? profileImage.name : '' }}</div> -->
@@ -49,10 +50,15 @@ export default {
 </script>
 
 <style>
+<<<<<<< frontend/src/components/SubSignup/SubmitPic.vue
   /* .custom-file-input:lang(ko) ~ .custom-file-label::after {
     content: 'B';
   } */
   .custom-file-label::after {
     content: 'B';
+=======
+  .img-btn {
+    margin-top: 5.3rem;
+>>>>>>> frontend/src/components/SubSignup/SubmitPic.vue
   }
 </style>

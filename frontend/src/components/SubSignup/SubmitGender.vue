@@ -24,7 +24,7 @@
       </b-form-radio>
     </b-form-group>
     <router-link
-      class="btn btn-success btn-block" 
+      class="btn btn-success btn-block gender-btn" 
       :to="{ name: 'SubmitBirth' }"
     >
       확인
@@ -58,9 +58,11 @@ export default {
   .gender-radio{
     display: inline-block;
   }
-
   .gender-form div {
     display: flex;
     justify-content: space-around;
+  }
+  .gender-btn {
+    margin-top: 1.6rem;
   }
 </style>
