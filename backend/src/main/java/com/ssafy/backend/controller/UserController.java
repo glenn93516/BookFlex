@@ -144,7 +144,7 @@ public class UserController {
 
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (UserNotFoundException exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
 
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
@@ -169,7 +169,7 @@ public class UserController {
 
             responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (UserNotFoundException exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
 
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
@@ -190,12 +190,30 @@ public class UserController {
 
             responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (UserNotFoundException exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
 
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
+        return responseEntity;
+    }
+
+    @ApiOperation(value = "이메일 중복 체크", notes = "해당 이메일로 가입한 유저 있는지 확인(중복된 경우 success: false)", response = UserDto.class)
+    @GetMapping("/check")
+    public ResponseEntity checkDuplicateEmail(@ApiParam(value = "이메일", required = true) @RequestParam String userEmail) {
+        ResponseEntity responseEntity = null;
+        try {
+            userService.checkDuplicateUser(userEmail);
+            BaseResponse response = responseService.getBaseResponse(true, "해당 이메일로 가입된 유저가 없습니다");
+
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (DuplicatedUsernameException exception) {
+            logger.info(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        }
         return responseEntity;
     }
 }
