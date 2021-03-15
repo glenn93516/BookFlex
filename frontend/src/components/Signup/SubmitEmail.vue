@@ -75,7 +75,7 @@ export default {
     setEmail() {
       console.log('커밋 완료')
       const user = {userEmail: this.email}
-      this.$store.commit("setEmail", user)
+      this.$store.dispatch("SetEmail", user)
       this.$router.push({ name: 'CheckEmail' })
     }
   }

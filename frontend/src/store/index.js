@@ -43,6 +43,9 @@ export default new Vuex.Store({
     },
     getEmail(state) {
       return state.signupInfo.userEmail
+    },
+    getSignupInfo(state) {
+      return state.signupInfo
     }
   },
   mutations: {
@@ -63,7 +66,7 @@ export default new Vuex.Store({
     setEmail(state, payload) {
       state.signupInfo.userEmail = payload.userEmail
     },
-    setSignupInfo(state, payload) {
+    SetSignupInfo(state, payload) {
       state.signupInfo.userNickname = payload.userNickname
       state.signupInfo.userPassword = payload.userPassword
     },
@@ -75,7 +78,6 @@ export default new Vuex.Store({
     },
     SubmitUserJob(state, payload) {
       state.user.userJob = payload
-      console.log(payload)
     },
     SubmitUserPic(state, payload) {
       state.user.userProfileImgFile = payload
@@ -90,8 +92,6 @@ export default new Vuex.Store({
   },
   actions: {
     Login (context, user) {
-      console.log(user)
-      console.log(SERVER_URL)
       return axios.post(`${SERVER_URL}/user/login`, {
           "userEmail": user.userEmail,
           "userPassword": user.userPassword
@@ -99,8 +99,6 @@ export default new Vuex.Store({
         .then(res => {
           // 로그인이 됐을 때
           if (res.data != "undefined") {
-            console.log('bearer res.data.data')
-            console.log(`Bearer ${res.data.data}`)
             axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${res.data['data']}`
@@ -112,12 +110,8 @@ export default new Vuex.Store({
         })
     },
     GetUserInfo (context) {
-      console.log('getUserInfo----')
-      console.log(axios.defaults.headers)
-      return axios
-      .get(`${SERVER_URL}/user`)
+      return axios.get(`${SERVER_URL}/user`)
       .then(res => {
-        console.log(res)
         context.commit("GetUserInfo", res.data.data)
       })
       .catch(err => {
@@ -137,6 +131,7 @@ export default new Vuex.Store({
       context.commit("SubmitUserPic", Img)
     },
     UpdateUserInfo(context, User) {
+      console.log('액션스 user', User)
       axios.put(`${SERVER_URL}/user`, {
         userEmail: User.userEmail,
         userNickname: User.userNickname,
@@ -153,6 +148,12 @@ export default new Vuex.Store({
       .catch(err => {
         console.error(err)
       })
+    },
+    SetEmail(context, Email) {
+      context.commit("setEmail", Email)
+    },
+    SetSignupInfo(context, user) {
+      context.commit('SetSignupInfo', user)
     }
   }
 })
