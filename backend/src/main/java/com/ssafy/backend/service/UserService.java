@@ -39,6 +39,12 @@ public class UserService {
         return userMapper.findUserByUserEmail(userDto.getUsername()).get();
     }
 
+    public void checkDuplicateUser(String userEmail) {
+        if (userMapper.findUserByUserEmail(userEmail).isPresent()) {
+            throw new DuplicatedUsernameException("이미 가입된 유저입니다");
+        }
+    }
+
     public String login(LoginDto loginDto) {
         UserDto userDto = userMapper.findUserByUserEmail(loginDto.getUserEmail())
                 .orElseThrow(() -> new LoginFailedException("잘못된 아이디입니다"));
@@ -63,7 +69,7 @@ public class UserService {
     @Transactional
     public Long updateUser(UserDto findUser, UserDto modifyUser) {
         if (modifyUser.getUserGender() != null) {
-            findUser.setUserGender(findUser.getUserGender().toUpperCase()); // 성별 FEMALE, MALE 대문자
+            findUser.setUserGender(modifyUser.getUserGender().toUpperCase()); // 성별 FEMALE, MALE 대문자
         }
         if (modifyUser.getUserBirth() != null) {
             findUser.setUserBirth(modifyUser.getUserBirth());
@@ -75,7 +81,7 @@ public class UserService {
             findUser.setUserNickname(modifyUser.getUserNickname());
         }
         if (modifyUser.getPassword() != null) {
-            findUser.setUserPassword(passwordEncoder.encode(findUser.getUserPassword())); // 비밀번호
+            findUser.setUserPassword(passwordEncoder.encode(modifyUser.getUserPassword())); // 비밀번호
         }
         if (modifyUser.getUserProfileImg() != null) {
             findUser.setUserProfileImg(modifyUser.getUserProfileImg());
