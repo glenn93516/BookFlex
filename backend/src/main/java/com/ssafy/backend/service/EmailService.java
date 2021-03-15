@@ -17,7 +17,6 @@ import java.util.Random;
 public class EmailService {
 
     private final JavaMailSender javaMailSender;
-    private static final String ePw = createKey();
     private final Logger logger = LoggerFactory.getLogger(EmailService.class);
 
     public static String createKey() {
@@ -43,7 +42,7 @@ public class EmailService {
         return sb.toString();
     }
 
-    public MimeMessage createMessage(String to) throws MessagingException {
+    public MimeMessage createMessage(String to, String ePw) throws MessagingException {
         logger.debug("보내는 대상 : '{}'", to);
         logger.debug("인증 번호 : '{}'", ePw);
 
@@ -74,7 +73,8 @@ public class EmailService {
     }
 
     public String sendSimpleMessage(String to) throws MessagingException {
-        MimeMessage message = createMessage(to);
+        String ePw = createKey();
+        MimeMessage message = createMessage(to, ePw);
 
         javaMailSender.send(message);
 
