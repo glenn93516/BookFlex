@@ -52,13 +52,14 @@
     >
       확인
     </b-button> -->
-    <router-link 
-      :to="{ name: 'SubmitPref' }" 
+    <b-button 
       :class="btnStatus"
+      @click="submitUserName"
+      @keydown.enter="submitUserName"
       style="margin-top: 16px;"
     >
       다음으로 넘어가기(임시)
-    </router-link>
+    </b-button>
   </div>
 </template>
 
@@ -158,6 +159,17 @@ export default {
         this.confirmStatus = ""
       }
     },
+    submitUserName() {
+      const user = { 
+        userNickname: this.name ,
+        userPassword: this.password
+      }
+      this.$store.dispatch("SetSignupInfo", user)
+      this.goToSubmitPref()
+    },
+    goToSubmitPref() {
+      this.$router.push({ name: "SubmitPref" })
+    }
   }
 }
 </script>
