@@ -39,6 +39,9 @@ export default new Vuex.Store({
     },
     getUser(state) {
       return state.user
+    },
+    getEmail(state) {
+      return state.signupInfo.userEmail
     }
   },
   mutations: {
@@ -55,6 +58,13 @@ export default new Vuex.Store({
       state.user.userGender = payload.userGender
       state.user.userJob = payload.userJob
       state.user.userRole = payload.userRole
+    },
+    setEmail(state, payload) {
+      state.signupInfo.userEmail = payload.userEmail
+    },
+    setSignupInfo(state, payload) {
+      state.signupInfo.userNickname = payload.userNickname
+      state.signupInfo.userPassword = payload.userPassword
     },
     SubmitUserGender(state, payload) {
       state.user.userGender = payload
