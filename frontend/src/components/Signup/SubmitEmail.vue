@@ -4,6 +4,7 @@
     <b-form-input
       v-model="email"
       id="id-input"
+      class="id-input"
       :class="emailStatus"
       style="border: 0;
       border-bottom: 1px solid;
@@ -16,13 +17,14 @@
       이메일 양식이 올바르지 않습니다.
     </div>
     <br>
-    <router-link
+    <!-- <div @click="setEmail">이거는</div> -->
+    <b-button
       id="next-btn"
       :class="btnStatus" 
-      :to="{ name: 'CheckEmail' }"
+      @click="setEmail"
     >
       확인
-    </router-link>
+    </b-button>
   </div>
 </template>
 
@@ -54,6 +56,7 @@ export default {
     servePageInfo() {
       return this.pageData
     },
+    // 이메일 형태 유효성 검사
     isValidEmail() {
       const reg_email = /^([0-9a-zA-Z_\\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
       if (this.email && !reg_email.test(this.email)) {
@@ -68,6 +71,12 @@ export default {
           this.btnStatus = emailInvalid
         }
       }
+    },
+    setEmail() {
+      console.log('커밋 완료')
+      const user = {userEmail: this.email}
+      this.$store.commit("setEmail", user)
+      this.$router.push({ name: 'CheckEmail' })
     }
   }
 }

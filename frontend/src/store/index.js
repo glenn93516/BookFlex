@@ -1,6 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
-import axios from "axios"
+// import axios from "axios"
 
 Vue.use(Vuex)
 
@@ -10,11 +10,25 @@ export default new Vuex.Store({
   state: {
     server: SERVER_URL,
     accessToken: "",
+    signupInfo: {
+      userEmail: "",
+      userPassword: "",
+      userNickname: "",
+      // userGenres: [],
+    },
     user: {
-      userId: Number,
       userEmail: "",
       userNickname: "",
+      userPassword: "",
+      // userGenres: [],
       userProfileImg: "",
+      userProfileImgFile: "", // file ?
+      userBirth: "",
+      userGender: "",
+      userJob: "",
+      // 입력 X
+      userId: Number,
+      userRole: "",
     }
   },
   getters: {
@@ -26,6 +40,9 @@ export default new Vuex.Store({
     },
     getUser(state) {
       return state.user
+    },
+    getEmail(state) {
+      return state.signupInfo.userEmail
     }
   },
   mutations: {
@@ -37,13 +54,20 @@ export default new Vuex.Store({
       state.user.userNickname = payload.userNickname
       state.user.userEmail = payload.userEmail
       state.user.userProfileImg = payload.userProfileImg
-    }
+    },
+    setEmail(state, payload) {
+      state.signupInfo.userEmail = payload.userEmail
+    },
+    setSignupInfo(state, payload) {
+      state.signupInfo.userNickname = payload.userNickname
+      state.signupInfo.userPassword = payload.userPassword
+    },
   },
   actions: {
     Login (context, user) {
       console.log(user)
       console.log(SERVER_URL)
-      return axios
+      return this.$axios
         .post(`${SERVER_URL}/user/login`, {
           "userEmail": user.userEmail,
           "userPassword": user.userPassword
@@ -53,7 +77,7 @@ export default new Vuex.Store({
           if (res.data != "undefined") {
             console.log('bearer res.data.data')
             console.log(`Bearer ${res.data.data}`)
-            axios.defaults.headers.common[
+            this.$axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${res.data['data']}`
           }
@@ -65,8 +89,8 @@ export default new Vuex.Store({
     },
     getUserInfo (context) {
       console.log('getUserInfo----')
-      console.log(axios.defaults.headers)
-      return axios
+      console.log(this.$axios.defaults.headers)
+      return this.$axios
       .get(`${SERVER_URL}/user`)
       .then(res => {
         console.log(res)
