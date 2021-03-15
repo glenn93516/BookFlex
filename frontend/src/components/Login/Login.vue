@@ -66,16 +66,11 @@ export default {
     },
     userLogin() {
       const user = { userEmail: this.email, userPassword: this.password }
-      console.log('user', user)
       this.$store.dispatch('Login', user)
       .then(res => {
-        console.log('여기가 언디파인?')
         console.log(res)
         this.getUserInfo()
-        console.log('여기는 75')
         this.$router.push({ name: "Main" })
-        console.log(this.$store.getters.getUser)
-        console.log(this.$store.getters.getAccessToken)
       })
       .catch(() => {
         alert("아이디 비밀번호를 확인해주세요.")
@@ -85,7 +80,7 @@ export default {
     },
     getUserInfo() {
       console.log('getUserInfo 실행')
-      this.$store.dispatch('getUserInfo')
+      this.$store.dispatch('GetUserInfo')
     }
   },
   watch: {

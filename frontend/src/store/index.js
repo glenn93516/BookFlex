@@ -1,6 +1,5 @@
 import Vue from "vue"
 import Vuex from "vuex"
-// import axios from "axios"
 
 Vue.use(Vuex)
 
@@ -49,11 +48,16 @@ export default new Vuex.Store({
     Login (state, payload) {
       state.accessToken = payload
     },
-    getUserInfo(state, payload) {
+    GetUserInfo(state, payload) {
       state.user.userId = payload.userId
-      state.user.userNickname = payload.userNickname
       state.user.userEmail = payload.userEmail
+      state.user.userNickname = payload.userNickname
       state.user.userProfileImg = payload.userProfileImg
+      // state.user.userGenres = payload.userGenres
+      state.user.userBirth = payload.userBirth
+      state.user.userGender = payload.userGender
+      state.user.userJob = payload.userJob
+      state.user.userRole = payload.userRole
     },
     setEmail(state, payload) {
       state.signupInfo.userEmail = payload.userEmail
@@ -62,6 +66,26 @@ export default new Vuex.Store({
       state.signupInfo.userNickname = payload.userNickname
       state.signupInfo.userPassword = payload.userPassword
     },
+    SubmitUserGender(state, payload) {
+      state.user.userGender = payload
+    },
+    SubmitUserBirth(state, payload) {
+      state.user.userBirth = payload
+    },
+    SubmitUserJob(state, payload) {
+      state.user.userJob = payload
+      console.log(payload)
+    },
+    SubmitUserPic(state, payload) {
+      state.user.userProfileImgFile = payload
+    },
+    UpdateUserInfo(state, payload) {
+      state.user.userEmail = payload.userEmail
+      state.user.userNickname = payload.userNickname
+      state.user.userBirth = payload.userBirth
+      state.user.userGender = payload.userGender
+      state.user.userJob = payload.userJob
+    }
   },
   actions: {
     Login (context, user) {
@@ -87,17 +111,47 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    getUserInfo (context) {
+    GetUserInfo (context) {
       console.log('getUserInfo----')
       console.log(this.$axios.defaults.headers)
       return this.$axios
       .get(`${SERVER_URL}/user`)
       .then(res => {
         console.log(res)
-        context.commit("getUserInfo", res.data.data)
+        context.commit("GetUserInfo", res.data.data)
       })
       .catch(err => {
         console.log(err)
+      })
+    },
+    SubmitUserGender(context, gender) {
+      context.commit("SubmitUserGender", gender)
+    },
+    SubmitUserBirth(context, birthday) {
+      context.commit("SubmitUserBirth", birthday)
+    },
+    SubmitUserJob(context, Job) {
+      context.commit("SubmitUserJob", Job)
+    },
+    SubmitUserPic(context, Img) {
+      context.commit("SubmitUserPic", Img)
+    },
+    UpdateUserInfo(context, User) {
+      this.$axios.put(`${SERVER_URL}/user`, {
+        userEmail: User.userEmail,
+        userNickname: User.userNickname,
+        userPassword: User.userPassword,
+        userProfileImgFile: User.userProfileImgFile,
+        userBirth: User.userBirth,
+        userGender: User.userGender,
+        userJob: User.userJob,
+      })
+      .then(res => {
+        console.log(res)
+        context.commit('UpdateUserInfo', User)
+      })
+      .catch(err => {
+        console.error(err)
       })
     }
   }

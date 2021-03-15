@@ -4,7 +4,14 @@
     <div v-for="(option, idx) in options" :key="idx" class="custom-control">
       <Checkbox :option="option" @serveData="catchData"/>
     </div>
-    <router-link :to="{ name: 'SubmitPic' }" class="btn btn-success btn-block job-btn">다음으로 넘어가기</router-link>
+    <b-button 
+      class="btn-success btn-block job-btn"
+      @click="submitUserJob(checkedValues[0])"
+      @keydown.enter="submitUserJob(checkedValues[0])"
+    >
+    <!-- 중복선택 가능하게 바꾸려면 checkedValues[0]을 checkedValues로 바꿔주세요 -->
+      다음으로 넘어가기
+    </b-button>
   </div>
 </template>
 
@@ -42,16 +49,26 @@ export default {
       return this.pageData
     },
     catchData(option) {
-      console.log(option)
       this.options[option.value].isChecked = option.isChecked
-      console.log(this.options)
       if (option.isChecked) {
-        this.checkedValues.push(option.text)
+        if (this.checkedValues.length > 0) {
+          // 중복선택 가능하게 바꾸려면 바로위의 if문을 제거하고 else문에 있는 명령어만 사용!
+          alert("하나만 선택해 주세요 :(")
+          this.options[option.value].isChecked = false
+        } else {
+          this.checkedValues.push(option.text)
+        }
       } else {
         const idx = this.checkedValues.indexOf(option.text)
         this.checkedValues.splice(idx, 1)
       }
-      console.log(this.checkedValues)
+    },
+    submitUserJob(Job) {
+      this.$store.dispatch('SubmitUserJob', Job)
+      this.goToSubmitPic()
+    },
+    goToSubmitPic() {
+      this.$router.push({ name: 'SubmitPic'})
     }
   },
   watch: {

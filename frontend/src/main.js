@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
+import axios from 'axios'
 import router from './router'
-import axios from "axios"
 import store from './store'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 
@@ -12,8 +12,9 @@ Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 
 Vue.use(axios);
-Vue.prototype.$axios=axios
+
 Vue.config.productionTip = false
+Vue.prototype.$axios=axios
 
 new Vue({
   router,
