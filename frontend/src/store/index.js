@@ -22,7 +22,7 @@ export default new Vuex.Store({
       userPassword: "",
       // userGenres: [],
       userProfileImg: "",
-      userProfileImgFile: File, // file ?
+      userProfileImgFile: "", // file ?
       userBirth: "",
       userGender: "",
       userJob: "",
@@ -103,6 +103,7 @@ export default new Vuex.Store({
               "Authorization"
             ] = `Bearer ${res.data['data']}`
           }
+          localStorage.setItem('jwt', `Bearer ${res.data.data}`)
           context.commit("Login", res.data.data)
         })
         .catch(err => {
@@ -131,15 +132,23 @@ export default new Vuex.Store({
       context.commit("SubmitUserPic", Img)
     },
     UpdateUserInfo(context, User) {
+      // let FormData = require('form-data')
+      let data = new FormData()
+      data.append('userProfileImgFile', User.userProfileImgFile)
+      data.append('userEmail', User.userEmail)
+      data.append('userNickname', User.userNickname)
+      data.append('userBirth', User.userBirth)
+      data.append('userGender', User.userGender)
+      data.append('userJob', User.userJob)
+      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+      for (let val of data.values()) {
+        console.log(val)
+      }
+      console.log(typeof(data), '타입')
+      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
       console.log('액션스 user', User)
-      axios.put(`${SERVER_URL}/user`, {
-        userEmail: User.userEmail,
-        userNickname: User.userNickname,
-        userProfileImgFile: User.userProfileImgFile,
-        userBirth: User.userBirth,
-        userGender: User.userGender,
-        userJob: User.userJob,
-      })
+
+      axios.put(`${SERVER_URL}/user`, data)
       .then(res => {
         console.log(res)
         context.commit('UpdateUserInfo', User)
