@@ -39,6 +39,12 @@ public class UserService {
         return userMapper.findUserByUserEmail(userDto.getUsername()).get();
     }
 
+    public void checkDuplicateUser(String userEmail) {
+        if (userMapper.findUserByUserEmail(userEmail).isPresent()) {
+            throw new DuplicatedUsernameException("이미 가입된 유저입니다");
+        }
+    }
+
     public String login(LoginDto loginDto) {
         UserDto userDto = userMapper.findUserByUserEmail(loginDto.getUserEmail())
                 .orElseThrow(() -> new LoginFailedException("잘못된 아이디입니다"));
