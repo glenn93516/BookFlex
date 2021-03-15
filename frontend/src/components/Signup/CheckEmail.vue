@@ -9,11 +9,13 @@
     <div>
       <h1 id="timer" class="text-center">{{ resTimeData }}</h1>
       <b-form-input
-        v-model="confirmSubmit"
+        v-model="inputNum"
         class="number-input"
         style="border: 0;
         border-bottom: 1px solid;
         border-radius: 0;
+        display: inline-block;
+        width=10%;
         "
         placeholder="6자리 입력"
       >
@@ -45,6 +47,8 @@
 </template>
 
 <script>
+// import axios from "axios"
+
 export default {
   props: {
   },
@@ -58,12 +62,36 @@ export default {
       timeCounter: 600,
       resTimeData: "10 : 00",
       timeOut: false,
+      // 인증번호
       mailNum: "",
+      // 사용자가 입력한 번호
       inputNum: "",
-      confirmSubmit: "",
     }
   },
+  created() {
+    // this.sendEmail()
+  },
   methods: {
+    sendEmail() {
+      const userEmail = this.$store.state.signupInfo.userEmail
+      this.$axios.post(`${this.$store.getters.getServer}/email/mail`, 
+        {},
+        {
+          params: {
+            'userEmail': userEmail,
+          }
+        }
+      )
+      .then(res => {
+        console.log(res)
+        this.mailNum = res.data.data
+        this.start()
+        alert(`인증번호가 발송되었습니다. ${ this.timeMin }분 이내에 발급받은 인증 번호를 입력해주세요.`)      
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
     servePageInfo() {
       console.log("여기는 체크")
       return this.pageData
@@ -80,8 +108,8 @@ export default {
     },
     prettyTime() {
       let time = this.timeCounter;
-      let minutes = parseInt(time);
-      let seconds = Math.round((time - minutes) * 60);
+      let minutes = parseInt(time / 60);
+      let seconds = Math.round(time - (minutes * 60));
       return `${this.pad(minutes, 2)} : ${this.pad(seconds, 2)}`;
     },
     pad(n, width) {
@@ -92,6 +120,7 @@ export default {
       clearInterval(this.polling);
       alert("인증번호 유효시간이 초과되었습니다.");
       this.timeOut = true;
+      // 버튼 비활성화
     },
     resend() {
 
@@ -100,8 +129,13 @@ export default {
       clearInterval(this.polling);
     },
     goToInputName() {
+      if (this.inputNum === this.mailNum) {
+        alert('인증되었습니다.')
+        // this.$router.push({ name : 'InputName' })
+      } else {
+        alert('다시 시도하세요.')
+      }
       // 조건에 따라(axios요청 결과 일치여부확인, 불일치시 alert 띄우기)
-      this.$router.push({ name : 'InputName' })
     }
   }
 
