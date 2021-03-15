@@ -22,7 +22,7 @@ export default new Vuex.Store({
       userPassword: "",
       // userGenres: [],
       userProfileImg: "",
-      userProfileImgFile: File, // file ?
+      userProfileImgFile: "", // file ?
       userBirth: "",
       userGender: "",
       userJob: "",
@@ -103,6 +103,7 @@ export default new Vuex.Store({
               "Authorization"
             ] = `Bearer ${res.data['data']}`
           }
+          localStorage.setItem('jwt', `Bearer ${res.data.data}`)
           context.commit("Login", res.data.data)
         })
         .catch(err => {
@@ -130,7 +131,7 @@ export default new Vuex.Store({
     SubmitUserPic(context, Img) {
       context.commit("SubmitUserPic", Img)
     },
-    UpdateUserInfo({ context, User, root }) {
+    UpdateUserInfo(context, User) {
       // let FormData = require('form-data')
       let data = new FormData()
       data.append('userProfileImgFile', User.userProfileImgFile)
@@ -147,14 +148,7 @@ export default new Vuex.Store({
       console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
       console.log('액션스 user', User)
 
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data",
-          Authorization: root.state.accessToken
-        }
-      }
-
-      axios.put(`${SERVER_URL}/user`, data, config)
+      axios.put(`${SERVER_URL}/user`, data)
       .then(res => {
         console.log(res)
         context.commit('UpdateUserInfo', User)
