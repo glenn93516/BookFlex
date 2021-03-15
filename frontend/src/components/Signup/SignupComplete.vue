@@ -50,6 +50,7 @@ export default {
   },
   created() {
     this.signupComplete()
+    console.log(this.$store.getters.getUser)
   },
   methods: {
     signupComplete() {

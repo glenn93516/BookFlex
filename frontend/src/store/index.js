@@ -1,5 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import axios from "axios"
 
 Vue.use(Vuex)
 
@@ -91,8 +92,7 @@ export default new Vuex.Store({
     Login (context, user) {
       console.log(user)
       console.log(SERVER_URL)
-      return this.$axios
-        .post(`${SERVER_URL}/user/login`, {
+      return axios.post(`${SERVER_URL}/user/login`, {
           "userEmail": user.userEmail,
           "userPassword": user.userPassword
         })
@@ -101,7 +101,7 @@ export default new Vuex.Store({
           if (res.data != "undefined") {
             console.log('bearer res.data.data')
             console.log(`Bearer ${res.data.data}`)
-            this.$axios.defaults.headers.common[
+            axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${res.data['data']}`
           }
@@ -113,8 +113,8 @@ export default new Vuex.Store({
     },
     GetUserInfo (context) {
       console.log('getUserInfo----')
-      console.log(this.$axios.defaults.headers)
-      return this.$axios
+      console.log(axios.defaults.headers)
+      return axios
       .get(`${SERVER_URL}/user`)
       .then(res => {
         console.log(res)
@@ -137,7 +137,7 @@ export default new Vuex.Store({
       context.commit("SubmitUserPic", Img)
     },
     UpdateUserInfo(context, User) {
-      this.$axios.put(`${SERVER_URL}/user`, {
+      axios.put(`${SERVER_URL}/user`, {
         userEmail: User.userEmail,
         userNickname: User.userNickname,
         userPassword: User.userPassword,

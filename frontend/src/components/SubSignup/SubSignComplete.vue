@@ -46,6 +46,7 @@ export default {
     const User = this.$store.getters.getUser
     this.$store.dispatch('UpdateUserInfo', User)
     this.$store.dispatch('GetUserInfo')
+    console.log(this.$store.getters.getUser)
   }
 }
 </script>
