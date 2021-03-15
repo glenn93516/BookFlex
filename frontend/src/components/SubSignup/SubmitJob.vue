@@ -68,6 +68,7 @@ export default {
       this.goToSubmitPic()
     },
     goToSubmitPic() {
+      console.log('담겼나?', this.$store.getters.getUser)
       this.$router.push({ name: 'SubmitPic'})
     }
   },

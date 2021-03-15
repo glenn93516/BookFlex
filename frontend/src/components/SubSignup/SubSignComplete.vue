@@ -45,7 +45,6 @@ export default {
     // 완료페이지 마운팅시 회원가입완료 요청보내기
     const User = this.$store.getters.getUser
     this.$store.dispatch('UpdateUserInfo', User)
-    this.$store.dispatch('GetUserInfo')
     console.log('여기는 signupcomplete', this.$store.getters.getUser)
   }
 }

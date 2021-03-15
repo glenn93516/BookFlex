@@ -52,6 +52,7 @@ export default {
       this.goToComplete()
     },
     goToComplete() {
+      console.log('담겼나?', this.$store.getters.getUser)
       this.$router.push({ name: "SubSignComplete" })
     }
   }

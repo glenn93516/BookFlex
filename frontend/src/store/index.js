@@ -22,7 +22,7 @@ export default new Vuex.Store({
       userPassword: "",
       // userGenres: [],
       userProfileImg: "",
-      userProfileImgFile: "", // file ?
+      userProfileImgFile: File, // file ?
       userBirth: "",
       userGender: "",
       userJob: "",
@@ -135,7 +135,6 @@ export default new Vuex.Store({
       axios.put(`${SERVER_URL}/user`, {
         userEmail: User.userEmail,
         userNickname: User.userNickname,
-        userPassword: User.userPassword,
         userProfileImgFile: User.userProfileImgFile,
         userBirth: User.userBirth,
         userGender: User.userGender,
