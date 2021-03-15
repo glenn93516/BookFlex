@@ -8,6 +8,7 @@
       drop-placeholder="Drop file here..."
       style="margin-top: 30px; margin-bottom: 10px;"
       enctype = "multipart/form-data"
+      type="file"
     >
     </b-form-file>
       <!-- <div class="mt-3">Selected file: {{ profileImage ? profileImage.name : '' }}</div> -->
