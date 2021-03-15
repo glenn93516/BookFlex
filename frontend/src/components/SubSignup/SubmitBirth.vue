@@ -37,6 +37,7 @@ export default {
       this.goToSubmitJob()
     },
     goToSubmitJob() {
+      console.log('담겼나?', this.$store.getters.getUser)
       this.$router.push({ name: 'SubmitJob' })
     }
   },

@@ -77,7 +77,7 @@ export default {
         "userPassword": this.$store.getters.getSignupInfo.userPassword,
       }
       this.$store.dispatch('Login', user)
-      setTimeout(this.getUserInfo(), 1000)
+      setTimeout(this.getUserInfo, 1000)
     },
     getUserInfo() {
       this.$store.dispatch('GetUserInfo')
