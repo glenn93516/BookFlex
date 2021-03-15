@@ -69,11 +69,13 @@ export default {
     }
   },
   created() {
-    // this.sendEmail()
+    this.sendEmail()
   },
   methods: {
     sendEmail() {
       const userEmail = this.$store.state.signupInfo.userEmail
+      console.log(userEmail)
+      console.log(this.$store.getters.getServer, '주소')
       this.$axios.post(`${this.$store.getters.getServer}/email/mail`, 
         {},
         {
@@ -131,7 +133,7 @@ export default {
     goToInputName() {
       if (this.inputNum === this.mailNum) {
         alert('인증되었습니다.')
-        // this.$router.push({ name : 'InputName' })
+        this.$router.push({ name : 'InputName' })
       } else {
         alert('다시 시도하세요.')
       }
