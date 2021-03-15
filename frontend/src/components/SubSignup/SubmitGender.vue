@@ -23,12 +23,13 @@
         />
       </b-form-radio>
     </b-form-group>
-    <router-link
-      class="btn btn-success btn-block gender-btn" 
-      :to="{ name: 'SubmitBirth' }"
+    <b-button
+      @click="submitUserGender(selected)"
+      @keydown.enter="submitUserGender(selected)"
+      class="btn-success btn-block gender-btn" 
     >
       확인
-    </router-link>
+    </b-button>
   </div>
 </template>
 
@@ -47,10 +48,11 @@ export default {
     servePageInfo() {
       return this.pageData
     },
-    checkSelected() {
-      console.log(this.selected)
-    },
-  }
+    submitUserGender(gender) {
+      this.$store.dispatch('SubmitUserGender', gender)
+      this.$router.push({ name: "SubmitBirth" })
+    }
+  },
 }
 </script>
 

@@ -7,12 +7,13 @@
       style="margin-top: 40px; margin-bottom: 40px;"
     >
     </b-form-datepicker>
-    <router-link
-      class="btn btn-success btn-block birth-btn" 
-      :to="{ name: 'SubmitJob' }"
+    <b-button
+      class="btn-success btn-block birth-btn" 
+      @click="submitUserBirth(birthdate)"
+      @keydown.enter="submitUserBirth(birthdate)"
     >
       확인
-    </router-link>
+    </b-button>
   </div>
 </template>
 
@@ -31,7 +32,14 @@ export default {
     servePageInfo() {
       return this.pageData
     },
-  }
+    submitUserBirth(birthday) {
+      this.$store.dispatch("SubmitUserBirth", birthday)
+      this.goToSubmitJob()
+    },
+    goToSubmitJob() {
+      this.$router.push({ name: 'SubmitJob' })
+    }
+  },
 }
 </script>
 
