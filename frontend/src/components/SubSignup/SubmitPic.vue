@@ -7,16 +7,18 @@
       :placeholder="photoName"
       drop-placeholder="Drop file here..."
       style="margin-top: 30px; margin-bottom: 10px;"
+      enctype = "multipart/form-data"
     >
     </b-form-file>
       <!-- <div class="mt-3">Selected file: {{ profileImage ? profileImage.name : '' }}</div> -->
 
-    <router-link
-      class="btn btn-success btn-block" 
-      :to="{ name: 'SubSignComplete' }"
+    <b-button
+      class="btn-success btn-block" 
+      @click="submitUserPic(profileImage)"
+      @keydown.enter="submitUserPic(profileImage)"
     >
       확인
-    </router-link>
+    </b-button>
   </div>
 </template>
 
@@ -45,6 +47,13 @@ export default {
     servePageInfo() {
       return this.pageData
     },
+    submitUserPic(Img) {
+      this.$store.dispatch('SubmitUserPic', Img)
+      this.goToComplete()
+    },
+    goToComplete() {
+      this.$router.push({ name: "SubSignComplete" })
+    }
   }
 }
 </script>
