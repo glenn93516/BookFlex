@@ -72,8 +72,9 @@ export default {
         this.getUserInfo()
         this.$router.push({ name: "Main" })
       })
-      .catch(() => {
+      .catch(err => {
         alert("아이디 비밀번호를 확인해주세요.")
+        console.log(err)
         this.email = ""
         this.password = ""
       })
