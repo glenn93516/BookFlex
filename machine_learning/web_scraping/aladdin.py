@@ -34,7 +34,7 @@ for foldername in foldername_list:
                 item_id = item_id_url[item_id_url.find('=') + 1:]
 
 
-                url2 = f'https://www.aladin.co.kr/ucl/shop/product/ajax/GetCommunityListAjax.aspx?itemId={item_id}&IsAjax=true&pageType=1&sort=1&communitytype=CommentReview&IsOrderer=2&pageCount=100'
+                url2 = f'https://www.aladin.co.kr/ucl/shop/product/ajax/GetCommunityListAjax.aspx?itemId={item_id}&IsAjax=true&pageType=1&sort=1&communitytype=CommentReview&IsOrderer=2&pageCount=500'
 
                 res = requests.get(url2)
                 res.raise_for_status()
