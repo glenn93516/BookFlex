@@ -4,6 +4,8 @@ import com.ssafy.backend.dto.response.BaseResponse;
 import com.ssafy.backend.dto.response.SingleDataResponse;
 import com.ssafy.backend.service.EmailService;
 import com.ssafy.backend.service.ResponseService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.mail.MessagingException;
-import javax.mail.SendFailedException;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,7 +29,8 @@ public class EmailController {
     private final Logger logger = LoggerFactory.getLogger(EmailController.class);
 
     @PostMapping("/mail")
-    public ResponseEntity getAuthEmail(@RequestParam(required = true) String userEmail) {
+    @ApiOperation(value = "인증 이메일 전송", notes = "성공시 인증 코드 반환")
+    public ResponseEntity getAuthEmail(@ApiParam(value = "가입 신청한 유저 이메일", required = true) @RequestParam(required = true) String userEmail) {
         ResponseEntity responseEntity = null;
         try {
             String code = emailService.sendSimpleMessage(userEmail);

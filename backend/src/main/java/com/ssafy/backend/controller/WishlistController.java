@@ -9,11 +9,12 @@ import com.ssafy.backend.service.ResponseService;
 import com.ssafy.backend.service.WishlistService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -38,9 +39,14 @@ public class WishlistController {
     private final Logger logger = LoggerFactory.getLogger(WishlistController.class);
 
     //위시리스트 등록
+    @ApiOperation(value = "위시리스트 등록")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping(value = "/{book_isbn}")
-    public ResponseEntity addWishlist(@PathVariable(name = "book_isbn") long book_isbn, @ApiIgnore final Authentication authentication) {
+    public ResponseEntity addWishlist(@ApiParam(value = "등록할 책 isbn", required = true, example = "8954672213") @PathVariable(name = "book_isbn") long book_isbn,
+                                      @ApiIgnore final Authentication authentication) {
         ResponseEntity responseEntity = null;
 
         SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
@@ -73,9 +79,14 @@ public class WishlistController {
     }
 
     //위시리스트 삭제
+    @ApiOperation(value = "위시리스트 삭제")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @PreAuthorize("hasRole('ROLE_USER')")
     @DeleteMapping(value = "/{wishlist_id}")
-    public ResponseEntity deleteWishlist(@PathVariable(name = "wishlist_id") long wishlist_id, @ApiIgnore final Authentication authentication) {
+    public ResponseEntity deleteWishlist(@ApiParam(value = "삭제할 위시리스트 id", required = true, example = "123") @PathVariable(name = "wishlist_id") long wishlist_id,
+                                         @ApiIgnore final Authentication authentication) {
         ResponseEntity responseEntity = null;
         Long user_id = ((UserDto) authentication.getPrincipal()).getUserId();
         Map map = new HashMap();
@@ -98,6 +109,10 @@ public class WishlistController {
     }
 
     //위시리스트 조회
+    @ApiOperation(value = "위시리스트 조회")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value = "")
     public ResponseEntity getWishList(@ApiIgnore final Authentication authentication){

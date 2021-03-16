@@ -52,7 +52,7 @@ public class NoticeController {
 
     @ApiOperation(value = "공지사항 상세조회")
     @GetMapping("/{noticeId}")
-    public ResponseEntity selectNotice(@ApiParam(value = "공지사항 아이디", required = true) @PathVariable("noticeId") Long noticeId){
+    public ResponseEntity selectNotice(@ApiParam(value = "공지사항 아이디", required = true, example = "123") @PathVariable("noticeId") Long noticeId){
         ResponseEntity responseEntity = null;
         try {
             NoticeDto noticeDto = noticeService.getNotice(noticeId);
@@ -70,7 +70,7 @@ public class NoticeController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiImplicitParams({@ApiImplicitParam(name = "Authorization", value = "관리자 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")})
-    @ApiOperation(value = "공지사항 작성")
+    @ApiOperation(value = "공지사항 작성", notes = "관리자 계정으로만 사용 가능")
     @PostMapping
     public ResponseEntity insertNotice(@ApiIgnore final Authentication authentication,
                                        @ApiParam(value = "공지사항 정보", required = true) @RequestBody NoticeDto noticeDto){
@@ -94,7 +94,7 @@ public class NoticeController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiImplicitParams({@ApiImplicitParam(name = "Authorization", value = "관리자 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")})
-    @ApiOperation(value = "공지사항 수정")
+    @ApiOperation(value = "공지사항 수정", notes = "관리자 계정으로만 사용 가능")
     @PutMapping("/{noticeId}")
     public ResponseEntity updateNotice(@ApiIgnore final Authentication authentication,
                                        @ApiParam(value = "공지사항 정보", required = true) @RequestBody NoticeDto noticeDto){
@@ -118,9 +118,9 @@ public class NoticeController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiImplicitParams({@ApiImplicitParam(name = "Authorization", value = "관리자 로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")})
-    @ApiOperation(value = "공지사항 삭제")
+    @ApiOperation(value = "공지사항 삭제", notes = "관리자 계정으로만 사용 가능")
     @DeleteMapping("/{noticeId}")
-    public ResponseEntity deleteNotice(@ApiParam(value = "공지사항 아이디", required = true) @PathVariable("noticeId") Long noticeId){
+    public ResponseEntity deleteNotice(@ApiParam(value = "공지사항 아이디", required = true, example = "123") @PathVariable("noticeId") Long noticeId){
         ResponseEntity responseEntity = null;
         try {
             noticeService.deleteNotice(noticeId);
