@@ -55,7 +55,6 @@
     <b-button 
       :class="btnStatus"
       @click="submitUserName"
-      @keydown.enter="submitUserName"
       style="margin-top: 16px;"
     >
       다음으로 넘어가기(임시)
