@@ -69,7 +69,7 @@ import Book from '@/components/Main/Book.vue'
 import BookShelf from '@/components/Main/BookShelf.vue'
 
 export default {
-  name: 'main',
+  name: 'Main',
   components: {
     Book,
     BookShelf,
