@@ -27,7 +27,7 @@
         </span>
       </router-link>
       <router-link 
-        :to="{ name: 'Login'}" 
+        :to="{ name: 'Main'}" 
         class="btn btn-danger"
       >
         귀찮아요
