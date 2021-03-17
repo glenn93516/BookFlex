@@ -5,7 +5,9 @@
       type="light" 
       class="background-nav"
     >
-      <b-navbar-brand href="/">
+      <b-navbar-brand
+        @click="goToMain"
+      >
         <img src="@/assets/book_logo.png" alt="book logo" height="55px">
       </b-navbar-brand>
       <b-navbar-nav>
@@ -26,13 +28,38 @@
           <template #button-content>
             <b-avatar size="2.5rem" src="@/assets/푸들.png"></b-avatar>
           </template>
-          <b-dropdown-item href="/login" style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"><span style="font-size: 0.8rem;">로그인</span></b-dropdown-item>
+
+          <b-dropdown-item
+            v-if="!isLogin" 
+            href="/login" 
+            style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
+          >
+            <span style="font-size: 0.8rem;">로그인</span>
+          </b-dropdown-item>
+
+          <b-dropdown-item
+            v-if="isLogin" 
+            @click="Logout"
+            style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
+          >
+            <span style="font-size: 0.8rem;">로그아웃</span>
+          </b-dropdown-item>
             <hr class="list-hr">
-          <b-dropdown-item href="#" style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"><span style="font-size: 0.8rem;">로그아웃</span></b-dropdown-item>
+
+          <b-dropdown-item 
+            href="#" 
+            style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
+          >
+            <span style="font-size: 0.8rem;">나의서재</span>
+          </b-dropdown-item>
             <hr class="list-hr">
-          <b-dropdown-item href="#" style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"><span style="font-size: 0.8rem;">나의서재</span></b-dropdown-item>
-            <hr class="list-hr">
-          <b-dropdown-item href="/signup/1" style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"><span style="font-size: 0.8rem;">회원가입(temp)</span></b-dropdown-item>
+
+          <!-- <b-dropdown-item 
+            href="/signup/1" 
+            style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
+          >
+            <span style="font-size: 0.8rem;">회원가입(temp)</span>
+          </b-dropdown-item> -->
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-navbar>
@@ -48,6 +75,8 @@ export default {
   data() {
     return {
       checkInput: true,
+      isLogin: false,
+      pageName: "",
     }
   },
   methods: {
@@ -57,7 +86,28 @@ export default {
     hideInput() {
       this.checkInput = true
     },
-  }
+    checkLogin() {
+      const token = this.$store.getters.getAccessToken
+      if (token) {
+        this.isLogin = true
+      }
+    },
+    Logout() {
+      this.$store.dispatch('Logout')
+      this.isLogin = false
+    },
+    goToMain() {
+      if (this.pageName!="Main") {
+        this.$router.push({ name: 'MainBook' })
+      }
+    }
+  },
+  watch: {
+    $route(to) {
+      this.pageName = to.name
+      this.checkLogin()
+    }
+  },
 }
 </script>
 
