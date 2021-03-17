@@ -19,7 +19,6 @@
           />
         </header>
         <router-view ref="progress" ></router-view>
-        <!-- <SubmitEmail ref="progress"/> -->
 
       </div>
 
@@ -44,10 +43,8 @@
 </template>
 
 <script>
-// import SubmitEmail from './SubmitEmail.vue'
 export default {
   components: {
-    // SubmitEmail,
   },
   data() {
     return {

@@ -30,13 +30,6 @@
       >
         인증메일 재발송하기
       </a>
-      <!-- <b-button
-        variant="success"
-        @click="isCorrect"
-        :active="!timeOut"  
-      >
-        확인
-      </b-button> -->
     </div>
       <b-btn 
         class="btn-success btn-block next-btn"

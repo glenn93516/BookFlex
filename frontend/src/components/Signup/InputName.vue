@@ -45,13 +45,6 @@
       비밀번호와 일치하지 않습니다
     </div>
     <br>
-    <!-- <b-button
-      block
-      variant="success"
-      @click="sendName"
-    >
-      확인
-    </b-button> -->
     <b-button 
       :class="btnStatus"
       @click="submitUserName"
