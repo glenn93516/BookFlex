@@ -126,13 +126,13 @@ export default {
     margin: 0 40px;
   }
 /*여기입니다요 id가 이거래 .. 선택자로 찍어버렸어 약간 포크 */
-  #__BVID__10 > ul{
+  #__BVID__9 > ul{
     background-color: #5c463d;
     border-radius: 10px/ 10px;
     border: 0px;
     width: 10px;
   }
-  #__BVID__10__BV_toggle_{ 
+  #__BVID__9__BV_toggle_{ 
     border : 0;
     outline-style: none;
     text-decoration-style: none; 
@@ -177,6 +177,6 @@ export default {
     margin-right: 15px;
     margin-top: 5px;
     margin-bottom: 5px;
-    background-color: white;
+    /* background-color: white; */
   }
 </style>
