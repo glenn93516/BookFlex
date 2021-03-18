@@ -1,31 +1,37 @@
 <template>
   <div>
-    <p class="noticeMessage">가입하실 이메일 주소를 입력해주세요.</p>
+    <p 
+      class="noticeMessage"
+    >
+      가입하실 이메일 주소를 입력해주세요.
+    </p>
     <b-form>
       <b-form-input
         v-model="email"
         class="id-input"
         :class="emailStatus"
-        style="border: 0;
-        border-bottom: 1px solid;
-        border-radius: 0;
-        "
         placeholder="이메일 (example@gmail.com)"
         @blur="duplicateCheck"
-        @keydown.enter="setEmail"
       >
       </b-form-input>
-      <div style="color: red; margin-bottom: -24px;" v-show="emailStatus === 'duplicate'">
+      <div 
+        class="warning-msg"
+        v-show="emailStatus === 'duplicate'"
+      >
         이미 가입된 회원입니다.
       </div>
-      <div style="color: red; margin-bottom: -24px;" v-show="emailStatus === 'form-invalid'">
+      <div 
+        class="warning-msg"
+        v-show="emailStatus === 'form-invalid'"
+      >
         이메일 양식이 올바르지 않습니다.
       </div>
       <br>
       <b-button
+        type="submit"
         class="btn btn-success btn-block next-btn"
-        :class="able" 
         @click="setEmail"
+        :disabled="disableBtn"
       >
         확인
       </b-button>
@@ -34,8 +40,6 @@
 </template>
 
 <script>
-// let emailValid = "btn btn-success btn-block"
-// let emailInvalid = "btn btn-success btn-block disabled"
 export default {
   data() {
     return {
@@ -46,8 +50,8 @@ export default {
       email: "",
       // 현재 이메일이 유효한지 아닌지 ("", form-invalid, duplicate)
       emailStatus: "",
-      // 다음 단계로 넘어갈 수 있는지 (disabled, "")
-      able: "disabled",
+      // 버튼 활성화 여부 (활성화: false, 비활성화: true)
+      disableBtn: false,
     }
   },
   created() {
@@ -67,41 +71,46 @@ export default {
       const reg_email = /^([0-9a-zA-Z_\\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
       if (this.email && !reg_email.test(this.email)) {
         this.emailStatus = "form-invalid"
-        this.able = "disabled"
+        this.disableBtn = true
       } else {
         if (this.email.length > 0) {
           this.emailStatus = ""
-          this.able = ""
+          this.disableBtn = false
         } else {
           this.emailStatus = ""
-          this.able = "disabled"
+          this.disableBtn = true
         }
       }
     },
     setEmail() {
       // 여기서 가입된 이메일이면 alert
-      this.duplicateCheck()
-      const user = {userEmail: this.email}
-      this.$store.dispatch("SetEmail", user)
-      this.$router.push({ name: 'CheckEmail' })
+      let goNext = this.duplicateCheck()
+      if (goNext === true) {
+        const user = {userEmail: this.email}
+        this.$store.dispatch("SetEmail", user)
+        this.$router.push({ name: 'CheckEmail' })
+      } else {
+        this.emailStatus = 'duplicate'
+        this.disableBtn = true
+        this.email = ""
+      }
     },
     duplicateCheck() {
-      // console.log(`${this.$store.getters.getServer}/user/check`, '주소')
-      // console.log(this.email, '이메일')
       this.$axios.get(`${this.$store.getters.getServer}/user/check`, {
         params: {
           userEmail: this.email
         }
       })
       .then(res => {
-        // console.log(res.data)
         // 가입 불가능
         if (!res.data.success) {
           this.emailStatus = "duplicate"
-          this.able = "disabled"
+          this.disableBtn = true
+          return false
         } else {
           this.emailStatus = ""
-          this.able = ""
+          this.diableBtn = false
+          return true
         }
       })
       .catch(err => {
@@ -123,5 +132,14 @@ export default {
   .form-control:focus{
     border-color: none;
     box-shadow: none;
+  }
+  .id-input{
+    border: 0;
+    border-bottom: 1px solid;
+    border-radius: 0;
+  }
+  .warning-msg{
+    color: red;
+    margin-bottom: -24px;
   }
 </style>
