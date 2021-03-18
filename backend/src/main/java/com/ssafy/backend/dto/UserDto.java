@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.time.LocalDate;
@@ -33,10 +34,12 @@ public class UserDto implements UserDetails {
     private String userGender;
     @ApiModelProperty(value = "유저 권한 (ROLE_ADMIN, ROLE_USER)")
     private String userRole;
+    @ApiModelProperty(value = "프로필 이미지 파일(등록 & 삭제용)")
+    private MultipartFile userProfileImgFile;
     @ApiModelProperty(value = "프로필 이미지 url")
     private String userProfileImg;
     @ApiModelProperty(value = "생일")
-    private LocalDate userBirth;
+    private String userBirth;
 
 
     // 이하 코드는 security 를 위한 용도

@@ -29,8 +29,6 @@ public class UserService {
             throw new DuplicatedUsernameException("이미 가입된 유저입니다");
         }
 
-        // TODO: 유저 프로필 이미지 저장하는 로직 추가 필요
-
         if (userDto.getUserGender() != null) {
             userDto.setUserGender(userDto.getUserGender().toUpperCase()); // 성별 FEMALE, MALE 대문자
         }
@@ -39,6 +37,12 @@ public class UserService {
         userMapper.save(userDto);
 
         return userMapper.findUserByUserEmail(userDto.getUsername()).get();
+    }
+
+    public void checkDuplicateUser(String userEmail) {
+        if (userMapper.findUserByUserEmail(userEmail).isPresent()) {
+            throw new DuplicatedUsernameException("이미 가입된 유저입니다");
+        }
     }
 
     public String login(LoginDto loginDto) {
@@ -65,7 +69,7 @@ public class UserService {
     @Transactional
     public Long updateUser(UserDto findUser, UserDto modifyUser) {
         if (modifyUser.getUserGender() != null) {
-            findUser.setUserGender(findUser.getUserGender().toUpperCase()); // 성별 FEMALE, MALE 대문자
+            findUser.setUserGender(modifyUser.getUserGender().toUpperCase()); // 성별 FEMALE, MALE 대문자
         }
         if (modifyUser.getUserBirth() != null) {
             findUser.setUserBirth(modifyUser.getUserBirth());
@@ -77,7 +81,10 @@ public class UserService {
             findUser.setUserNickname(modifyUser.getUserNickname());
         }
         if (modifyUser.getPassword() != null) {
-            findUser.setUserPassword(passwordEncoder.encode(findUser.getUserPassword())); // 비밀번호
+            findUser.setUserPassword(passwordEncoder.encode(modifyUser.getUserPassword())); // 비밀번호
+        }
+        if (modifyUser.getUserProfileImg() != null) {
+            findUser.setUserProfileImg(modifyUser.getUserProfileImg());
         }
 
         userMapper.update(findUser);
