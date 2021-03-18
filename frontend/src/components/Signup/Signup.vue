@@ -71,12 +71,6 @@ export default {
         progressGraph.innerHTML = ""
       }
       this.size = PageData.size
-      console.log(this.progressPercent)
-      if (this.progressPercent == 100) {
-        this.signupTitle = false
-      } else {
-        this.signupTitle = true
-      }
     },
     sendLogin() {
       this.$router.push({ name: 'Login' })
@@ -88,6 +82,11 @@ export default {
   watch: {
     $route(to) {
       this.urlName = to.name // url이름이 필요할 때 사용(불필요하면 지우도 괜찮음)
+      if (this.urlName=="SignupComplete") {
+        this.signupTitle = false
+      } else {
+        this.signupTitle = true
+      }
       setTimeout(this.getPageInfo, 50)
     }
   },

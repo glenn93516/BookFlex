@@ -1,25 +1,28 @@
 <template>
   <div>
-    <p class="noticeMessage">가입하실 이메일 주소를 입력해주세요.</p>
+    <p class="notice-message">가입하실 이메일 주소를 입력해주세요.</p>
+
     <b-form-input
       v-model="email"
       id="id-input"
       class="id-input"
       :class="emailStatus"
-      style="border: 0;
-      border-bottom: 1px solid;
-      border-radius: 0;
-      "
+      @keydown.enter="setEmail"
       placeholder="이메일 (example@gmail.com)"
     >
     </b-form-input>
-    <div style="color: red; margin-bottom: -24px;" v-show="emailStatus === 'is-invalid'">
+
+    <div 
+      class="notice-email" 
+      v-show="emailStatus === 'is-invalid'"
+    >
       이메일 양식이 올바르지 않습니다.
     </div>
+
     <br>
     <!-- <div @click="setEmail">이거는</div> -->
     <b-button
-      id="next-btn"
+      class="next-btn"
       :class="btnStatus" 
       @click="setEmail"
     >
@@ -83,15 +86,24 @@ export default {
 </script>
 
 <style>
-  .noticeMessage {
+  .notice-message {
     color: rgb(108, 160, 29);
     margin-top: 20px;
+  }
+  .id-input {
+    border: 0;
+    border-bottom: 1px solid;
+    border-radius: 0;
+  }
+  .notice-email {
+    color: red; 
+    margin-bottom: -24px;
   }
   /* #id-input[type="text"]:focus {
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
     outline: 0 none;
   } */
-  #next-btn{
+  .next-btn{
     margin-top: 20px;
   }
   .form-control:focus{

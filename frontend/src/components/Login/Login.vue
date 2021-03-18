@@ -27,6 +27,7 @@
           border-bottom: 1px solid;
           border-radius: 0;
           "
+          @keydown.enter="userLogin"
           type="password"
           placeholder="비밀번호"
         >

@@ -77,42 +77,16 @@ export default {
 </script>
 
 <style>
-  .custom-control {
-    display: inline-block;
-    width: 117px;
-    line-height: 25px;
-    margin-bottom: 25px;
-  }
   .describeP {
     color: #5a9b00;
     font-size: 14px;
     margin-top: -5px;
   }
-  .checkPref {
-    display: none;
-  }
-  .check {
-    height: 17px;
-    width: 17px;
-    background-color: white;
-    border: 1px solid;
-    border-color: rgb(121, 121, 121);
-    border-radius: 20px/ 20px;
-    margin-left: 0px;
-    margin-bottom: 0px;
-    margin-top: 0px;
-  }
-  .checked {
-    height: 17px;
-    width: 17px;
-    border: 0px solid;
-    border-color: rgb(145, 145, 145);
-    border-radius: 5px/ 5px;
-    margin-left: 0px;
-    margin-bottom: 0px;
-  }
-  .realLabel {
-    margin-left: 5px;
+  .custom-control {
+    display: inline-block;
+    width: 117px;
+    line-height: 25px;
+    margin-bottom: 25px;
   }
   .checkvalues {
     margin-bottom: 10px;

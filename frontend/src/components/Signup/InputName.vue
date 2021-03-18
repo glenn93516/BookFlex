@@ -3,15 +3,15 @@
     <b-form-input
       v-model="name"
       :class="nameStatus"
-      style="border: 0;
-      border-bottom: 1px solid;
-      border-radius: 0;
-      margin-top: 20px;
-      "
+      class="input-userinfo"
       placeholder="필명 (8자리 이내)"
     >
     </b-form-input>
-    <div style="color: red; margin-bottom: -24px;" v-show="nameStatus == 'input is-invalid'">
+
+    <div 
+      class="userinfo-alert"
+      v-show="nameStatus == 'input is-invalid'"
+    >
       필명은 8자리 이내의 한글, 숫자, 영문만 가능합니다
     </div>
     <br>
@@ -26,22 +26,29 @@
       placeholder="비밀번호 (8자리 이상, 영문 숫자 혼합 필수)"
     >
     </b-form-input>
-    <div style="color: red; margin-bottom: -24px;" v-show="pwStatus == 'input is-invalid'">
+    <div 
+      class="input-userinfo" 
+      v-show="pwStatus == 'input is-invalid'"
+    >
       비밀번호는 8자리 이상, 영문 숫자를 혼합해주세요
     </div>
     <br>
     <b-form-input
       v-model="confirmPassword"
       :class="confirmStatus"
-      style="border: 0;
-      border-bottom: 1px solid;
-      border-radius: 0;
-      "
+        style="border: 0;
+        border-bottom: 1px solid;
+        border-radius: 0;
+        "
+      @keydown.enter="submitUserName"
       type="password"
       placeholder="비밀번호 확인"
     >
     </b-form-input>
-    <div style="color: red; margin-bottom: -24px;" v-show="confirmStatus == 'input is-invalid'">
+    <div 
+      class="userinfo-alert" 
+      v-show="confirmStatus == 'input is-invalid'"
+    >
       비밀번호와 일치하지 않습니다
     </div>
     <br>
@@ -55,7 +62,6 @@
     <b-button 
       :class="btnStatus"
       @click="submitUserName"
-      @keydown.enter="submitUserName"
       style="margin-top: 16px;"
     >
       다음으로 넘어가기(임시)
@@ -175,6 +181,16 @@ export default {
 </script>
 
 <style>
+  .input-userinfo {
+    border: 0;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    margin-top: 20px;
+  }
+  .userinfo-alert {
+    color: red; 
+    margin-bottom: -24px;
+  }
   .form-control:focus{
     border-color: none;
     box-shadow: none;
