@@ -118,7 +118,7 @@ export default {
 </script>
 
 <style>
-  .noticeMessage {
+  .notice-message {
     color: rgb(108, 160, 29);
     margin-top: 20px;
   }

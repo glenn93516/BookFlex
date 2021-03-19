@@ -1,16 +1,18 @@
 <template>
   <div>
     <h4>생년월일을 입력해주세요</h4>
+
     <b-form-datepicker 
       id="datepicker" 
-      v-model="birthdate" 
-      style="margin-top: 40px; margin-bottom: 40px;"
+      v-model="birthdate"
+      class="birth-datepicker"
     >
     </b-form-datepicker>
+
     <b-button
-      class="btn-success btn-block birth-btn" 
       @click="submitUserBirth(birthdate)"
       @keydown.enter="submitUserBirth(birthdate)"
+      class="btn-success btn-block birth-btn" 
     >
       확인
     </b-button>
@@ -45,8 +47,9 @@ export default {
 </script>
 
 <style>
-  .gender-radio{
-    display: inline-block;
+  .birth-datepicker {
+    margin-top: 40px; 
+    margin-bottom: 40px;
   }
   .birth-btn {
     margin-top: 5.8rem;

@@ -17,6 +17,7 @@
         display: inline-block;
         width=10%;
         "
+        @keydown.enter="goToInputName"
         placeholder="6자리 입력"
         :autofocus="inputAutofocus"
         @keydown.enter="goToInputName"

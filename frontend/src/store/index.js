@@ -88,6 +88,9 @@ export default new Vuex.Store({
       state.user.userBirth = payload.userBirth
       state.user.userGender = payload.userGender
       state.user.userJob = payload.userJob
+    },
+    Logout(state) {
+      state.accessToken = ""
     }
   },
   actions: {
@@ -162,6 +165,9 @@ export default new Vuex.Store({
     },
     SetSignupInfo(context, user) {
       context.commit('SetSignupInfo', user)
+    },
+    Logout(context) {
+      context.commit('Logout')
     }
   }
 })
