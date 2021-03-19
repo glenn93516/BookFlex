@@ -16,7 +16,7 @@
 
     <router-link
       class="btn btn-success btn-block subcomplete-btn" 
-      :to="{ name: 'Login' }"
+      :to="{ name: 'Main' }"
     >
       둘러보기
     </router-link>
