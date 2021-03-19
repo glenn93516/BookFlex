@@ -5,13 +5,13 @@
     >
       가입하실 이메일 주소를 입력해주세요.
     </p>
-    <b-form>
+    <b-form @submit.prevent="duplicateCheck('enter', email)">
       <b-form-input
         v-model="email"
         class="id-input"
         :class="emailStatus"
         placeholder="이메일 (example@gmail.com)"
-        @blur="duplicateCheck"
+        @blur="duplicateCheck('blur', email)"
       >
       </b-form-input>
       <div 
@@ -28,9 +28,8 @@
       </div>
       <br>
       <b-button
-        type="submit"
         class="btn btn-success btn-block next-btn"
-        @click="setEmail"
+        type="submit"
         :disabled="disableBtn"
       >
         확인
@@ -51,7 +50,7 @@ export default {
       // 현재 이메일이 유효한지 아닌지 ("", form-invalid, duplicate)
       emailStatus: "",
       // 버튼 활성화 여부 (활성화: false, 비활성화: true)
-      disableBtn: false,
+      disableBtn: true,
     }
   },
   created() {
@@ -82,35 +81,32 @@ export default {
         }
       }
     },
-    setEmail() {
-      // 여기서 가입된 이메일이면 alert
-      let goNext = this.duplicateCheck()
-      if (goNext === true) {
-        const user = {userEmail: this.email}
-        this.$store.dispatch("SetEmail", user)
-        this.$router.push({ name: 'CheckEmail' })
-      } else {
-        this.emailStatus = 'duplicate'
-        this.disableBtn = true
-        this.email = ""
-      }
+    setEmail(email) {
+      const user = {userEmail: email}
+      this.$store.dispatch("SetEmail", user)
+      this.$router.push({ name: 'CheckEmail' })
     },
-    duplicateCheck() {
+    duplicateCheck(input, email) {
+      const user = {userEmail: email}
+      console.log(input, 'input상태')
+      console.log(email, 'email')
       this.$axios.get(`${this.$store.getters.getServer}/user/check`, {
-        params: {
-          userEmail: this.email
-        }
+        params: user
       })
       .then(res => {
         // 가입 불가능
         if (!res.data.success) {
           this.emailStatus = "duplicate"
           this.disableBtn = true
-          return false
         } else {
+          // 가입 가능
           this.emailStatus = ""
           this.diableBtn = false
-          return true
+          if (input === 'enter') {
+            const user = {userEmail: email}
+            this.$store.dispatch("SetEmail", user)
+            this.$router.push({ name: 'CheckEmail' })
+          }
         }
       })
       .catch(err => {
