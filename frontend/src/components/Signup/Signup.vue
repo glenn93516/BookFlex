@@ -1,14 +1,14 @@
 <template>
-  <div style="display: flex; justify-content: center;">
+  <div class="signup-main">
     <div>
-      <div :class="size" id="signupbackground">
-        <header style="display: flex; justify-content: space-between; align-items: center;">
+      <div :class="size" id="signup-background">
+        <header class="signup-header">
           <h1 
-            class="signupHeader mb-0"
+            class="signup-h1 mb-0"
             v-show="signupTitle"
           >
             회원가입
-          </h1>  
+          </h1>
           <img 
             width="30px" 
             height="30px" 
@@ -26,17 +26,12 @@
       <!--progressbar들어갈 위치-->
       <div>
         <b-progress 
-          class="mt-5"
+          class="mt-5 progress"
           :value="progressPercent"
           height="2rem"
           max="100" 
           show-progress 
           animated
-          style="
-            background-color: white;
-            border-radius: 10px / 10px;
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.16);
-          "
         ></b-progress>
       </div>
     </div>
@@ -71,12 +66,6 @@ export default {
         progressGraph.innerHTML = ""
       }
       this.size = PageData.size
-      console.log(this.progressPercent)
-      if (this.progressPercent == 100) {
-        this.signupTitle = false
-      } else {
-        this.signupTitle = true
-      }
     },
     sendLogin() {
       this.$router.push({ name: 'Login' })
@@ -88,6 +77,11 @@ export default {
   watch: {
     $route(to) {
       this.urlName = to.name // url이름이 필요할 때 사용(불필요하면 지우도 괜찮음)
+      if (this.urlName=="SignupComplete") {
+        this.signupTitle = false
+      } else {
+        this.signupTitle = true
+      }
       setTimeout(this.getPageInfo, 50)
     }
   },
@@ -95,7 +89,11 @@ export default {
 </script>
 
 <style>
-  #signupbackground {
+  .signup-main {
+    display: flex; 
+    justify-content: center;
+  }
+  #signup-background {
     margin-top: 15vh;
     width: 550px;
     /* height: 400px; */
@@ -107,22 +105,32 @@ export default {
     padding-left: 75px;
     padding-right: 75px;
   }
-.back-lg {
-  height: 500px;
-}
-.back-md {
-  height: 400px;
-}
-.back-sm {
-  height: 300px;
-}
-.signupHeader {
-color: black;
-font-size: 2rem;
-font-weight: bold;
-display: inline-block;
-} 
-.cancel-btn:hover {
-  cursor: pointer;
-}
+  .signup-header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+  }
+  .signup-h1 {
+  color: black;
+  font-size: 2rem;
+  font-weight: bold;
+  display: inline-block;
+  } 
+  .cancel-btn:hover {
+    cursor: pointer;
+  }
+  .progress {
+    background-color: white;
+    border-radius: 10px / 10px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.16);
+  }
+  .back-lg {
+    height: 500px;
+  }
+  .back-md {
+    height: 400px;
+  }
+  .back-sm {
+    height: 300px;
+  }
 </style>

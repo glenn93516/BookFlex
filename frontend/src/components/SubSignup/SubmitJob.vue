@@ -1,15 +1,25 @@
 <template>
   <div>
-    <h5 style="margin-top: -5px; margin-bottom: 18px">현재 혹은 희망하시는 직종을 선택해주세요.</h5>
-    <div v-for="(option, idx) in options" :key="idx" class="custom-control">
+    <h5 
+      class="job-subtitle"
+    >
+      현재 혹은 희망하시는 직종을 선택해주세요.
+    </h5>
+
+    <div 
+      v-for="(option, idx) in options" 
+      :key="idx" 
+      class="custom-control"
+    >
       <Checkbox :option="option" @serveData="catchData"/>
     </div>
+
+    <!-- 중복선택 가능하게 바꾸려면 checkedValues[0]을 checkedValues로 바꿔주세요 -->
     <b-button 
-      class="btn-success btn-block job-btn"
       @click="submitUserJob(checkedValues[0])"
       @keydown.enter="submitUserJob(checkedValues[0])"
+      class="btn-success btn-block job-btn"
     >
-    <!-- 중복선택 가능하게 바꾸려면 checkedValues[0]을 checkedValues로 바꿔주세요 -->
       다음으로 넘어가기
     </b-button>
   </div>
@@ -78,45 +88,15 @@ export default {
 </script>
 
 <style>
+  .job-subtitle {
+    margin-top: -5px; 
+    margin-bottom: 18px
+  }
   .custom-control {
     display: inline-block;
     width: 117px;
     line-height: 25px;
     margin-bottom: 25px;
-  }
-  .describeP {
-    color: #5a9b00;
-    font-size: 13px;
-    margin-top: -5px;
-  }
-  .checkPref {
-    display: none;
-  }
-  .check {
-    height: 17px;
-    width: 17px;
-    background-color: white;
-    border: 1px solid;
-    border-color: rgb(121, 121, 121);
-    border-radius: 20px/ 20px;
-    margin-left: 0px;
-    margin-bottom: 0px;
-    margin-top: 0px;
-  }
-  .checked {
-    height: 17px;
-    width: 17px;
-    border: 0px solid;
-    border-color: rgb(145, 145, 145);
-    border-radius: 5px/ 5px;
-    margin-left: 0px;
-    margin-bottom: 0px;
-  }
-  .realLabel {
-    margin-left: 5px;
-  }
-  .checkvalues {
-    margin-bottom: 10px;
   }
   .job-btn {
     margin-top: -11px;

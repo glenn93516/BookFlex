@@ -17,6 +17,7 @@
         display: inline-block;
         width=10%;
         "
+        @keydown.enter="goToInputName"
         placeholder="6자리 입력"
         :autofocus="inputAutofocus"
       >
@@ -41,7 +42,6 @@
         class="btn-success btn-block next-btn"
         :disabled="btnDisabled" 
         @click="goToInputName" 
-        @keydown.enter="goToInputName"
       >
         확인
       </b-btn>
