@@ -1,10 +1,10 @@
 <template>
-  <div style="display: flex; justify-content: center;">
+  <div class="subsignup-main">
     <div>
-      <div id="signupbackground" :class="size">
-        <header style="display: flex; justify-content: space-between; align-items: center;">
+      <div id="signup-background" :class="size">
+        <header class="subsignup-header">
           <h1 
-            class="signupHeader mb-0"
+            class="signup-h1 mb-0"
             v-show="signupTitle"
           >
             추가항목
@@ -30,17 +30,12 @@
       <!--progressbar들어갈 위치-->
       <div>
         <b-progress 
-          class="mt-5"
+          class="mt-5 progress"
           :value="progressPercent"
           height="2rem"
           max="100" 
           show-progress 
           animated
-          style="
-            background-color: white;
-            border-radius: 10px / 10px;
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.16);
-          "
         ></b-progress>
       </div>
     </div>
@@ -99,11 +94,11 @@ export default {
 </script>
 
 <style>
-  .noticeMessage {
-    color: rgb(108, 160, 29);
-    margin-top: 20px;
+  .subsignup-main {
+    display: flex; 
+    justify-content: center;
   }
-  #signupbackground {
+  #signup-background {
     margin-top: 15vh;
     width: 550px;
     background-color: white;
@@ -114,6 +109,30 @@ export default {
     padding-left: 75px;
     padding-right: 75px;
   }
+  .subsignup-header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+  }
+  .signup-h1 {
+  color: black;
+  font-size: 2rem;
+  font-weight: bold;
+  display: inline-block;
+  } 
+  .noticeMessage {
+    color: rgb(108, 160, 29);
+    margin-top: 20px;
+  }
+  .cancel-btn:hover {
+    cursor: pointer;
+  }
+  .progress {
+    background-color: white;
+    border-radius: 10px / 10px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.16);
+  }
+  /* 라우터뷰에 따른 사이즈 속성값(컴포넌트에 따라 동적으로 변함) */
   .back-lg {
     height: 500px;
   }
@@ -122,14 +141,5 @@ export default {
   }
   .back-sm {
     height: 300px;
-  }
-  .signupHeader {
-  color: black;
-  font-size: 2rem;
-  font-weight: bold;
-  display: inline-block;
-  } 
-  .cancel-btn:hover {
-    cursor: pointer;
   }
 </style>

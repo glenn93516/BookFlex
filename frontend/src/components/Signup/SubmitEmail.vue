@@ -7,7 +7,6 @@
       id="id-input"
       class="id-input"
       :class="emailStatus"
-      @keydown.enter="setEmail"
       placeholder="이메일 (example@gmail.com)"
     >
     </b-form-input>
