@@ -3,11 +3,10 @@
     <div 
       id="first-shelf-tag"
       class="tag"
-      style="text-align: center;"
     >
+      <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px; color: black;" alt="제목태그">
       <div 
         class="tag-name"
-        style="border: 1px solid yellow;"
       >
         맞춤형 추천
       </div>
@@ -25,11 +24,17 @@
       id="second-shelf-tag"
       class="tag"
     >
+      <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그">
       <div 
         class="tag-name"
-        style="border: 1px solid green;"
       >
-        장르 이름
+        스릴러
+      </div>
+      <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그">
+      <div 
+        class="tag-name"
+      >
+        정치
       </div>
     </div>
     <div 
@@ -45,9 +50,9 @@
       id="third-shelf-tag"
       class="tag"
     >
+      <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그">
       <div 
         class="tag-name"
-        style="border: 1px solid red;"
       >
         위시리스트
       </div>
@@ -102,7 +107,7 @@ export default {
 <style>
   .shelf{
     margin-top: 40px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0);
     border-radius: 10px;
   }
   .shelf-row{
@@ -113,19 +118,23 @@ export default {
     margin: auto;
   }
   .tag{
-    text-align: center;
+    text-align: left;
     margin-top: -20px;
+    margin-left: 50px;
   }
   .tag-name{
     margin-bottom: 20px;
-    background-color: ivory;
+    background-color: rgba(161, 114, 70, 0);
     display: inline-block;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     padding: 10px;
-    width: 180px;
-    box-shadow: 1px 1px 2px rgb(150, 150, 150);
+    margin-left: 0px;
+    /* box-shadow: 1px 1px 2px rgb(150, 150, 150); */
     border-radius: 3px/ 3px;
+    border: 0px;
+    color: rgb(90, 90, 90);
+    align-items: left;
   }
   .book {
     box-shadow: 2px 2px 3px rgb(102, 102, 102);

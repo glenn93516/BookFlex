@@ -47,20 +47,21 @@
             <hr class="list-hr">
 
           <b-dropdown-item 
+            v-if="isLogin" 
             href="#" 
             style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
           >
             <span style="font-size: 0.8rem;">나의서재</span>
           </b-dropdown-item>
-            <hr class="list-hr">
+            <!-- <hr class="list-hr"> -->
 
-
-          <!-- <b-dropdown-item 
+          <b-dropdown-item 
+            v-if="!isLogin"
             href="/signup/1" 
             style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
           >
-            <span style="font-size: 0.8rem;">회원가입(temp)</span>
-          </b-dropdown-item> -->
+            <span style="font-size: 0.8rem;">회원가입</span>
+          </b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-navbar>
@@ -114,9 +115,9 @@ export default {
 
 <style>
   .background{
-    background-color: rgba(61, 16, 5, 0.1); 
-    height: 100vh;
-    width: 100vw;
+    /* background-color: rgba(61, 16, 5, 0.1);  */
+    /* height: 100%;
+    width: 100%; */
   }
   .background-nav{
     display: flex;
@@ -142,10 +143,16 @@ export default {
   .animate__animated {
     --animate-duration: 1s;
   }
+  #navInput {
+    font-size: 12px;
+    width: 200px;
+  }
   #navInput[type="text"]:focus {
     border-color: rgba(78, 35, 0, 0.8);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(63, 20, 0, 0.6);
     outline: 0 none;
+    font-size: 12px;
+    width: 200px;
   }
   .dropdown-item:hover{
     background-color: #5c463d;
