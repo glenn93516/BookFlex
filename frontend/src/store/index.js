@@ -63,7 +63,7 @@ export default new Vuex.Store({
       state.user.userJob = payload.userJob
       state.user.userRole = payload.userRole
     },
-    setEmail(state, payload) {
+    SetEmail(state, payload) {
       state.signupInfo.userEmail = payload.userEmail
     },
     SetSignupInfo(state, payload) {
@@ -158,7 +158,7 @@ export default new Vuex.Store({
       })
     },
     SetEmail(context, Email) {
-      context.commit("setEmail", Email)
+      context.commit("SetEmail", Email)
     },
     SetSignupInfo(context, user) {
       context.commit('SetSignupInfo', user)
