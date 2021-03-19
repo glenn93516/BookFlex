@@ -72,7 +72,7 @@ export default {
       this.size = PageData.size
     },
     sendCancel() {
-      this.$router.push({ name: 'Main' })
+      this.$router.push({ name: 'MainBook' })
     },
   },
   mounted() {
