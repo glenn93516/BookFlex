@@ -16,7 +16,7 @@
 
     <router-link
       class="btn btn-success btn-block subcomplete-btn" 
-      :to="{ name: 'Main' }"
+      :to="{ name: 'MainBook' }"
     >
       둘러보기
     </router-link>
