@@ -27,6 +27,7 @@
           border-bottom: 1px solid;
           border-radius: 0;
           "
+          @keydown.enter="userLogin"
           type="password"
           placeholder="비밀번호"
         >
@@ -70,7 +71,7 @@ export default {
       .then(res => {
         console.log(res)
         this.getUserInfo()
-        this.$router.push({ name: "Main" })
+        this.$router.push({ name: "MainBook" })
       })
       .catch(err => {
         alert("아이디 비밀번호를 확인해주세요.")

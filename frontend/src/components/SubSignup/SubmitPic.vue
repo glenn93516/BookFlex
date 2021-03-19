@@ -1,12 +1,13 @@
 <template>
   <div>
     <h4>프로필 사진을 등록해주세요.</h4>
+
     <b-form-file
       v-model="profileImage"
       :state="Boolean(profileImage)"
       :placeholder="photoName"
       drop-placeholder="Drop file here..."
-      style="margin-top: 30px; margin-bottom: 10px;"
+      class="submit-PImg"
       enctype='multipart/form-data'
       type='file'
     >
@@ -14,7 +15,7 @@
       <!-- <div class="mt-3">Selected file: {{ profileImage ? profileImage.name : '' }}</div> -->
 
     <b-button
-      class="btn-success btn-block" 
+      class="btn-success btn-block profileImg-btn" 
       @click="submitUserPic(profileImage)"
       @keydown.enter="submitUserPic(profileImage)"
     >
@@ -64,10 +65,11 @@ export default {
   /* .custom-file-input:lang(ko) ~ .custom-file-label::after {
     content: 'B';
   } */
-  .custom-file-label::after {
-    content: 'B';
+  .submit-PImg {
+    margin-top: 30px; 
+    margin-bottom: 10px;
   }
-  .img-btn {
+  .profileImg-btn {
     margin-top: 5.3rem;
   }
 </style>
