@@ -20,7 +20,6 @@
         @keydown.enter="goToInputName"
         placeholder="6자리 입력"
         :autofocus="inputAutofocus"
-        @keydown.enter="goToInputName"
       >
       </b-form-input>
       <a 
