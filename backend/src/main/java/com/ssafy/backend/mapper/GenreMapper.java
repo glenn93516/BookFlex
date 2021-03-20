@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface GenreMapper {
     List<GenreDto> findAll();
+    List<GenreDto> findByUserId(Long userId);
 }

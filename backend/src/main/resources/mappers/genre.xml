@@ -6,4 +6,11 @@
     <select id="findAll" resultType="GenreDto">
         SELECT genre_id genreId, genre_name genreName FROM genre ORDER BY genre_id
     </select>
+
+    <select id="findByUserId" resultType="GenreDto">
+        SELECT genre_id genreId, genre_name genreName FROM genre
+        WHERE genre_id in (
+            SELECT genre_id FROM user_genre WHERE user_id = #{userId}
+        )
+    </select>
 </mapper>
