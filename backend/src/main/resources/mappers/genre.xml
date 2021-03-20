@@ -13,4 +13,13 @@
             SELECT genre_id FROM user_genre WHERE user_id = #{userId}
         )
     </select>
+
+    <insert id="saveGenres">
+        INSERT INTO user_genre
+            (user_id, genre_id)
+        VALUES
+        <foreach collection="genres" item="genre" separator=" , ">
+            ( #{userId}, #{genre.genreId} )
+        </foreach>
+    </insert>
 </mapper>
