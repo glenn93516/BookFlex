@@ -11,4 +11,5 @@ public interface GenreMapper {
     List<GenreDto> findAll();
     List<GenreDto> findByUserId(Long userId);
     void saveGenres(@Param("userId") Long userId, @Param("genres") List<GenreDto> genres);
+    void deleteUserGenre(@Param("userId") Long userId, @Param("genreId") Long genreId);
 }

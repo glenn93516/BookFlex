@@ -22,4 +22,9 @@
             ( #{userId}, #{genre.genreId} )
         </foreach>
     </insert>
+
+    <delete id="deleteUserGenre">
+        DELETE FROM user_genre
+        WHERE user_id = #{userId} AND genre_id = #{genreId}
+    </delete>
 </mapper>

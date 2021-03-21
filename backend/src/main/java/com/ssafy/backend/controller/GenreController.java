@@ -82,4 +82,37 @@ public class GenreController {
 
         return responseEntity;
     }
+
+    @ApiOperation(value = "선호 장르 삭제", notes = "해당 장르 선호장르에서 제거")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @DeleteMapping
+    public ResponseEntity deleteUserGenre(@ApiIgnore final Authentication authentication, @RequestBody GenreDto genre) {
+        ResponseEntity responseEntity = null;
+        try {
+            if (genre == null) {
+                throw new IllegalStateException("잘못된 데이터입니다");
+            }
+            Long userId = ((UserDto) authentication.getPrincipal()).getUserId(); // 로그인한 유저 아이디 획득
+            genreService.removeGenre(userId, genre);
+
+            BaseResponse response = responseService.getBaseResponse(true, "장르 삭제 성공");
+
+            responseEntity = ResponseEntity.ok(response);
+        } catch (IllegalStateException exception) {
+            logger.info(exception.getMessage());
+
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+
+            BaseResponse response = responseService.getBaseResponse(false, "서버 에러");
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(response);
+        }
+
+        return responseEntity;
+    }
 }

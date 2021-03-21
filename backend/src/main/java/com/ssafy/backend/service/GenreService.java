@@ -38,4 +38,9 @@ public class GenreService {
             genreMapper.saveGenres(userId, genres);
         }
     }
+
+    @Transactional
+    public void removeGenre(Long userId, GenreDto genre) {
+        genreMapper.deleteUserGenre(userId, genre.getGenreId());
+    }
 }
