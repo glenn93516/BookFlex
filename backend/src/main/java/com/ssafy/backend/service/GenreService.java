@@ -40,7 +40,7 @@ public class GenreService {
     }
 
     @Transactional
-    public void removeGenre(Long userId, GenreDto genre) {
-        genreMapper.deleteUserGenre(userId, genre.getGenreId());
+    public void removeGenre(Long userId, Long genreId) {
+        genreMapper.deleteUserGenre(userId, genreId);
     }
 }
