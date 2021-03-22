@@ -5,6 +5,7 @@ import com.ssafy.backend.dto.UserDto;
 import com.ssafy.backend.exception.DuplicatedUsernameException;
 import com.ssafy.backend.exception.LoginFailedException;
 import com.ssafy.backend.exception.UserNotFoundException;
+import com.ssafy.backend.mapper.GenreMapper;
 import com.ssafy.backend.mapper.UserMapper;
 import com.ssafy.backend.utils.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.Collections;
 public class UserService {
 
     private final UserMapper userMapper;
+    private final GenreMapper genreMapper;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
@@ -34,9 +36,17 @@ public class UserService {
         }
 
         userDto.setUserPassword(passwordEncoder.encode(userDto.getPassword()));
-        userMapper.save(userDto);
+        userMapper.save(userDto); // 회원 가입
+        
+        UserDto savedUser = userMapper.findUserByUserEmail(userDto.getUsername()).get();
 
-        return userMapper.findUserByUserEmail(userDto.getUsername()).get();
+        // 선호 장르 선택한 경우 장르 추가
+        if (userDto.getGenres() != null && userDto.getGenres().size() > 0) {
+            userMapper.saveUserGenres(savedUser.getUserId(), userDto.getGenres()); // 선호장르 추가
+            savedUser.setGenres(genreMapper.findByUserId(savedUser.getUserId()));
+        }
+
+        return savedUser;
     }
 
     public void checkDuplicateUser(String userEmail) {
@@ -57,13 +67,21 @@ public class UserService {
     }
 
     public UserDto findByUserId(Long userId) {
-        return userMapper.findUserByUserId(userId)
+        UserDto findUser = userMapper.findUserByUserId(userId)
                 .orElseThrow(() -> new UserNotFoundException("없는 유저입니다."));
+        
+        findUser.setGenres(genreMapper.findByUserId(userId)); // 선호 장르 목록 추가
+        
+        return findUser;
     }
 
     public UserDto findUserByUserNickname(String userNickname) {
-        return userMapper.findUserByUserNickname(userNickname)
+        UserDto findUser = userMapper.findUserByUserNickname(userNickname)
                 .orElseThrow(() -> new UserNotFoundException("없는 유저입니다."));
+
+        findUser.setGenres(genreMapper.findByUserId(findUser.getUserId())); // 선호 장르 추가
+        
+        return findUser;
     }
 
     @Transactional

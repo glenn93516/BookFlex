@@ -11,8 +11,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 
-Vue.use(axios);
-
 Vue.config.productionTip = false
 Vue.prototype.$axios=axios
 

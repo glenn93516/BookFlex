@@ -33,6 +33,15 @@
         VALUES ( #{userEmail}, #{userPassword}, #{userNickname} , #{userJob}, #{userGender}, #{userProfileImg}, #{userBirth})
     </insert>
 
+    <insert id="saveUserGenres">
+        INSERT INTO user_genre
+        (user_id, genre_id)
+        VALUES
+        <foreach collection="genres" item="genre" separator=" , ">
+            ( #{userId}, #{genre.genreId} )
+        </foreach>
+    </insert>
+
     <delete id="deleteOne">
         DELETE FROM user WHERE user_id = #{userId};
     </delete>

@@ -17,6 +17,7 @@
         display: inline-block;
         width=10%;
         "
+        @keydown.enter="goToInputName"
         placeholder="6자리 입력"
         :autofocus="inputAutofocus"
       >
@@ -29,19 +30,11 @@
       >
         인증메일 재발송하기
       </a>
-      <!-- <b-button
-        variant="success"
-        @click="isCorrect"
-        :active="!timeOut"  
-      >
-        확인
-      </b-button> -->
     </div>
       <b-btn 
         class="btn-success btn-block next-btn"
         :disabled="btnDisabled" 
         @click="goToInputName" 
-        @keydown.enter="goToInputName"
       >
         확인
       </b-btn>
