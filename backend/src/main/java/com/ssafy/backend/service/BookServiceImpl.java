@@ -53,4 +53,9 @@ public class BookServiceImpl implements BookService{
     public List<BookDto> selectContentsList(String word) throws Exception {
         return mapper.selectContentsList(word);
     }
+
+    @Override
+    public List<BookDto> findAll() {
+        return mapper.findAll();
+    }
 }
