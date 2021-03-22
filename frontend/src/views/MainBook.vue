@@ -136,7 +136,4 @@ export default {
     color: rgb(90, 90, 90);
     align-items: left;
   }
-  .book {
-    box-shadow: 2px 2px 3px rgb(102, 102, 102);
-  }
 </style>
