@@ -42,4 +42,10 @@
         from book
         where book_contents like CONCAT('%', #{word}, "%")
     </select>
+
+    <select id="findAll" resultType="BookDto">
+        SELECT book_isbn, book_title, book_author, book_publisher, book_contents, book_date, book_cover
+        FROM book
+        LIMIT 20
+    </select>
 </mapper>
