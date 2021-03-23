@@ -1,18 +1,21 @@
 <template>
   <div>
     <h4>생년월일을 입력해주세요</h4>
+
     <b-form-datepicker 
       id="datepicker" 
-      v-model="birthdate" 
-      style="margin-top: 40px; margin-bottom: 40px;"
+      v-model="birthdate"
+      class="birth-datepicker"
     >
     </b-form-datepicker>
-    <router-link
-      class="btn btn-success btn-block" 
-      :to="{ name: 'SubmitJob' }"
+
+    <b-button
+      @click="submitUserBirth(birthdate)"
+      @keydown.enter="submitUserBirth(birthdate)"
+      class="btn-success btn-block birth-btn" 
     >
       확인
-    </router-link>
+    </b-button>
   </div>
 </template>
 
@@ -21,19 +24,34 @@ export default {
   data() {
     return {
       birthdate: '',
-      progress: 1,
+      pageData: {
+        progress: 1,
+        size: "back-md"
+      },
     }
   },
   methods: {
-    serveProgressData() {
-      return this.progress
+    servePageInfo() {
+      return this.pageData
+    },
+    submitUserBirth(birthday) {
+      this.$store.dispatch("SubmitUserBirth", birthday)
+      this.goToSubmitJob()
+    },
+    goToSubmitJob() {
+      console.log('담겼나?', this.$store.getters.getUser)
+      this.$router.push({ name: 'SubmitJob' })
     }
-  }
+  },
 }
 </script>
 
 <style>
-  .gender-radio{
-    display: inline-block;
+  .birth-datepicker {
+    margin-top: 40px; 
+    margin-bottom: 40px;
+  }
+  .birth-btn {
+    margin-top: 5.8rem;
   }
 </style>

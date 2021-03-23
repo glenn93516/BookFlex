@@ -1,14 +1,14 @@
 <template>
-  <div style="display: flex; justify-content: center;">
+  <div class="signup-main">
     <div>
-      <div class="signupbackground">
-        <header style="display: flex; justify-content: space-between; align-items: center;">
+      <div :class="size" id="signup-background">
+        <header class="signup-header">
           <h1 
-            class="signupHeader mb-0"
+            class="signup-h1 mb-0"
             v-show="signupTitle"
           >
             회원가입
-          </h1>  
+          </h1>
           <img 
             width="30px" 
             height="30px" 
@@ -18,25 +18,19 @@
             v-show="signupTitle"
           />
         </header>
-        <router-view ref="progress"></router-view>
-        <!-- <SubmitEmail ref="progress"/> -->
+        <router-view ref="progress" ></router-view>
 
       </div>
 
       <!--progressbar들어갈 위치-->
       <div>
         <b-progress 
-          class="mt-5"
+          class="mt-5 progress"
           :value="progressPercent"
           height="2rem"
           max="100" 
           show-progress 
           animated
-          style="
-            background-color: white;
-            border-radius: 10px / 10px;
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.16);
-          "
         ></b-progress>
       </div>
     </div>
@@ -44,51 +38,62 @@
 </template>
 
 <script>
-// import SubmitEmail from './SubmitEmail.vue'
 export default {
   components: {
-    // SubmitEmail,
   },
   data() {
     return {
       progressPercent: 0,
       urlName: "",
       signupTitle: true,
+      size: "back-md",
     }
   },
   methods: {
-    getProgress() {
-      console.log(" getProgress 실행!")
-      const ProgressData = this.$refs.progress.serveProgressData()
-      this.progressPercent = ProgressData * 25
-      console.log(this.progressPercent)
-      if (this.progressPercent == 100) {
-        this.signupTitle = false
+    getPageInfo() {
+      console.log(" getPageInfo 실행!")
+      const PageData = this.$refs.progress.servePageInfo()
+      if (PageData.progress > 0) {
+        this.progressPercent = PageData.progress * 25
+        const progressGraph = document.querySelector('.progress-bar')
+        progressGraph.innerHTML = this.progressPercent
       } else {
-        this.signupTitle = true
+        this.progressPercent = 2
+        const progressGraph = document.querySelector('.progress-bar')
+        progressGraph.innerHTML = ""
       }
+      this.size = PageData.size
     },
     sendLogin() {
       this.$router.push({ name: 'Login' })
     },
   },
   mounted() {
-    this.getProgress()
+    this.getPageInfo()
   },
   watch: {
     $route(to) {
       this.urlName = to.name // url이름이 필요할 때 사용(불필요하면 지우도 괜찮음)
-      setTimeout(this.getProgress, 50)
+      if (this.urlName=="SignupComplete") {
+        this.signupTitle = false
+      } else {
+        this.signupTitle = true
+      }
+      setTimeout(this.getPageInfo, 50)
     }
   },
 }
 </script>
 
 <style>
-  .signupbackground {
+  .signup-main {
+    display: flex; 
+    justify-content: center;
+  }
+  #signup-background {
     margin-top: 15vh;
     width: 550px;
-    height: 400px;
+    /* height: 400px; */
     background-color: white;
     border-radius: 30px / 30px;
     margin-right: 0px;
@@ -97,7 +102,12 @@ export default {
     padding-left: 75px;
     padding-right: 75px;
   }
-  .signupHeader {
+  .signup-header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+  }
+  .signup-h1 {
   color: black;
   font-size: 2rem;
   font-weight: bold;
@@ -105,5 +115,19 @@ export default {
   } 
   .cancel-btn:hover {
     cursor: pointer;
+  }
+  .progress {
+    background-color: white;
+    border-radius: 10px / 10px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.16);
+  }
+  .back-lg {
+    height: 500px;
+  }
+  .back-md {
+    height: 400px;
+  }
+  .back-sm {
+    height: 300px;
   }
 </style>
