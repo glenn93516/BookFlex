@@ -107,6 +107,7 @@ export default {
 <style>
 .loginbackground {
   margin-top: 15vh;
+  margin-bottom: 15vh;
   height: 400px;
   width: 550px;
   background-color: white;

@@ -1,23 +1,34 @@
 <template>
   <div>
-    <div class="book-cover">
+    <div class="book-cover btn book">
       <!--alt에 책 이름도 같이 바인딩 해주기-->
-      <img class="bookimg" :src="imgSrc" alt="책표지">
+      <img v-if="imgSrc" class="bookimg" :src="imgSrc" alt="책표지">
       <!-- <img class="bookimg" src="https://i.picsum.photos/id/288/200/300.jpg?hmac=45WLionXnoogi0-njKuSNnVY5hnswMhf-CrxwzKTcrc" alt="책표지"> -->
+      <!-- <img src="@/assets/booktag.png" width="60px;" style="margin-right: -60px; margin-top: 10px; margin-bottom: -60px; z-index: 10;" alt="booktag"> -->
     </div>
   </div> 
 </template>
 
 <script>
 export default {
-  props: ['imgSrc'],
+  props: {
+    imgSrc: String,
+  },
+  mounted() {
+  }
 }
 </script>
 
 <style>
   .book-cover{
-    background-color: ivory;
-    padding: 20px;
+    background-color: rgba(255, 255, 240, 0.733);
+    padding: 15px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2); 
+    transition-duration: 0.3s;
+  }
+  .book-cover:hover {
+    box-shadow: 0px 0px 8px rgba(143, 143, 143, 0.8);
+    border-radius: 5px/ 5px;
   }
   .bookimg {
     width: 125px;

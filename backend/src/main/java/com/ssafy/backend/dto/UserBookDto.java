@@ -15,6 +15,6 @@ public class UserBookDto {
     private Long userBookId;
     @ApiModelProperty(value = "유저 ID")
     private Long userId;
-    @ApiModelProperty(value = "책 isbn")
+    @ApiModelProperty(value = "책 isbn (읽은 책 등록시 이 값만 넣어주면 됨)")
     private Long bookIsbn;
 }
