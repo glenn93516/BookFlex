@@ -100,6 +100,7 @@ export default {
   }
   #signup-background {
     margin-top: 15vh;
+    margin-bottom: 15vh;
     width: 550px;
     background-color: white;
     border-radius: 30px / 30px;
