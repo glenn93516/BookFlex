@@ -16,7 +16,7 @@
       class="shelf-row"
     >
       <div class="d-flex justify-content-around books">
-        <Book v-for="(book, idx) in suitRecommend" :key="idx" class="book" :imgSrc="suitRecommend[idx].imgSrc"></Book>
+        <Book v-for="(book, idx) in suitRecommend" :key="idx" class="book" :imgSrc="book.book_cover"></Book>
       </div>
       <Book-shelf />
     </div>
@@ -42,7 +42,7 @@
       class="shelf-row"
     >
       <div class="d-flex justify-content-around books">
-        <Book v-for="(book, idx) in genreRecommend" :key="idx" class="book" :imgSrc="genreRecommend[idx].imgSrc"></Book>
+        <Book v-for="(book, idx) in genreRecommend" :key="idx" class="book" :imgSrc="book.book_cover"></Book>
       </div>
       <Book-shelf />
     </div>
@@ -62,7 +62,7 @@
       class="shelf-row"
     >
       <div class="d-flex justify-content-around books">
-        <Book v-for="(book, idx) in wishRecommend" :key="idx" class="book" :imgSrc="wishRecommend[idx].imgSrc"></Book>
+        <Book v-for="(book, idx) in wishRecommend" :key="idx" class="book" :imgSrc="book.book_cover"></Book>
       </div>
       <Book-shelf />
     </div>
@@ -81,25 +81,38 @@ export default {
   },
   data() {
     return {
-      suitRecommend: [
-        {book: '1번책', imgSrc: 'http://bimage.interpark.com/goods_image/3/0/9/9/267393099g.jpg'},
-        {book: '2번책', imgSrc: 'http://bimage.interpark.com/goods_image/6/4/1/8/308016418g.jpg'},
-        {book: '3번책', imgSrc: 'http://bimage.interpark.com/goods_image/5/1/4/1/286555141g.jpg'},
-        {book: '4번책', imgSrc: 'http://bimage.interpark.com/goods_image/3/9/6/1/347293961g.jpg'},
-        ],
-      genreRecommend: [
-        {book: '1번책', imgSrc: 'http://bimage.interpark.com/goods_image/4/2/7/9/340174279g.jpg'},
-        {book: '2번책', imgSrc: 'http://bimage.interpark.com/goods_image/8/8/9/0/310008890g.jpg'},
-        {book: '3번책', imgSrc: 'http://bimage.interpark.com/goods_image/5/8/5/6/347485856g.jpg'},
-        {book: '4번책', imgSrc: 'http://bimage.interpark.com/goods_image/1/4/8/4/319111484g.jpg'},
-      ],
-      wishRecommend: [
-        {book: '1번책', imgSrc: 'http://bimage.interpark.com/goods_image/7/9/3/0/260947930g.jpg'},
-        {book: '2번책', imgSrc: 'http://bimage.interpark.com/goods_image/5/9/6/1/241435961g.jpg'},
-        {book: '3번책', imgSrc: 'http://bimage.interpark.com/goods_image/0/3/8/0/347230380g.jpg'},
-        {book: '4번책', imgSrc: 'http://bimage.interpark.com/goods_image/3/7/2/5/346643725g.jpg'},
-      ],
+      suitRecommend: {},
+      genreRecommend: {},
+      wishRecommend: {},
+      bookDataList: {},
     }
+  },
+  mounted() {
+    this.getBookData()
+  },
+  methods: {
+    // 책을 로드하는 함수
+    loadBookData() {
+      const token = this.$store.getters.getAccessToken
+      if (token != undefined) {
+        this.getBookData()
+      } else {
+        this.getBookData()
+      }
+    },
+    // 로그인 되어 있지않을 때 일반적인 책 정보를 가져올 axios 함수(검색에서도 쓰임)
+    getBookData() {
+      this.$axios.get(`${this.$store.getters.getServer}/book`)
+      .then(res => {
+        this.bookDataList = res.data.data
+        this.suitRecommend = this.bookDataList.slice(0, 4)
+        this.genreRecommend = this.bookDataList.slice(4, 8)
+        this.wishRecommend = this.bookDataList.slice(8, 12)
+      })
+    },
+    getRcmdBook() {
+      // 추천 알고리즘 완성시 api 연결
+    },
   }
 }
 </script>
