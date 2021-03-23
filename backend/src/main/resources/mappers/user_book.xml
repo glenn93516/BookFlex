@@ -6,8 +6,8 @@
 <mapper namespace="com.ssafy.backend.mapper.UserBookMapper">
 
     <insert id="insertUserBook" parameterType="UserBookDto">
-        INSERT INTO user_book (user_book_id, user_id, book_isbn)
-        VALUES (#{userBookId}, #{userId}, #{bookIsbn})
+        INSERT INTO user_book (user_id, book_isbn)
+        VALUES (#{userId}, #{bookIsbn})
     </insert>
 
     <select id="selectUserBookList" resultType="UserBookDto">
