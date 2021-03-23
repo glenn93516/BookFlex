@@ -62,7 +62,7 @@ public class BookController {
         // ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         // }
         catch (Exception exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
@@ -85,7 +85,7 @@ public class BookController {
                 responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
             }
         } catch (Exception exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
@@ -115,7 +115,7 @@ public class BookController {
                 responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
             }
         } catch (Exception exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
@@ -143,7 +143,7 @@ public class BookController {
                 responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
             }
         } catch (Exception exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
@@ -161,7 +161,7 @@ public class BookController {
             ListDataResponse<ReviewDto> response = responseService.getListDataResponse(true, "도서 리뷰 조회 성공", list);
             responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         } catch (Exception exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
@@ -169,15 +169,17 @@ public class BookController {
     }
 
     // 도서 검색
-    @ApiOperation(value = "도서 검색")
+    @ApiOperation(value = "도서 검색", notes = "검색 타입 없을 시 전체 책 목록에서 20개 반환")
     @GetMapping(value = "")
-    public ResponseEntity getSearchList(@ApiParam(value = "검색 타입", required = true) @RequestParam(defaultValue = "title") String search,
+    public ResponseEntity getSearchList(@ApiParam(value = "검색 타입", required = false) @RequestParam(defaultValue = "") String search,
                                         @ApiParam(value = "검색어", required = false) @RequestParam(defaultValue = "") String word) {
         ResponseEntity responseEntity = null;
         Map result = new HashMap();
         List<BookDto> list = null;
         try {
-            if (search.equals("title")) {
+            if (search.equals("")) {
+                list = bookService.findAll();
+            } else if (search.equals("title")) {
                 list = bookService.selectTitleList(word);
             } else if (search.equals("author")) {
                 list = bookService.selectAuthorList(word);
@@ -187,7 +189,7 @@ public class BookController {
             ListDataResponse<BookDto> response = responseService.getListDataResponse(true, "도서 검색 성공", list);
             responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         } catch (Exception exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
