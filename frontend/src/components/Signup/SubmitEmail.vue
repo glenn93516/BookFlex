@@ -94,6 +94,7 @@ export default {
         params: user
       })
       .then(res => {
+        console.log(`${this.$store.getters.getServer}/user/check`)
         // 가입 불가능
         if (!res.data.success) {
           this.emailStatus = "duplicate"

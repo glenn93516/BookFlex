@@ -11,6 +11,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,6 +35,8 @@ public class UserDto implements UserDetails {
     private String userGender;
     @ApiModelProperty(value = "유저 권한 (ROLE_ADMIN, ROLE_USER)")
     private String userRole;
+    @ApiModelProperty(value = "선호 장르")
+    private List<GenreDto> genres;
     @ApiModelProperty(value = "프로필 이미지 파일(등록 & 삭제용)")
     private MultipartFile userProfileImgFile;
     @ApiModelProperty(value = "프로필 이미지 url")
@@ -44,6 +47,7 @@ public class UserDto implements UserDetails {
 
     // 이하 코드는 security 를 위한 용도
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ApiModelProperty(value = "Security를 위한 변수. 사용X")
     private Collection<? extends GrantedAuthority> authorities;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

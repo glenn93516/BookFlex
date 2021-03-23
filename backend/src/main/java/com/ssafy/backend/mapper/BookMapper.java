@@ -17,5 +17,5 @@ public interface BookMapper {
     List<BookDto> selectTitleList(String word) throws Exception;
     List<BookDto> selectAuthorList(String word) throws Exception;
     List<BookDto> selectContentsList(String word) throws Exception;
-
+    List<BookDto> findAll();
 }
