@@ -16,10 +16,16 @@
       class="shelf-row"
     >
       <div class="d-flex justify-content-around books">
-        <Book v-for="(book, idx) in suitRecommend" :key="idx" class="book" :imgSrc="book.book_cover"></Book>
+        <Book 
+          v-for="(book, idx) in suitRecommend" 
+          :key="idx" class="book" 
+          :imgSrc="book.book_cover" 
+          @open-Modal="openModal"
+        ></Book>
       </div>
       <Book-shelf />
     </div>
+    
     <div
       id="second-shelf-tag"
       class="tag"
@@ -30,19 +36,18 @@
       >
         스릴러
       </div>
-      <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그">
-      <div 
-        class="tag-name"
-      >
-        정치
-      </div>
     </div>
     <div 
       id="second-row"
       class="shelf-row"
     >
       <div class="d-flex justify-content-around books">
-        <Book v-for="(book, idx) in genreRecommend" :key="idx" class="book" :imgSrc="book.book_cover"></Book>
+        <Book 
+          v-for="(book, idx) in genreRecommend" 
+          :key="idx" class="book" 
+          :imgSrc="book.book_cover" 
+          @open-Modal="openModal"
+        ></Book>
       </div>
       <Book-shelf />
     </div>
@@ -62,22 +67,46 @@
       class="shelf-row"
     >
       <div class="d-flex justify-content-around books">
-        <Book v-for="(book, idx) in wishRecommend" :key="idx" class="book" :imgSrc="book.book_cover"></Book>
+        <Book 
+          v-for="(book, idx) in wishRecommend" 
+          :key="idx" class="book" 
+          :imgSrc="book.book_cover" 
+          @open-Modal="openModal"
+        ></Book>
       </div>
       <Book-shelf />
     </div>
+    <Modal v-show="isModalViewed" @close-modal="closeModal">
+        <!-- 컨텐츠 컴포넌트 자리 -->
+        <!-- 헤더 자리 -->
+        <template #header>
+
+        </template>
+
+        <!-- 바디 자리 -->
+        <template #body>
+          <SelectStatus v-if="step === 'selectStatus' " :imgURL="selectedImgURL" @go-reaction="goToReaction"/>
+          <BookReaction v-else-if="step === 'bookReaction' " :imgURL="selectedImgURL" />
+        </template>
+    </Modal> 
   </div>
 </template>
 
 <script>
 import Book from '@/components/Main/Book.vue'
 import BookShelf from '@/components/Main/BookShelf.vue'
+import Modal from '@/components/Element/Modal.vue'
+import SelectStatus from '@/components/Main/SelectStatus.vue'
+import BookReaction from '@/components/Main/BookReaction.vue'
 
 export default {
   name: 'Main',
   components: {
     Book,
     BookShelf,
+    Modal,
+    SelectStatus,
+    BookReaction,
   },
   data() {
     return {
@@ -85,6 +114,9 @@ export default {
       genreRecommend: {},
       wishRecommend: {},
       bookDataList: {},
+      isModalViewed: false,
+      selectedImgURL: "",
+      step: "selectStatus",
     }
   },
   mounted() {
@@ -113,6 +145,20 @@ export default {
     getRcmdBook() {
       // 추천 알고리즘 완성시 api 연결
     },
+    closeModal() {
+      this.isModalViewed = false
+      console.log('닫아')
+    },
+    openModal(url) {
+      this.selectedImgURL = url
+      this.step = 'selectStatus'
+      this.isModalViewed = true
+      console.log('열어')
+    },
+    goToReaction() {
+      console.log('되나?')
+      this.step = "bookReaction"
+    }
   }
 }
 </script>

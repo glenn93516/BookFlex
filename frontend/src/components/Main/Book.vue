@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="book-cover btn book">
+    <div class="book-cover btn book" @click="$emit('open-Modal', imgSrc)">
       <!--alt에 책 이름도 같이 바인딩 해주기-->
       <img v-if="imgSrc" class="bookimg" :src="imgSrc" alt="책표지">
       <!-- <img class="bookimg" src="https://i.picsum.photos/id/288/200/300.jpg?hmac=45WLionXnoogi0-njKuSNnVY5hnswMhf-CrxwzKTcrc" alt="책표지"> -->
@@ -15,6 +15,11 @@ export default {
     imgSrc: String,
   },
   mounted() {
+  },
+  methods: {
+    checkModal() {
+      console.log('직히나?')
+    }
   }
 }
 </script>
