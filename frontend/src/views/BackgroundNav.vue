@@ -31,9 +31,17 @@
         <!-- 마이페이지 -->
         <b-nav-item-dropdown right>
           <template #button-content>
-            <b-avatar size="2.5rem" src="@/assets/푸들.png"></b-avatar>
+            <b-avatar size="2.5rem" src="https://placekitten.com/300/300"></b-avatar>
           </template>
 
+          <b-dropdown-item
+            href="/profile/genre" 
+            style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
+          >
+            <span style="font-size: 0.8rem;">프로필</span>
+          </b-dropdown-item>
+          <hr class="list-hr">
+          
           <b-dropdown-item
             v-if="!isLogin" 
             href="/login" 
@@ -142,13 +150,13 @@ export default {
       this.isLogin = false
     },
     goToMain() {
-      if (this.pageName!="Main") {
+      if (this.pageName!="MainBook") {
         this.$router.push({ name: 'MainBook' })
       }
     },
     postBoxClick() {
       alert('우체통 설치 중 ...🛠')
-    }
+    },
   },
   watch: {
     $route(to) {
