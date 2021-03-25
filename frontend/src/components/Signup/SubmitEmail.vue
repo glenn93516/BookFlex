@@ -87,32 +87,33 @@ export default {
       this.$router.push({ name: 'CheckEmail' })
     },
     duplicateCheck(input, email) {
-      const user = {userEmail: email}
-      console.log(input, 'input상태')
-      console.log(email, 'email')
-      this.$axios.get(`${this.$store.getters.getServer}/user/check`, {
-        params: user
-      })
-      .then(res => {
-        console.log(`${this.$store.getters.getServer}/user/check`)
-        // 가입 불가능
-        if (!res.data.success) {
-          this.emailStatus = "is-invalid duplicate"
-          this.disableBtn = true
-        } else {
-          // 가입 가능
-          this.emailStatus = ""
-          this.diableBtn = false
-          if (input === 'enter') {
-            const user = {userEmail: email}
-            this.$store.dispatch("SetEmail", user)
-            this.$router.push({ name: 'CheckEmail' })
+      if (this.emailStatus !== 'is-invalid form-invalid') {
+        const user = {userEmail: email}
+        this.$axios.get(`${this.$store.getters.getServer}/user/check`, {
+          params: user
+        })
+        .then(res => {
+          // 가입 불가능
+          if (!res.data.success) {
+            this.emailStatus = "is-invalid duplicate"
+            this.disableBtn = true
+          } else {
+            // 가입 가능
+            this.emailStatus = ""
+            this.diableBtn = false
+            if (input === 'enter') {
+              const user = {userEmail: email}
+              this.$store.dispatch("SetEmail", user)
+              this.$router.push({ name: 'CheckEmail' })
+            }
           }
-        }
-      })
-      .catch(err => {
-        console.error(err)
-      })
+        })
+        .catch(err => {
+          console.error(err)
+        })
+      } else {
+        console.log('여기에는 뭘 넣을까')
+      }
     }
   }
 }
