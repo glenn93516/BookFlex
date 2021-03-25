@@ -13,7 +13,7 @@
         class="userinfo-alert"
         v-show="nameStatus === 'is-invalid duplicate'"
       >
-        이미 가입된 회원입니다.
+        이미 존재하는 닉네임입니다.
       </div>
       <div 
         class="userinfo-alert"
@@ -66,7 +66,6 @@
 </template>
 
 <script>
-// 나중에 필명 겹치는지도 확인해줘야함
 export default {
   data() {
     return {
@@ -180,7 +179,6 @@ export default {
           .then(res => {
             // 가입 불가능
             if (res.data.message === '조회 성공') {
-              // console.log(res)
               this.nameStatus = "is-invalid duplicate"
             }
           })
