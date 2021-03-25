@@ -16,13 +16,13 @@
       </b-form-input>
       <div 
         class="warning-msg"
-        v-show="emailStatus === 'duplicate'"
+        v-show="emailStatus === 'is-invalid duplicate'"
       >
         이미 가입된 회원입니다.
       </div>
       <div 
         class="warning-msg"
-        v-show="emailStatus === 'form-invalid'"
+        v-show="emailStatus === 'is-invalid form-invalid'"
       >
         이메일 양식이 올바르지 않습니다.
       </div>
@@ -47,7 +47,7 @@ export default {
         size: "back-sm"
       },
       email: "",
-      // 현재 이메일이 유효한지 아닌지 ("", form-invalid, duplicate)
+      // 현재 이메일이 유효한지 아닌지 ("", is-valid, is-invalid form-invalid, is-invalid duplicate)
       emailStatus: "",
       // 버튼 활성화 여부 (활성화: false, 비활성화: true)
       disableBtn: true,
@@ -69,7 +69,7 @@ export default {
     isValidEmail() {
       const reg_email = /^([0-9a-zA-Z_\\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
       if (this.email && !reg_email.test(this.email)) {
-        this.emailStatus = "form-invalid"
+        this.emailStatus = "is-invalid form-invalid"
         this.disableBtn = true
       } else {
         if (this.email.length > 0) {
@@ -97,7 +97,7 @@ export default {
         console.log(`${this.$store.getters.getServer}/user/check`)
         // 가입 불가능
         if (!res.data.success) {
-          this.emailStatus = "duplicate"
+          this.emailStatus = "is-invalid duplicate"
           this.disableBtn = true
         } else {
           // 가입 가능
