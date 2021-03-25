@@ -1,6 +1,6 @@
 <template>
-  <div class="selectStatus flex">
-    <img class="book-img" :src="imgURL" alt="북커버">
+  <div class="selectStatus">
+    <img class="book-img" :src="book.book_cover" :alt="book.book_title">
     <br>
     <hr>
     <div>
@@ -14,11 +14,15 @@
 <script>
 export default {
   props: {
-    imgURL: String,
+    book: Object,
   },
   data() {
     return {
     }
+  },
+  created() {
+  },
+  methods: {
   }
 }
 </script>
@@ -29,7 +33,6 @@ export default {
     width: 400px;
   }
   .selectStatus {
-    justify-content: center;
     text-align: center;
   }
   .btn-read {

@@ -16,10 +16,12 @@
       class="shelf-row"
     >
       <div class="d-flex justify-content-around books">
+        <!-- 클릭할때 객체를 스토어에 저장 commit -->
         <Book 
           v-for="(book, idx) in suitRecommend" 
           :key="idx" class="book" 
-          :imgSrc="book.book_cover" 
+          :book="book" 
+          @click="selectBook(book)"
           @open-Modal="openModal"
         ></Book>
       </div>
@@ -45,7 +47,8 @@
         <Book 
           v-for="(book, idx) in genreRecommend" 
           :key="idx" class="book" 
-          :imgSrc="book.book_cover" 
+          :book="book" 
+          @click="selectBook(book)"
           @open-Modal="openModal"
         ></Book>
       </div>
@@ -70,7 +73,8 @@
         <Book 
           v-for="(book, idx) in wishRecommend" 
           :key="idx" class="book" 
-          :imgSrc="book.book_cover" 
+          :book="book" 
+          @click="selectBook(book)"
           @open-Modal="openModal"
         ></Book>
       </div>
@@ -85,8 +89,8 @@
 
         <!-- 바디 자리 -->
         <template #body>
-          <SelectStatus v-if="step === 'selectStatus' " :imgURL="selectedImgURL" @go-reaction="goToReaction"/>
-          <BookReaction v-else-if="step === 'bookReaction' " :imgURL="selectedImgURL" />
+          <SelectStatus v-if="step === 'selectStatus' " @go-reaction="goToReaction" :book="selectedBook"/>
+          <BookReaction v-else-if="step === 'bookReaction' "/>
         </template>
     </Modal> 
   </div>
@@ -115,7 +119,7 @@ export default {
       wishRecommend: {},
       bookDataList: {},
       isModalViewed: false,
-      selectedImgURL: "",
+      selectedBook: "",
       step: "selectStatus",
     }
   },
@@ -149,8 +153,14 @@ export default {
       this.isModalViewed = false
       console.log('닫아')
     },
-    openModal(url) {
-      this.selectedImgURL = url
+    openModal(book) {
+      console.log(book)
+      // 선택한객체를 변수와 store에 모두 저장
+      // 변수는 책 선택시 바로 커버를 띄울 목적
+      this.selectedBook = book
+      console.log(this.selectedBook)
+      // store는 반응이 늦으므로 이후 axios요청을 보낼 목적
+      this.selectBook(book)
       this.step = 'selectStatus'
       this.isModalViewed = true
       console.log('열어')
@@ -158,6 +168,12 @@ export default {
     goToReaction() {
       console.log('되나?')
       this.step = "bookReaction"
+    },
+    selectBook(book) {
+      this.$store.commit('SelectBook', book)
+    },
+    getSelectedBook() {
+      this.selectedBook = this.$store.getters.getSelectedBook
     }
   }
 }

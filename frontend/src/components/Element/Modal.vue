@@ -59,7 +59,7 @@ export default {
   height: 800px;
   margin: 0px auto;
   padding: 20px 30px;
-  background-color: rgba(255, 255, 255, 0.747);
+  background-color: rgba(255, 255, 255, 0.85);
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;
