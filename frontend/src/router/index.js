@@ -90,7 +90,29 @@ const routes = [
       {
         path:'/profile',
         name: 'Profile',
-        component: () => import('../views/Profile.vue')
+        component: () => import('../views/Profile.vue'),
+        children: [
+          {
+            path: 'genre',
+            name: 'PreferenceGenre',
+            component: () => import('../components/Profile/PreferenceGenre.vue'),
+          },
+          {
+            path: 'sentence',
+            name: 'SaveSentence',
+            component: () => import('../components/Profile/SaveSentence.vue'),
+          },
+          {
+            path: 'books',
+            name: 'ReadBooks',
+            component: () => import('../components/Profile/ReadBooks.vue'),
+          },
+          {
+            path: 'wishlist',
+            name: 'WishList',
+            component: () => import('../components/Profile/WishList.vue'),
+          },
+        ]
       },
     ]
   },
