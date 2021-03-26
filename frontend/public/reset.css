@@ -2,7 +2,8 @@
 
 body,
 h1, h2, h3, h4, h5, h6,
-ul, ol, dl, dd, li, hr{
+ul, ol, dl, dd, li, hr, 
+p {
   margin: 0;
   padding: 0;
 }
@@ -11,4 +12,10 @@ li {
 }
 a:hover{
   text-decoration: none;
+}
+.footer-content {
+  font-size: 10px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }

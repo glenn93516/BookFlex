@@ -25,7 +25,7 @@
       <!--progressbar들어갈 위치-->
       <div>
         <b-progress 
-          class="mt-5 progress"
+          class="mt-5 mb-5 progress"
           :value="progressPercent"
           height="2rem"
           max="100" 
@@ -92,7 +92,7 @@ export default {
   }
   #signup-background {
     margin-top: 15vh;
-    margin-bottom: 15vh;
+    /* margin-bottom: 15vh; */
     width: 550px;
     /* height: 400px; */
     background-color: white;
