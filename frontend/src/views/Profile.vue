@@ -100,6 +100,7 @@
       style="
         min-width: 1110px;
         display: inline-block;
+        height: 600px;
       ">
     </router-view>
 

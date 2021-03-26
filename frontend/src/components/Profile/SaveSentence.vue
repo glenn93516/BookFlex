@@ -68,6 +68,21 @@ export default {
         },
         {
           src: 'https://cdn.pixabay.com/photo/2021/03/03/07/09/background-6064645_960_720.jpg',
+          text: '책 이름2',
+          book: '책 이름2',
+        },
+        {
+          src: 'https://cdn.pixabay.com/photo/2021/01/30/18/07/salzburg-5964812_960_720.jpg',
+          text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다3.',
+          book: '책 이름3',
+        },
+        {
+          src: 'https://cdn.pixabay.com/photo/2021/03/16/15/30/beach-6100209_960_720.jpg',
+          text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다1.',
+          book: '책 이름1',
+        },
+        {
+          src: 'https://cdn.pixabay.com/photo/2021/03/03/07/09/background-6064645_960_720.jpg',
           text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다2.',
           book: '책 이름2',
         },
