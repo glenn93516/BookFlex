@@ -71,7 +71,7 @@
       </b-navbar-nav>
     </b-navbar>
     <!-- 메인페이지 입니다 :) -->
-    <section class="container">
+    <section class="container main-background">
       <router-view></router-view>
     </section>
     <aside 
@@ -238,5 +238,12 @@ export default {
   }
   .postbox:hover {
     cursor: pointer;
+  }
+  .main-background {
+    background-image: url('../assets/waterprint_back.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding: 0px;
+    min-width: 1140px;
   }
 </style>

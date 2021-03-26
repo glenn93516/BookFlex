@@ -1,7 +1,7 @@
 <template>
   <div class="book-shelf">
     <!-- <img width="1000px" height="30px" src="@/assets/wood_texture.jpg" alt="" style="border-radius: 10px;"> -->
-    <div style="background-color: rgba(127, 102, 91, 1); border-radius: 10px; height: 60px; width: 1000px; display: inline-block;"></div>
+    <div class="book-shelf-bot"></div>
   </div>
 </template>
 
@@ -15,5 +15,16 @@ export default {
   .book-shelf{
     text-align: center; 
     margin: 0 auto;
+    z-index: 1;
+  }
+  .book-shelf-bot {
+    transform: skew(-45deg, 0);
+    -webkit-transform:skew(-45deg, 0);
+    margin-top: -30px;
+    background-color: rgb(112, 87, 76); 
+    border-radius: 10px; 
+    height: 30px; 
+    width: 1000px; 
+    display: inline-block;
   }
 </style>
