@@ -7,7 +7,7 @@
       <img src="@/assets/thumbsdown.png" class="btn thumbs" alt="">
     </div>
     <br>
-    <b-button class="btn-put">문장 담기</b-button>
+    <b-button class="btn-put" @click="$emit('go-collect')">문장 담기</b-button>
 
   </div>
 </template>

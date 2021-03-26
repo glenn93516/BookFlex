@@ -90,7 +90,8 @@
         <!-- 바디 자리 -->
         <template #body>
           <SelectStatus v-if="step === 'selectStatus' " @go-reaction="goToReaction" :book="selectedBook"/>
-          <BookReaction v-else-if="step === 'bookReaction' "/>
+          <BookReaction v-else-if="step === 'bookReaction' " @go-collect="goToCollect" />
+          <CollectSentence v-else-if="step === 'collectSentence' " :mode="0"/>
         </template>
     </Modal> 
   </div>
@@ -102,6 +103,7 @@ import BookShelf from '@/components/Main/BookShelf.vue'
 import Modal from '@/components/Element/Modal.vue'
 import SelectStatus from '@/components/Main/SelectStatus.vue'
 import BookReaction from '@/components/Main/BookReaction.vue'
+import CollectSentence from '@/components/Book/CollectSentence.vue'
 
 export default {
   name: 'Main',
@@ -111,6 +113,7 @@ export default {
     Modal,
     SelectStatus,
     BookReaction,
+    CollectSentence,
   },
   data() {
     return {
@@ -120,7 +123,7 @@ export default {
       bookDataList: {},
       isModalViewed: false,
       selectedBook: "",
-      step: "selectStatus",
+      step: "",
     }
   },
   mounted() {
@@ -174,6 +177,9 @@ export default {
     },
     getSelectedBook() {
       this.selectedBook = this.$store.getters.getSelectedBook
+    },
+    goToCollect() {
+      this.step = "collectSentence"
     }
   }
 }
