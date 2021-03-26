@@ -158,16 +158,13 @@ export default {
 </script>
 
 <style>
-  @font-face {
-    font-family: 'NanumBarunpen';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
   * {
     font-family: 'NanumBarunpen', sans-serif;
     margin: 0;
     padding: 0;
+  }
+  .profile-nav {
+    font-family: 'S-CoreDream-2ExtraLight', sans-serif;
   }
   /* reset */
   h1, p {
@@ -303,9 +300,11 @@ export default {
     justify-content: center;
   }
   .profile-nav-item {
+    font-family: 'S-CoreDream-2ExtraLight', sans-serif;
     display: inline-block;
-    margin: 10px 40px;
-    font-size: 30px;
+    padding: 10px 20px;
+    margin: 0 20px;
+    font-size: 20px;
     color: black;
   }
   .profile-nav-item:hover {
@@ -326,6 +325,7 @@ export default {
   .router-link-exact-active {
     color: black;
     font-weight: bold;
+    border-top: 2px black solid;
   }
 
 
