@@ -15,7 +15,7 @@
           height="35px"
         >
       </b-navbar-brand>
-      <b-navbar-menu>
+      <div>
         <span class="temp-menu">
           RECOMMEND
           <!-- <div class="temp-hightlight"></div> -->
@@ -26,7 +26,7 @@
         <span class="temp-menu">
           MYPLACE
         </span>
-      </b-navbar-menu>
+      </div>
       <b-navbar-nav>
         <!-- 검색 -->
         <b-nav-item>
@@ -92,7 +92,7 @@
       </b-navbar-nav>
     </b-navbar>
     <!-- 메인페이지 입니다 :) -->
-    <section class="container main-background">
+    <section class="container">
       <router-view></router-view>
     </section>
     <aside 
@@ -225,8 +225,8 @@ export default {
     width: 200px;
   }
   #navInput[type="text"]:focus {
-    border-color: rgba(78, 35, 0, 0.8);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(63, 20, 0, 0.6);
+    border-color: rgb(218, 203, 0);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 6px rgba(255, 195, 105, 0.6);
     outline: 0 none;
     font-size: 12px;
     width: 200px;
@@ -292,11 +292,4 @@ export default {
   /* .temp-hightlight {
     display: absolute;
   } */
-  .main-background {
-    background-image: url('../assets/waterprint_back.jpg');
-    background-repeat: no-repeat;
-    background-size: 100%;
-    padding: 0px;
-    min-width: 1140px;
-  }
 </style>
