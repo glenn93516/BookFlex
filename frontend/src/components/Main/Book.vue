@@ -24,17 +24,21 @@ export default {
 
 <style>
   .book-cover{
-    background-color: rgba(255, 255, 240, 0.733);
+    background-color: rgba(0, 0, 0, 0.4);
     padding: 15px;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2); 
     transition-duration: 0.3s;
+    z-index: 10;
+    position: relative;
   }
   .book-cover:hover {
     box-shadow: 0px 0px 8px rgba(143, 143, 143, 0.8);
     border-radius: 5px/ 5px;
+    z-index: 10;
   }
   .bookimg {
     width: 125px;
     height: 187.5px;
+    z-index: 10;
   }
 </style>

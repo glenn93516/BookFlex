@@ -4,7 +4,7 @@
       id="first-shelf-tag"
       class="tag"
     >
-      <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px; color: black;" alt="제목태그">
+      <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px; color: black;" alt="제목태그"> -->
       <div 
         class="tag-name"
       >
@@ -32,7 +32,7 @@
       id="second-shelf-tag"
       class="tag"
     >
-      <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그">
+      <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그"> -->
       <div 
         class="tag-name"
       >
@@ -58,7 +58,7 @@
       id="third-shelf-tag"
       class="tag"
     >
-      <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그">
+      <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그"> -->
       <div 
         class="tag-name"
       >
@@ -188,7 +188,7 @@ export default {
 <style>
   .shelf{
     margin-top: 40px;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(237, 234, 232, 0.4);
     border-radius: 10px;
   }
   .shelf-row{
@@ -207,14 +207,14 @@ export default {
     margin-bottom: 20px;
     background-color: rgba(161, 114, 70, 0);
     display: inline-block;
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.7rem;
+    font-weight: 500;
     padding: 10px;
     margin-left: 0px;
     /* box-shadow: 1px 1px 2px rgb(150, 150, 150); */
     border-radius: 3px/ 3px;
     border: 0px;
-    color: rgb(90, 90, 90);
+    color: rgb(0, 0, 0);
     align-items: left;
   }
 </style>
