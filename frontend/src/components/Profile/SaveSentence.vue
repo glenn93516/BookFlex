@@ -136,9 +136,6 @@ export default {
 </script>
 
 <style>
-  .temp {
-    display: flex;
-  }
   .sentence-item {
     display: inline-block;
     position: relative;
