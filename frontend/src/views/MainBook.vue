@@ -1,99 +1,101 @@
 <template>
-  <div class="shelf">
-    <div 
-      id="first-shelf-tag"
-      class="tag"
-    >
-      <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px; color: black;" alt="제목태그"> -->
+  <div class="recommend-back">
+    <div class="shelf">
       <div 
-        class="tag-name"
+        id="first-shelf-tag"
+        class="tag"
       >
-        맞춤형 추천
+        <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px; color: black;" alt="제목태그"> -->
+        <div 
+          class="tag-name"
+        >
+          맞춤형 추천
+        </div>
       </div>
-    </div>
-    <div 
-      id="first-row"
-      class="shelf-row"
-    >
-      <div class="d-flex justify-content-around books">
-        <!-- 클릭할때 객체를 스토어에 저장 commit -->
-        <Book 
-          v-for="(book, idx) in suitRecommend" 
-          :key="idx" class="book" 
-          :book="book" 
-          @click="selectBook(book)"
-          @open-Modal="openModal"
-        ></Book>
-      </div>
-      <Book-shelf />
-    </div>
-    
-    <div
-      id="second-shelf-tag"
-      class="tag"
-    >
-      <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그"> -->
       <div 
-        class="tag-name"
+        id="first-row"
+        class="shelf-row"
       >
-        스릴러
+        <div class="d-flex justify-content-around books">
+          <!-- 클릭할때 객체를 스토어에 저장 commit -->
+          <Book 
+            v-for="(book, idx) in suitRecommend" 
+            :key="idx" class="book" 
+            :book="book" 
+            @click="selectBook(book)"
+            @open-Modal="openModal"
+          ></Book>
+        </div>
+        <Book-shelf />
       </div>
-    </div>
-    <div 
-      id="second-row"
-      class="shelf-row"
-    >
-      <div class="d-flex justify-content-around books">
-        <Book 
-          v-for="(book, idx) in genreRecommend" 
-          :key="idx" class="book" 
-          :book="book" 
-          @click="selectBook(book)"
-          @open-Modal="openModal"
-        ></Book>
+      
+      <div
+        id="second-shelf-tag"
+        class="tag"
+      >
+        <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그"> -->
+        <div 
+          class="tag-name"
+        >
+          스릴러
+        </div>
       </div>
-      <Book-shelf />
-    </div>
-    <div
-      id="third-shelf-tag"
-      class="tag"
-    >
-      <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그"> -->
       <div 
-        class="tag-name"
+        id="second-row"
+        class="shelf-row"
       >
-        위시리스트
+        <div class="d-flex justify-content-around books">
+          <Book 
+            v-for="(book, idx) in genreRecommend" 
+            :key="idx" class="book" 
+            :book="book" 
+            @click="selectBook(book)"
+            @open-Modal="openModal"
+          ></Book>
+        </div>
+        <Book-shelf />
       </div>
-    </div>
-    <div
-      id="third-row"
-      class="shelf-row"
-    >
-      <div class="d-flex justify-content-around books">
-        <Book 
-          v-for="(book, idx) in wishRecommend" 
-          :key="idx" class="book" 
-          :book="book" 
-          @click="selectBook(book)"
-          @open-Modal="openModal"
-        ></Book>
+      <div
+        id="third-shelf-tag"
+        class="tag"
+      >
+        <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그"> -->
+        <div 
+          class="tag-name"
+        >
+          위시리스트
+        </div>
       </div>
-      <Book-shelf />
-    </div>
-    <Modal v-show="isModalViewed" @close-modal="closeModal">
-        <!-- 컨텐츠 컴포넌트 자리 -->
-        <!-- 헤더 자리 -->
-        <template #header>
+      <div
+        id="third-row"
+        class="shelf-row"
+      >
+        <div class="d-flex justify-content-around books">
+          <Book 
+            v-for="(book, idx) in wishRecommend" 
+            :key="idx" class="book" 
+            :book="book" 
+            @click="selectBook(book)"
+            @open-Modal="openModal"
+          ></Book>
+        </div>
+        <Book-shelf />
+      </div>
+      <Modal v-show="isModalViewed" @close-modal="closeModal">
+          <!-- 컨텐츠 컴포넌트 자리 -->
+          <!-- 헤더 자리 -->
+          <template #header>
 
-        </template>
+          </template>
 
-        <!-- 바디 자리 -->
-        <template #body>
-          <SelectStatus v-if="step === 'selectStatus' " @go-reaction="goToReaction" :book="selectedBook"/>
-          <BookReaction v-else-if="step === 'bookReaction' " @go-collect="goToCollect" />
-          <CollectSentence v-else-if="step === 'collectSentence' " :mode="0"/>
-        </template>
-    </Modal> 
+          <!-- 바디 자리 -->
+          <template #body>
+            <SelectStatus v-if="step === 'selectStatus' " @go-reaction="goToReaction" :book="selectedBook"/>
+            <BookReaction v-else-if="step === 'bookReaction' " @go-collect="goToCollect" />
+            <CollectSentence v-else-if="step === 'collectSentence' " :mode="0"/>
+          </template>
+      </Modal> 
+    </div>
   </div>
 </template>
 
@@ -186,9 +188,16 @@ export default {
 </script>
 
 <style>
+  .recommend-back {
+    background-image: url('../assets/waterprint_back.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding: 0px;
+    min-width: 1140px;
+  }
   .shelf{
     margin-top: 40px;
-    background-color: rgba(237, 234, 232, 0.4);
+    background-color: rgba(237, 234, 232, 0.7);
     border-radius: 10px;
   }
   .shelf-row{
