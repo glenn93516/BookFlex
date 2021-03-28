@@ -6,15 +6,20 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path:'/',
+    name: 'MainPage',
+    component: () => import('../views/Main.vue')
+  },
+  {
     path: '/',
-    name: 'Main',
+    name: 'Background',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/BackgroundNav.vue'),
     children: [
       {
-        path:'/',
+        path:'/main',
         name: 'MainBook',
         component: () => import('../views/MainBook.vue')
       },
@@ -90,7 +95,29 @@ const routes = [
       {
         path:'/profile',
         name: 'Profile',
-        component: () => import('../views/Profile.vue')
+        component: () => import('../views/Profile.vue'),
+        children: [
+          {
+            path: 'genre',
+            name: 'PreferenceGenre',
+            component: () => import('../components/Profile/PreferenceGenre.vue'),
+          },
+          {
+            path: 'sentence',
+            name: 'SaveSentence',
+            component: () => import('../components/Profile/SaveSentence.vue'),
+          },
+          {
+            path: 'books',
+            name: 'ReadBooks',
+            component: () => import('../components/Profile/ReadBooks.vue'),
+          },
+          {
+            path: 'wishlist',
+            name: 'WishList',
+            component: () => import('../components/Profile/WishList.vue'),
+          },
+        ]
       },
     ]
   },
