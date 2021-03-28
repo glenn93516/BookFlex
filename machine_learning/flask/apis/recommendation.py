@@ -202,8 +202,10 @@ def recommend_by_user(userId):
         "data": {
             "customized_by_user": customized_by_user,
             "customized_by_genre": {
-                "genre_id": customized_genre_id,
-                "genre_name": customized_genre_name,
+                "genre": {
+                    "genre_id": customized_genre_id,
+                    "genre_name": customized_genre_name
+                },
                 "customized_books": customized_by_genre
             }
         }
@@ -226,8 +228,10 @@ def recommend_for_guest():
         "data": {
             "customized_by_user": random_books,
             "customized_by_genre": {
-                "genre_id": random_genre_id,
-                "genre_name": random_genre_name,
+                "genre": {
+                    "genre_id": random_genre_id,
+                    "genre_name": random_genre_name
+                },
                 "customized_books": random_books_genre
             }
         }
