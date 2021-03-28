@@ -27,3 +27,11 @@ services:
     container_name: app_backend
     volumes:
       - ./backend:/app
+
+  ml:
+    build:
+      dockerfile: Dockerfile
+      context: ./machine_learning/flask
+    container_name: ml_backend
+    volumes:
+      - ./machine_learning/flask:/app
