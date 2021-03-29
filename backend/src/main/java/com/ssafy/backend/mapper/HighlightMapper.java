@@ -17,4 +17,5 @@ public interface HighlightMapper {
     Optional<HighlightDto> findOneByHighlightId(Long highlightId);
     int deleteOne(@Param("highlightId") Long highlightId);
     void updateOne(HighlightDto origin);
+    List<HighlightDto> findAllOnlyPublic();
 }

@@ -59,6 +59,16 @@
         where highlight_id = #{highlightId}
     </select>
 
+    <select id="findAllOnlyPublic" resultType="HighlightDto">
+        select highlight_id highlightId, highlight_content highlightContent,
+               highlight_page highlightPage, highlight_cover highlightCover,
+               book_isbn bookIsbn, user_id userId, created_date createdDate,
+               updated_date updatedDate, is_public isPublic
+        from highlight
+        where is_public = 1
+        ORDER BY updated_date DESC
+    </select>
+
     <delete id="deleteOne">
         delete from highlight
         where highlight_id = #{highlightId}

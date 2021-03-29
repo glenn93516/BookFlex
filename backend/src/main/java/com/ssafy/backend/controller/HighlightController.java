@@ -82,19 +82,13 @@ public class HighlightController {
         return responseEntity;
     }
 
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
-    })
-    @ApiOperation(value = "유저가 작성한 문장 수집 조회")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @ApiOperation(value = "공개된 문장 수집 목록 조회", notes = "공개된 문장수집 목록 조회 - 게시판 용도")
     @GetMapping
-    public ResponseEntity getUserHighlights(@ApiIgnore final Authentication authentication) {
+    public ResponseEntity getUserHighlights() {
         ResponseEntity responseEntity = null;
         try {
-            Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
-
             // 작성한 문장수집 조회
-            List<HighlightDto> highlights = highlightService.findAllByUserId(userId);
+            List<HighlightDto> highlights = highlightService.findAllOnlyPublic();
 
             ListDataResponse<HighlightDto> response = responseService.getListDataResponse(true, "조회 성공", highlights);
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);

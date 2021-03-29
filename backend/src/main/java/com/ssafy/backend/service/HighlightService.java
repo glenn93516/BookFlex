@@ -59,4 +59,7 @@ public class HighlightService {
         highlightMapper.updateOne(origin);
     }
 
+    public List<HighlightDto> findAllOnlyPublic() {
+        return highlightMapper.findAllOnlyPublic();
+    }
 }
