@@ -7,7 +7,6 @@ import com.ssafy.backend.dto.highlight.HighlightRequestDto;
 import com.ssafy.backend.dto.response.BaseResponse;
 import com.ssafy.backend.dto.response.ListDataResponse;
 import com.ssafy.backend.dto.response.SingleDataResponse;
-import com.ssafy.backend.exception.UserNotFoundException;
 import com.ssafy.backend.service.HighlightService;
 import com.ssafy.backend.service.ResponseService;
 import com.ssafy.backend.service.UserService;
@@ -16,7 +15,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Delete;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -67,10 +65,18 @@ public class HighlightController {
 
             BaseResponse response = responseService.getBaseResponse(true, "등록 성공");
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (IOException | IllegalArgumentException | IllegalStateException exception) {
+        } catch (IllegalStateException exception) {
+            // 아직 읽지 않은 책 문장수집 작성하려는 경우
             logger.info(exception.getMessage());
+
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (IOException | IllegalArgumentException exception) {
+            // 파일 업로드 중 오류 발생
+            logger.info(exception.getMessage());
+
+            BaseResponse response = responseService.getBaseResponse(false, "서버 에러 발생");
+            responseEntity = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
 
         return responseEntity;
@@ -95,7 +101,7 @@ public class HighlightController {
         } catch (Exception exception) {
             logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
-            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+            responseEntity = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
 
         return responseEntity;
@@ -112,8 +118,10 @@ public class HighlightController {
 
             SingleDataResponse<HighlightDetailDto> response = responseService.getSingleDataResponse(true, "조회 성공", highlightDetail);
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (Exception exception) {
+        } catch (IllegalStateException exception) {
+            // 문장수집 id 틀린 경우
             logger.info(exception.getMessage());
+            
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
         }
@@ -144,10 +152,62 @@ public class HighlightController {
 
             BaseResponse response = responseService.getBaseResponse(true, "삭제 성공");
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (Exception exception) {
+        } catch (IllegalStateException exception) {
+            // 이미 삭제된 데이터 이거나 다른 유저의 데이터 삭제하려고 시도한 경우
             logger.info(exception.getMessage());
+
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+
+        return responseEntity;
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "유저가 작성한 문장 수집 수정", notes = "내용, 페이지, 공개여부, 배경이미지 수정 가능")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PutMapping("/{highlightId}")
+    public ResponseEntity modifyUserHighlights(@ApiIgnore final Authentication authentication,
+                                               @PathVariable Long highlightId,
+                                               HighlightRequestDto highlightRequestDto) {
+        ResponseEntity responseEntity = null;
+        try {
+            Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
+            HighlightDto findHighlight = highlightService.findOneByHighlightId(highlightId);
+
+            if (!findHighlight.getUserId().equals(userId)) {
+                throw new IllegalStateException("작성자만 수정할 수 있습니다");
+            }
+
+            HighlightDto highlight = HighlightDto.createHighlight(highlightRequestDto, userId);
+
+            // 배경 사진 있으면 S3에 등록
+            if (highlightRequestDto.getHighlightCover() != null) {
+                String unique = "highlight_" + userId + "_" + LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+                String url = uploader.upload(highlightRequestDto.getHighlightCover(), "highlight", unique);
+
+                highlight.setHighlightCover(url);
+            }
+
+            // 수정한 문장수집 저장
+            highlightService.updateOne(findHighlight, highlight);
+
+            BaseResponse response = responseService.getBaseResponse(true, "등록 성공");
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (IllegalStateException exception) {
+            // 다른 유저 데이터 수정 시도한 경우 또는 로그인, 문장수집 데이터 조회 오류
+            logger.info(exception.getMessage());
+
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (IOException | IllegalArgumentException exception) {
+            // 파일 업로드 중 오류 발생
+            logger.info(exception.getMessage());
+
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
 
         return responseEntity;

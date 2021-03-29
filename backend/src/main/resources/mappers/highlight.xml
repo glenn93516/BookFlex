@@ -62,4 +62,12 @@
         delete from highlight
         where highlight_id = #{highlightId}
     </delete>
+
+    <update id="updateOne" parameterType="HighlightDto">
+        update highlight h
+        set h.highlight_content = #{highlightContent}, h.highlight_page = #{highlightPage},
+            h.is_public = #{isPublic}, h.highlight_cover = #{highlightCover},
+            h.updated_date = now()
+        where highlight_id = #{highlightId}
+    </update>
 </mapper>

@@ -41,6 +41,16 @@ public class HighlightDto {
         return highlightDto;
     }
 
+    public void update(HighlightDto dto) {
+        this.highlightContent = dto.getHighlightContent();
+        this.highlightPage =  dto.getHighlightPage();
+        this.isPublic = dto.getIsPublic();
+
+        if (dto.getHighlightCover() != null) {
+            this.highlightCover = dto.getHighlightCover();
+        }
+    }
+
     public int getIsPublic() {
         return this.isPublic;
     }

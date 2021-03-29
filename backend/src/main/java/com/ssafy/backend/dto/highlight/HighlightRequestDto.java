@@ -17,12 +17,12 @@ public class HighlightRequestDto {
     private String highlightContent;
     @ApiModelProperty(value = "책 페이지")
     private int highlightPage;
-    @ApiModelProperty(value = "배경 이미지 파일")
-    private MultipartFile highlightCover;
     @ApiModelProperty(value = "문장수집 등록할 책 ISBN")
     private Long bookIsbn;
     @ApiModelProperty(value = "공개 여부 (1: 공개 / 0 : 비공개)")
     private int isPublic;
+    @ApiModelProperty(value = "배경 이미지 파일")
+    private MultipartFile highlightCover;
 
     public int getIsPublic() {
         return this.isPublic;

@@ -4,9 +4,11 @@ import com.ssafy.backend.dto.highlight.HighlightDetailDto;
 import com.ssafy.backend.dto.highlight.HighlightDto;
 import com.ssafy.backend.mapper.HighlightMapper;
 import com.ssafy.backend.mapper.UserBookMapper;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,4 +51,12 @@ public class HighlightService {
             throw new IllegalStateException("이미 삭제된 문장수집입니다");
         }
     }
+
+    @Transactional
+    public void updateOne(HighlightDto origin, HighlightDto newData) {
+        origin.update(newData);
+
+        highlightMapper.updateOne(origin);
+    }
+
 }
