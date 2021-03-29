@@ -110,14 +110,11 @@ public class UserController {
             BaseResponse response = responseService.getBaseResponse(true, "수정 성공");
 
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (UserNotFoundException exception) {
+        } catch (UserNotFoundException | IOException | IllegalArgumentException exception) {
             logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
 
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        } catch (IOException | IllegalArgumentException exception) {
-            logger.info(exception.getMessage());
-            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
         }
 
         return responseEntity;
