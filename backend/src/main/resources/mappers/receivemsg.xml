@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backend.mapper.ReceivemsgMapper">
+
+    <select id="selectReceivemsgList" resultType="ReceivemsgDto">
+        SELECT receivemsg_id receivemsgId, receivemsg_title receivemsgTitle, receivemsg_content receivemsgContent, receivemsg_date receivemsgDate, sender_id senderId, receiver_id receiverId
+        FROM receivemsg
+        WHERE receiver_id = #{receiverId}
+    </select>
+
+    <select id="selectReceivemsg" resultType="ReceivemsgDto">
+        SELECT receivemsg_id receivemsgId, receivemsg_title receivemsgTitle, receivemsg_content receivemsgContent, receivemsg_date receivemsgDate, sender_id senderId, receiver_id receiverId
+        FROM receivemsg
+        WHERE receivemsg_id = #{receivemsgId}
+    </select>
+
+    <insert id="insertReceivemsg" parameterType="ReceivemsgDto">
+        INSERT INTO receivemsg (receivemsg_title, receivemsg_content, receivemsg_date, sender_id, receiver_id)
+        VALUES (#{receivemsgTitle}, #{receivemsgContent}, now(), #{senderId}, #{receiverId})
+    </insert>
+
+    <delete id="deleteReceivemsg">
+        DELETE FROM receivemsg
+        WHERE receivemsg_id = #{receivemsgId}
+    </delete>
+
+</mapper>
