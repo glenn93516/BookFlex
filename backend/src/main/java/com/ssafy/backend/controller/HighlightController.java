@@ -4,6 +4,7 @@ import com.ssafy.backend.dto.UserDto;
 import com.ssafy.backend.dto.highlight.HighlightDto;
 import com.ssafy.backend.dto.highlight.HighlightRequestDto;
 import com.ssafy.backend.dto.response.BaseResponse;
+import com.ssafy.backend.dto.response.ListDataResponse;
 import com.ssafy.backend.exception.UserNotFoundException;
 import com.ssafy.backend.service.HighlightService;
 import com.ssafy.backend.service.ResponseService;
@@ -19,15 +20,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -66,6 +65,31 @@ public class HighlightController {
             BaseResponse response = responseService.getBaseResponse(true, "등록 성공");
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (IOException | IllegalArgumentException | IllegalStateException exception) {
+            logger.info(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+
+        return responseEntity;
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "유저가 작성한 문장 수집 조회")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping
+    public ResponseEntity getUserHighlights(@ApiIgnore final Authentication authentication) {
+        ResponseEntity responseEntity = null;
+        try {
+            Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
+
+            // 작성한 문장수집 조회
+            List<HighlightDto> highlights = highlightService.findAllByUserId(userId);
+
+            ListDataResponse<HighlightDto> response = responseService.getListDataResponse(true, "조회 성공", highlights);
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception exception) {
             logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);

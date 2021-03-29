@@ -8,4 +8,13 @@
         INSERT INTO highlight (highlight_content, highlight_page, highlight_cover, book_isbn, user_id, is_public)
         VALUES (#{highlightContent}, #{highlightPage}, #{highlightCover}, #{bookIsbn}, #{userId}, #{isPublic})
     </insert>
+
+    <select id="findAllByUserId" resultType="HighlightDto">
+        SELECT highlight_id highlightId, highlight_content highlightContent,
+               highlight_page highlightPage, highlight_cover highlightCover,
+               book_isbn bookIsbn, user_id userId, created_date createdDate,
+               updated_date updatedDate, is_public isPublic
+        FROM highlight
+        WHERE user_id = #{userId}
+    </select>
 </mapper>
