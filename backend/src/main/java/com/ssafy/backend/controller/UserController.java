@@ -2,11 +2,14 @@ package com.ssafy.backend.controller;
 
 import com.ssafy.backend.dto.LoginDto;
 import com.ssafy.backend.dto.UserDto;
+import com.ssafy.backend.dto.highlight.HighlightDto;
 import com.ssafy.backend.dto.response.BaseResponse;
+import com.ssafy.backend.dto.response.ListDataResponse;
 import com.ssafy.backend.dto.response.SingleDataResponse;
 import com.ssafy.backend.exception.DuplicatedUsernameException;
 import com.ssafy.backend.exception.LoginFailedException;
 import com.ssafy.backend.exception.UserNotFoundException;
+import com.ssafy.backend.service.HighlightService;
 import com.ssafy.backend.service.ResponseService;
 import com.ssafy.backend.service.UserService;
 import com.ssafy.backend.utils.Uploader;
@@ -28,6 +31,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,6 +39,7 @@ import java.time.ZoneId;
 public class UserController {
 
     private final UserService userService;
+    private final HighlightService highlightService;
     private final ResponseService responseService;
     private final Uploader uploader;
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -211,6 +216,30 @@ public class UserController {
 
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
         }
+        return responseEntity;
+    }
+
+    /**
+     * 유저가 작성한 문장수집 목록 조회
+     */
+    @ApiOperation(value = "유저가 작성한 문장 수집 조회")
+    @GetMapping("/{userId}/highlight")
+    public ResponseEntity getUserHighlights(@ApiParam(value = "조회할 유저 아이디(PK)", required = true) @PathVariable Long userId) {
+        ResponseEntity responseEntity = null;
+        try {
+            UserDto user = userService.findByUserId(userId);
+
+            // 작성한 문장수집 조회
+            List<HighlightDto> highlights = highlightService.findAllByUserId(user.getUserId());
+
+            ListDataResponse<HighlightDto> response = responseService.getListDataResponse(true, "조회 성공", highlights);
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception exception) {
+            logger.info(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+
         return responseEntity;
     }
 }

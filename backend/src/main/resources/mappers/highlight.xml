@@ -38,6 +38,7 @@
                updated_date updatedDate, is_public isPublic
         FROM highlight
         WHERE user_id = #{userId}
+        ORDER BY created_date DESC
     </select>
 
     <select id="findByHighlightId" resultMap="HighlightDetailDto">
