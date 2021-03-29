@@ -9,6 +9,7 @@
         @click="goToMain"
       >
         <img
+          @click="goToBookShelf()"
           id="title-logo" 
           src="@/assets/hansam.png" 
           alt="book logo" 
@@ -16,16 +17,15 @@
         >
       </b-navbar-brand>
       <div>
-        <span class="temp-menu">
+        <router-link to="/main" class="temp-menu">
           RECOMMEND
-          <!-- <div class="temp-hightlight"></div> -->
-        </span>
-        <span class="temp-menu">
+        </router-link>
+        <router-link to="/" class="temp-menu">
           COMMUNITY
-        </span>
-        <span class="temp-menu">
+        </router-link>
+        <router-link to="/profile" class="temp-menu">
           MYPLACE
-        </span>
+        </router-link>
       </div>
       <b-navbar-nav>
         <!-- 검색 -->
@@ -138,6 +138,9 @@ export default {
     }
   },
   methods: {
+    goToBookShelf() {
+      this.$router.push({ path:"/main" })
+    },
     tempOverImg() {
       this.postBox = this.openPostBox
       console.log(this.postBox)
@@ -269,10 +272,10 @@ export default {
   }
 
   .temp-menu {
-    background: linear-gradient(to right, rgba(255, 255, 255, 0) 50%, rgba(255, 204, 0, 0.3) 50%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 50%, rgb(255, 240, 178) 50%);
     background-size: 200%;
     transition: .35s;
-    /* color: red; */
+    color: black;
     
     position: relative;
     font-size: 18px;
@@ -281,10 +284,15 @@ export default {
     margin-left: 20px; 
     font-family: Candara,Calibri,Segoe,Segoe UI,Optima,Arial,sans-serif;
   }
+  .router-link-exact-active {
+    font-weight: bold;
+    background-color: rgb(255, 240, 178)
+  }
   .temp-menu:hover {
     background-position: -100% 0;
     cursor: pointer;
     font-weight: bold;
+    color: black;
   }
   .temp {
     display: flex;
