@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Delete;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -110,6 +111,38 @@ public class HighlightController {
             HighlightDetailDto highlightDetail = highlightService.findByHighlightId(highlightId);
 
             SingleDataResponse<HighlightDetailDto> response = responseService.getSingleDataResponse(true, "조회 성공", highlightDetail);
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception exception) {
+            logger.info(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+
+        return responseEntity;
+    }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "유저가 작성한 문장 수집 삭제")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @DeleteMapping("/{highlightId}")
+    public ResponseEntity deleteUserHighlights(@ApiIgnore final Authentication authentication, @PathVariable Long highlightId) {
+        ResponseEntity responseEntity = null;
+        try {
+            Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
+
+            // 작성한 문장수집 조회
+            HighlightDto highlight = highlightService.findOneByHighlightId(highlightId);
+
+            // 삭제 요청한 문장수집과 로그인한 유저가 같아야 삭제 가능
+            if (!userId.equals(highlight.getUserId())) {
+                throw new IllegalStateException("작성자만 삭제할 수 있습니다");
+            }
+
+            highlightService.deleteOne(highlightId);
+
+            BaseResponse response = responseService.getBaseResponse(true, "삭제 성공");
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception exception) {
             logger.info(exception.getMessage());

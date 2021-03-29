@@ -35,4 +35,18 @@ public class HighlightService {
         return highlightMapper.findByHighlightId(highlightId)
                 .orElseThrow(() -> new IllegalStateException("잘못된 문장수집 id 입니다"));
     }
+
+    public HighlightDto findOneByHighlightId(Long highlightId) {
+        return highlightMapper.findOneByHighlightId(highlightId)
+                .orElseThrow(() -> new IllegalStateException("잘못된 문장수집 id 입니다"));
+    }
+
+    @Transactional
+    public void deleteOne(Long highlightId) {
+        int result = highlightMapper.deleteOne(highlightId);
+
+        if (result == 0) {
+            throw new IllegalStateException("이미 삭제된 문장수집입니다");
+        }
+    }
 }

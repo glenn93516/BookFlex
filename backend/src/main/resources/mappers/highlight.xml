@@ -48,4 +48,18 @@
             join user u on u.user_id = h.user_id
         where highlight_id = #{highlightId}
     </select>
+
+    <select id="findOneByHighlightId" resultType="HighlightDto">
+        select highlight_id highlightId, highlight_content highlightContent,
+               highlight_page highlightPage, highlight_cover highlightCover,
+               book_isbn bookIsbn, user_id userId, created_date createdDate,
+               updated_date updatedDate, is_public isPublic
+        from highlight
+        where highlight_id = #{highlightId}
+    </select>
+
+    <delete id="deleteOne">
+        delete from highlight
+        where highlight_id = #{highlightId}
+    </delete>
 </mapper>
