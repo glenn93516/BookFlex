@@ -4,6 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.backend.mapper.HighlightMapper">
+
+    <resultMap id="UserDto" type="UserDto">
+        <result column="user_id" property="userId" />
+        <result column="user_email" property="userEmail" />
+        <result column="user_nickname" property="userNickname" />
+        <result column="user_job" property="userJob" />
+        <result column="user_profile_img" property="userProfileImg" />
+        <result column="user_birth" property="userBirth" />
+    </resultMap>
+
+    <resultMap id="HighlightDetailDto" type="HighlightDetailDto">
+        <result column="highlight_id" property="highlightId" />
+        <result column="highlight_content" property="highlightContent" />
+        <result column="highlight_page" property="highlightPage" />
+        <result column="highlight_cover" property="highlightCover" />
+        <result column="book_isbn" property="bookIsbn" />
+        <result column="created_date" property="createdDate" />
+        <result column="updated_date" property="updatedDate" />
+        <result column="is_public" property="isPublic" />
+        <collection property="user" resultMap="UserDto" />
+    </resultMap>
+
     <insert id="save" parameterType="HighlightDto">
         INSERT INTO highlight (highlight_content, highlight_page, highlight_cover, book_isbn, user_id, is_public)
         VALUES (#{highlightContent}, #{highlightPage}, #{highlightCover}, #{bookIsbn}, #{userId}, #{isPublic})
@@ -16,5 +38,14 @@
                updated_date updatedDate, is_public isPublic
         FROM highlight
         WHERE user_id = #{userId}
+    </select>
+
+    <select id="findByHighlightId" resultMap="HighlightDetailDto">
+        select
+            h.highlight_id, h.highlight_content, h.highlight_page, h.highlight_cover, h.book_isbn, h.created_date, h.updated_date, h.is_public,
+            u.user_id, u.user_email, u.user_nickname, u.user_job, u.user_profile_img, u.user_birth
+        from highlight h
+            join user u on u.user_id = h.user_id
+        where highlight_id = #{highlightId}
     </select>
 </mapper>

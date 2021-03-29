@@ -1,10 +1,12 @@
 package com.ssafy.backend.controller;
 
 import com.ssafy.backend.dto.UserDto;
+import com.ssafy.backend.dto.highlight.HighlightDetailDto;
 import com.ssafy.backend.dto.highlight.HighlightDto;
 import com.ssafy.backend.dto.highlight.HighlightRequestDto;
 import com.ssafy.backend.dto.response.BaseResponse;
 import com.ssafy.backend.dto.response.ListDataResponse;
+import com.ssafy.backend.dto.response.SingleDataResponse;
 import com.ssafy.backend.exception.UserNotFoundException;
 import com.ssafy.backend.service.HighlightService;
 import com.ssafy.backend.service.ResponseService;
@@ -88,6 +90,26 @@ public class HighlightController {
             List<HighlightDto> highlights = highlightService.findAllByUserId(userId);
 
             ListDataResponse<HighlightDto> response = responseService.getListDataResponse(true, "조회 성공", highlights);
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception exception) {
+            logger.info(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+
+        return responseEntity;
+    }
+
+
+    @ApiOperation(value = "문장 수집 상세 정보조회")
+    @GetMapping("/{highlightId}")
+    public ResponseEntity getUserHighlights(@PathVariable Long highlightId) {
+        ResponseEntity responseEntity = null;
+        try {
+            // 문장수집 상세정보 조회
+            HighlightDetailDto highlightDetail = highlightService.findByHighlightId(highlightId);
+
+            SingleDataResponse<HighlightDetailDto> response = responseService.getSingleDataResponse(true, "조회 성공", highlightDetail);
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception exception) {
             logger.info(exception.getMessage());
