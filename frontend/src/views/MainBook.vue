@@ -20,7 +20,8 @@
           <!-- 클릭할때 객체를 스토어에 저장 commit -->
           <Book 
             v-for="(book, idx) in suitRecommend" 
-            :key="idx" class="book" 
+            :key="idx" 
+            class="book-component" 
             :book="book" 
             @click="selectBook(book)"
             @open-Modal="openModal"
@@ -28,7 +29,6 @@
         </div>
         <Book-shelf />
       </div>
-      
       <div
         id="second-shelf-tag"
         class="tag"
@@ -47,7 +47,8 @@
         <div class="d-flex justify-content-around books">
           <Book 
             v-for="(book, idx) in genreRecommend" 
-            :key="idx" class="book" 
+            :key="idx" 
+            class="book-component" 
             :book="book" 
             @click="selectBook(book)"
             @open-Modal="openModal"
@@ -73,7 +74,8 @@
         <div class="d-flex justify-content-around books">
           <Book 
             v-for="(book, idx) in wishRecommend" 
-            :key="idx" class="book" 
+            :key="idx" 
+            class="book-component" 
             :book="book" 
             @click="selectBook(book)"
             @open-Modal="openModal"
@@ -225,5 +227,9 @@ export default {
     border: 0px;
     color: rgb(0, 0, 0);
     align-items: left;
+  }
+  .book-component {
+    /* width: 150px;
+    height: 200px; */
   }
 </style>

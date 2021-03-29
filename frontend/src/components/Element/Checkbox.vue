@@ -47,7 +47,7 @@ export default {
     },
     serveData() {
       console.log('this.option', this.option)
-      this.$emit("serveData", this.option)
+      this.$emit("serve-data", this.option)
     }
   }
 }
@@ -84,5 +84,6 @@ export default {
   }
   .realLabel {
     margin-left: 5px;
+    font-size: 17px;
   }
 </style>

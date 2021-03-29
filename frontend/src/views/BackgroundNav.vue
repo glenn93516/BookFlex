@@ -200,7 +200,7 @@ export default {
     justify-content: space-around;
     padding-top: 0;
     padding-bottom: 0;
-    z-index: 10;
+    z-index: 1000;
     /* 그림자 효과 */
     box-shadow: 0px 5px 10px -10px gray;
   }
