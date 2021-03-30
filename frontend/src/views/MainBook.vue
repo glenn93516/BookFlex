@@ -36,6 +36,7 @@
             :book="book" 
             @click="selectBook(book)"
             @open-modal="openModal"
+            @delete-readBook="deleteReadBook"
           ></Book>
         </div>
         <Book-shelf />
@@ -63,6 +64,7 @@
             :book="book" 
             @click="selectBook(book)"
             @open-modal="openModal"
+            @delete-readBook="deleteReadBook"
           ></Book>
         </div>
         <Book-shelf />
@@ -90,6 +92,7 @@
             :book="book" 
             @click="selectBook(book)"
             @open-modal="openModal"
+            @delete-readBook="deleteReadBook"
           ></Book>
         </div>
         <Book-shelf />
@@ -185,6 +188,14 @@ export default {
       this.step = 'collectSentence'
       this.isModalViewed = true
       console.log('열어')
+    },
+    deleteReadBook(isbn) {
+      console.log(isbn)
+      // 읽은 책 목록 삭제하기
+      // 1. 위시리스트 기반 추천이 완료되면 data 분리(현재 유저기반 공유중)
+      // 2. 각 추천별 id 부여 => props로 전달
+      // 3. 삭제요청 보낼때 props가 가진 번호별로 data 를 선택하고 isbn과 일치여부 판별
+      // 4. 해당 data리스트에서 책 삭제하기
     },
     goToReaction() {
       console.log('되나?')

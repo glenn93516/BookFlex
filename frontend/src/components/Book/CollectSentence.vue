@@ -31,6 +31,11 @@
         drop-placeholder="Drop file here..."
       ></b-form-file>
       <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
+      
+
+
+
+      <button @click="collectSentence">문장 담기</button>
 
     </div>
   </div>
@@ -52,6 +57,9 @@ export default {
   created() {
   }, 
   methods: {
+    collectSentence() {
+      
+    }
   },
 }
 </script>

@@ -4,7 +4,7 @@
     <li>
       <figure class='book'>        
         <!-- Front -->        
-        <ul class='hardcover_front'>
+        <ul class='hardcover_front book-ul'>
           <li>
             <img :src="book.book_cover" alt="" width="100%" height="100%">
             <!-- <span class="ribbon bestseller">Nº1</span> -->
@@ -12,23 +12,33 @@
           <li></li>
         </ul>        
         <!-- Pages -->        
-        <ul class='page'>
+        <ul class='page book-ul'>
           <li></li>
           <li>
-            <a 
-							class="btn" 
+						<a 
+							class="btn book-btn book-moreInf" 
 							@click="goToBookDetail"
 							style="margin-right: 5px;" 
 							href="#"
 						>
 							더보기
 						</a>
-						<a 
-							class="btn readcheck" 
+						<br>
+            <a 
+							class="btn book-btn book-readcheck" 
 							@click="goToCollect"
+							style="margin-right: 5px;" 
 							href="#"
 						>
 							읽음
+						</a>
+						<br>
+						<a 
+							class="btn book-btn book-wishlist" 
+							@click="addToWish"
+							href="#"
+						>
+							위시리스트
 						</a>
           </li>
           <li></li>
@@ -36,11 +46,11 @@
           <li></li>
         </ul>        
         <!-- Back -->        
-        <ul class='hardcover_back'>
+        <ul class='hardcover_back book-ul'>
           <li></li>
           <li></li>
         </ul>
-        <ul class='book_spine'>
+        <ul class='book_spine book-ul'>
           <li></li>
           <li></li>
         </ul>
@@ -58,11 +68,52 @@ export default {
   },
   methods: {
 		goToCollect() {			
+			// 읽음 api 요청 보내기(일단 연결 x)
+			this.checkReadStatus()
+
 			// 문장수집으로 이동
 			this.$emit('open-modal', this.book)
 		},
+		checkReadStatus() {
+			const token = localStorage.getItem('jwt')
+			if (token) {
+				this.$axios.post(`${this.$store.getters.getServer}/bookshelf`, {
+					token,
+				},
+				{
+					"bookIsbn": this.book.book_isbn,
+					"userId": this.$store.getters.getUser.userId
+				})
+				.then(res => {
+					alert('읽기 목록에 담겼습니다 :)')
+					console.log(res)
+					// 읽은 책은 추천 목록에서 삭제 => 부모로 신호보내서 데이터 삭제하기
+					this.$emit('delete-readBook', this.book.book_isbn)
+				})
+				.catch(err => {
+					console.error(err)
+				})
+			} else {
+				alert('로그인 후 이용하세요!')
+			}
+		},
 		goToBookDetail() {
 
+		},
+		addToWish() {
+			const token = localStorage.getItem('jwt')
+			if (token) {
+				this.$axios.post(`${this.$store.getters.getServer}/wishlist/${this.book.book_isbn}`, {token})
+				.then(res => {
+					console.log(res)
+					alert('위시리스트에 담겼습니다 :)')
+				})
+				.catch(err => {
+					console.error(err)
+				})
+			} else {
+				alert('로그인 후 이용하세요!')
+			}
 		}
   }
 }
@@ -71,8 +122,16 @@ export default {
 <style>
 /* @import "compass/css3"; */
 
-.readcheck {
-	background-color: rgb(255, 247, 130);
+.book-moreInf {
+	background-color: rgba(26, 163, 255, 0.56);
+}
+
+.book-readcheck {
+	background-color: rgba(255, 204, 0, 0.56);
+}
+
+.book-wishlist {
+	background-color: rgba(255, 0, 0, 0.34);
 }
 
 /*
@@ -108,7 +167,7 @@ body {
 	line-height: 1.2;
 }
 
-ul {
+.book-ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -119,23 +178,27 @@ a {
 	text-decoration: none;
 } */
 
-.btn {
+.book-btn {
 	display: inline-block;
 	text-transform: uppercase;
 	border: 2px solid #2c3e50;
-	margin-top: 100px; 
+	border-radius: 20px;
+	margin-top: 30px; 
 	font-size: 1rem;
 	font-weight: 700;
 	padding: 0.1em 0.4em;
 	text-align: center;
+	width: 100px;
+	height: 30px;
 	-webkit-transition: color 0.3s, border-color 0.3s;
 	-moz-transition: color 0.3s, border-color 0.3s;
 	transition: color 0.3s, border-color 0.3s;
 }
 
-.btn:hover {
-	border-color: #16a085;
-	color: #16a085;
+.book-btn:hover {
+	background-color: rgba(116, 94, 81, 0.7);
+	color: white;
+	border-color: white;
 }
 
 /* basic grid, only for this demo */
