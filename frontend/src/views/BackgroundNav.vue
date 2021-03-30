@@ -26,7 +26,7 @@
         <router-link :to="{name: 'Login'}" class="temp-menu">
           COMMUNITY
         </router-link>
-        <router-link :to="{name: 'PreferenceGenre'}" class="temp-menu" exact>
+        <router-link :to="{name: 'Profile'}" class="temp-menu">
           MYPLACE
         </router-link>
       </div>
@@ -249,11 +249,12 @@ export default {
   }
   .dropdown-menu {
     min-width: 100px;
+    background-color: #5c463d;
   }
   .dropdown-menu .dropdown-menu-right .show > li {
     display: flex;
     justify-items: center;
-    /* background-color: #3D1605; */
+    background-color: #3D1605;
     margin: 0;
   }
   .dropdown-menu .dropdown-menu-right .show > li > a:hover {
@@ -263,7 +264,6 @@ export default {
     text-align: center;
     /* background-color: #3D1605; */
     color: rgba(255, 255, 255, 0.9);
-    
   }
   .list-hr {
     margin-left: 15px;
