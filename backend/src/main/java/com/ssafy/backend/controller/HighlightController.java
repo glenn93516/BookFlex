@@ -133,11 +133,41 @@ public class HighlightController {
             logger.info(exception.getMessage());
             
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
-            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
         return responseEntity;
     }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token.", required = false, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "좋아요 누르기 or 취소", notes = "로그인 한 유저만 가능")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/{highlightId}/good")
+    public ResponseEntity pressGood(@ApiIgnore final Authentication authentication,
+                                            @ApiParam(value = "조회할 문장수집 아이디(PK)", required = true) @PathVariable Long highlightId) {
+        ResponseEntity responseEntity = null;
+        try {
+            Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
+            // 로그인한 유저가 좋아요 눌렀는지 확인
+            boolean userGood = highlightService.checkUserGoodByHighlightIdAndUserId(highlightId, userId);
+
+            highlightService.pressGood(highlightId, userId, userGood);
+
+            BaseResponse response = responseService.getBaseResponse(true, "좋아요 or 취소 성공");
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception exception) {
+            // 문장수집 id 틀린 경우
+            logger.info(exception.getMessage());
+
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        return responseEntity;
+    }
+
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")

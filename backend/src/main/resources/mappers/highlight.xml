@@ -89,4 +89,13 @@
             h.updated_date = now()
         where highlight_id = #{highlightId}
     </update>
+
+    <insert id="pressGood">
+        insert into good (user_id, highlight_id) VALUES (#{userId}, #{highlightId})
+    </insert>
+
+    <delete id="cancelGood">
+        delete from good where highlight_id = #{highlightId} and user_id = #{userId}
+    </delete>
+
 </mapper>

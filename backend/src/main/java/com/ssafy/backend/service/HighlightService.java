@@ -71,4 +71,15 @@ public class HighlightService {
     public boolean checkUserGoodByHighlightIdAndUserId(Long highlightId, Long userId) {
         return highlightMapper.checkUserGoodByHighlightIdAndUserId(highlightId, userId);
     }
+
+    @Transactional
+    public void pressGood(Long highlightId, Long userId, boolean userGood) {
+        if (userGood) {
+            // 이미 좋아요 누른 경우 좋아요 취소
+            highlightMapper.cancelGood(highlightId, userId);
+        } else {
+            // 아직 좋아요 안누른 경우 좋아요
+            highlightMapper.pressGood(highlightId, userId);
+        }
+    }
 }

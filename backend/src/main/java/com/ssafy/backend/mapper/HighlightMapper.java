@@ -20,4 +20,6 @@ public interface HighlightMapper {
     List<HighlightDto> findAllOnlyPublic();
     int findGoodCountByHighlightId(Long highlightId);
     boolean checkUserGoodByHighlightIdAndUserId(@Param("highlightId") Long highlightId, @Param("userId") Long userId);
+    void pressGood(@Param("highlightId") Long highlightId, @Param("userId") Long userId);
+    void cancelGood(@Param("highlightId") Long highlightId, @Param("userId") Long userId);
 }
