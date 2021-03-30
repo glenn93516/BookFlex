@@ -1,7 +1,7 @@
 <template>
   <div>
     <p 
-      class="noticeMessage"
+      class="notice-message"
     >
       가입하실 이메일 주소를 입력해주세요.
     </p>
@@ -28,7 +28,7 @@
       </div>
       <br>
       <b-button
-        class="btn btn-success btn-block next-btn"
+        class="btn btn-success btn-block next-btn-submit"
         type="submit"
         :disabled="disableBtn"
       >
@@ -124,8 +124,8 @@ export default {
     color: rgb(108, 160, 29);
     margin-top: 20px;
   }
-  .next-btn{
-    margin-top: 20px;
+  .next-btn-submit{
+    margin-top: 40px;
   }
   .form-control:focus{
     border-color: none;

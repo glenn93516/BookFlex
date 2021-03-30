@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>성별을 선택해주세요</h4>
+    <h4 class="gender-subtitle">성별을 선택해주세요</h4>
 
     <b-form-group 
       class="gender-form"
@@ -66,6 +66,9 @@ export default {
 </script>
 
 <style>
+  .gender-subtitle {
+    margin-top: 5px;
+  }
   .gender-form {
     margin-top: 20px; 
     margin-bottom: 20px;
@@ -79,6 +82,6 @@ export default {
     justify-content: space-around;
   }
   .gender-btn {
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
 </style>

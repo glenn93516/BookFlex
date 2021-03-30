@@ -32,7 +32,7 @@
       </a>
     </div>
       <b-btn 
-        class="btn-success btn-block next-btn"
+        class="btn-success btn-block next-btn-check"
         :disabled="btnDisabled" 
         @click="goToInputName" 
       >
@@ -61,7 +61,7 @@ export default {
       mailNum: "",
       // 사용자가 입력한 번호
       inputNum: "",
-      btnDisabled: false,
+      btnDisabled: true,
       polling: "",
       inputAutofocus: false,
     }
@@ -72,9 +72,7 @@ export default {
   methods: {
     // 이메일 전송하기
     sendEmail() {
-      this.btnDisabled = false
       const userEmail = this.$store.state.signupInfo.userEmail
-      console.log(userEmail)
       this.$axios.post(`${this.$store.getters.getServer}/email/mail`, 
         {},
         {
@@ -133,9 +131,6 @@ export default {
       this.mailNum = ""
       this.sendEmail()
     },
-    beforeDestroy() {
-      clearInterval(this.polling)
-    },
     goToInputName() {
       if (this.inputNum === this.mailNum) {
         alert('인증되었습니다.')
@@ -147,8 +142,10 @@ export default {
       }
       // 조건에 따라(axios요청 결과 일치여부확인, 불일치시 alert 띄우기)
     }
-  }
-
+  },
+  beforeDestroy() {
+    clearInterval(this.polling)
+  },
 }
 </script>
 
@@ -161,8 +158,8 @@ export default {
     color: rgb(108, 160, 29);
     margin-top: 20px;
   }
-  .next-btn {
-    margin-top: 2rem;
+  .next-btn-check {
+    margin-top: 2.1rem;
   }
   #timer {
     margin: 2rem;
