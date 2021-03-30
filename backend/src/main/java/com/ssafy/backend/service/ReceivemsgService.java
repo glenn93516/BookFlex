@@ -33,7 +33,8 @@ public class ReceivemsgService {
 
     @Transactional
     public ReceivemsgDto selectReceivemsg(Long receivemsgId) throws Exception {
-        receivemsgMapper.updateReceivemsg(receivemsgId); // 읽음 표시
+        // 읽음 표시
+        receivemsgMapper.updateReceivemsg(receivemsgId);
 
         ReceivemsgDto receivemsgDto = receivemsgMapper.selectReceivemsg(receivemsgId);
 

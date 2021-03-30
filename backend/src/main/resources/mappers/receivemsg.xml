@@ -19,12 +19,12 @@
 
     <insert id="insertReceivemsg" parameterType="ReceivemsgDto">
         INSERT INTO receivemsg (receivemsg_title, receivemsg_content, receivemsg_date, receivemsg_read, sender_id, receiver_id)
-        VALUES (#{receivemsgTitle}, #{receivemsgContent}, 0, now(), #{senderId}, #{receiverId})
+        VALUES (#{receivemsgTitle}, #{receivemsgContent}, now(), false, #{senderId}, #{receiverId})
     </insert>
 
     <update id="updateReceivemsg" parameterType="ReceivemsgDto">
         UPDATE receivemsg
-        SET receivemsg_read = 1
+        SET receivemsg_read = true
         WHERE receivemsg_id = #{receivemsgId}
     </update>
 

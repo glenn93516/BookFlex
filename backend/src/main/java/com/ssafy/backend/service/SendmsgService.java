@@ -36,6 +36,7 @@ public class SendmsgService {
 
     @Transactional
     public SendmsgDto selectSendmsg(Long sendmsgId) throws Exception {
+        // 읽음 표시
         SendmsgDto sendmsgDto = sendmsgMapper.selectSendmsg(sendmsgId);
 
         UserDto findUser = userMapper.findUserByUserId(sendmsgDto.getReceiverId())
