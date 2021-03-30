@@ -12,6 +12,7 @@ import com.ssafy.backend.exception.UserNotFoundException;
 import com.ssafy.backend.service.HighlightService;
 import com.ssafy.backend.service.ResponseService;
 import com.ssafy.backend.service.UserService;
+import com.ssafy.backend.utils.JwtTokenProvider;
 import com.ssafy.backend.utils.Uploader;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -25,11 +26,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -40,6 +42,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+    private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
     private final HighlightService highlightService;
     private final ResponseService responseService;
@@ -70,6 +73,12 @@ public class UserController {
         ResponseEntity responseEntity = null;
         try {
             String token = userService.login(loginDto);
+
+            if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
+                Authentication authentication = jwtTokenProvider.getAuthentication(token);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                logger.info("{} 로그인 정보를 저장했습니다", loginDto.getUserEmail());
+            }
 
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.add("Authorization", "Bearer " + token);
