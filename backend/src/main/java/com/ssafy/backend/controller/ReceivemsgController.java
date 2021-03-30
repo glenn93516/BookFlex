@@ -75,7 +75,7 @@ public class ReceivemsgController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @ApiOperation(value = "수신 메세지 상세조회")
+    @ApiOperation(value = "수신 메세지 삭제")
     @DeleteMapping("/{receivemsgId}")
     public ResponseEntity deleteReceivemsg(@ApiParam(value = "수신메세지 아이디", required = true)
                                            @PathVariable Long receivemsgId) {
