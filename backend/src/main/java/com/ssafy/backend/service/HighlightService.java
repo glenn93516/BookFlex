@@ -82,4 +82,8 @@ public class HighlightService {
             highlightMapper.pressGood(highlightId, userId);
         }
     }
+
+    public List<HighlightDto> findAllByUserIdOnlyGood(Long userId) {
+        return highlightMapper.findAllByUserIdOnlyGood(userId);
+    }
 }

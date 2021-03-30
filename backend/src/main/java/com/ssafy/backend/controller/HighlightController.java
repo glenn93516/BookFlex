@@ -146,7 +146,7 @@ public class HighlightController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/{highlightId}/good")
     public ResponseEntity pressGood(@ApiIgnore final Authentication authentication,
-                                            @ApiParam(value = "조회할 문장수집 아이디(PK)", required = true) @PathVariable Long highlightId) {
+                                            @ApiParam(value = "좋아요 누를 문장수집 아이디(PK)", required = true) @PathVariable Long highlightId) {
         ResponseEntity responseEntity = null;
         try {
             Long userId = ((UserDto) authentication.getPrincipal()).getUserId();

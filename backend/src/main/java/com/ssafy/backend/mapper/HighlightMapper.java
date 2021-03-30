@@ -22,4 +22,5 @@ public interface HighlightMapper {
     boolean checkUserGoodByHighlightIdAndUserId(@Param("highlightId") Long highlightId, @Param("userId") Long userId);
     void pressGood(@Param("highlightId") Long highlightId, @Param("userId") Long userId);
     void cancelGood(@Param("highlightId") Long highlightId, @Param("userId") Long userId);
+    List<HighlightDto> findAllByUserIdOnlyGood(Long userId);
 }

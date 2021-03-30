@@ -29,8 +29,10 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -224,13 +226,20 @@ public class UserController {
      */
     @ApiOperation(value = "유저가 작성한 문장 수집 조회")
     @GetMapping("/{userId}/highlight")
-    public ResponseEntity getUserHighlights(@ApiParam(value = "조회할 유저 아이디(PK)", required = true) @PathVariable Long userId) {
+    public ResponseEntity getUserHighlights(@ApiParam(value = "조회할 유저 아이디(PK)", required = true) @PathVariable Long userId,
+                                            @ApiParam(value = "좋아요만 누를지 여부", required = false) @RequestParam(required = true, defaultValue = "false") Boolean onlyGood) {
         ResponseEntity responseEntity = null;
         try {
             UserDto user = userService.findByUserId(userId);
 
+            System.out.println(onlyGood);
             // 작성한 문장수집 조회
-            List<HighlightDto> highlights = highlightService.findAllByUserId(user.getUserId());
+            List<HighlightDto> highlights = new ArrayList<>();
+            if (onlyGood) {
+                highlights = highlightService.findAllByUserIdOnlyGood(user.getUserId());
+            } else {
+                highlights = highlightService.findAllByUserId(user.getUserId());
+            }
 
             ListDataResponse<HighlightDto> response = responseService.getListDataResponse(true, "조회 성공", highlights);
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
