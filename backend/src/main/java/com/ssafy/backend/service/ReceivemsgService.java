@@ -21,6 +21,7 @@ public class ReceivemsgService {
 
     @Transactional
     public ReceivemsgDto selectReceivemsg(Long receivemsgId) throws Exception {
+        receivemsgMapper.updateReceivemsg(receivemsgId);
         return receivemsgMapper.selectReceivemsg(receivemsgId);
     }
 

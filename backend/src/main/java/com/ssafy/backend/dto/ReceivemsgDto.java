@@ -19,6 +19,8 @@ public class ReceivemsgDto {
     private String receivemsgContent;
     @ApiModelProperty(value = "작성일")
     private String receivemsgDate;
+    @ApiModelProperty(value = "읽음 여부")
+    private String receivemsgRead;
     @ApiModelProperty(value = "발신 유저 ID")
     private Long senderId;
     @ApiModelProperty(value = "수신 유저 ID")

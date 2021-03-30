@@ -95,22 +95,4 @@ public class ReceivemsgController {
 
         return  responseEntity;
     }
-
-//    @PreAuthorize("hasRole('ROLE_USER')")
-//    @ApiOperation(value = "수신 메세지 확인")
-//    public ResponseEntity selectReceivemsgList(@ApiIgnore final Authentication authentication) {
-//        ResponseEntity responseEntity = null;
-//
-//        try {
-//
-//            responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
-//        } catch (Exception exception) {
-//            logger.debug(exception.getMessage());
-//
-//            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
-//            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-//        }
-//
-//        return  responseEntity;
-//    }
 }

@@ -6,21 +6,27 @@
 <mapper namespace="com.ssafy.backend.mapper.ReceivemsgMapper">
 
     <select id="selectReceivemsgList" resultType="ReceivemsgDto">
-        SELECT receivemsg_id receivemsgId, receivemsg_title receivemsgTitle, receivemsg_content receivemsgContent, receivemsg_date receivemsgDate, sender_id senderId, receiver_id receiverId
+        SELECT receivemsg_id receivemsgId, receivemsg_title receivemsgTitle, receivemsg_content receivemsgContent, receivemsg_date receivemsgDate, receivemsg_read receivemsgRead , sender_id senderId, receiver_id receiverId
         FROM receivemsg
         WHERE receiver_id = #{receiverId}
     </select>
 
     <select id="selectReceivemsg" resultType="ReceivemsgDto">
-        SELECT receivemsg_id receivemsgId, receivemsg_title receivemsgTitle, receivemsg_content receivemsgContent, receivemsg_date receivemsgDate, sender_id senderId, receiver_id receiverId
+        SELECT receivemsg_id receivemsgId, receivemsg_title receivemsgTitle, receivemsg_content receivemsgContent, receivemsg_date receivemsgDate, receivemsg_read receivemsgRead, sender_id senderId, receiver_id receiverId
         FROM receivemsg
         WHERE receivemsg_id = #{receivemsgId}
     </select>
 
     <insert id="insertReceivemsg" parameterType="ReceivemsgDto">
-        INSERT INTO receivemsg (receivemsg_title, receivemsg_content, receivemsg_date, sender_id, receiver_id)
-        VALUES (#{receivemsgTitle}, #{receivemsgContent}, now(), #{senderId}, #{receiverId})
+        INSERT INTO receivemsg (receivemsg_title, receivemsg_content, receivemsg_date, receivemsg_read, sender_id, receiver_id)
+        VALUES (#{receivemsgTitle}, #{receivemsgContent}, 0, now(), #{senderId}, #{receiverId})
     </insert>
+
+    <update id="updateReceivemsg" parameterType="ReceivemsgDto">
+        UPDATE receivemsg
+        SET receivemsg_read = 1
+        WHERE receivemsg_id = #{receivemsgId}
+    </update>
 
     <delete id="deleteReceivemsg">
         DELETE FROM receivemsg
