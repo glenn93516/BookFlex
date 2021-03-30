@@ -23,4 +23,6 @@ public class SendmsgDto {
     private Long senderId;
     @ApiModelProperty(value = "수신 유저 ID")
     private Long receiverId;
+    @ApiModelProperty(value = "수신 유저 닉네임")
+    private String receiverNickname;
 }

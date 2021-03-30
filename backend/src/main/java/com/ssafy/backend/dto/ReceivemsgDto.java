@@ -23,6 +23,8 @@ public class ReceivemsgDto {
     private String receivemsgRead;
     @ApiModelProperty(value = "발신 유저 ID")
     private Long senderId;
+    @ApiModelProperty(value = "발신 유저 닉네임")
+    private String senderNickname;
     @ApiModelProperty(value = "수신 유저 ID")
     private Long receiverId;
 
