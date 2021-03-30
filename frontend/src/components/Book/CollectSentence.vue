@@ -32,9 +32,6 @@
       ></b-form-file>
       <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
 
-
-
-
     </div>
   </div>
 </template>
@@ -43,23 +40,18 @@
 export default {
   props: {
     mode: Number,
+    book: Object,
   },
   components: {
   },
   data() {
     return {
-      book: "",
-      brand: 'Honda',
       file: null,
     }
   },
   created() {
-    this.getSelectedBook()
   }, 
   methods: {
-    getSelectedBook() {
-      this.book = this.$store.getters.getSelectedBook
-    }
   },
 }
 </script>
