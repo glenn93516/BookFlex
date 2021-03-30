@@ -131,9 +131,6 @@ export default {
       this.mailNum = ""
       this.sendEmail()
     },
-    beforeDestroy() {
-      clearInterval(this.polling)
-    },
     goToInputName() {
       if (this.inputNum === this.mailNum) {
         alert('인증되었습니다.')
@@ -145,8 +142,10 @@ export default {
       }
       // 조건에 따라(axios요청 결과 일치여부확인, 불일치시 alert 띄우기)
     }
-  }
-
+  },
+  beforeDestroy() {
+    clearInterval(this.polling)
+  },
 }
 </script>
 
