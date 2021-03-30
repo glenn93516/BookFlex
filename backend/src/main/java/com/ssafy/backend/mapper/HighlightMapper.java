@@ -18,4 +18,6 @@ public interface HighlightMapper {
     int deleteOne(@Param("highlightId") Long highlightId);
     void updateOne(HighlightDto origin);
     List<HighlightDto> findAllOnlyPublic();
+    int findGoodCountByHighlightId(Long highlightId);
+    boolean checkUserGoodByHighlightIdAndUserId(@Param("highlightId") Long highlightId, @Param("userId") Long userId);
 }

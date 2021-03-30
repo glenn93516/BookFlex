@@ -69,6 +69,14 @@
         ORDER BY updated_date DESC
     </select>
 
+    <select id="findGoodCountByHighlightId" resultType="int">
+        select count(*) from good where highlight_id = #{highlightId}
+    </select>
+
+    <select id="checkUserGoodByHighlightIdAndUserId" resultType="boolean">
+        select count(*) from good where user_id = #{userId} and highlight_id = #{highlightId}
+    </select>
+
     <delete id="deleteOne">
         delete from highlight
         where highlight_id = #{highlightId}

@@ -22,7 +22,8 @@ import springfox.documentation.annotations.ApiIgnore;
 @RequiredArgsConstructor
 @RequestMapping("/recommend")
 public class RecommendController {
-    private final String BASE_FLASK_URL = "https://j4f004.p.ssafy.io/ml/api/recommend";
+//    private final String BASE_FLASK_URL = "https://j4f004.p.ssafy.io/ml/api/recommend";
+    private final String BASE_FLASK_URL = "http://localhost:5000/ml/api/recommend";
     private final ResponseService responseService;
     private final Logger logger = LoggerFactory.getLogger(RecommendController.class);
 

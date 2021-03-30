@@ -30,8 +30,16 @@ public class HighlightDetailDto {
     private String updatedDate;
     @ApiModelProperty(value = "공개 여부 (1: 공개 / 0 : 비공개)")
     private int isPublic;
+    @ApiModelProperty(value = "좋아요 개수")
+    private int goodCount;
+    @ApiModelProperty(value = "해당 유저가 좋아요 눌렀는지 여부 (로그인 안한 경우 false)")
+    private boolean userGood;
 
     public int getIsPublic() {
         return this.isPublic;
+    }
+
+    public boolean getUserGood() {
+        return this.userGood;
     }
 }

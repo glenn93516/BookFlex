@@ -14,6 +14,7 @@ import com.ssafy.backend.utils.Uploader;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +48,7 @@ public class HighlightController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     public ResponseEntity writeHighlight(@ApiIgnore final Authentication authentication,
-                                         HighlightRequestDto highlightRequestDto) {
+                                         @ApiParam(value = "등록할 문장수집 데이터", required = true) HighlightRequestDto highlightRequestDto) {
         ResponseEntity responseEntity = null;
         try {
             Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
@@ -102,13 +103,28 @@ public class HighlightController {
     }
 
 
-    @ApiOperation(value = "문장 수집 상세 정보조회")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token. 로그인 안한 경우 안 넣어도 됨", required = false, dataType = "String", paramType = "header")
+    })
+    @ApiOperation(value = "문장 수집 상세 정보조회", notes = "좋아요 개수, 유저가 좋아요 눌렀는지 여부 포함")
     @GetMapping("/{highlightId}")
-    public ResponseEntity getUserHighlights(@PathVariable Long highlightId) {
+    public ResponseEntity getUserHighlights(@ApiIgnore final Authentication authentication,
+                                            @ApiParam(value = "조회할 문장수집 아이디(PK)", required = true) @PathVariable Long highlightId) {
         ResponseEntity responseEntity = null;
         try {
             // 문장수집 상세정보 조회
             HighlightDetailDto highlightDetail = highlightService.findByHighlightId(highlightId);
+
+            if (authentication != null) {
+                Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
+                // 로그인한 유저가 좋아요 눌렀는지 확인
+                boolean userGood = highlightService.checkUserGoodByHighlightIdAndUserId(highlightId, userId);
+
+                highlightDetail.setUserGood(userGood);
+            } else {
+                // 로그인 안한 경우 좋아요 안누른 것으로 체크
+                highlightDetail.setUserGood(false);
+            }
 
             SingleDataResponse<HighlightDetailDto> response = responseService.getSingleDataResponse(true, "조회 성공", highlightDetail);
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
@@ -129,7 +145,8 @@ public class HighlightController {
     @ApiOperation(value = "유저가 작성한 문장 수집 삭제")
     @PreAuthorize("hasRole('ROLE_USER')")
     @DeleteMapping("/{highlightId}")
-    public ResponseEntity deleteUserHighlights(@ApiIgnore final Authentication authentication, @PathVariable Long highlightId) {
+    public ResponseEntity deleteUserHighlights(@ApiIgnore final Authentication authentication,
+                                               @ApiParam(value = "삭제할 문장수집 아이디(PK)", required = true) @PathVariable Long highlightId) {
         ResponseEntity responseEntity = null;
         try {
             Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
@@ -164,8 +181,8 @@ public class HighlightController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("/{highlightId}")
     public ResponseEntity modifyUserHighlights(@ApiIgnore final Authentication authentication,
-                                               @PathVariable Long highlightId,
-                                               HighlightRequestDto highlightRequestDto) {
+                                               @ApiParam(value = "수정할 문장수집 아이디(PK)", required = true) @PathVariable Long highlightId,
+                                               @ApiParam(value = "수정할 문장수집 데이터", required = true) HighlightRequestDto highlightRequestDto) {
         ResponseEntity responseEntity = null;
         try {
             Long userId = ((UserDto) authentication.getPrincipal()).getUserId();

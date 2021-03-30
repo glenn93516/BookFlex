@@ -34,8 +34,13 @@ public class HighlightService {
     }
 
     public HighlightDetailDto findByHighlightId(Long highlightId) {
-        return highlightMapper.findByHighlightId(highlightId)
+        HighlightDetailDto highlight = highlightMapper.findByHighlightId(highlightId)
                 .orElseThrow(() -> new IllegalStateException("잘못된 문장수집 id 입니다"));
+
+        int goodCount = highlightMapper.findGoodCountByHighlightId(highlightId);
+        highlight.setGoodCount(goodCount);
+
+        return highlight;
     }
 
     public HighlightDto findOneByHighlightId(Long highlightId) {
@@ -61,5 +66,9 @@ public class HighlightService {
 
     public List<HighlightDto> findAllOnlyPublic() {
         return highlightMapper.findAllOnlyPublic();
+    }
+
+    public boolean checkUserGoodByHighlightIdAndUserId(Long highlightId, Long userId) {
+        return highlightMapper.checkUserGoodByHighlightIdAndUserId(highlightId, userId);
     }
 }
