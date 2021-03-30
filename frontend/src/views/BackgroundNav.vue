@@ -109,7 +109,7 @@
         @mouseover="postBox = openPostBox"
       /> -->
 
-      <!-- <div>여기는 우체통</div> -->
+      <!-- 여기는 우체통 -->
       <img
         class="postbox"
         width="120px"
@@ -153,13 +153,14 @@ export default {
       this.checkInput = true
     },
     checkLogin() {
-      const token = this.$store.getters.getAccessToken
+      const token = localStorage.getItem('jwt')
       if (token) {
         this.isLogin = true
       }
     },
     Logout() {
       this.$store.dispatch('Logout')
+      localStorage.removeItem('jwt')
       this.isLogin = false
     },
     goToMain() {
@@ -177,6 +178,9 @@ export default {
       this.checkLogin()
     }
   },
+  created() {
+    this.checkLogin()
+  }
 }
 </script>
 
@@ -200,7 +204,7 @@ export default {
     justify-content: space-around;
     padding-top: 0;
     padding-bottom: 0;
-    z-index: 10;
+    z-index: 1000;
     /* 그림자 효과 */
     box-shadow: 0px 5px 10px -10px gray;
   }

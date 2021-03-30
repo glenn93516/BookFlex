@@ -14,13 +14,13 @@ export default new Vuex.Store({
       userEmail: "",
       userPassword: "",
       userNickname: "",
-      // userGenres: [],
+      genres: [],
     },
     user: {
       userEmail: "",
       userNickname: "",
       userPassword: "",
-      // userGenres: [],
+      genres: [],
       userProfileImg: "",
       userProfileImgFile: "", // file ?
       userBirth: "",
@@ -62,7 +62,7 @@ export default new Vuex.Store({
       state.user.userEmail = payload.userEmail
       state.user.userNickname = payload.userNickname
       state.user.userProfileImg = payload.userProfileImg
-      // state.user.userGenres = payload.userGenres
+      state.user.genres = payload.genres
       state.user.userBirth = payload.userBirth
       state.user.userGender = payload.userGender
       state.user.userJob = payload.userJob
@@ -94,6 +94,12 @@ export default new Vuex.Store({
       state.user.userGender = payload.userGender
       state.user.userJob = payload.userJob
     },
+    SubmitPref(state, payload) {
+      state.signupInfo.genres = payload
+      state.user.genres = payload
+      console.log(payload)
+      console.log(state.user.genres)
+    },
     Logout(state) {
       state.accessToken = ""
     },
@@ -117,6 +123,7 @@ export default new Vuex.Store({
           }
           localStorage.setItem('jwt', `Bearer ${res.data.data}`)
           context.commit("Login", res.data.data)
+          console.log(`Bearer ${res.data.data}`)
         })
         .catch(err => {
           console.log(err)
