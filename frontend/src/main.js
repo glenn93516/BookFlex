@@ -9,11 +9,13 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '../public/reset.css'
 
-import vueSmoothScroll from 'vue2-smooth-scroll'
+// import 'fulllpage.js/vendors/scrolloverflow' // Optional. When using scrollOverflow: true
+// import './fullpage.scrollHorizontally.min' // Optional. When using fullpage extensions
+import VueFullPage from 'vue-fullpage.js'
 
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
-Vue.use(vueSmoothScroll)
+Vue.use(VueFullPage)
 
 Vue.config.productionTip = false
 Vue.prototype.$axios=axios

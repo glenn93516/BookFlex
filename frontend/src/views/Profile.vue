@@ -322,7 +322,7 @@ export default {
     font-weight: bold;
     cursor: pointer;
   }
-  .router-link-exact-active {
+  .profile-nav-item.router-link-exact-active {
     color: black;
     font-weight: bold;
     border-top: 2px black solid;
