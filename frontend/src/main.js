@@ -10,10 +10,22 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '../public/reset.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { faTimesCircle as fasTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { faTimesCircle as farTimesCircle } from '@fortawesome/free-regular-svg-icons'
+import { faEdit as fasEdit } from '@fortawesome/free-solid-svg-icons'
+import { faEdit as farEdit } from '@fortawesome/free-regular-svg-icons'
+import { faTrashAlt as fasTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt as farTrashAlt } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faUserSecret)
+library.add(
+  fasTimesCircle,
+  farTimesCircle,
+  fasEdit,
+  farEdit,
+  fasTrashAlt,
+  farTrashAlt,
+)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

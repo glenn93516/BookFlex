@@ -4,10 +4,11 @@
       style="
         display: flex;
         justify-content: flex-end;
+        font-size: 15px;
       "
     >
-      <img width="25px" @click="closeModal()" v-show="!hoverClose" @mouseover="hoverClose = true" src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMnB0IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjUxMnB0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0yNTYgNTEyYy0xNDEuMTYwMTU2IDAtMjU2LTExNC44Mzk4NDQtMjU2LTI1NnMxMTQuODM5ODQ0LTI1NiAyNTYtMjU2IDI1NiAxMTQuODM5ODQ0IDI1NiAyNTYtMTE0LjgzOTg0NCAyNTYtMjU2IDI1NnptMC00NzUuNDI5Njg4Yy0xMjAuOTkyMTg4IDAtMjE5LjQyOTY4OCA5OC40Mzc1LTIxOS40Mjk2ODggMjE5LjQyOTY4OHM5OC40Mzc1IDIxOS40Mjk2ODggMjE5LjQyOTY4OCAyMTkuNDI5Njg4IDIxOS40Mjk2ODgtOTguNDM3NSAyMTkuNDI5Njg4LTIxOS40Mjk2ODgtOTguNDM3NS0yMTkuNDI5Njg4LTIxOS40Mjk2ODgtMjE5LjQyOTY4OHptMCAwIi8+PHBhdGggZD0ibTM0Ny40Mjk2ODggMzY1LjcxNDg0NGMtNC42Nzk2ODggMC05LjM1OTM3Ni0xLjc4NTE1Ni0xMi45Mjk2ODgtNS4zNTkzNzVsLTE4Mi44NTU0NjktMTgyLjg1NTQ2OWMtNy4xNDQ1MzEtNy4xNDQ1MzEtNy4xNDQ1MzEtMTguNzE0ODQ0IDAtMjUuODU1NDY5IDcuMTQwNjI1LTcuMTQwNjI1IDE4LjcxNDg0NC03LjE0NDUzMSAyNS44NTU0NjkgMGwxODIuODU1NDY5IDE4Mi44NTU0NjljNy4xNDQ1MzEgNy4xNDQ1MzEgNy4xNDQ1MzEgMTguNzE0ODQ0IDAgMjUuODU1NDY5LTMuNTcwMzEzIDMuNTc0MjE5LTguMjQ2MDk0IDUuMzU5Mzc1LTEyLjkyNTc4MSA1LjM1OTM3NXptMCAwIi8+PHBhdGggZD0ibTE2NC41NzAzMTIgMzY1LjcxNDg0NGMtNC42Nzk2ODcgMC05LjM1NTQ2OC0xLjc4NTE1Ni0xMi45MjU3ODEtNS4zNTkzNzUtNy4xNDQ1MzEtNy4xNDA2MjUtNy4xNDQ1MzEtMTguNzE0ODQ0IDAtMjUuODU1NDY5bDE4Mi44NTU0NjktMTgyLjg1NTQ2OWM3LjE0NDUzMS03LjE0NDUzMSAxOC43MTQ4NDQtNy4xNDQ1MzEgMjUuODU1NDY5IDAgNy4xNDA2MjUgNy4xNDA2MjUgNy4xNDQ1MzEgMTguNzE0ODQ0IDAgMjUuODU1NDY5bC0xODIuODU1NDY5IDE4Mi44NTU0NjljLTMuNTcwMzEyIDMuNTc0MjE5LTguMjUgNS4zNTkzNzUtMTIuOTI5Njg4IDUuMzU5Mzc1em0wIDAiLz48L3N2Zz4=" />
-      <img width="25px" @click="closeModal()" class="mouse-pointer" v-show="hoverClose" @mouseleave="hoverClose = false" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik0yNTcsMEMxMTYuMzksMCwwLDExNC4zOSwwLDI1NXMxMTYuMzksMjU3LDI1NywyNTdzMjU1LTExNi4zOSwyNTUtMjU3UzM5Ny42MSwwLDI1NywweiBNMzgzLjIyLDMzOC43OQ0KCQkJYzExLjcsMTEuNywxMS43LDMwLjczLDAsNDIuNDRjLTExLjYxLDExLjYtMzAuNjQsMTEuNzktNDIuNDQsMEwyNTcsMjk3LjQybC04NS43OSw4My44MmMtMTEuNywxMS43LTMwLjczLDExLjctNDIuNDQsMA0KCQkJYy0xMS43LTExLjctMTEuNy0zMC43MywwLTQyLjQ0bDgzLjgtODMuOGwtODMuOC04My44Yy0xMS43LTExLjcxLTExLjctMzAuNzQsMC00Mi40NGMxMS43MS0xMS43LDMwLjc0LTExLjcsNDIuNDQsMEwyNTcsMjEyLjU4DQoJCQlsODMuNzgtODMuODJjMTEuNjgtMTEuNjgsMzAuNzEtMTEuNzIsNDIuNDQsMGMxMS43LDExLjcsMTEuNywzMC43MywwLDQyLjQ0bC04My44LDgzLjhMMzgzLjIyLDMzOC43OXoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==" />
+      <font-awesome-icon @click="closeModal()" size="2x" class="mouse-pointer text-secondary" v-show="hoverClose" @mouseleave="hoverClose = false" :icon="['fas', 'times-circle']" :style="{color: '#FF0000'}" />
+      <font-awesome-icon @click="closeModal()" class="text-secondary" v-show="!hoverClose" @mouseover="hoverClose = true" size="2x" :icon="['far', 'times-circle']" :style="{color: '#FF0000'}" />
     </header>
     <div>
       <img 
@@ -44,9 +45,11 @@
         <div class="like-num">{{likeNum}}</div>
       </div>
       <!-- 여기는 하트랑 아이콘이 들어갈 자리 -->
-      <div class="footer-icon">
-        <img width="30px" class="mouse-pointer" @mouseover="editSrc = hoverEdit" @mouseleave="editSrc = noHoverEdit" :src="editSrc" />
-        <img width="30px" class="mouse-pointer" @mouseover="deleteSrc = hoverDel" @mouseleave="deleteSrc = noHoverDel" :src="deleteSrc" />
+      <div class="footer-icon" style="font-size: 15px;">
+        <font-awesome-icon @click="closeModal()" class="text-primary" v-show="!hoverClose" @mouseover="hoverClose = true" size="2x" :icon="['far', 'edit']" :style="{color: '#FF0000'}" />
+        <font-awesome-icon @click="closeModal()" size="2x" class="text-primary mouse-pointer" v-show="hoverClose" @mouseleave="hoverClose = false" :icon="['fas', 'edit']" :style="{color: '#FF0000'}" />
+        <font-awesome-icon @click="closeModal()" class="text-danger" v-show="!hoverClose" @mouseover="hoverClose = true" size="2x" :icon="['far', 'trash-alt']" :style="{color: '#FF0000'}" />
+        <font-awesome-icon @click="closeModal()" size="2x" class="mouse-pointer text-danger" v-show="hoverClose" @mouseleave="hoverClose = false" :icon="['fas', 'trash-alt']" :style="{color: '#FF0000'}" />
       </div>
     </footer>
   </div>
