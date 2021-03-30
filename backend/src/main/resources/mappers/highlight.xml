@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backend.mapper.HighlightMapper">
+
+    <resultMap id="UserDto" type="UserDto">
+        <result column="user_id" property="userId" />
+        <result column="user_email" property="userEmail" />
+        <result column="user_nickname" property="userNickname" />
+        <result column="user_job" property="userJob" />
+        <result column="user_profile_img" property="userProfileImg" />
+        <result column="user_birth" property="userBirth" />
+    </resultMap>
+
+    <resultMap id="HighlightDetailDto" type="HighlightDetailDto">
+        <result column="highlight_id" property="highlightId" />
+        <result column="highlight_content" property="highlightContent" />
+        <result column="highlight_page" property="highlightPage" />
+        <result column="highlight_cover" property="highlightCover" />
+        <result column="book_isbn" property="bookIsbn" />
+        <result column="created_date" property="createdDate" />
+        <result column="updated_date" property="updatedDate" />
+        <result column="is_public" property="isPublic" />
+        <collection property="user" resultMap="UserDto" />
+    </resultMap>
+
+    <insert id="save" parameterType="HighlightDto">
+        INSERT INTO highlight (highlight_content, highlight_page, highlight_cover, book_isbn, user_id, is_public)
+        VALUES (#{highlightContent}, #{highlightPage}, #{highlightCover}, #{bookIsbn}, #{userId}, #{isPublic})
+    </insert>
+
+    <select id="findAllByUserId" resultType="HighlightDto">
+        SELECT highlight_id highlightId, highlight_content highlightContent,
+               highlight_page highlightPage, highlight_cover highlightCover,
+               book_isbn bookIsbn, user_id userId, created_date createdDate,
+               updated_date updatedDate, is_public isPublic
+        FROM highlight
+        WHERE user_id = #{userId}
+        ORDER BY created_date DESC
+    </select>
+
+    <select id="findAllByUserIdOnlyGood" resultType="HighlightDto">
+        SELECT highlight_id highlightId, highlight_content highlightContent,
+               highlight_page highlightPage, highlight_cover highlightCover,
+               book_isbn bookIsbn, user_id userId, created_date createdDate,
+               updated_date updatedDate, is_public isPublic
+        FROM highlight
+        WHERE user_id = #{userId} AND highlight_id IN (select highlight_id from good where user_id=#{userId})
+        ORDER BY created_date DESC
+    </select>
+
+    <select id="findByHighlightId" resultMap="HighlightDetailDto">
+        select
+            h.highlight_id, h.highlight_content, h.highlight_page, h.highlight_cover, h.book_isbn, h.created_date, h.updated_date, h.is_public,
+            u.user_id, u.user_email, u.user_nickname, u.user_job, u.user_profile_img, u.user_birth
+        from highlight h
+            join user u on u.user_id = h.user_id
+        where highlight_id = #{highlightId}
+    </select>
+
+    <select id="findOneByHighlightId" resultType="HighlightDto">
+        select highlight_id highlightId, highlight_content highlightContent,
+               highlight_page highlightPage, highlight_cover highlightCover,
+               book_isbn bookIsbn, user_id userId, created_date createdDate,
+               updated_date updatedDate, is_public isPublic
+        from highlight
+        where highlight_id = #{highlightId}
+    </select>
+
+    <select id="findAllOnlyPublic" resultType="HighlightDto">
+        select highlight_id highlightId, highlight_content highlightContent,
+               highlight_page highlightPage, highlight_cover highlightCover,
+               book_isbn bookIsbn, user_id userId, created_date createdDate,
+               updated_date updatedDate, is_public isPublic
+        from highlight
+        where is_public = 1
+        ORDER BY updated_date DESC
+    </select>
+
+    <select id="findGoodCountByHighlightId" resultType="int">
+        select count(*) from good where highlight_id = #{highlightId}
+    </select>
+
+    <select id="checkUserGoodByHighlightIdAndUserId" resultType="boolean">
+        select count(*) from good where user_id = #{userId} and highlight_id = #{highlightId}
+    </select>
+
+    <delete id="deleteOne">
+        delete from highlight
+        where highlight_id = #{highlightId}
+    </delete>
+
+    <update id="updateOne" parameterType="HighlightDto">
+        update highlight h
+        set h.highlight_content = #{highlightContent}, h.highlight_page = #{highlightPage},
+            h.is_public = #{isPublic}, h.highlight_cover = #{highlightCover},
+            h.updated_date = now()
+        where highlight_id = #{highlightId}
+    </update>
+
+    <insert id="pressGood">
+        insert into good (user_id, highlight_id) VALUES (#{userId}, #{highlightId})
+    </insert>
+
+    <delete id="cancelGood">
+        delete from good where highlight_id = #{highlightId} and user_id = #{userId}
+    </delete>
+
+</mapper>
