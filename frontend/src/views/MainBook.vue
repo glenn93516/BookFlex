@@ -19,7 +19,7 @@
         <div class="d-flex justify-content-around books">
           <!-- 클릭할때 객체를 스토어에 저장 commit -->
           <Book 
-            v-for="(book, idx) in suitRecommend" 
+            v-for="(book, idx) in suitRecommend.slice(0, 4)" 
             :key="idx" 
             class="book-component" 
             :book="book" 
@@ -37,7 +37,7 @@
         <div 
           class="tag-name"
         >
-          스릴러
+          {{ userGenre }}
         </div>
       </div>
       <div 
@@ -46,7 +46,7 @@
       >
         <div class="d-flex justify-content-around books">
           <Book 
-            v-for="(book, idx) in genreRecommend" 
+            v-for="(book, idx) in genreRecommend.slice(0, 4)" 
             :key="idx" 
             class="book-component" 
             :book="book" 
@@ -73,7 +73,7 @@
       >
         <div class="d-flex justify-content-around books">
           <Book 
-            v-for="(book, idx) in wishRecommend" 
+            v-for="(book, idx) in suitRecommend.slice(5, 9)" 
             :key="idx" 
             class="book-component" 
             :book="book" 
@@ -121,40 +121,46 @@ export default {
   },
   data() {
     return {
-      suitRecommend: {},
-      genreRecommend: {},
-      wishRecommend: {},
-      bookDataList: {},
+      suitRecommend: [],
+      genreRecommend: [],
+      userGenre: "",
+      wishRecommend: [],
       isModalViewed: false,
       selectedBook: "",
       step: "",
     }
   },
   mounted() {
-    this.getBookData()
+    this.loadBookData()
   },
   methods: {
     // 책을 로드하는 함수
     loadBookData() {
-      const token = this.$store.getters.getAccessToken
-      if (token != undefined) {
-        this.getBookData()
+      const token = localStorage.getItem('jwt')
+      console.log(token)
+      if (token) {
+        this.$axios.get(`${this.$store.getters.getServer}/recommend`, {token})
+        .then(res => {
+          this.suitRecommend = res.data.data.customized_by_user
+          this.genreRecommend = res.data.data.customized_by_genre.customized_books
+          this.userGenre = res.data.data.customized_by_genre.genre.genre_name
+          console.log(this.userGenre)
+        })
+        .catch(err => {
+          console.error(err)
+        })
       } else {
-        this.getBookData()
+        this.$axios.get(`${this.$store.getters.getServer}/recommend`)
+        .then(res => {
+          console.log(res)
+          this.suitRecommend = res.data.data.customized_by_user
+          this.genreRecommend = res.data.data.customized_by_genre.customized_books
+          this.userGenre = res.data.data.customized_by_genre.genre.genre_name
+        })
+        .catch(err => {
+          console.error(err)
+        })
       }
-    },
-    // 로그인 되어 있지않을 때 일반적인 책 정보를 가져올 axios 함수(검색에서도 쓰임)
-    getBookData() {
-      this.$axios.get(`${this.$store.getters.getServer}/book`)
-      .then(res => {
-        this.bookDataList = res.data.data
-        this.suitRecommend = this.bookDataList.slice(0, 4)
-        this.genreRecommend = this.bookDataList.slice(4, 8)
-        this.wishRecommend = this.bookDataList.slice(8, 12)
-      })
-    },
-    getRcmdBook() {
-      // 추천 알고리즘 완성시 api 연결
     },
     closeModal() {
       this.isModalViewed = false
@@ -228,8 +234,8 @@ export default {
     color: rgb(0, 0, 0);
     align-items: left;
   }
-  .book-component {
+  /* .book-component { */
     /* width: 150px;
     height: 200px; */
-  }
+  /* } */
 </style>

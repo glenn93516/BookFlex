@@ -89,8 +89,8 @@ export default {
 
 <style>
   .job-subtitle {
-    margin-top: -5px; 
-    margin-bottom: 18px
+    margin-top: 5px; 
+    margin-bottom: 10px
   }
   .custom-control {
     display: inline-block;
@@ -99,6 +99,6 @@ export default {
     margin-bottom: 25px;
   }
   .job-btn {
-    margin-top: -11px;
+    margin-top: -17px;
   }
 </style>
