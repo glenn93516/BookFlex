@@ -1,5 +1,19 @@
 @charset "utf-8";
 
+@font-face {
+  font-family: 'NanumBarunpen';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face { 
+  font-family: 'S-CoreDream-2ExtraLight'; 
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); 
+  font-weight: normal; 
+  font-style: normal; 
+}
+
 body,
 h1, h2, h3, h4, h5, h6,
 ul, ol, dl, dd, li, hr, 

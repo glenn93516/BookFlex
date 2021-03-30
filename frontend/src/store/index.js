@@ -29,7 +29,8 @@ export default new Vuex.Store({
       // 입력 X
       userId: Number,
       userRole: "",
-    }
+    },
+    selectedBook: "",
   },
   getters: {
     getServer(state) {
@@ -46,6 +47,10 @@ export default new Vuex.Store({
     },
     getSignupInfo(state) {
       return state.signupInfo
+    },
+    getSelectedBook(state) {
+      console.log('이거 되는겨?1')
+      return state.selectedBook
     }
   },
   mutations: {
@@ -91,6 +96,10 @@ export default new Vuex.Store({
     },
     Logout(state) {
       state.accessToken = ""
+    },
+    SelectBook(state, payload) {
+      console.log('이거 되는겨?2')
+      state.selectedBook = payload
     }
   },
   actions: {

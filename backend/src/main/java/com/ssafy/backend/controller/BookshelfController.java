@@ -74,7 +74,7 @@ public class BookshelfController {
 
             responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         } catch (Exception exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
 
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
@@ -92,12 +92,15 @@ public class BookshelfController {
                                          @ApiParam(value = "읽음 정보", required = true) @RequestBody UserBookDto userBookDto){
         ResponseEntity responseEntity = null;
         try {
+            Long userId = ((UserDto) authentication.getPrincipal()).getUserId();
+            userBookDto.setUserId(userId);
+
             bookshelfService.insertUserBook(userBookDto);
             BaseResponse response = responseService.getBaseResponse(true, "읽음 생성 성공");
 
             responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         } catch (Exception exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
 
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
@@ -119,7 +122,7 @@ public class BookshelfController {
 
             responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         } catch (Exception exception) {
-            logger.debug(exception.getMessage());
+            logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
 
             responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);

@@ -6,15 +6,20 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path:'/',
+    name: 'MainPage',
+    component: () => import('../views/Main.vue')
+  },
+  {
     path: '/',
-    name: 'Main',
+    name: 'Background',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/BackgroundNav.vue'),
     children: [
       {
-        path:'/',
+        path:'/main',
         name: 'MainBook',
         component: () => import('../views/MainBook.vue')
       },
