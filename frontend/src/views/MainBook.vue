@@ -1,5 +1,5 @@
 <template>
-  <div class="recommend-back">
+  <div class="recommend-back font-coredream">
 
     <!-- 페이지 로딩 -->
     <div v-show="isLoading" id="page-loading">
@@ -245,7 +245,7 @@ export default {
     background-color: rgba(161, 114, 70, 0);
     display: inline-block;
     font-size: 1.7rem;
-    font-weight: 500;
+    font-weight: bold;
     padding: 10px;
     margin-left: 0px;
     /* box-shadow: 1px 1px 2px rgb(150, 150, 150); */
@@ -253,6 +253,7 @@ export default {
     border: 0px;
     color: rgb(0, 0, 0);
     align-items: left;
+    /* background-color: #fb4242b0; */
   }
 
   /* 페이지 로딩 css */

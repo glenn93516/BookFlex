@@ -1,22 +1,15 @@
 <template>
   <div style="color: black;">
     <p 
-      class="noticeMessage" 
-      style="margin-top: 20px;"
+      class="notice-message font-coredream" 
     >
       {{ timeMin }}분 이내에 발급받은 인증 번호를 입력해주세요.
     </p>
     <div>
-      <h1 id="timer" class="text-center">{{ resTimeData }}</h1>
+      <h1 id="timer" class="text-center font-nanumpen">{{ resTimeData }}</h1>
       <b-form-input
         v-model="inputNum"
-        class="number-input"
-        style="border: 0;
-        border-bottom: 1px solid;
-        border-radius: 0;
-        display: inline-block;
-        width=10%;
-        "
+        class="number-input font-nanumpen"
         @keydown.enter="goToInputName"
         placeholder="6자리 입력"
         :autofocus="inputAutofocus"
@@ -24,15 +17,15 @@
       </b-form-input>
       <a 
         href="#" 
-        class="my-1" 
-        style="display: block; font-size: 0.9rem;" 
+        class="resend-link font-coredream"
         @click="resend"
       >
         인증메일 재발송하기
       </a>
     </div>
       <b-btn 
-        class="btn-success btn-block next-btn-check"
+        block
+        class="btn-success next-btn-check font-nanumpen"
         :disabled="btnDisabled" 
         @click="goToInputName" 
       >
@@ -150,18 +143,30 @@ export default {
 </script>
 
 <style>
+  .number-input {
+    border: 0;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    display: inline-block;
+    width: 100%;
+  }
   .number-input[type="text"]:focus {
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
     outline: 0 none;
-  }
-  .noticeMessage {
-    color: rgb(108, 160, 29);
-    margin-top: 20px;
   }
   .next-btn-check {
     margin-top: 2.1rem;
   }
   #timer {
     margin: 2rem;
+    font-weight: bold;
+  }
+  .resend-link {
+    display: block;
+    font-size: 0.8rem;
+    margin: 10px 0 0 0;
+  }
+  .resend-link:hover {
+    text-decoration: none;
   }
 </style>
