@@ -139,33 +139,33 @@ export default {
 */
 *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
-* {
+/* * {
   margin: 0;
   padding: 0;
-}
+} */
 
 ::before,
 ::after {
 	content: "";
 }
 
-html,
+/* html,
 body {
 	height: 100%;
 	-webkit-font-smoothing: subpixel-antialiased;
-}
+} */
 
 html {
 	font-size: 100%;
 }
 
-body {
+/* body {
 	background: #ecf0f1;
 	color: #34495e;
 	font-family: 'Lato', 'Arial', sans-serif;
 	font-weight: 400;
 	line-height: 1.2;
-}
+} */
 
 .book-ul {
 	margin: 0;
