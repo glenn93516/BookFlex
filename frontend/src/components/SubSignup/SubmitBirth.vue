@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>생년월일을 입력해주세요</h4>
+    <h4 style="margin-top: 5px;">생년월일을 입력해주세요</h4>
 
     <b-form-datepicker 
       id="datepicker" 
@@ -52,6 +52,6 @@ export default {
     margin-bottom: 40px;
   }
   .birth-btn {
-    margin-top: 5.8rem;
+    margin-top: 6.6rem;
   }
 </style>

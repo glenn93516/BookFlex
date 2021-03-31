@@ -4,7 +4,7 @@
     <div id="profileHeader" class="profile-header">
       <!-- 프로필사진 -->
       <b-avatar 
-        src="https://placekitten.com/300/300" 
+        :src="userInfo.userProfileImg" 
         size="10rem"
         class="profile-left"
       >
@@ -14,7 +14,7 @@
         <div class="profile-title">
           <div class="profile-name-group">
             <h1 class="profile-name">
-              {{ profileName }}
+              {{ userInfo.userNickname }}
             </h1>
             <img width="40px" :src="medal.first" />
           </div>
@@ -135,6 +135,7 @@ export default {
         readBooks: false,
         wishList: false,
       },
+      userInfo: {},
     }
   },
   methods: {
@@ -153,6 +154,21 @@ export default {
       this.genreModalShow = true
       alert('장르 이모티콘 추가 작업 중입니다🛠')
     },
+  },
+  mounted() {
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      this.$axios.get(`${this.$store.getters.getServer}/user`, {token})
+      .then(res => {
+        this.userInfo = res.data.data
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    } else {
+      alert('로그인 해주세요!')
+      this.$router.push({ name: 'Login' })
+    }
   }
 }
 </script>
@@ -322,7 +338,7 @@ export default {
     font-weight: bold;
     cursor: pointer;
   }
-  .router-link-exact-active {
+  .profile-nav-item.router-link-exact-active {
     color: black;
     font-weight: bold;
     border-top: 2px black solid;

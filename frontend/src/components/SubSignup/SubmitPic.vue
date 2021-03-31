@@ -70,6 +70,6 @@ export default {
     margin-bottom: 10px;
   }
   .profileImg-btn {
-    margin-top: 5.3rem;
+    margin-top: 6.9rem;
   }
 </style>

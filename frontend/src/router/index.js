@@ -96,6 +96,7 @@ const routes = [
         path:'/profile',
         name: 'Profile',
         component: () => import('../views/Profile.vue'),
+        redirect: '/profile/genre',
         children: [
           {
             path: 'genre',
@@ -120,6 +121,11 @@ const routes = [
         ]
       },
     ]
+  },
+  {
+    path:'*',
+    name: 'NotFound',
+    component: () => import('../views/NotFound.vue')
   },
 ]
 

@@ -18,13 +18,14 @@ export default {
     z-index: 1;
   }
   .book-shelf-bot {
-    transform: skew(-45deg, 0);
-    -webkit-transform:skew(-45deg, 0);
-    margin-top: -30px;
-    background-color: rgb(112, 87, 76); 
-    border-radius: 10px; 
+    transform: skew(-55deg, 0);
+    -webkit-transform:skew(-65deg, 0);
+    margin-top: -20px;
+    background-color: rgb(133, 108, 97); 
+    border-radius: 50px; 
     height: 30px; 
     width: 1000px; 
     display: inline-block;
+    box-shadow: 3px 3px 3px rgb(61, 45, 45);
   }
 </style>
