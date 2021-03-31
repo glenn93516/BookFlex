@@ -1,14 +1,10 @@
 <template>
   <div>
-    <!-- <div class="book-cover btn book" @click="$emit('open-Modal', book)">
-      <img v-if="book" class="bookimg" :src="book.book_cover" :alt="book.book_title">
-    </div> -->
-
-    <!-- Book 1 -->
+		<!-- Book -->
     <li>
       <figure class='book'>        
         <!-- Front -->        
-        <ul class='hardcover_front'>
+        <ul class='hardcover_front book-ul'>
           <li>
             <img :src="book.book_cover" alt="" width="100%" height="100%">
             <!-- <span class="ribbon bestseller">Nº1</span> -->
@@ -16,29 +12,48 @@
           <li></li>
         </ul>        
         <!-- Pages -->        
-        <ul class='page'>
+        <ul class='page book-ul'>
           <li></li>
           <li>
-            <a class="btn" href="#">Download</a>
+						<a 
+							class="btn book-btn book-moreInf" 
+							@click="goToBookDetail"
+							style="margin-right: 5px;" 
+							href="#"
+						>
+							더보기
+						</a>
+						<br>
+            <a 
+							class="btn book-btn book-readcheck" 
+							@click="goToCollect"
+							style="margin-right: 5px;" 
+							href="#"
+						>
+							읽음
+						</a>
+						<br>
+						<a 
+							class="btn book-btn book-wishlist" 
+							@click="addToWish"
+							href="#"
+						>
+							위시리스트
+						</a>
           </li>
           <li></li>
           <li></li>
           <li></li>
         </ul>        
         <!-- Back -->        
-        <ul class='hardcover_back'>
+        <ul class='hardcover_back book-ul'>
           <li></li>
           <li></li>
         </ul>
-        <ul class='book_spine'>
+        <ul class='book_spine book-ul'>
           <li></li>
           <li></li>
         </ul>
-        <!-- <figcaption>
-          <h1>Responsive Web Design</h1>
-          <span>By Ethan Marcotte</span>
-          <p>From mobile browsers to netbooks and tablets, users are visiting your sites from an increasing array of devices and browsers. Are your designs ready?...</p>
-        </figcaption> -->
       </figure>
     </li>  
   </div> 
@@ -52,31 +67,72 @@ export default {
   mounted() {
   },
   methods: {
+		goToCollect() {			
+			// 읽음 api 요청 보내기(일단 연결 x)
+			this.checkReadStatus()
+
+			// 문장수집으로 이동
+			this.$emit('open-modal', this.book)
+		},
+		checkReadStatus() {
+			const token = localStorage.getItem('jwt')
+			if (token) {
+				this.$axios.post(`${this.$store.getters.getServer}/bookshelf`, {
+					token,
+				},
+				{
+					"bookIsbn": this.book.book_isbn,
+					"userId": this.$store.getters.getUser.userId
+				})
+				.then(res => {
+					alert('읽기 목록에 담겼습니다 :)')
+					console.log(res)
+					// 읽은 책은 추천 목록에서 삭제 => 부모로 신호보내서 데이터 삭제하기
+					this.$emit('delete-readBook', this.book.book_isbn)
+				})
+				.catch(err => {
+					console.error(err)
+				})
+			} else {
+				alert('로그인 후 이용하세요!')
+			}
+		},
+		goToBookDetail() {
+
+		},
+		addToWish() {
+			const token = localStorage.getItem('jwt')
+			if (token) {
+				this.$axios.post(`${this.$store.getters.getServer}/wishlist/${this.book.book_isbn}`, {token})
+				.then(res => {
+					console.log(res)
+					alert('위시리스트에 담겼습니다 :)')
+				})
+				.catch(err => {
+					console.error(err)
+				})
+			} else {
+				alert('로그인 후 이용하세요!')
+			}
+		}
   }
 }
 </script>
 
-<style lang="scss">
-  /* .book-cover{
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2); 
-    transition-duration: 0.3s;
-    z-index: 8;
-    position: relative;
-  }
-  .book-cover:hover {
-    box-shadow: 0px 0px 8px rgba(143, 143, 143, 0.8);
-    border-radius: 5px/ 5px;
-    z-index: 8;
-  }
-  .bookimg {
-    width: 125px;
-    height: 187.5px;
-    z-index: 8;
-  } */
+<style>
+/* @import "compass/css3"; */
 
-  /* // @import "compass/css3"; */
+.book-moreInf {
+	background-color: rgba(26, 163, 255, 0.56);
+}
+
+.book-readcheck {
+	background-color: rgba(255, 204, 0, 0.56);
+}
+
+.book-wishlist {
+	background-color: rgba(255, 0, 0, 0.34);
+}
 
 /*
 	A. Mini Reset 
@@ -111,34 +167,38 @@ body {
 	line-height: 1.2;
 }
 
-ul {
+.book-ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
-
+/* 
 a {
 	color: #2c3e50;
 	text-decoration: none;
-}
+} */
 
-.btn {
+.book-btn {
 	display: inline-block;
 	text-transform: uppercase;
 	border: 2px solid #2c3e50;
-	margin-top: 100px; 
-	font-size: 0.7em;
+	border-radius: 20px;
+	margin-top: 30px; 
+	font-size: 1rem;
 	font-weight: 700;
 	padding: 0.1em 0.4em;
 	text-align: center;
+	width: 100px;
+	height: 30px;
 	-webkit-transition: color 0.3s, border-color 0.3s;
 	-moz-transition: color 0.3s, border-color 0.3s;
 	transition: color 0.3s, border-color 0.3s;
 }
 
-.btn:hover {
-	border-color: #16a085;
-	color: #16a085;
+.book-btn:hover {
+	background-color: rgba(116, 94, 81, 0.7);
+	color: white;
+	border-color: white;
 }
 
 /* basic grid, only for this demo */
@@ -186,8 +246,6 @@ Table of Contents
 	position: relative;
 	width: 160px; 
 	height: 220px;
-	-webkit-perspective: 1000px;
-	-moz-perspective: 1000px;
 	perspective: 1000px;
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
@@ -243,16 +301,13 @@ Table of Contents
 .book_spine li:first-child:before,
 .book_spine li:last-child:after,
 .book_spine li:last-child:before {
-	background: #999;
+	background: rgb(194, 194, 194);
 }
 
 /* page */
 
 .page > li {
-	// background: -webkit-linear-gradient(left, #e1ddd8 0%, #fffbf6 100%);
-	// background: -moz-linear-gradient(left, #e1ddd8 0%, #fffbf6 100%);
-	// background: -ms-linear-gradient(left, #e1ddd8 0%, #fffbf6 100%);
-	// background: linear-gradient(left, #e1ddd8 0%, #fffbf6 100%);
+	background: linear-gradient(to right, #e1ddd8 0%, #fffbf6 100%);
 	box-shadow: inset 0px -1px 2px rgba(50, 50, 50, 0.1), inset -1px 0px 1px rgba(150, 150, 150, 0.2);
 	border-radius: 0px 5px 5px 0px;
   background-color: #fffbf6;
@@ -637,180 +692,4 @@ Table of Contents
 	-moz-transition-duration: 1.2s;
 	transition-duration: 1.2s;
 }
-
-/*
-	6. Bonus
-*/
-
-/* cover CSS */
-
-.coverDesign {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	overflow: hidden;
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	backface-visibility: hidden;
-}
-
-.coverDesign::after {
-	background-image: -webkit-linear-gradient( -135deg, rgba(255, 255, 255, 0.45) 0%, transparent 100%);
-	background-image: -moz-linear-gradient( -135deg, rgba(255, 255, 255, 0.45) 0%, transparent 100%);
-	background-image: linear-gradient( -135deg, rgba(255, 255, 255, 0.45) 0%, transparent 100%);
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-}
-
-.coverDesign h1 {
-	color: #fff;
-	font-size: 2.2em;
-	letter-spacing: 0.05em;
-	text-align: center;
-	margin: 54% 0 0 0;
-	text-shadow: -1px -1px 0 rgba(0,0,0,0.1);
-}
-
-.coverDesign p {
-	color: #f8f8f8;
-	font-size: 1em;
-	text-align: center;
-	text-shadow: -1px -1px 0 rgba(0,0,0,0.1);
-}
-
-.yellow {
-	background-color: #f1c40f;
-	background-image: -webkit-linear-gradient(top, #f1c40f 58%, #e7ba07 0%);
-	background-image: -moz-linear-gradient(top, #f1c40f 58%, #e7ba07 0%);
-	background-image: linear-gradient(top, #f1c40f 58%, #e7ba07 0%);
-}
-
-.blue {
-	background-color: #3498db;
-	background-image: -webkit-linear-gradient(top, #3498db 58%, #2a90d4 0%);
-	background-image: -moz-linear-gradient(top, #3498db 58%, #2a90d4 0%);
-	background-image: linear-gradient(top, #3498db 58%, #2a90d4 0%);
-}
-
-.grey {
-	background-color: #f8e9d1;
-	background-image: -webkit-linear-gradient(top, #f8e9d1 58%, #e7d5b7 0%);
-	background-image: -moz-linear-gradient(top, #f8e9d1 58%, #e7d5b7 0%);
-	background-image: linear-gradient(top, #f8e9d1 58%, #e7d5b7 0%);
-}
-
-/* Basic ribbon */
-
-.ribbon {
-	color: #fff;
-	display: block;
-	font-size: 0.7em;
-	position: absolute;
-	top: 11px;
-	right: 1px;
-	width: 40px;
-	height: 20px;
-	line-height: 20px;
-	letter-spacing: 0.15em; 
-	text-align: center;
-	-webkit-transform: rotateZ(45deg) translateZ(1px);
-	-moz-transform: rotateZ(45deg) translateZ(1px);
-	transform: rotateZ(45deg) translateZ(1px);
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	backface-visibility: hidden;
-	z-index: 10;
-  &.new{
-    background: #63c930;
-    &:before,
-    &:after{
-      border-bottom: 20px solid #63c930;
-    }
-  }
-  &.bestseller{
-    background: #c0392b;
-    &:before,
-    &:after{
-      border-bottom: 20px solid #c0392b;
-    }
-  }
-  
-    
-}
-
-.ribbon::before,
-.ribbon::after{
-	position: absolute;
-	top: -20px;
-	width: 0;
-	height: 0;
-	
-	border-top: 20px solid transparent;
-}
-
-.ribbon::before{
-	left: -20px;
-	border-left: 20px solid transparent;
-}
-
-.ribbon::after{
-	right: -20px;
-	border-right: 20px solid transparent;
-}
-
-/* figcaption */
-
-figcaption {
-	padding-left: 40px;
-	text-align: left;
-	position: absolute;
-	top: 0%;
-	left: 160px;
-	width: 310px;
-}
-
-figcaption h1 {
-	margin: 0;
-}
-
-figcaption span {
-	color: #16a085;
-	padding: 0.6em 0 1em 0;
-	display: block;
-}
-
-figcaption p {
-	color: #63707d;
-	line-height: 1.3;
-}
-
-/* Media Queries */
-@media screen and (max-width: 37.8125em) {
-	.align > li {
-		width: 100%;
-		min-height: 440px;
-		height: auto;
-		padding: 0;
-		margin: 0 0 30px 0;
-	}
-
-	.book {
-		margin: 0 auto;
-	}
-
-	figcaption {
-		text-align: center;
-		width: 320px;
-		top: 250px;
-		padding-left: 0;
-		left: -80px;
-		font-size: 90%;
-	}
-}
-
 </style>

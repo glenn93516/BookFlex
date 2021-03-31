@@ -10,7 +10,6 @@
       >
         <div style="width: 290px;">
           <img
-            @click="goToBookShelf()"
             id="title-logo" 
             src="@/assets/hansam.png" 
             alt="book logo" 
@@ -20,14 +19,14 @@
         </div>
       </b-navbar-brand>
       <div>
-        <router-link :to="{name: 'MainBook'}" class="temp-menu">
+        <router-link :to="{ name: 'MainBook' }" class="temp-menu">
           RECOMMEND
         </router-link>
-        <router-link :to="{name: 'Login'}" class="temp-menu">
+        <router-link :to="{ name: 'Login' }" class="temp-menu">
           COMMUNITY
         </router-link>
-        <router-link :to="{name: 'Profile'}" class="temp-menu">
-          MYPLACE
+        <router-link :to="{ name: 'Profile' }" class="temp-menu">
+          USER SPACE
         </router-link>
       </div>
       <b-navbar-nav style="display: flex; align-items: center; width: 290px; justify-content: flex-end;">
@@ -49,14 +48,14 @@
         <!-- 마이페이지 -->
         <b-nav-item-dropdown right>
           <template #button-content>
-            <b-avatar size="2.5rem" src="https://placekitten.com/300/300"></b-avatar>
+            <b-avatar size="2.5rem" :src="userInfo.userProfileImg"></b-avatar>
           </template>
 
           <b-dropdown-item
-            href="/profile/genre" 
+            @click="goToProfile"
             style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
           >
-            <span style="font-size: 0.8rem;">프로필</span>
+            <span style="font-size: 0.8rem;">프로필(temp)</span>
           </b-dropdown-item>
           <hr class="list-hr">
           
@@ -79,7 +78,7 @@
 
           <b-dropdown-item 
             v-if="isLogin" 
-            href="#" 
+            @click="goToProfile"
             style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
           >
             <span style="font-size: 0.8rem;">나의서재</span>
@@ -140,11 +139,23 @@ export default {
       closePostBox: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyLjAwNSA1MTIuMDA1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIuMDA1IDUxMi4wMDU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxyZWN0IHg9IjIyNy43NzgiIHk9IjI4NC41NTQiIHN0eWxlPSJmaWxsOiM5NUFCQjA7IiB3aWR0aD0iODkuNTExIiBoZWlnaHQ9IjIxMC45MTIiLz4NCjxnPg0KCTxyZWN0IHg9IjIyNy43NzgiIHk9IjI4NC41NTQiIHN0eWxlPSJmaWxsOiM3ODg3OEM7IiB3aWR0aD0iODkuNTExIiBoZWlnaHQ9IjQ1LjY0MyIvPg0KCTxyZWN0IHg9IjIyNy43NzgiIHk9IjI4NC41NTQiIHN0eWxlPSJmaWxsOiM3ODg3OEM7IiB3aWR0aD0iMzkuMjU3IiBoZWlnaHQ9IjIxMC45MTIiLz4NCjwvZz4NCjxyZWN0IHk9IjI3MC45MzMiIHN0eWxlPSJmaWxsOiNGRkNBM0I7IiB3aWR0aD0iNTEyLjAwNSIgaGVpZ2h0PSIyOC4yNjYiLz4NCjxyZWN0IHk9IjI3MC45MzMiIHN0eWxlPSJmaWxsOiNFNUIwMkM7IiB3aWR0aD0iMjIxLjQxMyIgaGVpZ2h0PSIyOC4yNjUiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiMwMDg2Q0M7IiBkPSJNNTExLjk5OCwxMjcuMjUxVjI3MC45M0gxODUuMzgxTDE1OC45NDYsNjIuMDgxbC01Ljc1OC00NS41NDFoMjQ4LjEwOQ0KCWMzNi43NzgsMCw2OS4zNjksMTcuOTQ0LDg5LjQ5LDQ1LjU0MUM1MDQuMTM2LDgwLjM3LDUxMS45OTgsMTAyLjg4OSw1MTEuOTk4LDEyNy4yNTF6Ii8+DQo8Zz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojMDI3QUFGOyIgZD0iTTE1My4xODcsMTYuNTQ0TDE1My4xODcsMTYuNTQ0Yy02MS4xNDEsMC0xMTAuNzA2LDQ5LjU2NC0xMTAuNzA2LDExMC43MDZ2MTQzLjY4MmgyMjEuNDExVjEyNy4yNQ0KCQlDMjYzLjg5Myw2Ni4xMDgsMjE0LjMyOCwxNi41NDQsMTUzLjE4NywxNi41NDR6Ii8+DQoJPHBhdGggc3R5bGU9ImZpbGw6IzAyN0FBRjsiIGQ9Ik0zMjAuOTcyLDE2LjU0NGgtOTUuNzg4YzY5LjU1MSwyNC4xOTEsNTguNTI1LDg3LjY5LDU3LjYxLDE3My4wODYNCgkJYy0wLjA1OSw1LjQ5Myw0LjM5Miw5Ljk3OSw5Ljg4NSw5Ljk3OWg0MC4zMTFMMzIwLjk3MiwxNi41NDQiLz4NCjwvZz4NCjxwYXRoIHN0eWxlPSJmaWxsOiNDMTEwMUQ7IiBkPSJNMzA0LjgxNCwyMDAuMjY0aDIwLjgwMmMzLjc5NSwwLDYuODcyLTMuMDc3LDYuODcyLTYuODcyVjkzLjExNmMwLTMuNzk1LDMuMDc3LTYuODcyLDYuODcyLTYuODcyDQoJaDU1LjM0OWMzLjc5NSwwLDYuODcyLTMuMDc3LDYuODcyLTYuODcyVjIzLjQxMmMwLTMuNzk1LTMuMDc3LTYuODcyLTYuODcyLTYuODcyaC02NS41NTZjLTE3LjIzNywwLTMxLjIxMiwxMy45NzQtMzEuMjEyLDMxLjIxMg0KCXYxNDUuNjQxQzI5Ny45NDIsMTk3LjE4NywzMDEuMDE5LDIwMC4yNjQsMzA0LjgxNCwyMDAuMjY0eiIvPg0KPGc+DQoJPHBhdGggc3R5bGU9ImZpbGw6IzMwMkQzNjsiIGQ9Ik0xNTMuMTg3LDExNi41OTVjLTE4Ljk1OCwwLTM0LjM4Mi0xNS40MjMtMzQuMzgyLTM0LjM4MnMxNS40MjMtMzQuMzgyLDM0LjM4Mi0zNC4zODINCgkJczM0LjM4MSwxNS40MjMsMzQuMzgxLDM0LjM4MlMxNzIuMTQ1LDExNi41OTUsMTUzLjE4NywxMTYuNTk1eiBNMTUzLjE4Nyw2My41MzVjLTEwLjI5OSwwLTE4LjY3OCw4LjM3OC0xOC42NzgsMTguNjc4DQoJCXM4LjM3OCwxOC42NzgsMTguNjc4LDE4LjY3OGMxMC4zLDAsMTguNjc3LTguMzc4LDE4LjY3Ny0xOC42NzhTMTYzLjQ4Niw2My41MzUsMTUzLjE4Nyw2My41MzV6Ii8+DQoJPHBhdGggc3R5bGU9ImZpbGw6IzMwMkQzNjsiIGQ9Ik0yMjAuMTksMTY5LjYzSDg2LjE4NGMtNC4zMzYsMC03Ljg1Mi0zLjUxNi03Ljg1Mi03Ljg1MmMwLTQuMzM2LDMuNTE2LTcuODUyLDcuODUyLTcuODUySDIyMC4xOQ0KCQljNC4zMzYsMCw3Ljg1MiwzLjUxNiw3Ljg1Miw3Ljg1MkMyMjguMDQyLDE2Ni4xMTUsMjI0LjUyNiwxNjkuNjMsMjIwLjE5LDE2OS42M3oiLz4NCgk8cGF0aCBzdHlsZT0iZmlsbDojMzAyRDM2OyIgZD0iTTE5Ny44NywyMTEuNTA3aC04OS4zNjdjLTQuMzM2LDAtNy44NTItMy41MTYtNy44NTItNy44NTJjMC00LjMzNiwzLjUxNi03Ljg1Miw3Ljg1Mi03Ljg1Mmg4OS4zNjcNCgkJYzQuMzM2LDAsNy44NTIsMy41MTYsNy44NTIsNy44NTJDMjA1LjcyMiwyMDcuOTkyLDIwMi4yMDcsMjExLjUwNywxOTcuODcsMjExLjUwN3oiLz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K",
       // openPostBox: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyLjAwNSA1MTIuMDA1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIuMDA1IDUxMi4wMDU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxyZWN0IHg9IjIyNy43NzgiIHk9IjI4Ny42OTQiIHN0eWxlPSJmaWxsOiM5NUFCQjA7IiB3aWR0aD0iODkuNTExIiBoZWlnaHQ9IjIwNy43NzEiLz4NCjxnPg0KCTxyZWN0IHg9IjIyNy43NzgiIHk9IjI4Ny42OTQiIHN0eWxlPSJmaWxsOiM3ODg3OEM7IiB3aWR0aD0iMzkuMjU3IiBoZWlnaHQ9IjIwNy43NzEiLz4NCgk8cmVjdCB4PSIyMjcuNzc4IiB5PSIyODQuNTU0IiBzdHlsZT0iZmlsbDojNzg4NzhDOyIgd2lkdGg9Ijg5LjUxMSIgaGVpZ2h0PSI0NS42NDMiLz4NCjwvZz4NCjxyZWN0IHk9IjI3MC45MzMiIHN0eWxlPSJmaWxsOiNGRkNBM0I7IiB3aWR0aD0iNTEyLjAwNSIgaGVpZ2h0PSIyOC4yNjYiLz4NCjxyZWN0IHk9IjI3MC45MzMiIHN0eWxlPSJmaWxsOiNFNUIwMkM7IiB3aWR0aD0iMjIxLjQxMyIgaGVpZ2h0PSIyOC4yNjUiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiMwMDg2Q0M7IiBkPSJNNTExLjk5OCwxMjcuMjUxVjI3MC45M0gxODUuMzgxTDE1OC45NDYsNjIuMDgxbC01Ljc1OC00NS41NDFoMjQ4LjEwOQ0KCWMzNi43NzgsMCw2OS4zNjksMTcuOTQ0LDg5LjQ5LDQ1LjU0MUM1MDQuMTM2LDgwLjM3LDUxMS45OTgsMTAyLjg4OSw1MTEuOTk4LDEyNy4yNTF6Ii8+DQo8cGF0aCBzdHlsZT0iZmlsbDojNDE0NTUxOyIgZD0iTTI2My44ODksMTI3LjI1MVYyNzAuOTNINDIuNDc3VjEyNy4yNTFjMC02MS4xNCw0OS41NzItMTEwLjcxMSwxMTAuNzExLTExMC43MTENCgljNDEuNDU4LDAsNzcuNTg3LDIyLjc5MSw5Ni41NTcsNTYuNTM0QzI1OC43NDksODkuMDgxLDI2My44ODksMTA3LjU2OSwyNjMuODg5LDEyNy4yNTF6Ii8+DQo8cGF0aCBzdHlsZT0iZmlsbDojMDI3QUFGOyIgZD0iTTMyMC45NzIsMTYuNTQ0aC05NS43ODhjNjkuNTUxLDI0LjE5MSw1OC41MjUsODcuNjksNTcuNjEsMTczLjA4Ng0KCWMtMC4wNTksNS40OTMsNC4zOTIsOS45NzksOS44ODUsOS45NzloNDAuMzExTDMyMC45NzIsMTYuNTQ0Ii8+DQo8cGF0aCBzdHlsZT0iZmlsbDojQzExMDFEOyIgZD0iTTMwNi4zNywyMDAuMjY0aDE3LjY5MWM0LjY1NSwwLDguNDI4LTMuNzczLDguNDI4LTguNDI4Vjk0LjY3MmMwLTQuNjU1LDMuNzczLTguNDI4LDguNDI4LTguNDI4DQoJaDUyLjIzN2M0LjY1NSwwLDguNDI4LTMuNzczLDguNDI4LTguNDI4VjI0Ljk2OGMwLTQuNjU1LTMuNzczLTguNDI4LTguNDI4LTguNDI4SDMzMC43MWMtMTguMDk3LDAtMzIuNzY3LDE0LjY3LTMyLjc2NywzMi43NjcNCgl2MTQyLjUyOUMyOTcuOTQyLDE5Ni40OTEsMzAxLjcxNSwyMDAuMjY0LDMwNi4zNywyMDAuMjY0eiIvPg0KPHBhdGggc3R5bGU9ImZpbGw6I0MwQzJEMDsiIGQ9Ik0yNjMuODg5LDEyNy4yNTF2MTQzLjY1OEg5Ni45NDhWNzMuMDczaDE1Mi43OThDMjU4Ljc0OSw4OS4wODEsMjYzLjg4OSwxMDcuNTY5LDI2My44ODksMTI3LjI1MXoiLz4NCjxwb2x5Z29uIHN0eWxlPSJmaWxsOiNEMEQ3REQ7IiBwb2ludHM9IjI2My44ODksMTcyLjAwNyAyNjMuODg5LDI3MC45MyA5Ni45NjksMjcwLjkzIDk2Ljk5LDI3MC45MDkgMjA1Ljk2MywxNzIuMDE3IA0KCTIwNS45NzQsMTcyLjAwNyAiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiNFNkVCRUY7IiBkPSJNMjYzLjg4OSwxMjcuMjUxdjcxLjc4N2wtMTQuMDgxLDEyLjc4M2wtNDMuODQ1LTM5LjgwNEw5Ni45NDgsNzMuMDczaDE1Mi43OTgNCglDMjU4Ljc0OSw4OS4wODEsMjYzLjg4OSwxMDcuNTY5LDI2My44ODksMTI3LjI1MXoiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiNDMEMyRDA7IiBkPSJNMjYzLjg4OSwxMjcuMjUxVjI3MC45M2gtNjcuMDAzVjEyNy4yNTFjMC0xOS42ODItNS4xNC0zOC4xNzEtMTQuMTQ0LTU0LjE3OGg2Ny4wMDMNCglDMjU4Ljc0OSw4OS4wODEsMjYzLjg4OSwxMDcuNTY5LDI2My44ODksMTI3LjI1MXoiLz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K",
       openPostBox: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyLjAwNSA1MTIuMDA1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIuMDA1IDUxMi4wMDU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxyZWN0IHg9IjIyNy43NzgiIHk9IjI4Ni42NDciIHN0eWxlPSJmaWxsOiM5NUFCQjA7IiB3aWR0aD0iODkuNTExIiBoZWlnaHQ9IjIwOC44MTgiLz4NCjxnPg0KCTxyZWN0IHg9IjIyNy43NzgiIHk9IjI4Ni42NDciIHN0eWxlPSJmaWxsOiM3ODg3OEM7IiB3aWR0aD0iMzkuMjU3IiBoZWlnaHQ9IjIwOC44MTgiLz4NCgk8cmVjdCB4PSIyMjcuNzc4IiB5PSIyODQuNTU0IiBzdHlsZT0iZmlsbDojNzg4NzhDOyIgd2lkdGg9Ijg5LjUxMSIgaGVpZ2h0PSI0NS42NDMiLz4NCjwvZz4NCjxyZWN0IHk9IjI3MC45MzMiIHN0eWxlPSJmaWxsOiNGRkNBM0I7IiB3aWR0aD0iNTEyLjAwNSIgaGVpZ2h0PSIyOC4yNjYiLz4NCjxyZWN0IHk9IjI3MC45MzMiIHN0eWxlPSJmaWxsOiNFNUIwMkM7IiB3aWR0aD0iMjIxLjQxMyIgaGVpZ2h0PSIyOC4yNjUiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiMwMDg2Q0M7IiBkPSJNNTExLjk5OCwxMjcuMjUxVjI3MC45M0gxODUuMzgxTDE1OC45NDYsNjIuMDgxbC01Ljc1OC00NS41NDFoMjQ4LjEwOQ0KCWMzNi43NzgsMCw2OS4zNjksMTcuOTQ0LDg5LjQ5LDQ1LjU0MUM1MDQuMTM2LDgwLjM3LDUxMS45OTgsMTAyLjg4OSw1MTEuOTk4LDEyNy4yNTF6Ii8+DQo8cGF0aCBzdHlsZT0iZmlsbDojNDE0NTUxOyIgZD0iTTE1My4xODcsMTYuNTQ0TDE1My4xODcsMTYuNTQ0Yy02MS4xNDEsMC0xMTAuNzA2LDQ5LjU2NC0xMTAuNzA2LDExMC43MDZ2MTQzLjY4MmgyMjEuNDExVjEyNy4yNQ0KCUMyNjMuODkzLDY2LjEwOCwyMTQuMzI4LDE2LjU0NCwxNTMuMTg3LDE2LjU0NHoiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiNDMTEwMUQ7IiBkPSJNMjk4LjQzOSwxNDAuMjV2MTYuMzk3YzAsNS4wMTIsNC4wNjMsOS4wNzUsOS4wNzUsOS4wNzVoOTUuODdjNS4wMTIsMCw5LjA3NSw0LjA2Myw5LjA3NSw5LjA3NQ0KCXY1Mi41MTNjMCw1LjAxMiw0LjA2Myw5LjA3NSw5LjA3NSw5LjA3NWg1MS41NTVjNS4wMTIsMCw5LjA3NS00LjA2Myw5LjA3NS05LjA3NXYtNjIuNzIxYzAtMTguNDU0LTE0Ljk2LTMzLjQxNC0zMy40MTQtMzMuNDE0DQoJSDMwNy41MTRDMzAyLjUwMywxMzEuMTc1LDI5OC40MzksMTM1LjIzOCwyOTguNDM5LDE0MC4yNXoiLz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K",
+      userInfo: {},
     }
   },
   methods: {
     goToBookShelf() {
       this.$router.push({ path:"/main" })
+    },
+    goToRecommend() {
+      if (this.pageName!="MainBook") {
+        this.$router.push({ name: 'MainBook' })
+      }
+    },
+    goToProfile() {
+      this.$router.push({ name: 'Profile' })
+    },
+    goToMain() {
+      this.$router.push({ name: 'MainPage' })
     },
     tempOverImg() {
       this.postBox = this.openPostBox
@@ -169,12 +180,8 @@ export default {
     Logout() {
       this.$store.dispatch('Logout')
       localStorage.removeItem('jwt')
+      this.userInfo = ""
       this.isLogin = false
-    },
-    goToMain() {
-      if (this.pageName!="MainBook") {
-        this.$router.push({ name: 'MainBook' })
-      }
     },
     postBoxClick() {
       this.$router.push({ name: 'Message' })
@@ -188,6 +195,8 @@ export default {
   },
   created() {
     this.checkLogin()
+    this.userInfo = this.$store.getters.getUser
+    console.log(this.userInfo)
   }
 }
 </script>
@@ -279,13 +288,11 @@ export default {
   .postbox:hover {
     cursor: pointer;
   }
-
   .temp-menu {
     background: linear-gradient(to right, rgba(255, 255, 255, 0) 50%, rgb(255, 240, 178) 50%);
     background-size: 200%;
     transition: .35s;
     color: black;
-    
     position: relative;
     font-size: 18px;
     font-weight:300;

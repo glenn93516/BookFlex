@@ -31,9 +31,11 @@
         drop-placeholder="Drop file here..."
       ></b-form-file>
       <div class="mt-3">Selected file: {{ file ? file.name : '' }}</div>
+      
 
 
 
+      <button @click="collectSentence">문장 담기</button>
 
     </div>
   </div>
@@ -43,22 +45,24 @@
 export default {
   props: {
     mode: Number,
+    book: Object,
   },
   components: {
   },
   data() {
     return {
-      book: "",
-      brand: 'Honda',
       file: null,
     }
   },
   created() {
-    this.getSelectedBook()
   }, 
   methods: {
-    getSelectedBook() {
-      this.book = this.$store.getters.getSelectedBook
+    collectSentence() {
+      // 토큰, isbn, 문장 수집 내용(text), 이미지 파일, 책 페이지, 공개 여부
+      // const token = localStorage.getItem('jwt')
+      // const isbn = this.book.book_isbn
+      // const text = 
+
     }
   },
 }

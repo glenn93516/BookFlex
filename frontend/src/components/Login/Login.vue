@@ -1,6 +1,7 @@
 <template>
   <div style="display: flex; justify-content: center;">
     <!-- 네모 -->
+    <!-- 로그인을 submit버튼으로 바꿔주기 -->
     <div
       class="loginbackground"
     >
