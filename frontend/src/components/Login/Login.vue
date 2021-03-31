@@ -59,25 +59,10 @@ export default {
       this.$router.push({ name: "SubmitEmail" })
     },
     userLogin() {
-      const user = { userEmail: this.email, userPassword: this.password }
+      const user = { userEmail: this.email, userPassword: this.password, mode: 1 }
       console.log('userLogin', user)
       this.$store.dispatch('Login', user)
-      .then(res => {
-        console.log(res, 'res')
-        this.getUserInfo()
-        this.$router.push({ name: "MainBook" })
-      })
-      .catch(err => {
-        alert("아이디 비밀번호를 확인해주세요.")
-        console.log(err)
-        this.email = ""
-        this.password = ""
-      })
     },
-    getUserInfo() {
-      console.log('getUserInfo 실행')
-      this.$store.dispatch('GetUserInfo')
-    }
   },
   watch: {
     // email 입력값이 변경될 때 마다 실행

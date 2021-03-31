@@ -165,6 +165,11 @@ export default {
       this.$router.push({ name: 'Login' })
     }
     console.log(this.$store.getters.getUser)
+  },
+  watch: {
+    // userInfo() {
+    //   if ()
+    // }
   }
 }
 </script>
