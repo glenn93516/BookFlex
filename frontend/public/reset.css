@@ -28,11 +28,44 @@ a:hover{
   text-decoration: none;
 }
 .footer-content {
+  font-family: 'NanumBarunpen', sans-serif;
   font-size: 10px;
   text-align: center;
   margin-top: 30px;
   margin-bottom: 30px;
 }
+/* font 설정 */
+.font-nanumpen {
+  font-family: 'NanumBarunpen', sans-serif;
+}
+.font-coredream {
+  font-family: 'S-CoreDream-2ExtraLight', sans-serif;
+}
+
+/* 자주 사용하는 mouse-pointer */
+.mouse-pointer {
+  cursor: pointer;
+}
+
+/* Login button, 회원가입 button */
+.login-button {
+  border-radius: 15px / 15px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+/* Login, 회원가입 notice */
+.notice-message {
+  color: rgb(108, 160, 29);
+  margin: 20px 0 10px 0;
+  font-size: 0.9rem;
+}
+.notice-message-sub {
+  color: rgb(108, 160, 29);
+  margin: 10px 0 10px 0;
+  font-size: 0.8rem;
+}
+
 /* hover했을 때 애니메이션 효과 */
 .hvr-rotate {
   display: inline-block;
@@ -63,4 +96,42 @@ a:hover{
 .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+/* Buzz */
+@-webkit-keyframes hvr-buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+@keyframes hvr-buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+.hvr-buzz {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-buzz:hover, .hvr-buzz:focus, .hvr-buzz:active {
+  -webkit-animation-name: hvr-buzz;
+  animation-name: hvr-buzz;
+  -webkit-animation-duration: 0.15s;
+  animation-duration: 0.15s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: 2;
+  animation-iteration-count: 2;
 }

@@ -4,7 +4,7 @@
       <div :class="size" id="signup-background">
         <header class="signup-header">
           <h1 
-            class="signup-h1 mb-0"
+            class="signup-h1 mb-0 font-nanumpen"
             v-show="signupTitle"
           >
             회원가입

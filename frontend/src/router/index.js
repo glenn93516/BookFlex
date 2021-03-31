@@ -122,6 +122,11 @@ const routes = [
       },
     ]
   },
+  {
+    path:'*',
+    name: 'NotFound',
+    component: () => import('../views/NotFound.vue')
+  },
 ]
 
 const router = new VueRouter({

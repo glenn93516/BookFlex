@@ -2,10 +2,6 @@
   <div class="bookReaction">
     <img :src="book.book_cover" class="reactionBookImg" :alt="book.book_title">
     <h3>이 책은 어떠셨나요?</h3>
-    <div>
-      <img src="@/assets/thumbsup.png" class="btn thumbs" alt="">
-      <img src="@/assets/thumbsdown.png" class="btn thumbs" alt="">
-    </div>
     <br>
     <b-button class="btn-put" @click="$emit('go-collect')">문장 담기</b-button>
 

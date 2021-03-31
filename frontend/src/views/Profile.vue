@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div id="profile">
     <!-- 프로필 헤더(사진, 이름, 한줄, 편집 버튼, 직업) -->
     <div id="profileHeader" class="profile-header">
       <!-- 프로필사진 -->
       <b-avatar 
-        src="https://placekitten.com/300/300" 
+        :src="userInfo.userProfileImg" 
         size="10rem"
         class="profile-left"
       >
@@ -14,7 +14,7 @@
         <div class="profile-title">
           <div class="profile-name-group">
             <h1 class="profile-name">
-              {{ profileName }}
+              {{ userInfo.userNickname }}
             </h1>
             <img width="40px" :src="medal.first" />
           </div>
@@ -135,6 +135,7 @@ export default {
         readBooks: false,
         wishList: false,
       },
+      userInfo: {},
     }
   },
   methods: {
@@ -153,12 +154,28 @@ export default {
       this.genreModalShow = true
       alert('장르 이모티콘 추가 작업 중입니다🛠')
     },
+  },
+  mounted() {
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      this.userInfo = this.$store.getters.getUser
+      console.log(this.userInfo)
+    } else {
+      alert('로그인 해주세요!')
+      this.$router.push({ name: 'Login' })
+    }
+    console.log(this.$store.getters.getUser)
+  },
+  watch: {
+    // userInfo() {
+    //   if ()
+    // }
   }
 }
 </script>
 
 <style>
-  * {
+  #profile {
     font-family: 'NanumBarunpen', sans-serif;
     margin: 0;
     padding: 0;

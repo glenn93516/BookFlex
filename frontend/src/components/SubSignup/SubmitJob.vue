@@ -1,7 +1,7 @@
 <template>
   <div>
     <h5 
-      class="job-subtitle"
+      class="job-subtitle font-nanumpen"
     >
       현재 혹은 희망하시는 직종을 선택해주세요.
     </h5>
@@ -9,7 +9,7 @@
     <div 
       v-for="(option, idx) in options" 
       :key="idx" 
-      class="custom-control"
+      class="custom-control font-nanumpen"
     >
       <Checkbox :option="option" @serveData="catchData"/>
     </div>
@@ -18,7 +18,8 @@
     <b-button 
       @click="submitUserJob(checkedValues[0])"
       @keydown.enter="submitUserJob(checkedValues[0])"
-      class="btn-success btn-block job-btn"
+      block
+      class="btn-success job-btn login-button font-nanumpen"
     >
       다음으로 넘어가기
     </b-button>
@@ -94,11 +95,13 @@ export default {
   }
   .custom-control {
     display: inline-block;
-    width: 117px;
+    width: 130px;
     line-height: 25px;
-    margin-bottom: 25px;
+    margin-top: 7px;
+    margin-bottom: 20px;
+    padding-left: 15px;
   }
   .job-btn {
-    margin-top: -17px;
+    margin-top: 10px;
   }
 </style>

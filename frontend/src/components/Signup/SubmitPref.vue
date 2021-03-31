@@ -1,16 +1,15 @@
 <template>
   <div>
-    <br>
-    <p class="describeP">선호 또는 관심있는 장르를 선택해 주세요.</p>
-    <div v-for="(option, idx) in options" :key="idx" class="custom-control">
+    <p class="notice-message font-coredream">선호 또는 관심있는 장르를 선택해 주세요.</p>
+    <div v-for="(option, idx) in options" :key="idx" class="custom-control font-nanumpen">
       <Checkbox :option="option" @serve-data="catchData"/>
     </div>
-    <div class="checkvalues">
-      선택항목: 
+    <!-- <div class="checkvalues">
       <span v-for="(checkValue, idx) in checkedValues" :key="idx" class="badge badge-pill" :class="checkValue.class">{{ checkValue.text }}</span>
-    </div>
+    </div> -->
     <b-button
-      class="btn btn-success btn-block" 
+      block
+      class="btn btn-success login-button font-nanumpen" 
       :class="{ disabled : isActive }"
       @click="goToComplete"
     >
@@ -151,17 +150,12 @@ export default {
 </script>
 
 <style>
-  .describeP {
-    color: #5a9b00;
-    font-size: 14px;
-    margin-top: -15px;
-  }
   .custom-control {
     display: inline-block;
     width: 130px;
     line-height: 25px;
     margin-top: 7px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     padding-left: 15px;
   }
   .checkvalues {
