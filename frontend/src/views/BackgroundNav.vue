@@ -192,6 +192,7 @@ export default {
     $route(to) {
       this.pageName = to.name
       this.checkLogin()
+      this.userInfo = this.$store.getters.getUser
     }
   },
   mounted() {

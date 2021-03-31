@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h4 style="margin-top: 5px;" class="font-nanumpen">생년월일을 입력해주세요</h4>
+    <h4 style="margin-top: 5px;">생년월일을 입력해주세요</h4>
 
     <b-form-datepicker 
       id="datepicker" 
       v-model="birthdate"
-      class="birth-datepicker font-nanumpen"
+      class="birth-datepicker"
     >
     </b-form-datepicker>
 
@@ -13,7 +13,7 @@
       @click="submitUserBirth(birthdate)"
       @keydown.enter="submitUserBirth(birthdate)"
       block
-      class="btn-success birth-btn login-button font-nanumpen" 
+      class="btn-success birth-btn login-button" 
     >
       확인
     </b-button>

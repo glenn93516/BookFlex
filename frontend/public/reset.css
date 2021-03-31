@@ -14,6 +14,13 @@
   font-style: normal; 
 }
 
+/* @font-face {
+  font-family: 'PureunJeonnam', sans-serif;
+  src: url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css');
+} */
+@import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css');
+
+
 body,
 h1, h2, h3, h4, h5, h6,
 ul, ol, dl, dd, li, hr, 
@@ -32,7 +39,7 @@ a:hover{
   font-size: 10px;
   text-align: center;
   margin-top: 30px;
-  margin-bottom: 30px;
+  padding-bottom: 30px;
 }
 /* font 설정 */
 .font-nanumpen {
@@ -40,6 +47,13 @@ a:hover{
 }
 .font-coredream {
   font-family: 'S-CoreDream-2ExtraLight', sans-serif;
+}
+.font-jeonnam {
+  font-family: 'PureunJeonnam', sans-serif;
+}
+
+* {
+  font-family: 'PureunJeonnam', sans-serif;
 }
 
 /* 자주 사용하는 mouse-pointer */

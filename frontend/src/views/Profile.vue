@@ -165,6 +165,11 @@ export default {
       this.$router.push({ name: 'Login' })
     }
     console.log(this.$store.getters.getUser)
+  },
+  watch: {
+    // userInfo() {
+    //   if ()
+    // }
   }
 }
 </script>
@@ -211,7 +216,8 @@ export default {
   .profile-name {
     font-size: 50px;
     font-weight: bold;
-    letter-spacing: 10px;
+    margin-right: 10px;
+    letter-spacing: 3px;
     display: inline-block;
   }
   .img-update-btn {
