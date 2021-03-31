@@ -120,6 +120,34 @@ const routes = [
           },
         ]
       },
+      {
+        path:'/message',
+        name: 'Message',
+        component: () => import('../components/Message/Message.vue'),
+        redirect: '/message/received',
+        children: [
+          {
+            path: 'received',
+            name: 'Recevied',
+            component: () => import('../components/Message/Recevied.vue'),
+          },
+          {
+            path: 'sent',
+            name: 'Sent',
+            component: () => import('../components/Message/Sent.vue'),
+          },
+          {
+            path: 'write',
+            name: 'Write',
+            component: () => import('../components/Message/Write.vue'),
+          },
+          {
+            path: 'read',
+            name: 'Read',
+            component: () => import('../components/Message/Read.vue'),
+          },
+        ]
+      }
     ]
   },
 ]
