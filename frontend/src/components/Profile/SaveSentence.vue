@@ -16,7 +16,7 @@
       </div>
       <b-modal v-model="showDetail" centered hide-footer hide-header hide-backdrop>
       <!-- <b-modal v-model="showDetail" centered hide-footer hide-header> -->
-        <sentence-detail :item="item" @close-modal="showDetail=false"></sentence-detail>
+        <sentence-detail :item="nowItem" @close-modal="showDetail=false"></sentence-detail>
       </b-modal>
     </div>
     <div class="more">
@@ -139,6 +139,7 @@ export default {
       moreBtn: true,
       showDetail: false,
       userInfo: {},
+      nowItem: "",
     }
   },
   // mounted() {
@@ -163,7 +164,7 @@ export default {
     },
     sentenceDetail(item) {
       this.showDetail = true
-      console.log(item)
+      this.nowItem = item
     }
   },
 }
