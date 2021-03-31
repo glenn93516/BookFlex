@@ -58,7 +58,11 @@ export default {
   }, 
   methods: {
     collectSentence() {
-      
+      // 토큰, isbn, 문장 수집 내용(text), 이미지 파일, 책 페이지, 공개 여부
+      // const token = localStorage.getItem('jwt')
+      // const isbn = this.book.book_isbn
+      // const text = 
+
     }
   },
 }
