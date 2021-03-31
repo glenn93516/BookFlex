@@ -1,6 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
+import router from '../router'
 
 Vue.use(Vuex)
 
@@ -119,28 +120,31 @@ export default new Vuex.Store({
         })
         .then(res => {
           // 로그인이 됐을 때
-          if (res.data != "undefined") {
-            axios.defaults.headers.common[
-              "Authorization"
-            ] = `Bearer ${res.data['data']}`
+          const token =`Bearer ${res.data.data}`
+          const data = {
+            "token": token,
+            "mode": user.mode
           }
-          localStorage.setItem('jwt', `Bearer ${res.data.data}`)
-          context.commit("Login", res.data.data)
-          console.log(`Bearer ${res.data.data}`)
+          localStorage.setItem('jwt', token)
+          context.commit("Login", token)
+          context.dispatch('GetUserInfo', data)
         })
         .catch(err => {
+          alert("아이디와 비밀번호를 확인해주세요.")
           console.log(err)
         })
     },
-    GetUserInfo (context) {
-      const token = localStorage.getItem('jwt')
+    GetUserInfo (context, data) {
       const headers = {
-        'Authorization' : token
+        'Authorization' : data.token
       }
       axios.get(`${SERVER_URL}/user`, {headers})
       .then(res => {
         context.commit("GetUserInfo", res.data.data)
         console.log(res.data.data)
+        if (data.mode) {
+          router.push({ name: "MainBook" })
+        } 
       })
       .catch(err => {
         console.error(err)
@@ -170,11 +174,18 @@ export default new Vuex.Store({
       for (let val of data.values()) {
         console.log(val)
       }
-
-      axios.put(`${SERVER_URL}/user`, data)
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      axios.put(`${SERVER_URL}/user`, data, {headers})
       .then(res => {
         console.log(res)
-        context.commit('UpdateUserInfo', User)
+        const data = {
+          "token": localStorage.getItem('jwt'),
+          "mode": 0
+        }
+        context.dispatch('GetUserInfo', data)
       })
       .catch(err => {
         console.error(err)

@@ -75,13 +75,10 @@ export default {
       const user = {
         "userEmail": this.$store.getters.getSignupInfo.userEmail,
         "userPassword": this.$store.getters.getSignupInfo.userPassword,
+        "mode": 0
       }
       this.$store.dispatch('Login', user)
-      setTimeout(this.getUserInfo, 1000)
     },
-    getUserInfo() {
-      this.$store.dispatch('GetUserInfo')
-    }
   }
 }
 </script>
