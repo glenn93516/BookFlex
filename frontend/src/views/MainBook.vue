@@ -29,7 +29,7 @@
         id="first-row"
         class="shelf-row"
       >
-        <div class="d-flex justify-content-around books">
+        <div class="d-flex justify-content-around books" style="margin-right: 40px;">
           <!-- 클릭할때 객체를 스토어에 저장 commit -->
           <Book 
             v-for="(book, idx) in suitRecommend.slice(0, 4)" 
@@ -41,7 +41,7 @@
             @delete-readBook="deleteReadBook"
           ></Book>
         </div>
-        <Book-shelf />
+        <!-- <Book-shelf /> -->
       </div>
       <div
         id="second-shelf-tag"
@@ -60,7 +60,7 @@
         id="second-row"
         class="shelf-row"
       >
-        <div class="d-flex justify-content-around books">
+        <div class="d-flex justify-content-around books" style="margin-left: 40px;">
           <Book 
             v-for="(book, idx) in genreRecommend.slice(0, 4)" 
             :key="idx" 
@@ -71,7 +71,7 @@
             @delete-readBook="deleteReadBook"
           ></Book>
         </div>
-        <Book-shelf />
+        <!-- <Book-shelf /> -->
       </div>
       <div
         id="third-shelf-tag"
@@ -90,7 +90,7 @@
         id="third-row"
         class="shelf-row"
       >
-        <div class="d-flex justify-content-around books">
+        <div class="d-flex justify-content-around books" style="margin-right: 40px;">
           <Book 
             v-for="(book, idx) in suitRecommend.slice(5, 9)" 
             :key="idx" 
@@ -101,7 +101,7 @@
             @delete-readBook="deleteReadBook"
           ></Book>
         </div>
-        <Book-shelf />
+        <!-- <Book-shelf /> -->
       </div>
       <Modal v-show="isModalViewed" @close-modal="closeModal">
           <!-- 컨텐츠 컴포넌트 자리 -->
@@ -121,7 +121,7 @@
 
 <script>
 import Book from '@/components/Main/Book.vue'
-import BookShelf from '@/components/Main/BookShelf.vue'
+// import BookShelf from '@/components/Main/BookShelf.vue'
 import Modal from '@/components/Element/Modal.vue'
 import CollectSentence from '@/components/Book/CollectSentence.vue'
 
@@ -129,7 +129,7 @@ export default {
   name: 'Main',
   components: {
     Book,
-    BookShelf,
+    // BookShelf,
     Modal,
     CollectSentence,
   },
@@ -222,7 +222,7 @@ export default {
 
 <style>
   .recommend-back {
-    background-image: url('../assets/waterprint_back.jpg');
+    /* background-image: url('../assets/waterprint_back.jpg'); */
     background-repeat: no-repeat;
     background-size: 100%;
     padding: 0px;
@@ -250,33 +250,42 @@ export default {
     margin-top: 1.5rem;
     /* background-color: rgba(161, 114, 70, 0); */
     display: inline-block;
-    font-size: 2rem;
-    /* font-weight: bold; */
+    font-size: 1.7rem;
+    font-weight: bold;
     padding: 10px;
     margin-left: 0px;
     /* box-shadow: 1px 1px 2px rgb(150, 150, 150); */
     border-radius: 15px/ 15px;
     border: 0px;
-    color: rgb(0, 0, 0);
+    color: black;
+    /* color: rgb(0, 0, 0); */
     align-items: left;
     text-align: left;
-    width: 100%;
-    text-shadow: whitesmoke 2px 3px;
+    width: 1000px;
+    /* text-shadow: white 2px 3px; */
     /* background-color: rgba(255, 255, 255, 0.3); */
   }
   .tag-name > span {
-    /* background-color: rgba(255, 255, 255, 0.7); */
-    padding: 5px 15px 10px;
+    /* background-color: rgba(0, 0, 0, 0.8); */
+    padding: 5px 15px 5px;
+    border-bottom: grey dotted 1px !important;
   }
-  /* .tag-name > span[id="first-tag"] {
-    border-bottom: #FB6542 solid 3px;
+  .tag-name > span[id="first-tag"] {
+    /* margin-right: 100px; */
+    border-bottom: #FB6542 solid 1px;
+    display: flex;
   }
   .tag-name > span[id="second-tag"] {
-    border-bottom: #03A9F4 solid 3px;
+    border-bottom: #03A9F4 solid 1px;
+    /* margin-left: 100px; */
+    display: flex;
+    justify-content: flex-end;
   }
   .tag-name > span[id="third-tag"] {
-    border-bottom: #FFBB00 solid 3px;
-  } */
+    /* margin-right: 100px; */
+    border-bottom: #FFBB00 solid 1px;
+    display: flex;
+  }
 
   /* 페이지 로딩 css */
   #page-loading {
