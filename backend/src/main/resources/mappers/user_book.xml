@@ -16,6 +16,12 @@
         WHERE user_id = #{userId}
     </select>
 
+    <select id="findUserBookByUserIdAndBookIsbn" resultType="UserBookDto">
+        SELECT user_book_id userBookId, user_id userId, book_isbn bookIsbn
+        FROM user_book
+        WHERE  user_id = #{userId} AND book_isbn = #{bookIsbn}
+    </select>
+
     <delete id="deleteUserBook">
         DELETE FROM user_book
         WHERE user_book_id = #{userBookId}

@@ -26,7 +26,7 @@
           COMMUNITY
         </router-link>
         <router-link :to="{ name: 'Profile' }" class="temp-menu">
-          MYPLACE
+          USER SPACE
         </router-link>
       </div>
       <b-navbar-nav style="display: flex; align-items: center; width: 290px; justify-content: flex-end;">
@@ -55,7 +55,7 @@
             @click="goToProfile"
             style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
           >
-            <span style="font-size: 0.8rem;">프로필</span>
+            <span style="font-size: 0.8rem;">프로필(temp)</span>
           </b-dropdown-item>
           <hr class="list-hr">
           

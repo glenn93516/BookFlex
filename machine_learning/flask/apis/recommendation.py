@@ -9,6 +9,7 @@ from models.Book import Book
 from models.UserBook import UserBook
 from models.UserGenre import UserGenre
 from models.Genre import Genre
+from models.Wishlist import Wishlist
 
 
 recommendation = Blueprint("recommendation", __name__)
@@ -182,11 +183,14 @@ def recommend_by_user(userId):
         user_id=userId).all()]
     user_genres = [genre.genre_id for genre in UserGenre.query.filter_by(
         user_id=userId).all()]
+    wishlists = [wishlist.book_isbn for wishlist in Wishlist.query.filter_by(
+        user_id=userId).all()]
     customized_genre_id, customized_genre_name = find_customized_genre(
         read_books, user_genres)
 
-    customized_by_user = []  # 유저가 읽은 책 기반 추천
-    customized_by_genre = []  # 유저 맞춤 장르 기반 추천
+    customized_by_user = []     # 유저가 읽은 책 기반 추천
+    customized_by_genre = []    # 유저 맞춤 장르 기반 추천
+    customized_by_wishlist = []  # 유저 위시리스트 기반 추천
 
     if len(read_books) == 0:
         # 읽은 책 없으면 유저 선호장르를 기준으로 랜덤 샘플링
@@ -195,7 +199,12 @@ def recommend_by_user(userId):
         # 읽은 책 있는 경우 읽은 책 기준으로 추천
         customized_by_user = recommend(read_books)
 
+    # 장르 기반 추천
     customized_by_genre = recommend(read_books, [customized_genre_id])
+
+    # 위시리스트 기반 추천 (위시리스트에 책 없으면 빈칸으로 보냄)
+    if len(wishlists) > 0:
+        customized_by_wishlist = recommend(wishlists)
 
     res_obj = {
         "success": True,
@@ -207,7 +216,8 @@ def recommend_by_user(userId):
                     "genre_name": customized_genre_name
                 },
                 "customized_books": customized_by_genre
-            }
+            },
+            "customized_by_wishlist": customized_by_wishlist
         }
     }
 
@@ -233,7 +243,8 @@ def recommend_for_guest():
                     "genre_name": random_genre_name
                 },
                 "customized_books": random_books_genre
-            }
+            },
+            "customized_by_wishlist": []
         }
     }
     return make_response(jsonify(res_obj), 200)
