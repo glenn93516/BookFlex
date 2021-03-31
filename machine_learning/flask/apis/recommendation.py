@@ -248,3 +248,16 @@ def recommend_for_guest():
         }
     }
     return make_response(jsonify(res_obj), 200)
+
+
+@recommendation.route("/book/<int:book_isbn>", methods=["GET"])
+def recommend_for_book(book_isbn):
+    customized_by_book = recommend([book_isbn])
+
+    res_obj = {
+        "success": True,
+        "data": {
+            "customized_by_book": customized_by_book
+        }
+    }
+    return make_response(jsonify(res_obj), 200)
