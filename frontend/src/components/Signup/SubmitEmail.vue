@@ -1,27 +1,27 @@
 <template>
   <div>
     <p 
-      class="notice-message font-coredream"
+      class="notice-message"
     >
       가입하실 이메일 주소를 입력해주세요.
     </p>
     <b-form @submit.prevent="duplicateCheck('enter', email)">
       <b-form-input
         v-model="email"
-        class="id-input font-nanumpen"
+        class="id-input"
         :class="emailStatus"
         placeholder="이메일 (example@gmail.com)"
         @blur="duplicateCheck('blur', email)"
       >
       </b-form-input>
       <div 
-        class="warning-msg font-coredream"
+        class="warning-msg"
         v-show="emailStatus === 'is-invalid duplicate'"
       >
         이미 가입된 회원입니다.
       </div>
       <div 
-        class="warning-msg font-coredream"
+        class="warning-msg"
         v-show="emailStatus === 'is-invalid form-invalid'"
       >
         이메일 양식이 올바르지 않습니다.
@@ -29,7 +29,7 @@
       <br>
       <b-button
         block
-        class="btn btn-success login-button font-nanumpen"
+        class="btn btn-success login-button"
         type="submit"
         :disabled="disableBtn"
       >

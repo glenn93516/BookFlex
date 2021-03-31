@@ -1,5 +1,5 @@
 <template>
-  <div class="recommend-back font-coredream">
+  <div class="recommend-back">
 
     <!-- 페이지 로딩 -->
     <div v-show="isLoading" id="page-loading">
@@ -20,7 +20,9 @@
         <div 
           class="tag-name"
         >
-          맞춤형 추천
+          <span id="first-tag">
+            맞춤형 추천
+          </span>
         </div>
       </div>
       <div 
@@ -32,7 +34,7 @@
           <Book 
             v-for="(book, idx) in suitRecommend.slice(0, 4)" 
             :key="idx" 
-            class="book-component" 
+            class="book-component mouse-pointer" 
             :book="book" 
             @click="selectBook(book)"
             @open-modal="openModal"
@@ -49,7 +51,9 @@
         <div 
           class="tag-name"
         >
-          {{ userGenre }}
+          <span id="second-tag">
+            {{ userGenre }}
+          </span>
         </div>
       </div>
       <div 
@@ -60,7 +64,7 @@
           <Book 
             v-for="(book, idx) in genreRecommend.slice(0, 4)" 
             :key="idx" 
-            class="book-component" 
+            class="book-component mouse-pointer" 
             :book="book" 
             @click="selectBook(book)"
             @open-modal="openModal"
@@ -77,7 +81,9 @@
         <div 
           class="tag-name"
         >
-          위시리스트
+          <span id="third-tag">
+            위시리스트
+          </span>
         </div>
       </div>
       <div
@@ -88,7 +94,7 @@
           <Book 
             v-for="(book, idx) in suitRecommend.slice(5, 9)" 
             :key="idx" 
-            class="book-component" 
+            class="book-component mouse-pointer" 
             :book="book" 
             @click="selectBook(book)"
             @open-modal="openModal"
@@ -241,20 +247,36 @@ export default {
   }
   .tag-name{
     margin-bottom: 20px;
-    margin-top: 10px;
-    background-color: rgba(161, 114, 70, 0);
+    margin-top: 1.5rem;
+    /* background-color: rgba(161, 114, 70, 0); */
     display: inline-block;
-    font-size: 1.7rem;
-    font-weight: bold;
+    font-size: 2rem;
+    /* font-weight: bold; */
     padding: 10px;
     margin-left: 0px;
     /* box-shadow: 1px 1px 2px rgb(150, 150, 150); */
-    border-radius: 3px/ 3px;
+    border-radius: 15px/ 15px;
     border: 0px;
     color: rgb(0, 0, 0);
     align-items: left;
-    /* background-color: #fb4242b0; */
+    text-align: left;
+    width: 100%;
+    text-shadow: whitesmoke 2px 3px;
+    /* background-color: rgba(255, 255, 255, 0.3); */
   }
+  .tag-name > span {
+    /* background-color: rgba(255, 255, 255, 0.7); */
+    padding: 5px 15px 10px;
+  }
+  /* .tag-name > span[id="first-tag"] {
+    border-bottom: #FB6542 solid 3px;
+  }
+  .tag-name > span[id="second-tag"] {
+    border-bottom: #03A9F4 solid 3px;
+  }
+  .tag-name > span[id="third-tag"] {
+    border-bottom: #FFBB00 solid 3px;
+  } */
 
   /* 페이지 로딩 css */
   #page-loading {

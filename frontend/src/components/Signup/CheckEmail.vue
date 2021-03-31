@@ -1,15 +1,15 @@
 <template>
   <div style="color: black;">
     <p 
-      class="notice-message font-coredream" 
+      class="notice-message" 
     >
       {{ timeMin }}분 이내에 발급받은 인증 번호를 입력해주세요.
     </p>
     <div>
-      <h1 id="timer" class="text-center font-nanumpen">{{ resTimeData }}</h1>
+      <h1 id="timer" class="text-center">{{ resTimeData }}</h1>
       <b-form-input
         v-model="inputNum"
-        class="number-input font-nanumpen"
+        class="number-input"
         @keydown.enter="goToInputName"
         placeholder="6자리 입력"
         :autofocus="inputAutofocus"
@@ -17,7 +17,7 @@
       </b-form-input>
       <a 
         href="#" 
-        class="resend-link font-coredream"
+        class="resend-link"
         @click="resend"
       >
         인증메일 재발송하기
@@ -25,7 +25,7 @@
     </div>
       <b-btn 
         block
-        class="btn-success next-btn-check font-nanumpen"
+        class="btn-success next-btn-check"
         :disabled="btnDisabled" 
         @click="goToInputName" 
       >

@@ -5,33 +5,33 @@
     <div
       class="loginbackground"
     >
-      <h1 class="loginheader font-nanumpen">로그인</h1>  
+      <h1 class="loginheader font-jeonnam">로그인</h1>  
       <br>
       <b-form @submit.prevent="userLogin()">
         <b-form-input
           v-model="email"
-          class="id-input font-nanumpen"
+          class="id-input font-jeonnam"
           placeholder="이메일 (example@gmail.com)"
         >
       </b-form-input>
-        <div class="warning-email" v-show="isVisible">
+        <div class="warning-email font-jeonnam" v-show="isVisible">
           이메일 양식이 올바르지 않습니다.
         </div>
         <br>
         <b-form-input
           v-model="password" 
-          class="id-input font-nanumpen"
+          class="id-input font-jeonnam"
           type="password"
           placeholder="비밀번호"
         >
         </b-form-input>
-        <a href="#" class="login-link first-login-link font-coredream">비밀번호를 잊어버리셨나요?</a>
+        <a href="#" class="login-link first-login-link font-jeonnam">비밀번호를 잊어버리셨나요?</a>
         <!-- signup/1이 아니라 signup으로 보내게 수정해줘야함 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-        <a href="/signup/1" class="login-link second-login-link font-coredream">회원이 아니신가요?</a>
+        <a href="/signup/1" class="login-link second-login-link font-jeonnam">회원이 아니신가요?</a>
         <b-button 
           block
           type="submit"
-          class="btn-success login-button font-nanumpen" 
+          class="btn-success login-button font-jeonnam" 
           :disabled="isVisible"
         >
           로그인

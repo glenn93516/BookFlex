@@ -4,13 +4,14 @@
       <div id="0" class="section first-main">
         <img src="https://i.pinimg.com/originals/3d/31/6b/3d316ba5a416f68c8627de6be9f97b68.gif" alt="">
         <div class="first-main-logo">
-          <span class="main-logo spread-underline font-main" @click="goMain()" @mouseover="bigLetterChange()" @mouseleave="bigLetterToWhite()">
+          <span class="main-logo spread-underline font-jeonnam" @click="goMain()" @mouseover="bigLetterChange()" @mouseleave="bigLetterToWhite()">
             <strong :class="bigLetter">B</strong>
             <span class="main-small-font">ook </span> 
             <strong :class="bigLetter">F</strong>
             <span class="main-small-font">lex</span>
           </span>
         </div>
+        <!-- <img width="600px;" style="position: absolute; top: 10vh; left: 30vw;" src="https://fontmeme.com/permalink/210331/cec3a003d7c1181272a1055dbb91e6b1.png" alt="neoneon-font" border="0"> -->
         <div class="scroll-link">
           <svg width="40px" class="mouse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76 130" preserveAspectRatio="xMidYMid meet">
             <g fill="none" fill-rule="evenodd">
@@ -18,7 +19,7 @@
               <circle class="scroll" cx="36.5" cy="31.5" r="4.5" fill="#FFF"/>
             </g>
           </svg>
-          <div style="color: white;" class="font-coredream">
+          <div style="color: white;" class="font-jeonnam">
             scroll down
           </div>
         </div>
@@ -71,7 +72,11 @@
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Open+Sans:wght@800&family=Roboto:wght@900&display=swap');
   .font-main {
+    /* font-family: 'Arvo', serif; */
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
   }
   .first-main {
     background-color: black;
@@ -85,7 +90,7 @@
     z-index: 10;
     color: white;
     text-align: center;
-    font-size: 80px;
+    font-size: 100px;
     font-weight: bold;
     letter-spacing: 5px;
   }
@@ -152,7 +157,7 @@
     }
   }
   .first-section {
-    background-color: red;
+    background-color: grey;
     height: 100vh;
   }
   .second-section {
