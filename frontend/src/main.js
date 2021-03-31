@@ -18,6 +18,10 @@ import { faTrashAlt as fasTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt as farTrashAlt } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+// import * as am4core from '@amcharts/amcharts4/core';
+// import * as am4charts from '@amcharts/amcharts4/charts';
+// import '@amcharts/amcharts4/charts';
+
 library.add(
   fasTimesCircle,
   farTimesCircle,
