@@ -22,5 +22,3 @@ app.register_blueprint(recommendation, url_prefix="/ml/api/recommend")
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
-    print(db)
-    print(app.config)
