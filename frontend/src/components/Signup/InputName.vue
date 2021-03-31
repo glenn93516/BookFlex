@@ -189,7 +189,7 @@ export default {
               if (input === 'enter') {
                 const user = {userNickname: this.name, userPassword: this.password}
                 this.$store.dispatch("SetSignupInfo", user)
-                this.$router.push({ name: 'SubmitPref' })
+                // this.$router.push({ name: 'SubmitPref' })
               }
             }
           })

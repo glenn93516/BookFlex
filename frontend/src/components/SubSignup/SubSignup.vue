@@ -123,7 +123,7 @@ export default {
   } 
   .noticeMessage {
     color: rgb(108, 160, 29);
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .cancel-btn:hover {
     cursor: pointer;
