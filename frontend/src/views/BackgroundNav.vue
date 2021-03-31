@@ -4,6 +4,7 @@
       variant="faded" 
       type="light" 
       class="background-nav"
+      style="min-width: 1060px;"
     >
       <b-navbar-brand
         @click="goToMain"
