@@ -93,6 +93,9 @@ export default new Vuex.Store({
       state.user.userBirth = payload.userBirth
       state.user.userGender = payload.userGender
       state.user.userJob = payload.userJob
+      state.user.userProfileImg = payload.userProfileImg
+      state.user.userId = payload.userId
+      state.user.userRole = payload.userRole
     },
     SubmitPref(state, payload) {
       state.signupInfo.genres = payload
@@ -110,7 +113,7 @@ export default new Vuex.Store({
   },
   actions: {
     Login (context, user) {
-      return axios.post(`${SERVER_URL}/user/login`, {
+      axios.post(`${SERVER_URL}/user/login`, {
           "userEmail": user.userEmail,
           "userPassword": user.userPassword
         })
@@ -130,12 +133,17 @@ export default new Vuex.Store({
         })
     },
     GetUserInfo (context) {
-      return axios.get(`${SERVER_URL}/user`)
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        'Authorization' : token
+      }
+      axios.get(`${SERVER_URL}/user`, {headers})
       .then(res => {
         context.commit("GetUserInfo", res.data.data)
+        console.log(res.data.data)
       })
       .catch(err => {
-        console.log(err)
+        console.error(err)
       })
     },
     SubmitUserGender(context, gender) {
@@ -159,13 +167,9 @@ export default new Vuex.Store({
       data.append('userBirth', User.userBirth)
       data.append('userGender', User.userGender)
       data.append('userJob', User.userJob)
-      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
       for (let val of data.values()) {
         console.log(val)
       }
-      console.log(typeof(data), '타입')
-      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-      console.log('액션스 user', User)
 
       axios.put(`${SERVER_URL}/user`, data)
       .then(res => {
