@@ -193,10 +193,25 @@ export default {
       this.checkLogin()
     }
   },
-  created() {
+  mounted() {
     this.checkLogin()
-    this.userInfo = this.$store.getters.getUser
-    console.log(this.userInfo)
+    const token = localStorage.getItem('jwt')
+    const headers = {
+      "Authorization" : token
+    }
+    console.log('token', token)
+    if (token) {
+      this.$axios.get(`${this.$store.getters.getServer}/user`, {headers})
+      .then(res => {
+        console.log(res.data)
+        this.userInfo = res.data.data
+        this.$store.commit('UpdateUserInfo', res.data.data)
+        console.log(this.userInfo)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    } 
   }
 }
 </script>

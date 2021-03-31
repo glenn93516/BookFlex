@@ -158,17 +158,13 @@ export default {
   mounted() {
     const token = localStorage.getItem('jwt')
     if (token) {
-      this.$axios.get(`${this.$store.getters.getServer}/user`, {token})
-      .then(res => {
-        this.userInfo = res.data.data
-      })
-      .catch(err => {
-        console.error(err)
-      })
+      this.userInfo = this.$store.getters.getUser
+      console.log(this.userInfo)
     } else {
       alert('로그인 해주세요!')
       this.$router.push({ name: 'Login' })
     }
+    console.log(this.$store.getters.getUser)
   }
 }
 </script>
