@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p class="notice-message font-coredream">선호 또는 관심있는 장르를 선택해 주세요.</p>
-    <div v-for="(option, idx) in options" :key="idx" class="custom-control font-nanumpen">
+    <p class="notice-message">선호 또는 관심있는 장르를 선택해 주세요.</p>
+    <div v-for="(option, idx) in options" :key="idx" class="custom-control">
       <Checkbox :option="option" @serve-data="catchData"/>
     </div>
     <!-- <div class="checkvalues">
@@ -9,7 +9,7 @@
     </div> -->
     <b-button
       block
-      class="btn btn-success login-button font-nanumpen" 
+      class="btn btn-success login-button" 
       :class="{ disabled : isActive }"
       @click="goToComplete"
     >
