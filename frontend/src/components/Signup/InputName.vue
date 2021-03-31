@@ -3,20 +3,20 @@
     <b-form @submit.prevent="duplicateCheck('enter', name)">
       <b-form-input
         v-model="name"
-        class="input-userinfo input"
+        class="input-userinfo font-nanumpen"
         :class="nameStatus"
         placeholder="필명 (8자리 이내)"
         @blur="duplicateCheck('blur', name)"
       >
       </b-form-input>
       <div 
-        class="userinfo-alert"
+        class="userinfo-alert font-coredream"
         v-show="nameStatus === 'is-invalid duplicate'"
       >
         이미 존재하는 닉네임입니다.
       </div>
       <div 
-        class="userinfo-alert"
+        class="userinfo-alert font-coredream"
         v-show="nameStatus === 'is-invalid'"
       >
         필명은 8자리 이내의 한글, 숫자, 영문만 가능합니다
@@ -25,14 +25,14 @@
 
       <b-form-input
         v-model="password"
-        class="input-userinfo-second input"
+        class="input-userinfo-second font-nanumpen"
         :class="pwStatus"
         type="password"
         placeholder="비밀번호 (8자리 이상, 영문 숫자 혼합 필수)"
       >
       </b-form-input>
       <div 
-        class="userinfo-alert" 
+        class="userinfo-alert font-coredream" 
         v-show="pwStatus == 'is-invalid'"
       >
         비밀번호는 8자리 이상, 영문 숫자를 혼합해주세요
@@ -40,21 +40,22 @@
       <br>
       <b-form-input
         v-model="confirmPassword"
-        class="input-userinfo-second"
+        class="input-userinfo-second font-nanumpen"
         :class="confirmStatus"
         type="password"
         placeholder="비밀번호 확인"
       >
       </b-form-input>
       <div 
-        class="userinfo-alert" 
+        class="userinfo-alert font-coredream" 
         v-show="confirmStatus == 'is-invalid'"
       >
         비밀번호와 일치하지 않습니다
       </div>
       <br>
       <b-button 
-        class="input-userinfo-btn btn btn-success btn-block"
+        block
+        class="input-userinfo-btn btn btn-success font-nanumpen"
         type="submit"
         :disabled="disableBtn"
         @click="submitUserName"
@@ -201,6 +202,18 @@ export default {
 </script>
 
 <style>
+  .number-input {
+    border: 0;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    display: inline-block;
+    width: 100%;
+  }
+  .number-input[type="text"]:focus {
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
+    outline: 0 none;
+  }
+
   .input-userinfo {
     border: 0;
     border-bottom: 1px solid;
@@ -215,6 +228,8 @@ export default {
   .userinfo-alert {
     color: red; 
     margin-bottom: -24px;
+    font-size: 0.8rem;
+    margin-top: 8px;
   }
   .form-control:focus{
     border-color: none;

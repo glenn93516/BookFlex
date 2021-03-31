@@ -1,34 +1,35 @@
 <template>
   <div>
     <p 
-      class="notice-message"
+      class="notice-message font-coredream"
     >
       가입하실 이메일 주소를 입력해주세요.
     </p>
     <b-form @submit.prevent="duplicateCheck('enter', email)">
       <b-form-input
         v-model="email"
-        class="id-input"
+        class="id-input font-nanumpen"
         :class="emailStatus"
         placeholder="이메일 (example@gmail.com)"
         @blur="duplicateCheck('blur', email)"
       >
       </b-form-input>
       <div 
-        class="warning-msg"
+        class="warning-msg font-coredream"
         v-show="emailStatus === 'is-invalid duplicate'"
       >
         이미 가입된 회원입니다.
       </div>
       <div 
-        class="warning-msg"
+        class="warning-msg font-coredream"
         v-show="emailStatus === 'is-invalid form-invalid'"
       >
         이메일 양식이 올바르지 않습니다.
       </div>
       <br>
       <b-button
-        class="btn btn-success btn-block next-btn-submit"
+        block
+        class="btn btn-success login-button font-nanumpen"
         type="submit"
         :disabled="disableBtn"
       >
@@ -120,10 +121,6 @@ export default {
 </script>
 
 <style>
-  .notice-message {
-    color: rgb(108, 160, 29);
-    margin-top: 20px;
-  }
   .next-btn-submit{
     margin-top: 40px;
   }
@@ -138,6 +135,8 @@ export default {
   }
   .warning-msg{
     color: red;
+    margin-top: 8px;
     margin-bottom: -24px;
+    font-size: 0.8rem;
   }
 </style>
