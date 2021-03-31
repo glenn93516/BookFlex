@@ -1,7 +1,7 @@
 <template>
   <div style="color: black;">
     <p 
-      class="notice-message" 
+      class="notice-message font-coredream" 
     >
       {{ timeMin }}분 이내에 발급받은 인증 번호를 입력해주세요.
     </p>
