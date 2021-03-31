@@ -2,9 +2,9 @@
   <div id='oopss'>
     <div id='error-text'>
       <img src="https://cdn.rawgit.com/ahmedhosna95/upload/1731955f/sad404.svg" alt="404">
-      <span>404 PAGE</span>
-      <p class="p-a" style="font-family: 'S-CoreDream-2ExtraLight'">
-          .존재하지 않는 페이지 입니다</p>
+      <span>404 NOT FOUND</span>
+      <p class="p-a">
+          존재하지 않는 페이지 입니다.</p>
       <a href='/' class="back">메인 페이지로 이동하기</a>
     </div>
     <footer>
@@ -38,7 +38,7 @@ export default {
   align-items: center;
   font-family: 'NanumBarunpen', sans-serif;
   color: #000;
-  direction: rtl;
+  /* direction: rtl; */
 }
 #oopss #error-text img {
   margin: 0 auto 20px;
@@ -69,7 +69,8 @@ export default {
 #oopss #error-text .back:hover {
   -webkit-transform: translateY(-13px);
           transform: translateY(-13px);
-  box-shadow: 0 35px 90px 4px rgba(61, 16, 5, 0.3), inset 0px 0 0 3px rgba(61, 16, 5, 0.8);
+  /* box-shadow: 0 35px 90px 4px rgba(61, 16, 5, 0.3), inset 0px 0 0 3px rgba(61, 16, 5, 0.8); */
+  box-shadow: 0 35px 90px 4px rgba(61, 16, 5, 0), inset 0px 0 0 3px rgba(61, 16, 5, 0.8);
 }
 footer {
   font-family: 'NanumBarunpen', sans-serif;
