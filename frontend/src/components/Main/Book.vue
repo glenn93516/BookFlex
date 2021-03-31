@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="book-component">
 		<!-- Book -->
     <li>
       <figure class='book'>        
@@ -144,8 +144,8 @@ export default {
   padding: 0;
 }
 
-::before,
-::after {
+.shelf * ::before,
+.shelf * ::after {
 	content: "";
 }
 
@@ -181,7 +181,7 @@ a {
 .book-btn {
 	display: inline-block;
 	text-transform: uppercase;
-	border: 2px solid #2c3e50;
+	border: 0.3px dotted #2c3e50;
 	border-radius: 20px;
 	margin-top: 30px; 
 	font-size: 1rem;
