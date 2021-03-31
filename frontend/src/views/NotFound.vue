@@ -8,9 +8,7 @@
       <a href='/' class="back">메인 페이지로 이동하기</a>
     </div>
     <footer>
-      <p class="footer-content">
-        Copyright © 앙상블. All Rights Reserved.
-      </p>
+      Copyright © 앙상블. All Rights Reserved.
     </footer>
   </div>
 </template>
@@ -43,7 +41,7 @@ export default {
   direction: rtl;
 }
 #oopss #error-text img {
-  margin: 85px auto 20px;
+  margin: 0 auto 20px;
   height: 342px;
 }
 #oopss #error-text span {
@@ -54,14 +52,14 @@ export default {
 }
 #oopss #error-text p.p-a {
   font-size: 19px;
-  margin: 20px 0 0 0;
+  margin: 40px 0 0 0;
 }
 #oopss #error-text .back {
   background: #fff;
   color: #000;
   font-size: 30px;
   text-decoration: none;
-  margin: 1em auto 0;
+  margin: 1.5em auto 0;
   padding: .7em 2em;
   border-radius: 500px;
   box-shadow: 0 20px 70px 4px rgba(0, 0, 0, 0.1), inset 7px 33px 0 0px rgba(61, 16, 5, 0.3);
@@ -71,13 +69,15 @@ export default {
 #oopss #error-text .back:hover {
   -webkit-transform: translateY(-13px);
           transform: translateY(-13px);
-  box-shadow: 0 35px 90px 4px rgba(0, 0, 0, 0.3), inset 0px 0 0 3px #000;
+  box-shadow: 0 35px 90px 4px rgba(61, 16, 5, 0.3), inset 0px 0 0 3px rgba(61, 16, 5, 0.8);
 }
-.footer-content {
+footer {
   font-family: 'NanumBarunpen', sans-serif;
+  position: fixed;
+  display: inline-block;
+  width: 100%;
+  bottom: 30px;
   font-size: 10px;
   text-align: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
 }
 </style>
