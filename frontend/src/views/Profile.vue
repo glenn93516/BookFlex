@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="profile">
     <!-- 프로필 헤더(사진, 이름, 한줄, 편집 버튼, 직업) -->
     <div id="profileHeader" class="profile-header">
       <!-- 프로필사진 -->
@@ -158,23 +158,19 @@ export default {
   mounted() {
     const token = localStorage.getItem('jwt')
     if (token) {
-      this.$axios.get(`${this.$store.getters.getServer}/user`, {token})
-      .then(res => {
-        this.userInfo = res.data.data
-      })
-      .catch(err => {
-        console.error(err)
-      })
+      this.userInfo = this.$store.getters.getUser
+      console.log(this.userInfo)
     } else {
       alert('로그인 해주세요!')
       this.$router.push({ name: 'Login' })
     }
+    console.log(this.$store.getters.getUser)
   }
 }
 </script>
 
 <style>
-  * {
+  #profile {
     font-family: 'NanumBarunpen', sans-serif;
     margin: 0;
     padding: 0;

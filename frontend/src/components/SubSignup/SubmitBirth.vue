@@ -1,18 +1,19 @@
 <template>
   <div>
-    <h4 style="margin-top: 5px;">생년월일을 입력해주세요</h4>
+    <h4 style="margin-top: 5px;" class="font-nanumpen">생년월일을 입력해주세요</h4>
 
     <b-form-datepicker 
       id="datepicker" 
       v-model="birthdate"
-      class="birth-datepicker"
+      class="birth-datepicker font-nanumpen"
     >
     </b-form-datepicker>
 
     <b-button
       @click="submitUserBirth(birthdate)"
       @keydown.enter="submitUserBirth(birthdate)"
-      class="btn-success btn-block birth-btn" 
+      block
+      class="btn-success birth-btn login-button font-nanumpen" 
     >
       확인
     </b-button>
@@ -52,6 +53,6 @@ export default {
     margin-bottom: 40px;
   }
   .birth-btn {
-    margin-top: 6.6rem;
+    margin-top: 5rem;
   }
 </style>
