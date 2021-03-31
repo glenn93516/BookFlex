@@ -4,7 +4,7 @@
       <div id="signup-background" :class="size">
         <header class="subsignup-header">
           <h1 
-            class="signup-h1 mb-0"
+            class="signup-h1 mb-0 font-nanumpen"
             v-show="signupTitle"
           >
             추가항목
@@ -18,7 +18,7 @@
             v-show="signupTitle"
           />
         </header>
-        <p class="noticeMessage" style="font-size: 12px" v-show="signupTitle">
+        <p class="notice-message-sub font-coredream" v-show="signupTitle">
           추가 항목은 프로필 수정 페이지에서 추가 입력 및 수정이 가능합니다.
         </p>
 

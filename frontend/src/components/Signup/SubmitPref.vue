@@ -150,11 +150,6 @@ export default {
 </script>
 
 <style>
-  .describeP {
-    color: #5a9b00;
-    font-size: 14px;
-    margin-top: -15px;
-  }
   .custom-control {
     display: inline-block;
     width: 130px;

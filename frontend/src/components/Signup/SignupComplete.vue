@@ -12,17 +12,12 @@
     <p class="notice-message font-coredream notice-message-margin">
       조금 더 정확한 추천을 위해 선택항목을 입력해주세요.
     </p>
-    <div
-      style="
-        display: flex;
-        justify-content: space-around;
-      "
-    >
+    <div class="button-group">
       <router-link 
         :to="{ name: 'SubmitGender'}" 
         class="btn btn-success complete-button font-nanumpen"
       >
-        <span style="display: inline-block; margin: 15px 0;">
+        <span class="button-text">
           네, 좋아요😊
         </span>
       </router-link>
@@ -95,7 +90,16 @@ export default {
     font-weight: bold;
     margin-top: 1.5rem;
   }
+  .button-group {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+  }
   .complete-button {
     border-radius: 15px / 15px;
+  }
+  .button-text {
+    display: inline-block; 
+    margin: 15px 0;
   }
 </style>

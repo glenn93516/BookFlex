@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h4>프로필 사진을 등록해주세요.</h4>
+    <h4 class="font-nanumpen">프로필 사진을 등록해주세요.</h4>
 
     <b-form-file
       v-model="profileImage"
       :state="Boolean(profileImage)"
       :placeholder="photoName"
       drop-placeholder="Drop file here..."
-      class="submit-PImg"
+      class="submit-PImg font-nanumpen"
       enctype='multipart/form-data'
       type='file'
     >
@@ -15,7 +15,8 @@
       <!-- <div class="mt-3">Selected file: {{ profileImage ? profileImage.name : '' }}</div> -->
 
     <b-button
-      class="btn-success btn-block profileImg-btn" 
+      block
+      class="btn-success profileImg-btn login-button font-nanumpen" 
       @click="submitUserPic(profileImage)"
       @keydown.enter="submitUserPic(profileImage)"
     >
@@ -70,6 +71,6 @@ export default {
     margin-bottom: 10px;
   }
   .profileImg-btn {
-    margin-top: 6.9rem;
+    margin-top: 5rem;
   }
 </style>

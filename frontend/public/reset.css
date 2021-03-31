@@ -60,6 +60,11 @@ a:hover{
   margin: 20px 0 10px 0;
   font-size: 0.9rem;
 }
+.notice-message-sub {
+  color: rgb(108, 160, 29);
+  margin: 10px 0 10px 0;
+  font-size: 0.8rem;
+}
 
 /* hover했을 때 애니메이션 효과 */
 .hvr-rotate {
