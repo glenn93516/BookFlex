@@ -26,7 +26,7 @@ public class ReceivemsgDto {
     @ApiModelProperty(value = "수신 유저 ID")
     private Long receiverId;
 
-    public ReceivemsgDto(String receivemsgTitle, String receivemsgContent, Long senderId, Long receiverId) {
+    public ReceivemsgDto(String receivemsgContent, Long senderId, Long receiverId) {
         this.receivemsgContent = receivemsgContent;
         this.senderId = senderId;
         this.receiverId = receiverId;
