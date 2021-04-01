@@ -70,25 +70,28 @@ export default {
 		goToCollect() {			
 			// 읽음 api 요청 보내기(일단 연결 x)
 			this.checkReadStatus()
-
-			// 문장수집으로 이동
 			this.$emit('open-modal', this.book)
 		},
 		checkReadStatus() {
 			const token = localStorage.getItem('jwt')
+			const headers = {
+				"Authorization": token,
+			}
 			if (token) {
 				this.$axios.post(`${this.$store.getters.getServer}/bookshelf`, {
-					token,
-				},
-				{
 					"bookIsbn": this.book.book_isbn,
 					"userId": this.$store.getters.getUser.userId
+				},
+				{
+					headers,
 				})
 				.then(res => {
 					alert('읽기 목록에 담겼습니다 :)')
 					console.log(res)
 					// 읽은 책은 추천 목록에서 삭제 => 부모로 신호보내서 데이터 삭제하기
 					this.$emit('delete-readBook', this.book.book_isbn)
+					// 문장수집으로 이동
+					this.$emit('open-modal', this.book)
 				})
 				.catch(err => {
 					console.error(err)
@@ -102,8 +105,14 @@ export default {
 		},
 		addToWish() {
 			const token = localStorage.getItem('jwt')
+			const headers = {
+				"Authorization": token
+			}
 			if (token) {
-				this.$axios.post(`${this.$store.getters.getServer}/wishlist/${this.book.book_isbn}`, {token})
+				this.$axios.post(`${this.$store.getters.getServer}/wishlist/${this.book.book_isbn}`, {}, 
+					{
+						headers
+					})
 				.then(res => {
 					console.log(res)
 					alert('위시리스트에 담겼습니다 :)')
