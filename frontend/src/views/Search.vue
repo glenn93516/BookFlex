@@ -39,9 +39,9 @@ export default {
     return {
       text : '', //SEARCH에 들어온 상태에서 Nav검색 이용 불가
       bookData : {
-        titleData : null,
-        authorData : null,
-        contentsData : null,
+        titleData : [],
+        authorData : [],
+        contentsData : [],
       },
       userData : null,
     }
@@ -66,7 +66,7 @@ export default {
         this.searchTitle();
         this.searchAuthor();
         this.searchContents();
-        // this.searchUser();
+        this.searchUser();
       }
     },
     searchTitle(){
@@ -115,13 +115,14 @@ export default {
         })
     },
     searchUser(){
-      this.$axios.get(`${this.$store.getters.getServer}/user/`,this.text)
+      this.$axios.get(`${this.$store.getters.getServer}/user/${this.text}`)
         .then(res => {
-          this.Userdata = res.data;
+          console.log('this.Userdata >> ',res.data.data);
+          this.userData = res.data.data;
         })
-        .catch(err => {
-          console.error(err)
-        })
+        // .catch(err => {
+        //   // console.error(err)
+        // })
     }
   }
 }
