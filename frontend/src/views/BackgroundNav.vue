@@ -25,8 +25,8 @@
         <router-link :to="{ name: 'Login' }" class="temp-menu">
           COMMUNITY
         </router-link>
-        <router-link :to="{ name: 'Profile' }" class="temp-menu">
-          USER SPACE
+        <router-link :to="{ name: 'Search' }" class="temp-menu">
+          SEARCH
         </router-link>
       </div>
       <b-navbar-nav style="display: flex; align-items: center; width: 290px; justify-content: flex-end;">
