@@ -121,7 +121,7 @@ const routes = [
         ],
       },
       {
-        path: '/search',
+        path: '/search/:word?',
         name: 'Search',
         component: () => import('../views/Search.vue'),
         children: [],

@@ -37,14 +37,24 @@ export default {
   },
   data() {
     return {
-      test : '메롱',
-      text : '',
+      text : '', //SEARCH에 들어온 상태에서 Nav검색 이용 불가
       titleData : null,
       authorData : null,
       contentsData : null,
       userData : null,
       bookData : null,
     }
+  },
+  created() {
+    // if(this.$route.params.word!=''){
+    //   searchClick()
+    // }
+  },
+  mounted() {
+    // if(this.$route.params.word!=undefined){
+    //   console.log('route : '+this.$route.params.word);
+    //   // this.text = this.$route.params.word
+    // }
   },
   methods: {
     searchClick(){
@@ -60,10 +70,12 @@ export default {
       }
     },
     searchTitle(){
+      console.log('TITLE : '+this.text)
       this.form = {
         search : 'title',
         word : this.text
       };
+      console.log(this.form)
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: this.form })
         .then(res => {
           console.log(res.data.data)
@@ -74,17 +86,9 @@ export default {
           console.error(err)
         })
     },
-    searchAuthor(){
-
-    },
-    searchContents(){
-
-    },
-    searchUser(){
-
-    }
-  },
-  mounted() {
+    searchAuthor(){},
+    searchContents(){},
+    searchUser(){}
   }
 }
 </script>
