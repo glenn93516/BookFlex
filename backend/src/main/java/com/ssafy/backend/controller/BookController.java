@@ -198,11 +198,19 @@ public class BookController {
         return responseEntity;
     }
 
-    // 도서 정보 조회
+    // 관련 도서 조회
     @ApiOperation(value = "현재 책이랑 비슷한 추천 도서 조회", notes = "현재 책이랑 유사한 책 20개 추천")
     @GetMapping(value = "/{book_isbn}/recommend")
     public ResponseEntity getSimilarBooks(@ApiParam(value = "선택한 책 isbn", required = true, example = "8954672213") @PathVariable(name = "book_isbn") Long book_isbn) {
         String url = BASE_FLASK_URL + "/recommend/book/" + book_isbn;
+        return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, url).build();
+    }
+
+    // 도서 감정 분석
+    @ApiOperation(value = "현재 책이랑 비슷한 추천 도서 조회", notes = "현재 책이랑 유사한 책 20개 추천")
+    @GetMapping(value = "/{book_isbn}/sentiment")
+    public ResponseEntity getBookSentiment(@ApiParam(value = "선택한 책 isbn", required = true, example = "8954672213") @PathVariable(name = "book_isbn") Long book_isbn) {
+        String url = BASE_FLASK_URL + "/book/" + book_isbn + "/sentiment";
         return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, url).build();
     }
 }

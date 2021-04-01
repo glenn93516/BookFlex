@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h4 class="font-nanumpen">프로필 사진을 등록해주세요.</h4>
+    <h4>프로필 사진을 등록해주세요.</h4>
 
     <b-form-file
       v-model="profileImage"
       :state="Boolean(profileImage)"
       :placeholder="photoName"
       drop-placeholder="Drop file here..."
-      class="submit-PImg font-nanumpen"
+      class="submit-PImg"
       enctype='multipart/form-data'
       type='file'
     >
@@ -16,7 +16,7 @@
 
     <b-button
       block
-      class="btn-success profileImg-btn login-button font-nanumpen" 
+      class="btn-success profileImg-btn login-button" 
       @click="submitUserPic(profileImage)"
       @keydown.enter="submitUserPic(profileImage)"
     >

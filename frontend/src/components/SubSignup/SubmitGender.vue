@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="gender-subtitle font-nanumpen">성별을 선택해주세요</h4>
+    <h4 class="gender-subtitle">성별을 선택해주세요</h4>
 
     <b-form-group 
       class="gender-form"
@@ -35,7 +35,7 @@
       @click="submitUserGender(selected)"
       @keydown.enter="submitUserGender(selected)"
       block
-      class="btn-success gender-btn login-button font-nanumpen" 
+      class="btn-success gender-btn login-button" 
     >
       확인
     </b-button>
