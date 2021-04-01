@@ -1,5 +1,5 @@
 <template>
-  <div class="temp">
+  <div class="temp" style="margin-top: 20px;">
     <div 
       class="sentence-item" 
       v-for="item in showItems" 
