@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from apis.recommendation import recommendation
 from apis.sentiment import sentiment
+from apis.statistics import statistics
 
 app = Flask(__name__)
 
@@ -20,6 +21,7 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 # EndPoint 추가
 app.register_blueprint(recommendation, url_prefix="/ml/api/recommend")
 app.register_blueprint(sentiment, url_prefix="/ml/api/book")
+app.register_blueprint(statistics, url_prefix="/ml/api/statistics")
 
 
 if __name__ == "__main__":
