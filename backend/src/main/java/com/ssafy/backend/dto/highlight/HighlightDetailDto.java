@@ -22,6 +22,8 @@ public class HighlightDetailDto {
     private String highlightCover;
     @ApiModelProperty(value = "문장수집 등록할 책 ISBN")
     private Long bookIsbn;
+    @ApiModelProperty(value = "문장수집 등록할 책 제목")
+    private String bookTitle;
     @ApiModelProperty(value = "문장수집 등록한 유저")
     private UserDto user;
     @ApiModelProperty(value = "문장 수집 생성 날짜")
