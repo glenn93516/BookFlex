@@ -185,7 +185,7 @@ export default {
       this.isLogin = false
     },
     postBoxClick() {
-      alert('우체통 설치 중 ...🛠')
+      this.$router.push({ name: 'Message' })
     },
   },
   watch: {

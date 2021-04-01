@@ -199,6 +199,7 @@ export default new Vuex.Store({
     },
     Logout(context) {
       context.commit('Logout')
-    }
+    },
+    
   }
 })
