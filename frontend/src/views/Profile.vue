@@ -159,12 +159,12 @@ export default {
     const token = localStorage.getItem('jwt')
     if (token) {
       this.userInfo = this.$store.getters.getUser
-      console.log(this.userInfo)
+      console.log(this.userInfo, 'this.userInfo')
     } else {
       alert('로그인 해주세요!')
       this.$router.push({ name: 'Login' })
     }
-    console.log(this.$store.getters.getUser)
+    console.log(this.$store.getters.getUser, 'this.$store.getters.getUser')
   },
   watch: {
     // userInfo() {
@@ -339,13 +339,13 @@ export default {
   .profile-nav-item:hover {
     font-weight: bold;
     cursor: pointer;
+    transition: 0.1s;
   }
   .profile-nav-item.router-link-exact-active {
     color: black;
     font-weight: bold;
     border-top: 2px black solid;
   }
-
 
   .more {
     display: flex;
