@@ -14,7 +14,6 @@
         @mouseover="closeIcon = ['fas', 'times-circle']" 
         @mouseleave="closeIcon = ['far', 'times-circle']" 
         :icon="closeIcon" 
-        :style="{color: '#FF0000'}" 
       />
     </header>
     <div>
@@ -22,15 +21,18 @@
         class="sentence-img" 
         width="465px" 
         height="300px" 
-        :src="item.src" 
+        :src="item.hightlightCover" 
         alt=""
         style="margin-top: 9px;"
       >
       <div class="detail-dimmed">
         <!-- text최소 길이, 최대 길이 정해주기 -->
         <div class="detail-sentence-text">
-          <div style="font-size: 17px;">{{item.text}}</div>
-          <div style="font-size: 20px; margin-top: 10px; font-weight: bold;">"{{item.book}}"</div>
+          <div style="font-size: 23px;">{{item.highlightContent}}</div>
+          <div style="font-size: 20px; margin-top: 10px; font-weight: bold;">"{{item.bookName}}"</div>
+        </div>
+        <div class="detail-sentence-date">
+          {{item.createdDate}}
         </div>
       </div>
     </div>
@@ -59,6 +61,7 @@
           @mouseleave="editIcon = ['far', 'edit']"
           :icon="editIcon"
           :style="{color: '#FF0000'}"
+          v-if="isEditor"
         />
         <font-awesome-icon 
           size="2x"
@@ -67,6 +70,7 @@
           @mouseleave="deleteIcon = ['far', 'trash-alt']"
           :icon="deleteIcon"
           :style="{color: '#FF0000'}"
+          v-if="isEditor"
         />
       </div>
     </footer>
@@ -86,9 +90,16 @@ export default {
       hoverClose: false,
       heart: false,
       likeNum: 100,
+      isEditor: false,
     }
   },
-  created() {
+  // 지금은 프로필이라서 이렇게 해도 되지만, community의 경우 한 개씩 반복해서 확인해줘야함
+  mounted() {
+    if (this.$store.getters.getUser.userNickname === this.$route.params.userName) {
+      this.isEditor = true
+    } else {
+      this.isEditor = false
+    }
   },
   methods: {
     closeModal() {
@@ -122,9 +133,21 @@ export default {
     text-align: center;
   }
   .detail-sentence-text {
+    display: absolute;
     width: 465px;
-    height: 300px;
+    height: 270px;
     padding: 100px 10px 0 10px;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+  }
+  .detail-sentence-date {
+    display: absolute;
+    height: 30px;
+    right: 0;
+    /* background-color: red; */
+    text-align: end;
+    padding-right: 20px;
     /* display: flex; */
     /* align-items: center; */
     /* justify-content: center; */

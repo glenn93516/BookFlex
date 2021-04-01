@@ -93,10 +93,10 @@ const routes = [
         ]
       },
       {
-        path:'/profile',
+        path:'/:userName',
         name: 'Profile',
         component: () => import('../views/Profile.vue'),
-        redirect: '/profile/genre',
+        redirect: '/:userName/genre',
         children: [
           {
             path: 'genre',

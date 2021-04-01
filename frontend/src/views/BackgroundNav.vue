@@ -26,7 +26,7 @@
         <router-link :to="{ name: 'Login' }" class="temp-menu">
           COMMUNITY
         </router-link>
-        <router-link :to="{ name: 'Profile' }" class="temp-menu">
+        <router-link :to="{ name: 'Profile', params: {userName: this.userInfo.userNickname}}" class="temp-menu">
           USER SPACE
         </router-link>
       </div>
@@ -153,7 +153,8 @@ export default {
       }
     },
     goToProfile() {
-      this.$router.push({ name: 'Profile' })
+      console.log(this.userInfo)
+      this.$router.push({ name: 'Profile', params: {userName: this.userInfo.userNickname}})
     },
     goToMain() {
       this.$router.push({ name: 'MainPage' })
