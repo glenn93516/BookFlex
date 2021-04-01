@@ -34,7 +34,8 @@
     <b-button
       @click="submitUserGender(selected)"
       @keydown.enter="submitUserGender(selected)"
-      class="btn-success btn-block gender-btn" 
+      block
+      class="btn-success gender-btn login-button" 
     >
       확인
     </b-button>

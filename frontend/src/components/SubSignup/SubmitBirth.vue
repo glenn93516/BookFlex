@@ -12,7 +12,8 @@
     <b-button
       @click="submitUserBirth(birthdate)"
       @keydown.enter="submitUserBirth(birthdate)"
-      class="btn-success btn-block birth-btn" 
+      block
+      class="btn-success birth-btn login-button" 
     >
       확인
     </b-button>
@@ -52,6 +53,6 @@ export default {
     margin-bottom: 40px;
   }
   .birth-btn {
-    margin-top: 6.6rem;
+    margin-top: 5rem;
   }
 </style>
