@@ -19,7 +19,7 @@ device = torch.device("cpu")
 model = ElectraForSequenceClassification.from_pretrained(
     "monologg/koelectra-base-v3-discriminator")
 model.load_state_dict(torch.load(
-    "data\koelectra_base_v3.pt", map_location=device))
+    "data/koelectra_base_v3.pt", map_location=device))
 model.eval()
 tokenizer = AutoTokenizer.from_pretrained(
     "monologg/koelectra-base-v3-discriminator")
