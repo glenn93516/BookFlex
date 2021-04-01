@@ -1,14 +1,14 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 // import Home from '../views/Home.vue'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path:'/',
+    path: '/',
     name: 'MainPage',
-    component: () => import('../views/Main.vue')
+    component: () => import('../views/Main.vue'),
   },
   {
     path: '/',
@@ -19,17 +19,17 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/BackgroundNav.vue'),
     children: [
       {
-        path:'/main',
+        path: '/main',
         name: 'MainBook',
-        component: () => import('../views/MainBook.vue')
+        component: () => import('../views/MainBook.vue'),
       },
       {
-        path:'/login',
+        path: '/login',
         name: 'Login',
-        component: () => import('../components/Login/Login.vue')
+        component: () => import('../components/Login/Login.vue'),
       },
       {
-        path:'/signup',
+        path: '/signup',
         name: 'Signup',
         component: () => import('../components/Signup/Signup.vue'),
         children: [
@@ -58,10 +58,10 @@ const routes = [
             name: 'SignupComplete',
             component: () => import('../components/Signup/SignupComplete.vue'),
           },
-        ]
+        ],
       },
       {
-        path:'/subsignup',
+        path: '/subsignup',
         name: 'SubSignup',
         component: () => import('../components/SubSignup/SubSignup.vue'),
         children: [
@@ -90,10 +90,10 @@ const routes = [
             name: 'SubSignComplete',
             component: () => import('../components/SubSignup/SubSignComplete.vue'),
           },
-        ]
+        ],
       },
       {
-        path:'/profile',
+        path: '/profile',
         name: 'Profile',
         component: () => import('../views/Profile.vue'),
         redirect: '/profile/genre',
@@ -118,17 +118,22 @@ const routes = [
             name: 'WishList',
             component: () => import('../components/Profile/WishList.vue'),
           },
-        ]
+        ],
       },
-    ]
+      {
+        path: '/search',
+        name: 'Search',
+        component: () => import('../views/Search.vue'),
+      },
+    ],
   },
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 // router guard로 이메일 인증 건너뛰기 막아줘야함
 
-export default router
+export default router;

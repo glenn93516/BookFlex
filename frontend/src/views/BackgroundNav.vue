@@ -195,9 +195,21 @@ export default {
   },
   created() {
     this.checkLogin()
+    const token = localStorage.getItem('jwt')
+    console.log('token', token)
+    if (token) {
+      // this.$store.dispatch('GetUserInfo')
+      this.$axios.get(`${this.$store.getters.getServer}/user`, {token})
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    } 
     this.userInfo = this.$store.getters.getUser
     console.log(this.userInfo)
-  }
+  },
 }
 </script>
 
