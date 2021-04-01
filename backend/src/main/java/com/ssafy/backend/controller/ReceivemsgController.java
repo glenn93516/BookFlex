@@ -7,6 +7,8 @@ import com.ssafy.backend.dto.response.ListDataResponse;
 import com.ssafy.backend.dto.response.SingleDataResponse;
 import com.ssafy.backend.service.ReceivemsgService;
 import com.ssafy.backend.service.ResponseService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,9 @@ public class ReceivemsgController {
     private final Logger logger = LoggerFactory.getLogger(ReceivemsgController.class);
 
     @PreAuthorize("hasRole('ROLE_USER')")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @ApiOperation(value = "수신 메세지 조회")
     @GetMapping
     public ResponseEntity selectReceivemsgList(@ApiIgnore final Authentication authentication) {
@@ -53,6 +58,9 @@ public class ReceivemsgController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @ApiOperation(value = "수신 메세지 상세조회")
     @GetMapping("/{receivemsgId}")
     public ResponseEntity selectReceivemsg(@ApiParam(value = "수신메세지 아이디", required = true)
@@ -75,6 +83,9 @@ public class ReceivemsgController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @ApiOperation(value = "수신 메세지 삭제")
     @DeleteMapping("/{receivemsgId}")
     public ResponseEntity deleteReceivemsg(@ApiParam(value = "수신메세지 아이디", required = true)

@@ -6,6 +6,8 @@ import com.ssafy.backend.dto.UserDto;
 import com.ssafy.backend.dto.response.*;
 import com.ssafy.backend.service.ResponseService;
 import com.ssafy.backend.service.SendmsgService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,9 @@ public class SendmsgController {
     private final Logger logger = LoggerFactory.getLogger(ReceivemsgController.class);
 
     @PreAuthorize("hasRole('ROLE_USER')")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @ApiOperation(value = "발신 메세지 조회")
     @GetMapping
     public ResponseEntity selectSendmsgList(@ApiIgnore final Authentication authentication) {
@@ -52,6 +57,9 @@ public class SendmsgController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @ApiOperation(value = "발신 메세지 상세조회")
     @GetMapping("/{sendmsgId}")
     public ResponseEntity selectSendmsg(@ApiParam(value = "발신메세지 아이디", required = true)
@@ -74,6 +82,9 @@ public class SendmsgController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @ApiOperation(value = "메세지 생성")
     @PostMapping
     public ResponseEntity insertMessage(@ApiIgnore final Authentication authentication,
@@ -99,6 +110,9 @@ public class SendmsgController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "로그인 성공 후 발급받는 token", required = true, dataType = "String", paramType = "header")
+    })
     @ApiOperation(value = "발신 메세지 상세조회")
     @DeleteMapping("/{sendmsgId}")
     public ResponseEntity deleteendmsg(@ApiParam(value = "발신메세지 아이디", required = true)
