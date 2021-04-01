@@ -128,8 +128,8 @@ const routes = [
         children: [
           {
             path: 'received',
-            name: 'Recevied',
-            component: () => import('../components/Message/Recevied.vue'),
+            name: 'Received',
+            component: () => import('../components/Message/Received.vue'),
           },
           {
             path: 'sent',
