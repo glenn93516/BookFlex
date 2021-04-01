@@ -38,7 +38,7 @@ export default {
   components: {
     SentenceDetail,
   },
-  created() {
+  mounted() {
     console.log(this.$route.params.userName, 'savesentence')
     // 문장 요청 보내기
     // 지금은 숫자로 요청해야함
