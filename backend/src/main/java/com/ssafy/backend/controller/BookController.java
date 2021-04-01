@@ -33,8 +33,8 @@ import java.util.Map;
 @RequestMapping("/book")
 public class BookController {
 
-//    private final String BASE_FLASK_URL = "https://j4f004.p.ssafy.io/ml/api";
-    private final String BASE_FLASK_URL = "http://localhost:5000/ml/api";
+    private final String BASE_FLASK_URL = "https://j4f004.p.ssafy.io/ml/api";
+//    private final String BASE_FLASK_URL = "http://localhost:5000/ml/api";
     private final BookService bookService;
     private final ResponseService responseService;
     private final Logger logger = LoggerFactory.getLogger(BookController.class);
