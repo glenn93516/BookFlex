@@ -28,7 +28,8 @@
       </div>
       <br>
       <b-button
-        class="btn btn-success btn-block next-btn-submit"
+        block
+        class="btn btn-success login-button"
         type="submit"
         :disabled="disableBtn"
       >
@@ -120,10 +121,6 @@ export default {
 </script>
 
 <style>
-  .notice-message {
-    color: rgb(108, 160, 29);
-    margin-top: 20px;
-  }
   .next-btn-submit{
     margin-top: 40px;
   }
@@ -138,6 +135,8 @@ export default {
   }
   .warning-msg{
     color: red;
+    margin-top: 8px;
     margin-bottom: -24px;
+    font-size: 0.8rem;
   }
 </style>

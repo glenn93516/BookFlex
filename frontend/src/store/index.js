@@ -1,6 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
+import router from '../router'
 
 Vue.use(Vuex)
 
@@ -93,6 +94,9 @@ export default new Vuex.Store({
       state.user.userBirth = payload.userBirth
       state.user.userGender = payload.userGender
       state.user.userJob = payload.userJob
+      state.user.userProfileImg = payload.userProfileImg
+      state.user.userId = payload.userId
+      state.user.userRole = payload.userRole
     },
     SubmitPref(state, payload) {
       state.signupInfo.genres = payload
@@ -110,32 +114,40 @@ export default new Vuex.Store({
   },
   actions: {
     Login (context, user) {
-      return axios.post(`${SERVER_URL}/user/login`, {
+      axios.post(`${SERVER_URL}/user/login`, {
           "userEmail": user.userEmail,
           "userPassword": user.userPassword
         })
         .then(res => {
           // 로그인이 됐을 때
-          if (res.data != "undefined") {
-            axios.defaults.headers.common[
-              "Authorization"
-            ] = `Bearer ${res.data['data']}`
+          const token =`Bearer ${res.data.data}`
+          const data = {
+            "token": token,
+            "mode": user.mode
           }
-          localStorage.setItem('jwt', `Bearer ${res.data.data}`)
-          context.commit("Login", res.data.data)
-          console.log(`Bearer ${res.data.data}`)
+          localStorage.setItem('jwt', token)
+          context.commit("Login", token)
+          context.dispatch('GetUserInfo', data)
         })
         .catch(err => {
+          alert("아이디와 비밀번호를 확인해주세요.")
           console.log(err)
         })
     },
-    GetUserInfo (context) {
-      return axios.get(`${SERVER_URL}/user`)
+    GetUserInfo (context, data) {
+      const headers = {
+        'Authorization' : data.token
+      }
+      axios.get(`${SERVER_URL}/user`, {headers})
       .then(res => {
         context.commit("GetUserInfo", res.data.data)
+        console.log(res.data.data)
+        if (data.mode) {
+          router.push({ name: "MainBook" })
+        } 
       })
       .catch(err => {
-        console.log(err)
+        console.error(err)
       })
     },
     SubmitUserGender(context, gender) {
@@ -159,18 +171,21 @@ export default new Vuex.Store({
       data.append('userBirth', User.userBirth)
       data.append('userGender', User.userGender)
       data.append('userJob', User.userJob)
-      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
       for (let val of data.values()) {
         console.log(val)
       }
-      console.log(typeof(data), '타입')
-      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-      console.log('액션스 user', User)
-
-      axios.put(`${SERVER_URL}/user`, data)
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      axios.put(`${SERVER_URL}/user`, data, {headers})
       .then(res => {
         console.log(res)
-        context.commit('UpdateUserInfo', User)
+        const data = {
+          "token": localStorage.getItem('jwt'),
+          "mode": 0
+        }
+        context.dispatch('GetUserInfo', data)
       })
       .catch(err => {
         console.error(err)
@@ -184,6 +199,7 @@ export default new Vuex.Store({
     },
     Logout(context) {
       context.commit('Logout')
-    }
+    },
+    
   }
 })

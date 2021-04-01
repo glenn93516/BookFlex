@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="book-component">
 		<!-- Book -->
     <li>
       <figure class='book'>        
@@ -70,25 +70,28 @@ export default {
 		goToCollect() {			
 			// 읽음 api 요청 보내기(일단 연결 x)
 			this.checkReadStatus()
-
-			// 문장수집으로 이동
 			this.$emit('open-modal', this.book)
 		},
 		checkReadStatus() {
 			const token = localStorage.getItem('jwt')
+			const headers = {
+				"Authorization": token,
+			}
 			if (token) {
 				this.$axios.post(`${this.$store.getters.getServer}/bookshelf`, {
-					token,
-				},
-				{
 					"bookIsbn": this.book.book_isbn,
 					"userId": this.$store.getters.getUser.userId
+				},
+				{
+					headers,
 				})
 				.then(res => {
 					alert('읽기 목록에 담겼습니다 :)')
 					console.log(res)
 					// 읽은 책은 추천 목록에서 삭제 => 부모로 신호보내서 데이터 삭제하기
 					this.$emit('delete-readBook', this.book.book_isbn)
+					// 문장수집으로 이동
+					this.$emit('open-modal', this.book)
 				})
 				.catch(err => {
 					console.error(err)
@@ -102,8 +105,14 @@ export default {
 		},
 		addToWish() {
 			const token = localStorage.getItem('jwt')
+			const headers = {
+				"Authorization": token
+			}
 			if (token) {
-				this.$axios.post(`${this.$store.getters.getServer}/wishlist/${this.book.book_isbn}`, {token})
+				this.$axios.post(`${this.$store.getters.getServer}/wishlist/${this.book.book_isbn}`, {}, 
+					{
+						headers
+					})
 				.then(res => {
 					console.log(res)
 					alert('위시리스트에 담겼습니다 :)')
@@ -139,33 +148,33 @@ export default {
 */
 *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
-* {
+/* * {
   margin: 0;
   padding: 0;
-}
+} */
 
-::before,
-::after {
+.shelf * ::before,
+.shelf * ::after {
 	content: "";
 }
 
-html,
+/* html,
 body {
 	height: 100%;
 	-webkit-font-smoothing: subpixel-antialiased;
-}
+} */
 
 html {
 	font-size: 100%;
 }
 
-body {
+/* body {
 	background: #ecf0f1;
 	color: #34495e;
 	font-family: 'Lato', 'Arial', sans-serif;
 	font-weight: 400;
 	line-height: 1.2;
-}
+} */
 
 .book-ul {
 	margin: 0;
@@ -181,7 +190,7 @@ a {
 .book-btn {
 	display: inline-block;
 	text-transform: uppercase;
-	border: 2px solid #2c3e50;
+	border: 0.3px dotted #2c3e50;
 	border-radius: 20px;
 	margin-top: 30px; 
 	font-size: 1rem;

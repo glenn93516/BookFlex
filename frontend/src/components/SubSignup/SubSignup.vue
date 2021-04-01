@@ -18,7 +18,7 @@
             v-show="signupTitle"
           />
         </header>
-        <p class="noticeMessage" style="font-size: 12px" v-show="signupTitle">
+        <p class="notice-message-sub" v-show="signupTitle">
           추가 항목은 프로필 수정 페이지에서 추가 입력 및 수정이 가능합니다.
         </p>
 

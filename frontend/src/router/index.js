@@ -126,7 +126,45 @@ const routes = [
         component: () => import('../views/Search.vue'),
         children: [],
       },
+      {
+        path: '/message',
+        name: 'Message',
+        component: () => import('../components/Message/Message.vue'),
+        redirect: '/message/received',
+        children: [
+          {
+            path: 'received',
+            name: 'Received',
+            component: () => import('../components/Message/Received.vue'),
+          },
+          {
+            path: 'sent',
+            name: 'Sent',
+            component: () => import('../components/Message/Sent.vue'),
+          },
+          {
+            path: 'write',
+            name: 'Write',
+            component: () => import('../components/Message/Write.vue'),
+          },
+          {
+            path: 'readSent/:id',
+            name: 'ReadSent',
+            component: () => import('../components/Message/ReadSent.vue'),
+          },
+          {
+            path: 'readReceived/:id',
+            name: 'ReadReceived',
+            component: () => import('../components/Message/ReadReceived.vue'),
+          },
+        ],
+      },
     ],
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: () => import('../views/NotFound.vue'),
   },
 ];
 

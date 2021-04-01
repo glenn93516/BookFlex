@@ -3,7 +3,7 @@
     <b-form @submit.prevent="duplicateCheck('enter', name)">
       <b-form-input
         v-model="name"
-        class="input-userinfo input"
+        class="input-userinfo"
         :class="nameStatus"
         placeholder="필명 (8자리 이내)"
         @blur="duplicateCheck('blur', name)"
@@ -25,7 +25,7 @@
 
       <b-form-input
         v-model="password"
-        class="input-userinfo-second input"
+        class="input-userinfo-second"
         :class="pwStatus"
         type="password"
         placeholder="비밀번호 (8자리 이상, 영문 숫자 혼합 필수)"
@@ -54,7 +54,8 @@
       </div>
       <br>
       <b-button 
-        class="input-userinfo-btn btn btn-success btn-block"
+        block
+        class="input-userinfo-btn btn btn-success"
         type="submit"
         :disabled="disableBtn"
         @click="submitUserName"
@@ -201,6 +202,18 @@ export default {
 </script>
 
 <style>
+  .number-input {
+    border: 0;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    display: inline-block;
+    width: 100%;
+  }
+  .number-input[type="text"]:focus {
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075);
+    outline: 0 none;
+  }
+
   .input-userinfo {
     border: 0;
     border-bottom: 1px solid;
@@ -215,6 +228,8 @@ export default {
   .userinfo-alert {
     color: red; 
     margin-bottom: -24px;
+    font-size: 0.8rem;
+    margin-top: 8px;
   }
   .form-control:focus{
     border-color: none;

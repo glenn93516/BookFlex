@@ -15,7 +15,8 @@
       <!-- <div class="mt-3">Selected file: {{ profileImage ? profileImage.name : '' }}</div> -->
 
     <b-button
-      class="btn-success btn-block profileImg-btn" 
+      block
+      class="btn-success profileImg-btn login-button" 
       @click="submitUserPic(profileImage)"
       @keydown.enter="submitUserPic(profileImage)"
     >
@@ -70,6 +71,6 @@ export default {
     margin-bottom: 10px;
   }
   .profileImg-btn {
-    margin-top: 6.9rem;
+    margin-top: 5rem;
   }
 </style>

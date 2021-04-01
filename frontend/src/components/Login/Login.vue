@@ -1,50 +1,42 @@
 <template>
-  <div style="display: flex; justify-content: center;">
+  <div id="login">
     <!-- 네모 -->
     <!-- 로그인을 submit버튼으로 바꿔주기 -->
     <div
       class="loginbackground"
     >
-      <h1 class="loginheader">로그인</h1>  
+      <h1 class="loginheader font-jeonnam">로그인</h1>  
       <br>
+      <b-form @submit.prevent="userLogin()">
         <b-form-input
           v-model="email"
-          class="id-input"
-          style="border: 0;
-          border-bottom: 1px solid;
-          border-radius: 0;
-          "
+          class="id-input font-jeonnam"
           placeholder="이메일 (example@gmail.com)"
         >
       </b-form-input>
-      <div style="color: red; margin-bottom: -24px;" v-show="isVisible">
-        이메일 양식이 올바르지 않습니다.
-      </div>
-      <br>
-      <b-form-input
+        <div class="warning-email font-jeonnam" v-show="isVisible">
+          이메일 양식이 올바르지 않습니다.
+        </div>
+        <br>
+        <b-form-input
           v-model="password" 
-          class="id-input"
-          style="border: 0;
-          border-bottom: 1px solid;
-          border-radius: 0;
-          "
-          @keydown.enter="userLogin"
+          class="id-input font-jeonnam"
           type="password"
           placeholder="비밀번호"
         >
-      </b-form-input>
-      <a href="#" class="mb-1 mt-2" style="display: block; font-size: 0.9rem;">비밀번호를 잊어버리셨나요?</a>
-      <!-- signup/1이 아니라 signup으로 보내게 수정해줘야함 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-      <a href="/signup/1" class="my-1" style="display: block; font-size: 0.9rem;">회원이 아니신가요?</a>
-      <b-button 
-        block
-        class="mt-3 btn-success" 
-        style="
-          border-radius: 15px / 15px; 
-          font-weight: bold; 
-          font-size: 1.2rem;"
-        @click="userLogin"
-        >로그인</b-button>
+        </b-form-input>
+        <a href="#" class="login-link first-login-link font-jeonnam">비밀번호를 잊어버리셨나요?</a>
+        <!-- signup/1이 아니라 signup으로 보내게 수정해줘야함 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+        <a href="/signup/1" class="login-link second-login-link font-jeonnam">회원이 아니신가요?</a>
+        <b-button 
+          block
+          type="submit"
+          class="btn-success login-button font-jeonnam" 
+          :disabled="isVisible"
+        >
+          로그인
+        </b-button>
+      </b-form>
     </div>
   </div>
 </template>
@@ -60,41 +52,27 @@ export default {
   },
   methods: {
     isEmail(email) {
-      const regExp = /^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+      const regExp = /^([0-9a-zA-Z_\\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
       return regExp.test(email); // 형식에 맞는 경우 true 리턴	
     },
     goToSignup() {
       this.$router.push({ name: "SubmitEmail" })
     },
     userLogin() {
-      const user = { userEmail: this.email, userPassword: this.password }
+      const user = { userEmail: this.email, userPassword: this.password, mode: 1 }
+      console.log('userLogin', user)
       this.$store.dispatch('Login', user)
-      .then(res => {
-        console.log(res)
-        this.getUserInfo()
-        this.$router.push({ name: "MainBook" })
-      })
-      .catch(err => {
-        alert("아이디 비밀번호를 확인해주세요.")
-        console.log(err)
-        this.email = ""
-        this.password = ""
-      })
     },
-    getUserInfo() {
-      console.log('getUserInfo 실행')
-      this.$store.dispatch('GetUserInfo')
-    }
   },
   watch: {
     // email 입력값이 변경될 때 마다 실행
     email(){
       if (this.email.length > 0) {
         if (this.isEmail(this.email)) {
-          console.log('false')
+          console.log('email isVisible false')
           this.isVisible = false
         } else {
-          console.log('true')
+          console.log('email isVisible true')
           this.isVisible = true
         }
       } else {
@@ -106,6 +84,10 @@ export default {
 </script>
 
 <style>
+#login {
+  display: flex; 
+  justify-content: center;
+}
 .loginbackground {
   margin-top: 15vh;
   margin-bottom: 15vh;
@@ -134,11 +116,25 @@ export default {
 }
 .id-input {
   font-size: 1.3rem;
+  border: 0;
+  border-bottom: 1px solid;
+  border-radius: 0;
 }
-.invalid-feedback{
-  font-size: 100%;
+.warning-email {
+  color: red;
+  margin-bottom: -24px;
 }
-a:hover {
+.login-link {
+  display: block;
+  font-size: 0.8rem;
+}
+.login-link:hover {
   text-decoration: none;
+}
+.first-login-link {
+  margin: 25px 0 0 0;
+}
+.second-login-link {
+  margin: 5px 0;
 }
 </style>
