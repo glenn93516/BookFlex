@@ -16,7 +16,7 @@
     <br>
     <recommend-word></recommend-word><br><br>
     <!-- <search-bar> </search-bar> -->
-    <result-user></result-user><br><br>
+    <result-user id='user' v-bind:userData="userData"></result-user><br><br>
     <result-book id='book' v-bind:item="bookData"></result-book>
   </div>
 </template>
@@ -38,11 +38,12 @@ export default {
   data() {
     return {
       text : '', //SEARCH에 들어온 상태에서 Nav검색 이용 불가
-      titleData : null,
-      authorData : null,
-      contentsData : null,
+      bookData : {
+        titleData : null,
+        authorData : null,
+        contentsData : null,
+      },
       userData : null,
-      bookData : null,
     }
   },
   created() {
@@ -50,10 +51,11 @@ export default {
     //   searchClick()
     // }
   },
-  mounted() {
+  mounted () {
     // if(this.$route.params.word!=undefined){
     //   console.log('route : '+this.$route.params.word);
-    //   // this.text = this.$route.params.word
+    //   this.text = this.$route.params.word;
+    //   this.searchClick()
     // }
   },
   methods: {
@@ -61,34 +63,66 @@ export default {
       if(this.text.trim==''){
         alert('검색어를 입력하세요.')
       }else{
-        this.searchTitle()
-        // alert(this.text)
-        this.bookData = {
-          titleData : this.titleData
-        }
-        
+        this.searchTitle();
+        this.searchAuthor();
+        this.searchContents();
+        // this.searchUser();
       }
     },
     searchTitle(){
-      console.log('TITLE : '+this.text)
-      this.form = {
+      var form = {
         search : 'title',
         word : this.text
       };
-      console.log(this.form)
-      this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: this.form })
+      // console.log(this.form)
+      this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: form })
         .then(res => {
-          console.log(res.data.data)
-          console.log('제목 검색 성공')
-          this.titleData = res.data.data;
+          this.bookData.titleData = res.data.data;
+          console.log('this.bookData.titleData  >> ',this.bookData.titleData)
         })
         .catch(err => {
           console.error(err)
         })
     },
-    searchAuthor(){},
-    searchContents(){},
-    searchUser(){}
+    searchAuthor(){
+      this.form = {
+        search : 'author',
+        word : this.text
+      };
+      // console.log(this.form)
+      this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: this.form })
+        .then(res => {
+          this.bookData.authorData = res.data.data;
+          console.log('this.bookData.authorData  >> ',res.data.data)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    searchContents(){
+      this.form = {
+        search : 'contents',
+        word : this.text
+      };
+      // console.log(this.form)
+      this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: this.form })
+        .then(res => {
+          this.bookData.contentsData = res.data.data;
+          console.log('this.bookData.contentsData >> ',res.data.data)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    searchUser(){
+      this.$axios.get(`${this.$store.getters.getServer}/user/`,this.text)
+        .then(res => {
+          this.Userdata = res.data;
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
   }
 }
 </script>

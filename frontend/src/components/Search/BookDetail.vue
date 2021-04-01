@@ -1,11 +1,14 @@
 <template>
   <div>
-    
+    {{book.book_title}}
   </div>
 </template>
 
 <script>
-export default {            
+export default {
+  props : {
+    book : null,
+  }            
 }
 </script>
 

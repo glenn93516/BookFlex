@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-avatar 
-    :src="item.userProfileImg" 
+    :src="profileImg" 
     size="10rem"
     class="profile-left"
     @click="clickImg"
@@ -12,12 +12,17 @@
 <script>
 export default {
   props: {
-    item: Object,
+    userData: null,
   },
   data() {
     return {
-      
+      profileImg : null,
+      profileNickname : null
     }
+  },
+  mounted() {
+    this.profileImg = this.item.userProfileImg,
+    this.profileNickname = this.item.userNickname
   },
   methods: {
     clickImg(){
