@@ -234,14 +234,13 @@ public class UserController {
      * 유저가 작성한 문장수집 목록 조회
      */
     @ApiOperation(value = "유저가 작성한 문장 수집 조회")
-    @GetMapping("/{userId}/highlight")
-    public ResponseEntity getUserHighlights(@ApiParam(value = "조회할 유저 아이디(PK)", required = true) @PathVariable Long userId,
-                                            @ApiParam(value = "좋아요만 누를지 여부", required = false) @RequestParam(required = true, defaultValue = "false") Boolean onlyGood) {
+    @GetMapping("/{userNickname}/highlight")
+    public ResponseEntity getUserHighlights(@ApiParam(value = "조회할 유저 닉네임", required = true) @PathVariable String userNickname,
+                                            @ApiParam(value = "좋아요 누른 문장수집만 조회", required = false) @RequestParam(required = true, defaultValue = "false") Boolean onlyGood) {
         ResponseEntity responseEntity = null;
         try {
-            UserDto user = userService.findByUserId(userId);
+            UserDto user = userService.findUserByUserNickname(userNickname);
 
-            System.out.println(onlyGood);
             // 작성한 문장수집 조회
             List<HighlightDto> highlights = new ArrayList<>();
             if (onlyGood) {
