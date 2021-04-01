@@ -142,9 +142,14 @@ const routes = [
             component: () => import('../components/Message/Write.vue'),
           },
           {
-            path: 'read',
-            name: 'Read',
-            component: () => import('../components/Message/Read.vue'),
+            path: 'readSent/:id',
+            name: 'ReadSent',
+            component: () => import('../components/Message/ReadSent.vue'),
+          },
+          {
+            path: 'readReceived/:id',
+            name: 'ReadReceived',
+            component: () => import('../components/Message/ReadReceived.vue'),
           },
         ]
       }
