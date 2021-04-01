@@ -49,7 +49,6 @@ public class SendmsgService {
     @Transactional
     public int insertSendmsg(SendmsgDto sendmsgDto) throws Exception {
         receivemsgMapper.insertReceivemsg(new ReceivemsgDto(
-                sendmsgDto.getSendmsgTitle(),
                 sendmsgDto.getSendmsgContent(),
                 sendmsgDto.getSenderId(),
                 sendmsgDto.getReceiverId()
