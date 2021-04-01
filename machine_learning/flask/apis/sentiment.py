@@ -8,6 +8,8 @@ from transformers import AutoTokenizer, ElectraForSequenceClassification, AdamW
 from flask import Blueprint, make_response, jsonify
 from flask_restx import Api, Resource
 
+from models.Review import Review
+
 
 sentiment = Blueprint("sentiment", __name__)
 api = Api(sentiment)
@@ -54,7 +56,20 @@ def preprocessing(reviews):
     return corpus
 
 
-def test_sentences(sentences):
+def get_sentiment(sentences):
+    book_sentiment = {
+        "total_count": 0,
+        "positive": {
+            "count": 0,
+            "ratio": 0.0
+        },
+        "negative": {
+            "count": 0,
+            "ratio": 0.0
+        }
+    }
+    if len(sentences) == 0:
+        return book_sentiment
 
     sentences = preprocessing(sentences)
 
@@ -66,28 +81,43 @@ def test_sentences(sentences):
         pad_to_max_length=True,
         add_special_tokens=True
     )
-    input_ids = inputs['input_ids'][0]
-    attention_mask = inputs['attention_mask'][0]
 
-    y_pred = model(
-        input_ids.unsqueeze(0),
-        attention_mask=attention_mask.unsqueeze(0)
-    )
+    input_ids = inputs['input_ids']
+    attention_mask = inputs['attention_mask']
 
-    return y_pred[0].detach().cpu().numpy()
+    for input_id, attention in zip(input_ids, attention_mask):
+        y_pred = model(
+            input_id.unsqueeze(0),
+            attention_mask=attention.unsqueeze(0)
+        )
+        y_pred = np.argmax(y_pred[0].detach().numpy())
+
+        book_sentiment["total_count"] += 1
+        if y_pred == 1:
+            book_sentiment["positive"]["count"] += 1
+        else:
+            book_sentiment["negative"]["count"] += 1
+
+    book_sentiment["positive"]["ratio"] = round(
+        (book_sentiment["positive"]["count"] / book_sentiment["total_count"]) * 100, 4)
+    book_sentiment["negative"]["ratio"] = round(
+        (book_sentiment["negative"]["count"] / book_sentiment["total_count"]) * 100, 4)
+
+    return book_sentiment
 
 
 @sentiment.route("/<int:book_isbn>/sentiment", methods=["GET"])
 def get_book_sentiment(book_isbn):
-    result = test_sentences(['연기는 별로지만 재미 하나는 끝내줌!'])
-    print(result)
+    reviews = [review.review_content for review in Review.query.filter_by(
+        book_isbn=book_isbn).all()]
 
-    result = np.argmax(result)
-    print(result)
+    result = get_sentiment(reviews)
+
     res_obj = {
         "success": True,
         "data": {
-
+            "book_isbn": book_isbn,
+            "sentiment": result
         }
     }
     return make_response(jsonify(res_obj), 200)
