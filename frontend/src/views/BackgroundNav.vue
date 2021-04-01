@@ -166,7 +166,6 @@ export default {
     },
     tempOutImg() {
       this.postBox = this.closePostBox
-      console.log(this.postBox)
     },
     showInput() {
       this.checkInput = false
@@ -212,6 +211,11 @@ export default {
       this.pageName = to.name
       this.checkLogin()
       this.userInfo = this.$store.getters.getUser
+    },
+    openPostBox(newOpenPostBox) {
+      this.openPostBox = newOpenPostBox
+      this.postBox = newOpenPostBox
+      // console.log(this.newOpenPostBox)
     }
   },
   mounted() {
