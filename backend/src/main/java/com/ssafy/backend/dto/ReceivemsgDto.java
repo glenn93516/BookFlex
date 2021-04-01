@@ -13,8 +13,6 @@ import lombok.*;
 public class ReceivemsgDto {
     @ApiModelProperty(value = "메세지 ID (PK)")
     private Long receivemsgId;
-    @ApiModelProperty(value = "제목")
-    private String receivemsgTitle;
     @ApiModelProperty(value = "내용")
     private String receivemsgContent;
     @ApiModelProperty(value = "작성일")
@@ -29,7 +27,6 @@ public class ReceivemsgDto {
     private Long receiverId;
 
     public ReceivemsgDto(String receivemsgTitle, String receivemsgContent, Long senderId, Long receiverId) {
-        this.receivemsgTitle = receivemsgTitle;
         this.receivemsgContent = receivemsgContent;
         this.senderId = senderId;
         this.receiverId = receiverId;
