@@ -10,7 +10,7 @@
       </div>
     </div>
     <!-- 책 선반 -->
-    <div 
+    <!-- <div 
       id="bookBottom"
       style="
         background-color: red;
@@ -19,7 +19,7 @@
         border-radius: 10px;
       "
     >
-    </div>
+    </div> -->
   </div>
 </template>
 
