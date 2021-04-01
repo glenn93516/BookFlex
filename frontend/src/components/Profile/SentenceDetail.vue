@@ -21,15 +21,26 @@
         class="sentence-img" 
         width="465px" 
         height="300px" 
-        :src="item.hightlightCover" 
+        v-if="item.highlightCover"
+        :src="item.highlightCover" 
         alt=""
         style="margin-top: 9px;"
       >
+      <img 
+        class="sentence-img" 
+        width="465px" 
+        height="300px" 
+        v-else
+        src="@/assets/waterprint_back.jpg" 
+        alt=""
+        style="margin-top: 9px;"
+      >
+      
       <div class="detail-dimmed">
         <!-- text최소 길이, 최대 길이 정해주기 -->
         <div class="detail-sentence-text">
           <div style="font-size: 23px;">{{item.highlightContent}}</div>
-          <div style="font-size: 20px; margin-top: 10px; font-weight: bold;">"{{item.bookName}}"</div>
+          <div style="font-size: 20px; margin-top: 10px; font-weight: bold;">"{{item.bookTitle}}"</div>
         </div>
         <div class="detail-sentence-date">
           {{item.createdDate}}
@@ -40,14 +51,14 @@
       <div>
         <div 
           style="margin-left: -40px; margin-top: -30px;"
-          @click="heart=false"
-          v-if="heart"
+          @click="delLike()"
+          v-if="likeStatus"
           class="heart hvr-buzz">
         </div>
         <div 
           style="margin-left: -40px; margin-top: -30px;"
-          @click="heart=true"
-          v-else
+          @click="addLike()"
+          v-if="!likeStatus"
           class="no-heart">
         </div>
         <div class="like-num">{{likeNum}}</div>
@@ -60,7 +71,6 @@
           @mouseover="editIcon = ['fas', 'edit']"
           @mouseleave="editIcon = ['far', 'edit']"
           :icon="editIcon"
-          :style="{color: '#FF0000'}"
           v-if="isEditor"
         />
         <font-awesome-icon 
@@ -69,7 +79,6 @@
           @mouseover="deleteIcon = ['fas', 'trash-alt']"
           @mouseleave="deleteIcon = ['far', 'trash-alt']"
           :icon="deleteIcon"
-          :style="{color: '#FF0000'}"
           v-if="isEditor"
         />
       </div>
@@ -89,8 +98,9 @@ export default {
       deleteIcon: ['far', 'trash-alt'],
       hoverClose: false,
       heart: false,
-      likeNum: 100,
+      likeNum: 0,
       isEditor: false,
+      likeStatus: null,
     }
   },
   // 지금은 프로필이라서 이렇게 해도 되지만, community의 경우 한 개씩 반복해서 확인해줘야함
@@ -100,11 +110,63 @@ export default {
     } else {
       this.isEditor = false
     }
+    this.getLikeStatus()
   },
   methods: {
+    getLikeStatus() {
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        'Authorization': token
+      }
+      this.$axios.get(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {headers})
+      .then(res => {
+        this.likeNum = res.data.data.goodCount
+        this.likeStatus = res.data.data.userGood
+        console.log(res.data.data, '처음에 들어오는 데이터')
+        console.log(res.data.data.userGood, '처음에 들어오는 데이터 userGood')
+      })
+    },
     closeModal() {
       this.$emit('close-modal')
-    }
+    },
+    addLike() {
+      console.log('addLike')
+      // 만약 로그인 안한 유저라면 addLike못함
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      if (token) {
+        this.$axios.post(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}/good`, {}, {headers})
+        .then(res => {
+          if (res.data.success) {
+            this.likeStatus = true
+            this.likeNum += 1
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    },
+    delLike() {
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      if (token) {
+        this.$axios.post(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}/good`, {}, {headers})
+        .then(res => {
+          if (res.data.success) {
+            this.likeStatus = false
+            this.likeNum -= 1
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    },
   }
 }
 </script>
@@ -128,7 +190,7 @@ export default {
     border-radius: 10px;
     height: 300px;
     top: 54px;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
     text-align: center;
   }
@@ -164,6 +226,11 @@ export default {
     /* animation: fave-heart 1s step-end infinite; */
     /* animation: fave-heart 1s steps(28); */
   }
+  .no-heart:hover {
+    background-position: -2800px 0;
+    /* animation: fave-heart 1s steps(28) infinite; */
+    transition: background 1s steps(28);
+  }
   .heart {
     width: 100px;
     height: 100px;
@@ -174,11 +241,6 @@ export default {
     cursor: pointer;
     /* transition: background 1s steps(28); */
     /* animation: fave-heart 1s step-start infinite; */
-  }
-  .no-heart:hover {
-    background-position: -2800px 0;
-    /* animation: fave-heart 1s steps(28) infinite; */
-    transition: background 1s steps(28);
   }
   @keyframes fave-heart {
     0% {

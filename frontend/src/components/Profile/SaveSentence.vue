@@ -5,20 +5,22 @@
       v-for="item in showItems" 
       :key="item.index" 
     >
-      <img class="sentence-img" width="340px" height="250px" :src="item.hightlightCover" alt="">
+      <!-- <img class="sentence-img" width="340px" height="250px" src="@/assets/waterprint_back.jpg" alt="bookImg"> -->
+      <img v-if="item.highlightCover" class="sentence-img" width="340px" height="250px" :src="item.highlightCover" alt="bookImg">
+      <img v-else class="sentence-img" width="340px" height="250px" src='@/assets/waterprint_back.jpg' alt="bookImg">
       <div @click="sentenceDetail(item)" class="dimmed">
         <!-- text최소 길이, 최대 길이 정해주기 -->
         <div class="sentence-text">
           <div style="font-size: 20px;">{{item.highlightContent}}</div>
-          <div style="margin-top: 10px; font-weight: bold; font-size: 18px;">"{{item.bookName}}"</div>
+          <div style="margin-top: 10px; font-weight: bold; font-size: 18px;">"{{item.bookTitle}}"</div>
         </div>
         <!-- <div class="sentence-book">{{item.book}}</div> -->
       </div>
-      <b-modal v-model="showDetail" centered hide-footer hide-header hide-backdrop>
-      <!-- <b-modal v-model="showDetail" centered hide-footer hide-header> -->
-        <sentence-detail :item="nowItem" @close-modal="showDetail=false"></sentence-detail>
-      </b-modal>
     </div>
+    <b-modal v-model="showDetail" centered hide-footer hide-header hide-backdrop>
+    <!-- <b-modal v-model="showDetail" centered hide-footer hide-header> -->
+      <sentence-detail :item="nowItem" @close-modal="showDetail=false"></sentence-detail>
+    </b-modal>
     <div class="more">
       <img 
         @click="more()"
@@ -42,124 +44,16 @@ export default {
     console.log(this.$route.params.userName, 'savesentence')
     // 문장 요청 보내기
     // 지금은 숫자로 요청해야함
-    this.$axios.get(`${this.$store.getters.getServer}/user/115/highlight`)
+    this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`)
     .then(res => {
       console.log(res.data.data, '이거 115')
       this.defaultItems = res.data.data
-      this.addBookName(this.defaultItems)
-      console.log(this.defaultItems, 'defaultItems')
       this.showItems = this.defaultItems.slice(0, 3)
     })
-    // this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`)
-    // .then(res => {
-    //   console.log(res.data.data, 'res.data.data')
-    //   this.defaultItems = res.data.data
-    //   this.showItems = res.data.data.slice(0, 3)
-    // })
-    // .catch(err => {
-    //   console.log(this.$route.params.userName, 'userName')
-    //   console.log(err, 'err')
-    // })
   },
   data() {
     return {
-      // 처음에 3개만 받아오기
-      // showItems: [
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/16/15/30/beach-6100209_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다1.',
-      //     book: '책 이름1',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/03/07/09/background-6064645_960_720.jpg',
-      //     text: '책 이름2',
-      //     book: '책 이름2',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/01/30/18/07/salzburg-5964812_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다3.',
-      //     book: '책 이름3',
-      //   },
-      // ],
       showItems: [],
-      // 다 받아온거
-      // defaultItems: [
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/16/15/30/beach-6100209_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다1.',
-      //     book: '책 이름1',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/03/07/09/background-6064645_960_720.jpg',
-      //     text: '책 이름2',
-      //     book: '책 이름2',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/01/30/18/07/salzburg-5964812_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다3.',
-      //     book: '책 이름3',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/16/15/30/beach-6100209_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다1.',
-      //     book: '책 이름1',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/03/07/09/background-6064645_960_720.jpg',
-      //     text: '책 이름2',
-      //     book: '책 이름2',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/01/30/18/07/salzburg-5964812_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다3.',
-      //     book: '책 이름3',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/16/15/30/beach-6100209_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다1.',
-      //     book: '책 이름1',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/03/07/09/background-6064645_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다2.',
-      //     book: '책 이름2',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/01/30/18/07/salzburg-5964812_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다3.',
-      //     book: '책 이름3',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/16/15/30/beach-6100209_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다1.',
-      //     book: '책 이름1',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/03/07/09/background-6064645_960_720.jpg',
-      //     text: '책 이름2',
-      //     book: '책 이름2',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/01/30/18/07/salzburg-5964812_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다3.',
-      //     book: '책 이름3',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/16/15/30/beach-6100209_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다1.',
-      //     book: '책 이름1',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/03/03/07/09/background-6064645_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다2.',
-      //     book: '책 이름2',
-      //   },
-      //   {
-      //     src: 'https://cdn.pixabay.com/photo/2021/01/30/18/07/salzburg-5964812_960_720.jpg',
-      //     text: '내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다3.',
-      //     book: '책 이름3',
-      //   },
-      // ],
       defaultItems: [],
       moreBtn: true,
       showDetail: false,
@@ -168,32 +62,7 @@ export default {
       nowBookTitle: "",
     }
   },
-  // mounted() {
-  // const token = localStorage.getItem('jwt')
-  // if (token) {
-  //   this.$axios.get(`${this.$store.getters.getServer}/user`, {token})
-  //   .then(res => {
-  //     this.userInfo = res.data.data
-  //   })
-  //   .catch(err => {
-  //     console.error(err)
-  //   })
-  //   } else {
-  //   alert('로그인 해주세요!')
-  //   this.$router.push({ name: 'Login' })
-  // }
-  // },
   methods: {
-    addBookName(items) {
-      for (let i=0; i < items.length; i++) {
-        let isbn = items[i].bookIsbn
-
-        this.$axios.get(`${this.$store.getters.getServer}/book/${isbn}`)
-        .then(res => {
-          items[i].bookName = res.data.data.book_title
-        })
-      }
-    },
     more() {
       this.showItems = this.defaultItems
       this.moreBtn = false

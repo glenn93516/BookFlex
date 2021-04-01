@@ -97,6 +97,7 @@ const routes = [
         name: 'Profile',
         component: () => import('../views/Profile.vue'),
         redirect: '/:userName/genre',
+        props: true,
         children: [
           {
             path: 'genre',
