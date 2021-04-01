@@ -30,7 +30,7 @@
 
     <delete id="deleteReceivemsg">
         DELETE FROM receivemsg
-        WHERE receivemsg_id = #{receivemsgId}
+        WHERE receivemsg_id = #{receivemsgId} AND receiver_id = #{userId}
     </delete>
 
 </mapper>

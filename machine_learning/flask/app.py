@@ -2,8 +2,9 @@ from flask import Flask, request, make_response, jsonify
 from flask_cors import CORS
 from flask_restx import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
-from apis.recommendation import recommendation
 
+from apis.recommendation import recommendation
+from apis.sentiment import sentiment
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 # EndPoint 추가
 app.register_blueprint(recommendation, url_prefix="/ml/api/recommend")
+app.register_blueprint(sentiment, url_prefix="/ml/api/book")
 
 
 if __name__ == "__main__":

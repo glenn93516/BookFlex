@@ -24,7 +24,7 @@
 
     <delete id="deleteSendmsg">
         DELETE FROM sendmsg
-        WHERE sendmsg_id = #{sendmsgId}
+        WHERE sendmsg_id = #{sendmsgId} AND sender_id = #{userId}
     </delete>
 
 </mapper>
