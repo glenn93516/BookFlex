@@ -6,25 +6,25 @@
 <mapper namespace="com.ssafy.backend.mapper.SendmsgMapper">
 
     <select id="selectSendmsgList" resultType="SendmsgDto">
-        SELECT sendmsg_id sendmsgId, sendmsg_title sendmsgTitle, sendmsg_content sendmsgContent, sendmsg_date sendmsgDate, sender_id senderId, receiver_id receiverId
+        SELECT sendmsg_id sendmsgId, sendmsg_content sendmsgContent, sendmsg_date sendmsgDate, sender_id senderId, receiver_id receiverId
         FROM sendmsg
         WHERE sender_id = #{senderId}
     </select>
 
     <select id="selectSendmsg" resultType="SendmsgDto">
-        SELECT sendmsg_id sendmsgId, sendmsg_title sendmsgTitle, sendmsg_content sendmsgContent, sendmsg_date sendmsgDate, sender_id senderId, receiver_id receiverId
+        SELECT sendmsg_id sendmsgId, sendmsg_content sendmsgContent, sendmsg_date sendmsgDate, sender_id senderId, receiver_id receiverId
         FROM sendmsg
         WHERE sendmsg_id = #{sendmsgId}
     </select>
 
     <insert id="insertSendmsg" parameterType="SendmsgDto">
-        INSERT INTO sendmsg (sendmsg_title, sendmsg_content, sendmsg_date, sender_id, receiver_id)
-        VALUES (#{sendmsgTitle}, #{sendmsgContent}, now(), #{senderId}, #{receiverId})
+        INSERT INTO sendmsg (sendmsg_content, sendmsg_date, sender_id, receiver_id)
+        VALUES (#{sendmsgContent}, now(), #{senderId}, #{receiverId})
     </insert>
 
     <delete id="deleteSendmsg">
         DELETE FROM sendmsg
-        WHERE sendmsg_id = #{sendmsgId}
+        WHERE sendmsg_id = #{sendmsgId} AND sender_id = #{userId}
     </delete>
 
 </mapper>

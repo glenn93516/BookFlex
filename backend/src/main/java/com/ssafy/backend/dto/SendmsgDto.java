@@ -13,8 +13,6 @@ import lombok.*;
 public class SendmsgDto {
     @ApiModelProperty(value = "메세지 ID (PK)")
     private Long sendmsgId;
-    @ApiModelProperty(value = "제목")
-    private String sendmsgTitle;
     @ApiModelProperty(value = "내용")
     private String sendmsgContent;
     @ApiModelProperty(value = "작성일")
