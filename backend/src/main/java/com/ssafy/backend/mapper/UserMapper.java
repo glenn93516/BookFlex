@@ -17,4 +17,5 @@ public interface UserMapper {
     void update(UserDto userDto);
     Optional<UserDto> findUserByUserNickname(String userNickname);
     void deleteOne(Long userId);
+    void saveNewPassword(@Param("userId") Long userId, @Param("newPassword") String newPassword);
 }
