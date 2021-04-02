@@ -19,7 +19,6 @@
 							class="btn book-btn book-moreInf" 
 							@click="goToBookDetail"
 							style="margin-right: 5px;" 
-							href="#"
 						>
 							더보기
 						</a>
@@ -28,7 +27,6 @@
 							class="btn book-btn book-readcheck" 
 							@click="goToCollect"
 							style="margin-right: 5px;" 
-							href="#"
 						>
 							읽음
 						</a>
@@ -36,7 +34,6 @@
 						<a 
 							class="btn book-btn book-wishlist" 
 							@click="addToWish"
-							href="#"
 						>
 							위시리스트
 						</a>
@@ -101,7 +98,7 @@ export default {
 			}
 		},
 		goToBookDetail() {
-
+			this.$router.push({ name: 'FirstPage', params: { book: this.book } })
 		},
 		addToWish() {
 			const token = localStorage.getItem('jwt')

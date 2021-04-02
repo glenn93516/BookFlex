@@ -154,6 +154,39 @@ const routes = [
         ]
       },
       {
+        path: '/bookdetail',
+        name: 'BookDetail',
+        component: () => import('../views/BookDetail.vue'),
+        redirect: '/bookdetail/firstpage',
+        props: true,
+        children: [
+          {
+            path: 'firstpage',
+            name: 'FirstPage',
+            component: () => import('../components/Book/FirstPage.vue'),
+            props: true,
+          },
+          {
+            path: 'secondpage',
+            name: 'SecondPage',
+            component: () => import('../components/Book/SecondPage.vue'),
+            props: true,
+          },
+          {
+          path: 'thirdpage',
+          name: 'ThirdPage',
+          component: () => import('../components/Book/ThirdPage.vue'),
+          props: true,
+        },
+        {
+        path: 'fourthpage',
+        name: 'FourthPage',
+        component: () => import('../components/Book/FourthPage.vue'),
+        props: true,
+        },
+        ]
+      },
+      {
         path: 'password',
         name: 'Password',
         component: () => import('../components/Password/Password.vue'),

@@ -109,7 +109,7 @@
 
           <!-- 바디 자리 -->
           <template #body>
-            <CollectSentence v-if="step === 'collectSentence' " :book=selectedBook :mode="0"/>
+            <CollectSentence v-if="step === 'collectSentence' " :book=selectedBook :mode="0" @close-modal="closeModal"/>
           </template>
       </Modal> 
     </div>
