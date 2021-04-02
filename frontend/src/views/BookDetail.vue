@@ -5,7 +5,7 @@
     </div>
     <div style="display: flex; justify-content: center;">
       <div class="mt-3">
-        <b-pagination-nav pills :pages="pages" use-router :book="book"></b-pagination-nav>
+        <b-pagination-nav pills :pages="pages" use-router></b-pagination-nav>
       </div>
     </div>
   </div>
@@ -14,7 +14,6 @@
 <script>
 export default {
   props: {
-    book: Object,
   },
   data() {
     return {
