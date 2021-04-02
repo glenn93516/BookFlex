@@ -10,5 +10,5 @@ import java.util.Map;
 public interface WishlistMapper {
     int insertWishlist(WishlistDto book) throws Exception;
     int deleteWishlist(Map map) throws Exception;
-    List<WishlistDto> selectWishlistList(long book_isbn) throws Exception;
+    List<Map> selectWishlistList(long book_isbn) throws Exception;
 }

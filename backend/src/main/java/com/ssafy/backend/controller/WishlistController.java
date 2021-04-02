@@ -4,7 +4,6 @@ import com.ssafy.backend.dto.UserDto;
 import com.ssafy.backend.dto.WishlistDto;
 import com.ssafy.backend.dto.response.BaseResponse;
 import com.ssafy.backend.dto.response.ListDataResponse;
-import com.ssafy.backend.dto.response.SingleDataResponse;
 import com.ssafy.backend.service.ResponseService;
 import com.ssafy.backend.service.WishlistService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -117,11 +116,12 @@ public class WishlistController {
     @GetMapping(value = "")
     public ResponseEntity getWishList(@ApiIgnore final Authentication authentication){
         ResponseEntity responseEntity = null;
-        List<WishlistDto> list = null;
+        List<Map> list = null;
+//        List list = null;
         Long user_id = ((UserDto) authentication.getPrincipal()).getUserId();
         try {
             list = wishlistService.selectWishlistList(user_id);
-            ListDataResponse<WishlistDto> response = responseService.getListDataResponse(true, "위시리스트 조회 성공", list);
+            ListDataResponse<Map> response = responseService.getListDataResponse(true, "위시리스트 조회 성공", list);
             responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         } catch (Exception exception) {
             logger.debug(exception.getMessage());
