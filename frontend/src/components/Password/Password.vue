@@ -37,8 +37,15 @@ export default {
     goToLogin() {
       this.$router.push({ name: 'Login' })
     },
+    Logout() {
+      this.$store.dispatch('Logout')
+      localStorage.removeItem('jwt')
+      this.userInfo = ""
+      this.isLogin = false
+    },
   },
   mounted() {
+    this.Logout()
   },
   watch: {
   },

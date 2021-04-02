@@ -141,11 +141,9 @@ export default {
         }
         console.log(message)
         this.$axios.post(`${this.$store.getters.getServer}/sendmsg`,message,{headers})
-        // this.goToSent()
       })
-    },
-    goToSent() {
-      this.$router.push({ name: "Sent" })
+
+      this.goToSent()
     },
     addTag (event) {
       event.preventDefault()
@@ -177,6 +175,9 @@ export default {
     },
     goToReceived() {
       this.$router.push({ name: "Received" })
+    },
+    goToSent() {
+      this.$router.push({ name: "Sent" })
     },
   }
 }
