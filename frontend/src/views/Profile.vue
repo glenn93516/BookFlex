@@ -97,10 +97,7 @@
       </ul>
     </nav>
     <!-- 갈아끼울 컴포넌트 -->
-    <router-view class="router-component" :userInfo="userInfo">
-    </router-view>
-
-
+    <router-view class="router-component" :userInfo="userInfo"></router-view>
   </div>
 </template>
 
