@@ -23,7 +23,7 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 app.register_blueprint(recommendation, url_prefix="/ml/api/recommend")
 app.register_blueprint(sentiment, url_prefix="/ml/api/book")
 app.register_blueprint(statistics, url_prefix="/ml/api/statistics")
-app.register_blueprint(wordcloud, url_prefix="/ml/api/wordcloud")
+app.register_blueprint(wordcloud, url_prefix="/ml/api/book")
 
 
 if __name__ == "__main__":

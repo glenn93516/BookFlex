@@ -10,7 +10,7 @@ with open('data/keyword_count_dict.pickle', 'rb') as fr:
     keyword_dict = pickle.load(fr)
 
 
-@wordcloud.route("/<int:book_isbn>", methods=["GET"])
+@wordcloud.route("/<int:book_isbn>/wordcloud", methods=["GET"])
 def get_book_wordcloud(book_isbn):
     word_counts = []
 
