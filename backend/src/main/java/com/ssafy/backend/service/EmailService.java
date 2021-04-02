@@ -80,4 +80,42 @@ public class EmailService {
 
         return ePw;
     }
+
+
+    public MimeMessage createNewPasswordMessage(String to, String newPassword) throws MessagingException {
+        logger.debug("보내는 대상 : '{}'", to);
+        logger.debug("새 비밀번호 : '{}'", newPassword);
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+        message.addRecipients(Message.RecipientType.TO, to); // 이메일 받는 사람
+        message.setSubject("[BookFlex] 새 비밀번호가 도착했습니다"); // 이메일 제목
+
+        String msg = "";
+        msg += "<div style='margin:100px;'>";
+        msg += "<h1> 안녕하세요  [BookFlex]입니다. </h1>";
+        msg += "<br>";
+        msg += "<p>새 비밀번호로 다시 로그인해주세요<p>";
+        msg += "<br>";
+        msg += "<p>감사합니다!<p>";
+        msg += "<br>";
+        msg += "<div align='center' style='border:1px solid black; font-family:verdana';>";
+        msg += "<h3 style='color:blue;'>새로운 비밀번호입니다</h3>";
+        msg += "<div style='font-size:130%'>";
+        msg += "CODE : <strong>";
+        msg += newPassword + "</strong><div><br/> ";
+        msg += "</div>";
+
+        message.setText(msg, "utf-8", "html");
+
+        return message;
+    }
+
+
+    public void sendNewPassword(String to, String newPassword) throws MessagingException {
+        MimeMessage message = createNewPasswordMessage(to, newPassword);
+
+        javaMailSender.send(message);
+    }
 }

@@ -205,7 +205,7 @@ public class BookController {
     }
 
     // 도서 감정 분석
-    @ApiOperation(value = "현재 책이랑 비슷한 추천 도서 조회", notes = "현재 책이랑 유사한 책 20개 추천")
+    @ApiOperation(value = "책의 감정 분석 데이터 조회", notes = "현재 책 리뷰를 감성분석한 결과 전달")
     @GetMapping(value = "/{book_isbn}/sentiment")
     public ResponseEntity getBookSentiment(@ApiParam(value = "선택한 책 isbn", required = true, example = "9791136202772") @PathVariable(name = "book_isbn") Long book_isbn) {
         String url = BASE_FLASK_URL + "/book/" + book_isbn + "/sentiment";
