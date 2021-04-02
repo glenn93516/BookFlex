@@ -173,7 +173,6 @@ export default {
 
 <style>
   .modal-footer {
-    /* background-color: blue; */
     display: flex; 
     justify-content: space-between; 
   }
@@ -199,48 +198,32 @@ export default {
     width: 465px;
     height: 270px;
     padding: 100px 10px 0 10px;
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
   }
   .detail-sentence-date {
     display: absolute;
     height: 30px;
     right: 0;
-    /* background-color: red; */
     text-align: end;
     padding-right: 20px;
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
   }
 
   .no-heart {
     width: 100px;
     height: 100px;
-    /* position: relative; */
-    /* transform: translate(-50%, -50%); */
     background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
     background-position: 0 0;
     cursor: pointer;
-    /* animation: fave-heart 1s step-end infinite; */
-    /* animation: fave-heart 1s steps(28); */
   }
   .no-heart:hover {
     background-position: -2800px 0;
-    /* animation: fave-heart 1s steps(28) infinite; */
     transition: background 1s steps(28);
   }
   .heart {
     width: 100px;
     height: 100px;
-    /* position: relative; */
-    /* transform: translate(-50%, -50%); */
     background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
     background-position: -2800px 0;
     cursor: pointer;
-    /* transition: background 1s steps(28); */
-    /* animation: fave-heart 1s step-start infinite; */
   }
   @keyframes fave-heart {
     0% {
@@ -250,5 +233,4 @@ export default {
       background-position: -2800px 0;
     }
   }
-
 </style>

@@ -48,7 +48,7 @@ export default {
     .then(res => {
       console.log(res.data.data, '이거 115')
       this.defaultItems = res.data.data
-      this.showItems = this.defaultItems.slice(0, 3)
+      this.showItems = this.defaultItems.slice(0, 6)
     })
   },
   data() {
@@ -109,30 +109,14 @@ export default {
     cursor: pointer;
   }
   .sentence-text {
-    /* background-color: rgba(255, 0, 0, 0.5); */
     margin-top: 80px;
     padding-left: 60px;
     width: 280px;
     height: 150px;
-    /* display: flex; */
     align-content: center;
     justify-items: center;
     text-align: center;
   }
-  /* .sentence-book {
-    position: absolute; 
-    width: 300px;
-    padding-left: 45px;
-  } */
-  /* .sentence-item {
-    display: absolute;
-    z-index: 1;
-    color: red;
-  } */
-  /* .sentence-item:hover {
-    cursor: pointer;
-    background-color: black;
-  } */
   .more {
     display: flex;
     justify-content: center;
@@ -141,19 +125,7 @@ export default {
   .more-icon:hover {
     cursor: pointer;
   }
-  /* .more-line {
-    display: absolute;
-    width: 300px;
-    left: 100px;
-  }
-  .more-word {
-    display: absolute;
-    left: 10px;
-  } */
-
   .modal-content {
     border: none;
-    /* border: 1px rgba(0, 0, 0, 0.2) solid; */
-    /* box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2); */
   }
 </style>
