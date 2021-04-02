@@ -18,6 +18,12 @@ export default {
   },
   mounted() {
     Highcharts.chart('container', {
+      caption: {
+        // align: center,
+        // 왜 위로 안가지 @!@!@!@
+        verticalAlign: top,
+        floating: top,
+      },
       chart: {
         type: 'packedbubble',
         height: '100%',

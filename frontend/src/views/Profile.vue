@@ -18,7 +18,7 @@
             </h1>
             <img width="40px" :src="medal.first" />
           </div>
-          <span class="img-update-btn"><span>편집</span></span>
+          <span class="img-update-btn" @click="updateModal=true" v-if="isEditor"><span>편집</span></span>
         </div>
         <p class="profile-singleline">
           {{ profileSingleLine.sentence }}
@@ -127,6 +127,7 @@ export default {
       userInfo: {},
       isEditor: false,
       nowUserName: "",
+      updateModal: false,
     }
   },
   methods: {
