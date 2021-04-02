@@ -33,14 +33,6 @@ export default {
 </script>
 
 <style>
-  * {
-    font-family: 'NanumBarunpen', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  .profile-nav {
-    font-family: 'S-CoreDream-2ExtraLight', sans-serif;
-  }
   /* reset */
   h1, p {
     margin: 0;
@@ -57,7 +49,6 @@ export default {
     font-size: 12px;
     width: 200px;
   }
-
   .more {
     display: flex;
     justify-content: center;
