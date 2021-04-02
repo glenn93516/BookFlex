@@ -16,7 +16,6 @@
         id="first-shelf-tag"
         class="tag"
       >
-        <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px; color: black;" alt="제목태그"> -->
         <div 
           class="tag-name"
         >
@@ -47,7 +46,6 @@
         id="second-shelf-tag"
         class="tag"
       >
-        <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그"> -->
         <div 
           class="tag-name"
         >
@@ -77,7 +75,6 @@
         id="third-shelf-tag"
         class="tag"
       >
-        <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그"> -->
         <div 
           class="tag-name"
         >
@@ -112,7 +109,7 @@
 
           <!-- 바디 자리 -->
           <template #body>
-            <CollectSentence v-if="step === 'collectSentence' " :book=selectedBook :mode="0"/>
+            <CollectSentence v-if="step === 'collectSentence' " :book=selectedBook :mode="0" @close-modal="closeModal"/>
           </template>
       </Modal> 
     </div>

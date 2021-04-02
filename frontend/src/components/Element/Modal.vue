@@ -6,7 +6,14 @@
 
           <div class="modal-header">
             <slot name="header">
-              <div class="btn exit-font" @click="$emit('close-modal')">X</div>
+              <font-awesome-icon 
+                @click="$emit('close-modal')"
+                size="2x" 
+                class="mouse-pointer text-secondary btn exit-font" 
+                @mouseover="closeIcon = ['fas', 'times-circle']" 
+                @mouseleave="closeIcon = ['far', 'times-circle']" 
+                :icon="closeIcon" 
+              />
             </slot>
           </div>
 
@@ -30,7 +37,13 @@
 export default {
   data() {
     return {
-      modalName: "Book"
+      modalName: "Book",
+      closeIcon: ['far', 'times-circle'],
+    }
+  },
+  methods: {
+    closeModal() {
+      this.$emit('close-modal')
     }
   }
 }
@@ -44,7 +57,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.315);
   display: table;
   transition: opacity .3s ease;
 }
@@ -59,12 +72,12 @@ export default {
   height: 800px;
   margin: 0px auto;
   padding: 20px 30px;
-  background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 2px;
+  background-color: rgb(255, 255, 255);
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;
   font-family: Helvetica, Arial, sans-serif;
-  border-radius: 50px/ 50px;
+  border-radius: 10px/ 10px;
+  color: rgb(0, 0, 0);
 }
 
 .modal-header {
@@ -73,11 +86,14 @@ export default {
   border-bottom: 0px;
   justify-content: flex-end;
   padding: 0px;
+  float: right;
 }
 
 .exit-font {
-  font-size: 1.5rem;
-  color: rgb(95, 95, 95);
+  float: right; 
+  width: 70px;
+  height: 70px;
+  z-index: 10;
 }
 
 .modal-body {

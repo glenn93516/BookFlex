@@ -25,7 +25,12 @@
           placeholder="비밀번호"
         >
         </b-form-input>
-        <a href="#" class="login-link first-login-link font-jeonnam">비밀번호를 잊어버리셨나요?</a>
+        <a href="#" 
+          class="login-link first-login-link font-jeonnam"
+          @click="goToPassword"
+        >
+        비밀번호를 잊어버리셨나요?
+        </a>
         <!-- signup/1이 아니라 signup으로 보내게 수정해줘야함 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
         <a href="/signup/1" class="login-link second-login-link font-jeonnam">회원이 아니신가요?</a>
         <b-button 
@@ -63,6 +68,9 @@ export default {
       console.log('userLogin', user)
       this.$store.dispatch('Login', user)
     },
+    goToPassword() {
+      this.$router.push({ name: "Password" })
+    }
   },
   watch: {
     // email 입력값이 변경될 때 마다 실행
