@@ -6,7 +6,7 @@ wordcloud = Blueprint("wordcloud", __name__)
 api = Api(wordcloud)
 
 keyword_dict = {}
-with open('data/keyword_count_dict.pickle', 'rb') as fr:
+with open('data/wordcount.pickle', 'rb') as fr:
     keyword_dict = pickle.load(fr)
 
 

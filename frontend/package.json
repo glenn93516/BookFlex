@@ -23,10 +23,16 @@
     "form-data": "^4.0.0",
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.1",
+    "swiper": "^6.5.3",
     "vue": "^2.6.12",
+    "vue-ads-pagination": "^2.1.7",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-fullpage.js": "^0.1.7",
     "vue-router": "^3.2.0",
-    "vuex": "^3.6.2"
+    "vue-wordcloud": "^1.1.1",
+    "vuewordcloud": "^18.7.12",
+    "vuex": "^3.6.2",
+    "wordcloud": "^1.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
