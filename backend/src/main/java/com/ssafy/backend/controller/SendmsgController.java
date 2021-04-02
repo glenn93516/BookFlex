@@ -108,7 +108,7 @@ public class SendmsgController {
             sendmsgService.insertSendmsg(sendmsgDto);
 
             BaseResponse response = responseService.getBaseResponse(true, "메세지 생성 성공");
-            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         } catch (Exception exception) {
             logger.info(exception.getMessage());
 

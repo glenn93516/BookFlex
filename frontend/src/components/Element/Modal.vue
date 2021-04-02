@@ -5,7 +5,7 @@
         <div class="modal-container">
 
           <div class="modal-header">
-            <slot name="header" @close-modal="closeModal">
+            <slot name="header">
               <font-awesome-icon 
                 @click="$emit('close-modal')"
                 size="2x" 

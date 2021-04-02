@@ -25,7 +25,7 @@ public class WishlistServiceImpl implements WishlistService{
     }
 
     @Override
-    public List<WishlistDto> selectWishlistList(long user_id) throws Exception {
+    public List<Map> selectWishlistList(long user_id) throws Exception {
         return mapper.selectWishlistList(user_id);
     }
 }

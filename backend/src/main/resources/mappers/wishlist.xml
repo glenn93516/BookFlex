@@ -10,9 +10,10 @@
     <delete id="deleteWishlist" parameterType="map">
         delete from wishlist where wishlist_id = #{wishlist_id} and user_id = #{user_id}
     </delete>
-    <select id="selectWishlistList" parameterType="long" resultType="WishlistDto">
-        select wishlist_id, wishlist_date, user_id, book_isbn
-        from wishlist
-        where user_id = #{user_id}
+    <select id="selectWishlistList" parameterType="long" resultType="Map">
+        select wish.wishlist_id, wish.wishlist_date, wish.user_id, wish.book_isbn, book.book_cover
+        from (select wishlist_id, wishlist_date, user_id, book_isbn
+              from wishlist
+              where user_id = #{user_id}) as wish left join book on wish.book_isbn = book.book_isbn
     </select>
 </mapper>
