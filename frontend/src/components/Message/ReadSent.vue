@@ -49,7 +49,7 @@
 
                     <div class="modal_body">
                       <div style="font-size:30px; font-weight: bold;">쪽지를 삭제 하시겠습니까?</div>
-                      <div style="color:red;">한 번 삭제한 쪽진느 복구가 불가능합니다.</div>
+                      <div style="color:red;">한 번 삭제한 쪽지는 복구가 불가능합니다.</div>
                     </div>
 
                     <div class="modal_footer">
