@@ -152,6 +152,29 @@ const routes = [
             component: () => import('../components/Message/ReadReceived.vue'),
           },
         ]
+      },
+      {
+        path: 'password',
+        name: 'Password',
+        component: () => import('../components/Password/Password.vue'),
+        redirect: 'password/submitEmail',
+        children: [
+          {
+            path: 'submitEmail',
+            name: 'PasswordSubmitEmail',
+            component: () => import('../components/Password/SubmitEmail.vue'),
+          },
+          {
+            path: 'checkEmail',
+            name: 'PasswordCheckEmail',
+            component: () => import('../components/Password/CheckEmail.vue'),
+          },
+          {
+            path: 'reset',
+            name: 'PasswordReset',
+            component: () => import('../components/Password/Reset.vue'),
+          },
+        ]
       }
     ]
   },
