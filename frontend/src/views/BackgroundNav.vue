@@ -156,7 +156,8 @@ export default {
       }
     },
     goToProfile() {
-      this.$router.push({ name: 'Profile' })
+      console.log(this.userInfo)
+      this.$router.push({ name: 'Profile', params: {userName: this.userInfo.userNickname}})
     },
     goToMain() {
       this.$router.push({ name: 'MainPage' })
