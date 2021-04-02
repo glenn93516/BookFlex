@@ -78,7 +78,7 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: form })
         .then(res => {
           this.bookData.titleData = res.data.data;
-          console.log('this.bookData.titleData  >> ',this.bookData.titleData)
+          // console.log('this.bookData.titleData  >> ',this.bookData.titleData)
         })
         .catch(err => {
           console.error(err)
@@ -93,7 +93,7 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: this.form })
         .then(res => {
           this.bookData.authorData = res.data.data;
-          console.log('this.bookData.authorData  >> ',res.data.data)
+          // console.log('this.bookData.authorData  >> ',res.data.data)
         })
         .catch(err => {
           console.error(err)
@@ -108,21 +108,27 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: this.form })
         .then(res => {
           this.bookData.contentsData = res.data.data;
-          console.log('this.bookData.contentsData >> ',res.data.data)
+          // console.log('this.bookData.contentsData >> ',res.data.data)
         })
         .catch(err => {
           console.error(err)
         })
     },
     searchUser(){
+      var temp = null;
       this.$axios.get(`${this.$store.getters.getServer}/user/${this.text}`)
         .then(res => {
-          console.log('this.Userdata >> ',res.data.data);
+          // console.log('this.Userdata >> ',res.data.data);
           this.userData = res.data.data;
+          temp = res.data.data;
         })
-        // .catch(err => {
-        //   // console.error(err)
+        // .catch(function(){
+        //   this.userData = null;
+        //   // console.log(err)
         // })
+        if(temp==null){
+          this.userData = null;
+        }
     }
   }
 }
