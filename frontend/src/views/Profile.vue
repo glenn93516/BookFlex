@@ -14,11 +14,11 @@
         <div class="profile-title">
           <div class="profile-name-group">
             <h1 class="profile-name">
-              {{ userInfo.userNickname }}
+              {{ $route.params.userName }}
             </h1>
             <img width="40px" :src="medal.first" />
           </div>
-          <span class="img-update-btn"><span>편집</span></span>
+          <span class="img-update-btn" @click="updateModal=true" v-if="isEditor"><span>편집</span></span>
         </div>
         <p class="profile-singleline">
           {{ profileSingleLine.sentence }}
@@ -78,17 +78,18 @@
             :to="{name: 'SaveSentence'}"
             class="profile-nav-item"
           >
-            문장수집(3)
+            문장수집
           </router-link>
           <router-link 
             :to="{name: 'ReadBooks'}"
             class="profile-nav-item"
           >
-            읽은 책(5)
+            읽은 책
           </router-link>
           <router-link 
             :to="{name: 'WishList'}"
             class="profile-nav-item"
+            v-if="isEditor"
           >
             위시리스트
           </router-link>
@@ -96,12 +97,7 @@
       </ul>
     </nav>
     <!-- 갈아끼울 컴포넌트 -->
-    <router-view 
-      style="
-        min-width: 1110px;
-        display: inline-block;
-        height: 600px;
-      ">
+    <router-view class="router-component" :userInfo="userInfo">
     </router-view>
 
 
@@ -116,7 +112,6 @@ export default {
   },
   data() {
     return {
-      profileName: "김싸피김싸피",
       profileMedal: "",
       profileSingleLine: {
         sentence: "내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다.",
@@ -129,13 +124,10 @@ export default {
       },
       jobList: false,
       genreModalShow: false,
-      navItemState: {
-        preferenceGenre: false,
-        saveSentence: false,
-        readBooks: false,
-        wishList: false,
-      },
       userInfo: {},
+      isEditor: false,
+      nowUserName: "",
+      updateModal: false,
     }
   },
   methods: {
@@ -155,23 +147,40 @@ export default {
       alert('장르 이모티콘 추가 작업 중입니다🛠')
     },
   },
-  mounted() {
-    const token = localStorage.getItem('jwt')
-    if (token) {
-      this.userInfo = this.$store.getters.getUser
-      console.log(this.userInfo)
-    } else {
-      alert('로그인 해주세요!')
-      this.$router.push({ name: 'Login' })
-    }
-    console.log(this.$store.getters.getUser)
+  created() {
+    this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}`)
+    .then(() => {
+      this.nowUserName = this.$store.state.user.userNickname
+    })
+    .catch(() => {
+      this.$router.push('not-user')
+      // 404에러 띄우기
+    })
   },
-  watch: {
-    // userInfo() {
-    //   if ()
-    // }
-  }
+  mounted() {
+    this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}`)
+    .then(res => {
+      this.userInfo = res.data.data
+    })
+    .catch(err => {
+      console.log(err, 'err')
+    })
+
+    this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`)
+    .then(res => {
+      console.log(res.data.length, '이거 갯수 세야함')
+    })
+  },
+  beforeUpdate() {
+    this.nowUserName = this.$store.state.user.userNickname
+    if (this.nowUserName === this.$route.params.userName) {
+      this.isEditor = true
+    } else {
+      this.isEditor = false
+    }
+  },
 }
+
 </script>
 
 <style>
@@ -339,13 +348,18 @@ export default {
   .profile-nav-item:hover {
     font-weight: bold;
     cursor: pointer;
+    transition: 0.1s;
   }
   .profile-nav-item.router-link-exact-active {
     color: black;
     font-weight: bold;
     border-top: 2px black solid;
   }
-
+  .router-component {
+    min-width: 1110px;
+    display: inline-block;
+    height: 600px;
+  }
 
   .more {
     display: flex;
