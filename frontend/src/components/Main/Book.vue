@@ -98,7 +98,7 @@ export default {
 			}
 		},
 		goToBookDetail() {
-			this.$router.push({ name: 'FirstPage', params: { book: this.book } })
+			this.$router.push({ name: 'BookDetail', params: { bookIsbn: this.book.book_isbn } })
 		},
 		addToWish() {
 			const token = localStorage.getItem('jwt')
