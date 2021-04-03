@@ -46,19 +46,38 @@ export default {
       userData : null,
     }
   },
-  computed() {
-    console.log(this.$rout.params.word);
-    if(this.$route.params.word!=undefined){
+  created() {
+    if(this.$route.params.word==null){
+      this.text = ''
+    }else{
       console.log('route : '+this.$route.params.word);
       this.text = this.$route.params.word;
-      this.searchClick()
+      this.searchClick();
     }
   },
+  watch: {
+    $route() {
+      console.log('watch : '+this.$route.params.word);
+      this.text = this.$route.params.word;
+      this.searchClick();
+    }
+  },
+  // watch () {
+  //   console.log('this.$rout.params.word  >>>  ',this.$rout.params.word);
+  //   if(this.$route.params.word!=undefined){
+  //     console.log('route : '+this.$route.params.word);
+  //     this.text = this.$route.params.word;
+  //     this.searchClick()
+  //   }
+  // },
   methods: {
     searchClick(){
-      if(this.text.trim==''){
+      // alert('클릭');
+      console.log(this.text.trim())
+      if(this.text.trim()==''){
         alert('검색어를 입력하세요.')
       }else{
+        console.log('검색어가 존재');
         this.searchTitle();
         this.searchAuthor();
         this.searchContents();
@@ -74,7 +93,7 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: form })
         .then(res => {
           this.bookData.titleData = res.data.data;
-          console.log('this.bookData.titleData  >> ',this.bookData.titleData)
+          // console.log('this.bookData.titleData  >> ',this.bookData.titleData)
         })
         .catch(err => {
           console.error(err)
