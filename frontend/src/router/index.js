@@ -93,7 +93,7 @@ const routes = [
         ],
       },
       {
-        path:'/:userName',
+        path: '/:userName',
         name: 'Profile',
         component: () => import('../views/Profile.vue'),
         redirect: '/:userName/genre',
@@ -158,7 +158,7 @@ const routes = [
             name: 'ReadReceived',
             component: () => import('../components/Message/ReadReceived.vue'),
           },
-        ]
+        ],
       },
       {
         path: '/:bookIsbn',
@@ -191,7 +191,7 @@ const routes = [
             component: () => import('../components/Book/FourthPage.vue'),
             props: true,
           },
-        ]
+        ],
       },
       {
         path: 'password',
@@ -214,9 +214,9 @@ const routes = [
             name: 'PasswordReset',
             component: () => import('../components/Password/Reset.vue'),
           },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
   {
     path: '*',
