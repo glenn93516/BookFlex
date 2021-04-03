@@ -22,13 +22,9 @@ export default {
     return {
     }
   },
-  mounted() {
-    // this.profileImg = this.item.userProfileImg,
-    // this.profileNickname = this.item.userNickname
-  },
   methods: {
     clickImg(){
-      alert('이미지 클릭')
+      this.$router.push(`/profile/${this.user.userNickname}`);
     }
   }
 }

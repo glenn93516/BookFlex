@@ -5,16 +5,16 @@
       <h4 style="text-align: center; ">😥검색된 결과가 없습니다.</h4>
     </div>
     <div v-if="userData!=null">
-      <user-detail v-bind:user="userData"></user-detail>
+      <search-user-detail v-bind:user="userData"></search-user-detail>
     </div>
   </div>
 </template>
 
 <script>
-import UserDetail from './UserDetail.vue'
+import SearchUserDetail from './SearchUserDetail.vue'
 export default {
   components: { 
-    UserDetail 
+    SearchUserDetail 
   },
   props: {
     userData: null,

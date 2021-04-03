@@ -50,34 +50,23 @@ export default {
     if(this.$route.params.word==null){
       this.text = ''
     }else{
-      console.log('route : '+this.$route.params.word);
+      // console.log('route : '+this.$route.params.word);
       this.text = this.$route.params.word;
       this.searchClick();
     }
   },
   watch: {
     $route() {
-      console.log('watch : '+this.$route.params.word);
+      // console.log('watch : '+this.$route.params.word);
       this.text = this.$route.params.word;
       this.searchClick();
     }
   },
-  // watch () {
-  //   console.log('this.$rout.params.word  >>>  ',this.$rout.params.word);
-  //   if(this.$route.params.word!=undefined){
-  //     console.log('route : '+this.$route.params.word);
-  //     this.text = this.$route.params.word;
-  //     this.searchClick()
-  //   }
-  // },
   methods: {
     searchClick(){
-      // alert('클릭');
-      console.log(this.text.trim())
       if(this.text.trim()==''){
         alert('검색어를 입력하세요.')
       }else{
-        console.log('검색어가 존재');
         this.searchTitle();
         this.searchAuthor();
         this.searchContents();
