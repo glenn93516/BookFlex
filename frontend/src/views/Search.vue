@@ -46,17 +46,25 @@ export default {
       userData : null,
     }
   },
-  computed() {
-    console.log(this.$rout.params.word);
-    if(this.$route.params.word!=undefined){
-      console.log('route : '+this.$route.params.word);
+  created() {
+    if(this.$route.params.word==null){
+      this.text = ''
+    }else{
+      // console.log('route : '+this.$route.params.word);
       this.text = this.$route.params.word;
-      this.searchClick()
+      this.searchClick();
+    }
+  },
+  watch: {
+    $route() {
+      // console.log('watch : '+this.$route.params.word);
+      this.text = this.$route.params.word;
+      this.searchClick();
     }
   },
   methods: {
     searchClick(){
-      if(this.text.trim==''){
+      if(this.text.trim()==''){
         alert('검색어를 입력하세요.')
       }else{
         this.searchTitle();
@@ -74,7 +82,7 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: form })
         .then(res => {
           this.bookData.titleData = res.data.data;
-          console.log('this.bookData.titleData  >> ',this.bookData.titleData)
+          // console.log('this.bookData.titleData  >> ',this.bookData.titleData)
         })
         .catch(err => {
           console.error(err)

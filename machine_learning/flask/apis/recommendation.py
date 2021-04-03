@@ -50,6 +50,9 @@ def calculate_score(similarity):
     return score * similarity
 
 
+vcalculate_score = np.vectorize(calculate_score)
+
+
 def recommend(isbn_list, genre_ids=None):
     ''' 책 리스트와 장르를 이용해 추천
     - paramter
@@ -65,16 +68,21 @@ def recommend(isbn_list, genre_ids=None):
     book_indices = [indices[isbn] for isbn in isbn_list]
 
     sim_scores = [[i, 0] for i in range(len(book_embedding_list))]
+    tmp_sim_scores = np.zeros(len(book_embedding_list))
 
     for idx in book_indices:
         # 해당 책과 다른 책들의 cosine similarity 계산
         cos_similarity = cosine_similarity(
             [book_embedding_list[idx]], book_embedding_list)
+        # 가중치 처리
+        cos_similarity = vcalculate_score(cos_similarity[0])
 
         # 해당 책과 다른 책들의 cosin similarity를 점수로 환산해 기존 값에 더해줌
-        for i in range(len(sim_scores)):
-            if i != idx:
-                sim_scores[i][1] += calculate_score(cos_similarity[0][i])
+        tmp_sim_scores += cos_similarity
+
+    # 유사도 + 가중치 처리한 결과 더해줌
+    for i in range(len(tmp_sim_scores)):
+        sim_scores[i][1] = tmp_sim_scores[i]
 
     # 유저가 선호하는 장르내에서만 추천하는 경우 0점 처리
     if genre_ids is not None and len(genre_ids) > 0:
@@ -103,7 +111,10 @@ def recommend(isbn_list, genre_ids=None):
 
     results = Book.query.filter(Book.book_isbn.in_(recommend)).all()
 
-    return [result.as_simple_dict(idx + 1) for idx, result in enumerate(results)]
+    response = [result.as_simple_dict(idx + 1)
+                for idx, result in enumerate(results)]
+
+    return response
 
 
 def select_book_only_genres(genre_ids):
@@ -125,7 +136,9 @@ def select_book_only_genres(genre_ids):
 
     results = Book.query.filter(Book.book_isbn.in_(recommend)).all()
 
-    return [result.as_simple_dict(idx + 1) for idx, result in enumerate(results)]
+    response = [result.as_simple_dict(idx + 1)
+                for idx, result in enumerate(results)]
+    return response
 
 
 def find_customized_genre(read_books, user_genres):
@@ -173,7 +186,9 @@ def recommend_random_books():
         .filter(Book.book_isbn.in_(recommend)) \
         .all()
 
-    return [result.as_simple_dict(idx + 1) for idx, result in enumerate(results)]
+    response = [result.as_simple_dict(idx + 1)
+                for idx, result in enumerate(results)]
+    return response
 # API Endpoints
 
 
@@ -185,8 +200,8 @@ def recommend_by_user(userId):
         user_id=userId).all()]
     wishlists = [wishlist.book_isbn for wishlist in Wishlist.query.filter_by(
         user_id=userId).all()]
-    customized_genre_id, customized_genre_name = find_customized_genre(
-        read_books, user_genres)
+    customized_genre_id, customized_genre_name \
+        = find_customized_genre(read_books, user_genres)
 
     customized_by_user = []     # 유저가 읽은 책 기반 추천
     customized_by_genre = []    # 유저 맞춤 장르 기반 추천

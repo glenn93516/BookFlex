@@ -10,8 +10,7 @@
     <hr class="mt-3 mb-0 mr-3 ml-3" style="background-color: grey;">
     <!-- 리뷰 내용 -->
     <div v-if="keywordReview">
-      <p v-for="(review, idx) in keywordReview" :key="idx">{{ review.review_content }}</p>
-      <br>
+      <p v-for="(review, idx) in keywordReview" :key="idx"><br>{{ review.review_content }}<br></p>
     </div>
   </div>
 </template>
@@ -27,7 +26,7 @@ export default {
       keywordReview: [],
     }
   },
-  created() {
+  beforeUpdate() {
     this.pickKeywordReview()
     // console.log(this.reviewList)
   },
