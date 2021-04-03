@@ -66,7 +66,7 @@ export default {
       }
     },
     searchTitle(){
-      var form = {
+      const form = {
         search : 'title',
         word : this.text
       };

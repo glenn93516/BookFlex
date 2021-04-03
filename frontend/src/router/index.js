@@ -161,10 +161,10 @@ const routes = [
         ]
       },
       {
-        path: '/bookdetail',
+        path: '/:bookIsbn',
         name: 'BookDetail',
         component: () => import('../views/BookDetail.vue'),
-        redirect: '/bookdetail/firstpage',
+        redirect: '/:bookIsbn/firstpage',
         props: true,
         children: [
           {
