@@ -4,38 +4,27 @@
       정보 수정
     </header>
     <hr class="update-hr">
-    <div>
-      <header class="update-title">프로필</header>
-      <div class="update-profile-image">
-        <!-- 기존 이미지 -->
-        <b-avatar
-          v-if="!uploadImg"
-          :src="profileImg"
-          size="10rem"
-          class="updateProfile-left"
-          variant="light"
-        >
-        </b-avatar>
-        <!-- 이미지 업데이트 했을 때 -->
-        <b-avatar
-          v-if="uploadImg"
-          :src="uploadImg"
-          size="10rem"
-          class="updateProfile-left"
-          variant="light"
-        >
-        </b-avatar>
-        <!-- reset img -->
-        <!-- <b-avatar size="10rem" v-if="resetImg" src="" class="updateProfile-left"></b-avatar> -->
-        <div class="upload-image">
-          <input ref="imageInput" type="file" hidden @change="onChangeImages">
-          <b-button variant="warning" @click="onClickImageUpload">이미지 업로드</b-button>
-          <!-- <b-button variant="primary" @click="resetImage">기본 이미지로 변경</b-button> -->
-        </div>
-      </div>
-    </div>
     <div class="update-genre">
-      <header class="update-title">선호 장르</header>
+      <header class="update-title">직업군</header>
+
+    </div>
+    <div class="update-birth">
+      <header class="update-title">생년월일</header>
+      <b-form-datepicker></b-form-datepicker>
+
+    </div>
+    <div class="update-gender">
+      <header class="update-title">성별</header>
+      <!-- <checkbox></checkbox> -->
+
+    </div>
+    <div class="update-password">
+      <header class="update-title">비밀번호 초기화</header>
+      <!-- <checkbox></checkbox> -->
+
+    </div>
+    <div class="delete-info">
+      <header class="update-title">회원탈퇴</header>
       <!-- <checkbox></checkbox> -->
 
     </div>
@@ -47,11 +36,9 @@
 export default {
   // components: { Checkbox },
   props: {
-    profileImg: String,
   },
   data() {
     return {
-      uploadImg: null,
       option: null,
       // resetImg: false,
     }
@@ -60,50 +47,21 @@ export default {
     const User = this.$store.getters.getUser
     console.log(User)
   },
-  mounted() {
-    this.getGenreInfo()
-  },
+  // mounted() {
+  //   this.getGenreInfo()
+  // },
   methods: {
-    onClickImageUpload() {
-      this.$refs.imageInput.click()
-    },
-    onChangeImages(e) {
-      console.log(e.target.files)
-      const file = e.target.files[0]
-      this.uploadImg = URL.createObjectURL(file)
-      this.submitImage(file)
-    },
-    // resetImage() {
-    //   this.resetImg = true
-    //   this.$refs.imageInput.value=null
-    //   this.completeChange()
-    //   // const User = this.$store.getters.getUserImg
-    //   // const UserFile = this.$store.getters.getUserImgFile
-    //   // console.log(User,  'FIKE1')
-    //   // console.log(UserFile, 'FIKE2')
-    //   // this.$store.dispatch('DeleteProfileImage')
-
-    //   // const file = new File(["name"], "no-image",)
-    //   // console.log('resetImage')
-    //   // console.log(file, 'file')
-    //   // this.$store.dispatch('SubmitUserPic', file)
-    //   // this.completeChange()
-    // },
-    submitImage(Img) {
-      this.$store.dispatch('SubmitUserPic', Img)
-      this.completeChange()
-    },
     completeChange() {
       const User = this.$store.getters.getUser
       this.$store.dispatch('UpdateUserInfo', User)
     },
-    getGenreInfo() {
-      this.$axios.get(`${this.$store.getters.getServer}/genre`)
-      .then(res => {
-        console.log(res.data.data)
-        this.option = res.data.data
-      })
-    }
+    // getGenreInfo() {
+    //   this.$axios.get(`${this.$store.getters.getServer}/genre`)
+    //   .then(res => {
+    //     console.log(res.data.data)
+    //     this.option = res.data.data
+    //   })
+    // }
   },
 }
 </script>
@@ -116,17 +74,6 @@ export default {
   }
   .update-hr {
     margin: 10px 0;
-  }
-  .update-profile-image {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    margin: 20px 10px;
-  }
-  .upload-image {
-    display: inline-block;
-    width: 100%;
-    text-align: center; 
   }
   .update-title {
     margin-left: 10px;

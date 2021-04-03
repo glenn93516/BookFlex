@@ -26,7 +26,7 @@ export default new Vuex.Store({
       userProfileImgFile: null, // file ?
       userBirth: "",
       userGender: "",
-      userJob: "",
+      userJob: [],
       // 입력 X
       userId: Number,
       userRole: "",

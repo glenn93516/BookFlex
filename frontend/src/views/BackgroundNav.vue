@@ -268,7 +268,6 @@ export default {
     /* 그림자 효과 */
     box-shadow: 0px 5px 10px -10px gray;
   }
-/*여기입니다요 id가 이거래 .. 선택자로 찍어버렸어 약간 포크 */
   #__BVID__9 > ul {
     background-color: #5c463d;
     border-radius: 10px/ 10px;
@@ -361,7 +360,4 @@ export default {
   .temp {
     display: flex;
   }
-  /* .temp-hightlight {
-    display: absolute;
-  } */
 </style>
