@@ -15,7 +15,6 @@
     <!-- 검색바 -->
     <SearchBar/>
     <!-- 검색결과 -->
-    
   </div>
 
 </template>
