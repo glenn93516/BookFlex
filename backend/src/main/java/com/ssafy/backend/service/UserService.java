@@ -110,7 +110,18 @@ public class UserService {
     }
 
     @Transactional
+    public void saveNewPassword(UserDto userDto, String newPassword) {
+        newPassword = passwordEncoder.encode(newPassword);
+        userMapper.saveNewPassword(userDto.getUserId(), newPassword);
+    }
+
+    @Transactional
     public void deleteOne(Long userId) {
         userMapper.deleteOne(userId);
+    }
+
+    public UserDto findByUserEmail(String userEmail) {
+        return userMapper.findUserByUserEmail(userEmail)
+                .orElseThrow(() -> new UserNotFoundException("잘못된 유저 이메일입니다"));
     }
 }
