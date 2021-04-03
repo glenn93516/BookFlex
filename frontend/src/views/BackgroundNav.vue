@@ -175,10 +175,10 @@ export default {
     },
     hideInput() {
       this.checkInput = true
-      var path = '/search/'+this.text;
-      console.log(path)
+      // var path = '/search/'+this.text;
+      // console.log(path)
       this.text=null
-      this.$router.push(path);
+      this.$router.push(`/search/${this.text}`);
     },
     checkLogin() {
       const token = localStorage.getItem('jwt')
