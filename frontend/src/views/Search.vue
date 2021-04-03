@@ -46,22 +46,6 @@ export default {
       userData : null,
     }
   },
-  created() {
-    // if(this.$route.params.word!=''){
-    //   this.text = this.$route.params.word;
-    //   searchClick()
-    // }
-  },
-  mounted () {
-    // if(this.$route.params.word!=undefined){
-    //   console.log('route : '+this.$route.params.word);
-    //   this.text = this.$route.params.word;
-    //   this.searchClick()
-    // }
-  },
-  updated : {
-
-  },
   computed() {
     console.log(this.$rout.params.word);
     if(this.$route.params.word!=undefined){
