@@ -165,11 +165,9 @@ export default {
     tempOverImg() {
       this.checkReceivedMessage()
       this.postBox = this.openPostBox
-      console.log(this.postBox)
     },
     tempOutImg() {
       this.postBox = this.closePostBox
-      console.log(this.postBox)
     },
     showInput() {
       this.checkInput = false
