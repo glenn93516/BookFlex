@@ -1,6 +1,9 @@
 <template>
   <div>
     <h4>프로필 사진을 등록해주세요.</h4>
+    <div style="text-align: center; margin-top: 1rem;">
+      <img width="100px" height="100px" :src="profileImage" alt="">
+    </div>
 
     <b-form-file
       v-model="profileImage"
@@ -8,7 +11,6 @@
       :placeholder="photoName"
       drop-placeholder="Drop file here..."
       class="submit-PImg"
-      enctype='multipart/form-data'
       type='file'
     >
     </b-form-file>
@@ -67,10 +69,10 @@ export default {
     content: 'B';
   } */
   .submit-PImg {
-    margin-top: 30px; 
+    margin-top: 1rem; 
     margin-bottom: 10px;
   }
   .profileImg-btn {
-    margin-top: 5rem;
+    margin-top: 0.5rem;
   }
 </style>

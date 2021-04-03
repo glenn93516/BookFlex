@@ -115,6 +115,11 @@ const routes = [
             component: () => import('../components/Profile/ReadBooks.vue'),
           },
           {
+            path: 'liked',
+            name: 'LikeSentence',
+            component: () => import('../components/Profile/LikeSentence.vue'),
+          },
+          {
             path: 'wishlist',
             name: 'WishList',
             component: () => import('../components/Profile/WishList.vue'),

@@ -50,7 +50,7 @@
         <!-- 마이페이지 -->
         <b-nav-item-dropdown right>
           <template #button-content>
-            <b-avatar size="2.5rem" :src="userInfo.userProfileImg"></b-avatar>
+            <b-avatar size="2.5rem" :src="userInfo.userProfileImg" variant="white"></b-avatar>
           </template>
 
           <b-dropdown-item
@@ -295,6 +295,11 @@ export default {
     font-size: 12px;
     width: 200px;
   }
+  .bi-person-fill {
+    display: inline-block;
+    width: 100%;
+    height: 100%
+  } 
   .dropdown-item:hover {
     background-color: #5c463d;
     font-weight: bold;

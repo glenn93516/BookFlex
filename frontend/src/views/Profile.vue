@@ -4,9 +4,10 @@
     <div id="profileHeader" class="profile-header">
       <!-- 프로필사진 -->
       <b-avatar 
-        :src="userInfo.userProfileImg" 
+        :src="userInfo.userProfileImg"  
         size="10rem"
         class="profile-left"
+        variant="white"
       >
       </b-avatar>
       <!-- 이름 -->
@@ -20,6 +21,9 @@
           </div>
           <span class="img-update-btn" @click="updateModal=true" v-if="isEditor"><span>편집</span></span>
         </div>
+        <b-modal v-model="updateModal" centered hide-footer hide-header hide-backdrop>
+          <update-profile :profileImg="userInfo.userProfileImg"></update-profile>
+        </b-modal>
         <p class="profile-singleline">
           {{ profileSingleLine.sentence }}
           <br>
@@ -87,6 +91,12 @@
             읽은 책
           </router-link>
           <router-link 
+            :to="{name: 'LikeSentence'}"
+            class="profile-nav-item"
+          >
+            좋은문장
+          </router-link>
+          <router-link 
             :to="{name: 'WishList'}"
             class="profile-nav-item"
             v-if="isEditor"
@@ -102,10 +112,13 @@
 </template>
 
 <script>
+import UpdateProfile from '../components/Profile/UpdateProfile.vue'
+
 export default {
   props: {
   },
   components: {
+    UpdateProfile,
   },
   data() {
     return {
@@ -205,6 +218,11 @@ export default {
     display: inline-block;
     margin: 30px 30px 30px 0px;
   }
+  .profile-left .bi-person-fill {
+    display: inline-block;
+    width: 100%;
+    height: 100%
+  }  
   .profile-right {
     display: inline-block;
     margin: 30px;

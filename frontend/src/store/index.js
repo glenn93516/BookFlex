@@ -23,7 +23,7 @@ export default new Vuex.Store({
       userPassword: "",
       genres: [],
       userProfileImg: "",
-      userProfileImgFile: "", // file ?
+      userProfileImgFile: null, // file ?
       userBirth: "",
       userGender: "",
       userJob: "",
@@ -178,6 +178,7 @@ export default new Vuex.Store({
       const headers = {
         "Authorization": token
       }
+      console.log('put전')
       axios.put(`${SERVER_URL}/user`, data, {headers})
       .then(res => {
         console.log(res)
@@ -189,6 +190,7 @@ export default new Vuex.Store({
       })
       .catch(err => {
         console.error(err)
+        console.log('actions에서 오류')
       })
     },
     SetEmail(context, Email) {
