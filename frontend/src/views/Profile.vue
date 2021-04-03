@@ -3,13 +3,16 @@
     <!-- 프로필 헤더(사진, 이름, 한줄, 편집 버튼, 직업) -->
     <div id="profileHeader" class="profile-header">
       <!-- 프로필사진 -->
-      <b-avatar 
-        :src="userInfo.userProfileImg"  
-        size="10rem"
-        class="profile-left"
-        variant="white"
-      >
-      </b-avatar>
+      <div class="profile-left">
+        <b-avatar 
+          :src="userInfo.userProfileImg"  
+          class="profile-left-img"
+          size="10rem"
+          variant="white"
+        >
+        </b-avatar>
+        <div class="img-update-btn" @click="updateModal=true" v-if="isEditor"><span>수정</span></div>
+      </div>
       <!-- 이름 -->
       <div class="profile-right">
         <div class="profile-title">
@@ -19,7 +22,6 @@
             </h1>
             <img width="40px" :src="medal.first" />
           </div>
-          <span class="img-update-btn" @click="updateModal=true" v-if="isEditor"><span>편집</span></span>
         </div>
         <b-modal v-model="updateModal" centered hide-footer hide-header hide-backdrop>
           <update-profile :profileImg="userInfo.userProfileImg"></update-profile>
@@ -217,6 +219,11 @@ export default {
   .profile-left {
     display: inline-block;
     margin: 30px 30px 30px 0px;
+    justify-content: center;
+    text-align: center;
+  }
+  .profile-left-img {
+    margin: 20px 0;
   }
   .profile-left .bi-person-fill {
     display: inline-block;
@@ -245,8 +252,9 @@ export default {
     display: inline-block;
   }
   .img-update-btn {
+    margin: auto;
     width: 50px;
-    height: 40px;
+    /* height: 40px; */
     border-radius: 25px;
     box-shadow: 1px 4px 0 rgb(0, 0, 0, 0.5);
     display: flex;
