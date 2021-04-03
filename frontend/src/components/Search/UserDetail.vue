@@ -30,7 +30,7 @@ export default {
     clickImg(){
       alert('이미지 클릭')
     }
-  },
+  }
 }
 </script>
 

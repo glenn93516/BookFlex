@@ -48,6 +48,7 @@ export default {
   },
   created() {
     // if(this.$route.params.word!=''){
+    //   this.text = this.$route.params.word;
     //   searchClick()
     // }
   },
@@ -57,6 +58,17 @@ export default {
     //   this.text = this.$route.params.word;
     //   this.searchClick()
     // }
+  },
+  updated : {
+
+  },
+  computed() {
+    console.log(this.$rout.params.word);
+    if(this.$route.params.word!=undefined){
+      console.log('route : '+this.$route.params.word);
+      this.text = this.$route.params.word;
+      this.searchClick()
+    }
   },
   methods: {
     searchClick(){
@@ -78,7 +90,7 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: form })
         .then(res => {
           this.bookData.titleData = res.data.data;
-          // console.log('this.bookData.titleData  >> ',this.bookData.titleData)
+          console.log('this.bookData.titleData  >> ',this.bookData.titleData)
         })
         .catch(err => {
           console.error(err)
@@ -126,9 +138,9 @@ export default {
         //   this.userData = null;
         //   // console.log(err)
         // })
-        if(temp==null){
-          this.userData = null;
-        }
+      if(temp==null){
+        this.userData = null;
+      }
     }
   }
 }

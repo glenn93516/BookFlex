@@ -12,8 +12,8 @@ export default {
   },
   methods: {
     clickImg(){
-      this.$router.push({ name: 'MainBook' })
-    }
+      this.$router.push({ name: 'FirstPage', params: { book: this.book } })
+    },
   },            
 }
 </script>
