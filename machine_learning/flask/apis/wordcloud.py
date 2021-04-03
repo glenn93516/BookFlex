@@ -55,8 +55,11 @@ def get_book_topic_response(topic_distribution, words_in_topic):
         word = dictionary[word_id]
 
         for topic in topics:
+            # 한 토픽에 단어 최대 10개만 담기도록 설정
             if len(res[topic]["words"]) < 10:
                 res[topic]["words"].append(word)
+                # 한 단어가 여러 토픽에 담기지 않도록 설정
+                break
 
     return list(res.values())
 
