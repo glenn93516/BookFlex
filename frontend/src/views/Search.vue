@@ -118,10 +118,11 @@ export default {
           this.userData = res.data.data;
           temp = res.data.data;
         })
-        // .catch(function(){
-        //   this.userData = null;
-        //   // console.log(err)
-        // })
+        .catch(() => {
+          this.userData = null;
+          console.log("없는 유저입니다.")
+          // console.error(err);
+        })
       if(temp==null){
         this.userData = null;
       }
