@@ -46,17 +46,13 @@ export default {
       userData : null,
     }
   },
-  created() {
-    // if(this.$route.params.word!=''){
-    //   searchClick()
-    // }
-  },
-  mounted () {
-    // if(this.$route.params.word!=undefined){
-    //   console.log('route : '+this.$route.params.word);
-    //   this.text = this.$route.params.word;
-    //   this.searchClick()
-    // }
+  computed() {
+    console.log(this.$rout.params.word);
+    if(this.$route.params.word!=undefined){
+      console.log('route : '+this.$route.params.word);
+      this.text = this.$route.params.word;
+      this.searchClick()
+    }
   },
   methods: {
     searchClick(){
@@ -70,7 +66,7 @@ export default {
       }
     },
     searchTitle(){
-      var form = {
+      const form = {
         search : 'title',
         word : this.text
       };
@@ -93,7 +89,7 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: this.form })
         .then(res => {
           this.bookData.authorData = res.data.data;
-          console.log('this.bookData.authorData  >> ',res.data.data)
+          // console.log('this.bookData.authorData  >> ',res.data.data)
         })
         .catch(err => {
           console.error(err)
@@ -108,21 +104,28 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: this.form })
         .then(res => {
           this.bookData.contentsData = res.data.data;
-          console.log('this.bookData.contentsData >> ',res.data.data)
+          // console.log('this.bookData.contentsData >> ',res.data.data)
         })
         .catch(err => {
           console.error(err)
         })
     },
     searchUser(){
+      var temp = null;
       this.$axios.get(`${this.$store.getters.getServer}/user/${this.text}`)
         .then(res => {
-          console.log('this.Userdata >> ',res.data.data);
+          // console.log('this.Userdata >> ',res.data.data);
           this.userData = res.data.data;
+          temp = res.data.data;
         })
-        // .catch(err => {
-        //   // console.error(err)
-        // })
+        .catch(() => {
+          this.userData = null;
+          console.log("없는 유저입니다.")
+          // console.error(err);
+        })
+      if(temp==null){
+        this.userData = null;
+      }
     }
   }
 }

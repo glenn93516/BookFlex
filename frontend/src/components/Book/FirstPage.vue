@@ -10,56 +10,44 @@
         <h2>키워드 분석</h2>
       </div>
       <div>
-        <vue-word-cloud
-          style="
-            height: 600px;
-            width: 450px;
-            box-shadow: 
-            box-shadow: 0px 5px 10px -10px gray;
-            margin-left: 30px;
-          "
-          :words="words"
-          :color="([, weight]) => weight > 5 ? 'DeepPink' : weight > 3 ? 'Red' : weight > 2 ? 'RoyalBlue' : 'Indigo'"
-          font-family="Anton"
-          font-weight="Bold"
-        />
+        <WordCloud :isbn="isbn"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import VueWordCloud from 'vuewordcloud';
+import WordCloud from '@/components/Element/WordCloud.vue'
 
 export default {
   props: {
-    book: Object,
   },
   components: {
-    VueWordCloud
+    WordCloud,
   },
   data() {
     return {
-      words: []
+      book: Object,
+      isbn: "",
     }
   },
   created() {
-    console.log(this.book)
-    const isbn = this.book.book_isbn
-    this.$axios.get(`${this.$store.getters.getServer}/book/${isbn}/wordcloud`)
-    .then(res => {
-      console.log(res.data.data)
-      this.words = res.data.data.slice(0, 30)
-    })
-    .catch(err => {
-      console.error(err)
-    })
-    // wordcloud(document.getElementById('my_canvas'), { list: this.list } )
+    const isbn = this.$route.params.bookIsbn
+    this.isbn = isbn
+    // 책 정보 가져오는 함수
+    this.getBookData(isbn)
   },
   methods: {
-    wordClickHandler(name, value, vm) {
-      console.log('wordClickHandler', name, value, vm);
-    }
+    getBookData(isbn) {
+      this.$axios.get(`${this.$store.getters.getServer}/book/${isbn}`)
+      .then(res => {
+        console.log(res.data.data)
+        this.book = res.data.data
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    },
   }
 }
 </script>

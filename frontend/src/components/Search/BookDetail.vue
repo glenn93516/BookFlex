@@ -1,6 +1,12 @@
 <template>
   <div style="width:170px;">
-    <img class="hvr-grow-shadow mouse-pointer" width="150px" height="200px" :src="this.book.book_cover" alt="" style="margin-left:10px; margin-right:10px;" @click="clickImg" >
+    <img class="hvr-grow-shadow mouse-pointer" 
+      width="150px" 
+      height="200px" 
+      :src="this.book.book_cover" 
+      alt="" 
+      style="margin-left:10px; margin-right:10px;" 
+      @click="clickImg" >
     <div style="text-align: center; size : 8rem; margin-top: 10px;">{{this.book.book_title}}</div>
   </div>
 </template>
@@ -12,8 +18,8 @@ export default {
   },
   methods: {
     clickImg(){
-      this.$router.push({ name: 'MainBook' })
-    }
+      this.$router.push({ name: 'FirstPage', params: { book: this.book } })
+    },
   },            
 }
 </script>

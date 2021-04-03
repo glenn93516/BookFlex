@@ -72,7 +72,7 @@ def get_categorize_genre_count(genres, genre_count):
 
 
 @statistics.route("/<int:userId>", methods=["GET"])
-def recommend_by_user(userId):
+def user_statistics(userId):
     read_books = [book.book_isbn for book in UserBook.query.filter_by(
         user_id=userId).all()]
     user_genres = [genre.genre_id for genre in UserGenre.query.filter_by(
