@@ -177,8 +177,8 @@ export default {
       this.checkInput = true
       // var path = '/search/'+this.text;
       // console.log(path)
-      this.text=null
       this.$router.push(`/search/${this.text}`);
+      this.text=null
     },
     checkLogin() {
       const token = localStorage.getItem('jwt')

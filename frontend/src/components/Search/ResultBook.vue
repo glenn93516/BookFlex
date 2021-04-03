@@ -8,12 +8,12 @@
       <br><h4> #도서명</h4><br>
       <div v-if="item.titleData!=null">
         <div style="display : flex" >
-          <book-detail 
+          <search-book-detail  
             v-for="(book,index) in titleList" 
             v-bind:book="book" 
             v-bind:key="book.book_title"
             v-bind:index='index'
-          ></book-detail>
+          ></search-book-detail >
         </div>
         <div v-if="item.titleData.length > 0">
           <b-pagination
@@ -32,12 +32,12 @@
       <h4> #작가명</h4><br>
       <div v-if="item.authorData!=null">
         <div style="display : flex">
-          <book-detail 
+          <search-book-detail 
             v-for="(book,index) in authorList" 
             v-bind:book="book" 
             v-bind:key="book.book_title"
             v-bind:index='index'
-          ></book-detail>
+          ></search-book-detail >
         </div>
         <div v-if="authorTotalRows > 0">
           <b-pagination
@@ -56,12 +56,12 @@
       <h4> #도서 설명</h4><br>
       <div v-if="item.contentsData!=null">
         <div style="display : flex">
-          <book-detail 
+          <search-book-detail  
             v-for="(book,index) in contentsList" 
             v-bind:book="book" 
             v-bind:key="book.book_title"
             v-bind:index='index'
-          ></book-detail>
+          ></search-book-detail >
         </div>
         <div v-if="contentsTotalRows > 0">
           <b-pagination
@@ -82,11 +82,11 @@
 </template>
 
 <script>
-import BookDetail from './BookDetail.vue'
+import SearchBookDetail from './SearchBookDetail.vue'
 
 export default {
   components: { 
-    BookDetail,
+    SearchBookDetail,
 
   },
   props: {
