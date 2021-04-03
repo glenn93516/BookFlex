@@ -1,11 +1,10 @@
 <template>
   <div>
     <header class="update-header">
-      정보 수정
+      프로필 수정
     </header>
     <hr class="update-hr">
     <div>
-      <header class="update-title">프로필</header>
       <div class="update-profile-image">
         <!-- 기존 이미지 -->
         <b-avatar
@@ -34,34 +33,23 @@
         </div>
       </div>
     </div>
-    <div class="update-genre">
-      <header class="update-title">선호 장르</header>
-      <!-- <checkbox></checkbox> -->
-
-    </div>
   </div>
 </template>
 
 <script>
-// import Checkbox from '@/components/Element/Checkbox.vue'
 export default {
-  // components: { Checkbox },
   props: {
     profileImg: String,
   },
   data() {
     return {
       uploadImg: null,
-      option: null,
       // resetImg: false,
     }
   },
   created() {
     const User = this.$store.getters.getUser
     console.log(User)
-  },
-  mounted() {
-    this.getGenreInfo()
   },
   methods: {
     onClickImageUpload() {
@@ -97,13 +85,6 @@ export default {
       const User = this.$store.getters.getUser
       this.$store.dispatch('UpdateUserInfo', User)
     },
-    getGenreInfo() {
-      this.$axios.get(`${this.$store.getters.getServer}/genre`)
-      .then(res => {
-        console.log(res.data.data)
-        this.option = res.data.data
-      })
-    }
   },
 }
 </script>
