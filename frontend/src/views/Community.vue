@@ -8,19 +8,19 @@
         <!-- <Book></Book> -->
         <div style="margin-left : 30px; margin-right:30px; justify-content:center;">
           <h6 style="text-align: center;"><strong>유저들이 가장 많이 읽은 도서 </strong></h6><br>
-          <community-book  v-bind:book="readBook" ></community-book>  
+          <community-book  v-bind:book="readBook" style=" margin:0 auto;"></community-book>  
         </div>
         <div style="margin-left : 30px; margin-right:30px; justify-content:center;">
           <h6 style="text-align: center;"><strong>좋아요가 가장 많은 문장의 도서 </strong></h6><br>
-          <community-book  v-bind:book="goodBook" ></community-book>  
+          <community-book  v-bind:book="goodBook" style=" margin:0 auto;"></community-book>  
         </div>
         <div style="margin-left : 30px; margin-right:30px; justify-content:center;">
           <h6 style="text-align: center;"><strong>위시리스트에 가장 많이 담긴 도서 </strong></h6><br>
-          <community-book  v-bind:book="wishlistBook" ></community-book>  
+          <community-book  v-bind:book="wishlistBook" style=" margin:0 auto;"></community-book>  
         </div>
         <div style="margin-left : 30px; margin-right:30px; justify-content:center;">
           <h6 style="text-align: center;"><strong>문장 수집이 가장 많이 된 도서</strong></h6><br>
-          <community-book style="text-align: center;" v-bind:book="highlightBook" ></community-book>  
+          <community-book style=" margin:0 auto;" v-bind:book="highlightBook" ></community-book>  
         </div>
         
       </div>
