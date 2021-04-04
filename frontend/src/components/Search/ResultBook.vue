@@ -22,7 +22,7 @@
             :total-rows="titleTotalRows"
             :per-page="7"
             align="center"
-          ></b-pagination><!-- @page-click="pageClick" -->
+          ></b-pagination>
         </div>
       </div>
       <div v-if="item.titleData.length===0">
@@ -46,7 +46,7 @@
             :total-rows="authorTotalRows"
             :per-page="7"
             align="center"
-          ></b-pagination><!-- @page-click="pageClick" -->
+          ></b-pagination>
         </div>
       </div>
       <div v-if="item.authorData.length==0">
@@ -70,7 +70,7 @@
             :total-rows="contentsTotalRows"
             :per-page="7"
             align="center"
-          ></b-pagination><!-- @page-click="pageClick" -->
+          ></b-pagination>
         </div>
       </div>
       <div v-if="item.contentsData.length==0">
@@ -144,6 +144,20 @@ export default {
 }
 </script>
 
-<style>
-
+<style scope>
+.pagination li button {
+  color: black;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px;
+}
+.page-item.active .page-link {
+  background-color: rgb(192, 180, 165);
+  color: white;
+  border-color: rgb(192, 180, 165);
+}
+li.page-item.disabled .page-link {
+  background-color: rgb(0, 0, 0, 0);
+  color: rgb(0, 0, 0);
+  border: 0px;
+}
 </style>

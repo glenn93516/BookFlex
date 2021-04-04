@@ -11,7 +11,7 @@
             <h5 style="text-align: right; margin-bottom: 10px;">{{ book.book_author }}</h5>
             <h6 style="text-align: right;">{{ book.book_publisher }} | {{ book.book_date }}</h6>
             <br>
-            <h5 v-html="book.book_description"></h5>
+            <h v-html="book.book_description"></h>
             <br>
           </div>
         </div>
