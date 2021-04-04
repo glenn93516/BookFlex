@@ -140,11 +140,6 @@ export default {
 </script>
 
 <style>
-  * {
-    font-family: 'NanumBarunpen', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
   .profile-nav {
     font-family: 'S-CoreDream-2ExtraLight', sans-serif;
   }

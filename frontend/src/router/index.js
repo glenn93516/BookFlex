@@ -221,6 +221,11 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/community',
+        name: 'Community',
+        component: () => import('../views/Community.vue'),
+      },
     ],
   },
   {
