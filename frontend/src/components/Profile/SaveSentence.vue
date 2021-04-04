@@ -82,7 +82,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .sentence-item {
     display: inline-block;
     position: relative;

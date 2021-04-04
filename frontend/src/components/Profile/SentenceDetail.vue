@@ -171,7 +171,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .modal-footer {
     display: flex; 
     justify-content: space-between; 
