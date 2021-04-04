@@ -1,5 +1,5 @@
 <template>
-  <div style="width:170px; margin:0 auto;">
+  <div style="width:170px;">
     <img class="hvr-grow-shadow mouse-pointer" 
       width="150px" 
       height="200px" 
