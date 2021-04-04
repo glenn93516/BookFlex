@@ -50,7 +50,7 @@
         <!-- 마이페이지 -->
         <b-nav-item-dropdown right>
           <template #button-content>
-            <b-avatar size="2.5rem" :src="userInfo.userProfileImg"></b-avatar>
+            <b-avatar size="2.5rem" :src="userInfo.userProfileImg" variant="white"></b-avatar>
           </template>
 
           <b-dropdown-item
@@ -268,7 +268,6 @@ export default {
     /* 그림자 효과 */
     box-shadow: 0px 5px 10px -10px gray;
   }
-/*여기입니다요 id가 이거래 .. 선택자로 찍어버렸어 약간 포크 */
   #__BVID__9 > ul {
     background-color: #5c463d;
     border-radius: 10px/ 10px;
@@ -295,6 +294,11 @@ export default {
     font-size: 12px;
     width: 200px;
   }
+  .bi-person-fill {
+    display: inline-block;
+    width: 100%;
+    height: 100%
+  } 
   .dropdown-item:hover {
     background-color: #5c463d;
     font-weight: bold;
@@ -356,7 +360,4 @@ export default {
   .temp {
     display: flex;
   }
-  /* .temp-hightlight {
-    display: absolute;
-  } */
 </style>

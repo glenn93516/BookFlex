@@ -53,10 +53,13 @@ export default {
     getPageInfo() {
       console.log(" getPageInfo 실행!")
       const PageData = this.$refs.progress.servePageInfo()
+      const progressGraph = document.querySelector('.progress-bar')
+      progressGraph.innerHTML = ""
       if (PageData.progress > 0) {
         this.progressPercent = PageData.progress * 25
         const progressGraph = document.querySelector('.progress-bar')
-        progressGraph.innerHTML = this.progressPercent
+        // progressGraph.innerHTML = this.progressPercent
+        progressGraph.innerHTML = ""
       } else {
         this.progressPercent = 2
         const progressGraph = document.querySelector('.progress-bar')
