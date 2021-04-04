@@ -13,21 +13,11 @@
         <h6 class="mr-1">도서 분류 분석</h6>
         <hr style="rgba(50, 50, 50); margin-bottom: 40px;">
       </div>
-      <div style="margin-left: 20px; width: 450px; height: auto;">
-        <figure class="highcharts-figure">
-          <div id="container"></div>
-          <p class="highcharts-description">
-            Variable radius pie charts can be used to visualize a
-            second dimension in a pie chart. In this chart, the more
-            densely populated countries are drawn further out, while the
-            slice width is determined by the size of the country.
-          </p>
-        </figure>
-      </div>
+      <SecondLeft :isbn="this.$route.params.bookIsbn" />
     </div>
 
     <!-- 오른쪽 페이지: 지도학습 긍부정 분석 + 한줄문장 -->
-    <div class="col-6 book_size">
+    <div class="col-6 book_size" style="float: right">
       <div 
         style="text-align: right; 
                   margin-top: 20px; 
@@ -38,74 +28,21 @@
         <h6 class="mr-1">리뷰 감정 분석</h6>
         <hr style="rgba(50, 50, 50); margin-bottom: 40px;">
       </div>
-      <div style="margin-right: 20px;">
-
-      </div>
-
+      <SecondRight :isbn="this.$route.params.bookIsbn" />
     </div>
 
   </div>
 </template>
 
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/variable-pie.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
-export default {
-  mounted() {
-    Highcharts.chart('container', {
-      chart: {
-        type: 'variablepie'
-      },
-      title: {
-        text: ''
-      },
-      tooltip: {
-        headerFormat: '',
-        pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> {point.name}</b><br/>' +
-          'Area (square km): <b>{point.y}</b><br/>' +
-          'Population density (people per square km): <b>{point.z}</b><br/>'
-      },
-      series: [{
-        minPointSize: 10,
-        innerSize: '20%',
-        zMin: 0,
-        name: 'countries',
-        data: [{
-          name: 'Spain',
-          y: 505370,
-          z: 92.9
-        }, {
-          name: 'France',
-          y: 551500,
-          z: 118.7
-        }, {
-          name: 'Poland',
-          y: 312685,
-          z: 124.6
-        }, {
-          name: 'Czech Republic',
-          y: 78867,
-          z: 137.5
-        }, {
-          name: 'Italy',
-          y: 301340,
-          z: 201.8
-        }, {
-          name: 'Switzerland',
-          y: 41277,
-          z: 214.5
-        }, {
-          name: 'Germany',
-          y: 357022,
-          z: 235.6
-        }]
-      }]
-    });
-  }
+import SecondLeft from './SecondLeft.vue'
+import SecondRight from './SecondRight.vue'
 
+export default {
+  components: {
+    SecondLeft,
+    SecondRight,
+  }
 }
 </script>
 
@@ -148,7 +85,4 @@ export default {
   background: #f1f7ff;
 }
 
-.book_size{
-
-}
 </style>
