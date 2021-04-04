@@ -52,6 +52,9 @@ export default {
     margin-top: 40px; 
     margin-bottom: 40px;
   }
+  #datepicker__dialog_ {
+    background-color: white;
+  }
   .birth-btn {
     margin-top: 5rem;
   }

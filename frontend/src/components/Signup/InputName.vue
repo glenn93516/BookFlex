@@ -179,20 +179,20 @@ export default {
           this.$axios.get(`${this.$store.getters.getServer}/user/${name}`)
           .then(res => {
             // 가입 불가능
-            if (res.data.message === '조회 성공') {
-              this.nameStatus = "is-invalid duplicate"
-            }
-          })
-          .catch(err => {
-            // 가입 가능
-            if (err.response.data.message === '없는 유저입니다.') {
-              this.nameStauts = "is-valid"
+            if (res.status === 202) {
+              this.nameStatus = "is-valid"
               if (input === 'enter') {
                 const user = {userNickname: this.name, userPassword: this.password}
                 this.$store.dispatch("SetSignupInfo", user)
-                // this.$router.push({ name: 'SubmitPref' })
+              }
+            } else {
+              if (res.status === 200) {
+                this.nameStatus = "is-invalid duplicate"
               }
             }
+          })
+          .catch(err => {
+            console.error(err)
           })
         }
       }
