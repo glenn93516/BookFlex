@@ -1,0 +1,271 @@
+<template>
+  <div id="communityItem">
+    <header class="header">
+      <b-avatar :src="writterInfo.user.userProfileImg" class="avatar mouse-pointer" variant="white"></b-avatar>
+      <span class="usernickname mouse-pointer" @click="goProfile()">
+        {{item.userNickname}}
+      </span>
+    </header>
+    <img 
+      class="sentence-img" 
+      v-if="item.highlightCover"
+      :src="item.highlightCover" 
+      alt=""
+    >
+    <img 
+      class="sentence-img" 
+      v-else
+      src="@/assets/waterprint_back.jpg" 
+      alt=""
+    >
+    
+    <div class="detail">
+      <div class="detail-sentence-date">
+        {{item.createdDate.slice(0, 10)}}
+      </div>
+      <!-- 하트랑 수정, 삭제 들어가는 곳 -->
+      <div class="footer">
+        <div>
+          <div 
+            @click="delLike()"
+            v-if="likeStatus"
+            class="heart hvr-buzz">
+          </div>
+          <div 
+            style="margin-left: -40px; margin-top: -30px;"
+            @click="addLike()"
+            v-if="!likeStatus"
+            class="no-heart">
+          </div>
+          <div class="like-num">{{likeNum}}</div>
+        </div>
+        <div class="footer-icon" style="font-size: 13px;">
+          <font-awesome-icon 
+            size="2x"
+            class="text-primary mouse-pointer"
+            @mouseover="editIcon = ['fas', 'edit']"
+            @mouseleave="editIcon = ['far', 'edit']"
+            :icon="editIcon"
+            v-if="isEditor"
+          />
+          <font-awesome-icon 
+            size="2x"
+            class="text-danger mouse-pointer ml-2"
+            @mouseover="deleteIcon = ['fas', 'trash-alt']"
+            @mouseleave="deleteIcon = ['far', 'trash-alt']"
+            :icon="deleteIcon"
+            v-if="isEditor"
+          />
+        </div>
+      </div>
+      <!-- text최소 길이, 최대 길이 정해주기 -->
+      <div class="detail-sentence-text">
+        <div class="sentence-text">{{item.highlightContent}}</div>
+        <div class="sentence-book-title mouse-pointer" @click="clickBook(item.bookIsbn)">📖 {{item.bookTitle}}-{{item.highlightPage}}p</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    item: Object,
+  },
+  data() {
+    return {
+      closeIcon: ['far', 'times-circle'],
+      editIcon: ['far', 'edit'],
+      deleteIcon: ['far', 'trash-alt'],
+      hoverClose: false,
+      heart: false,
+      likeNum: 0,
+      isEditor: false,
+      likeStatus: null,
+      writterInfo: null,
+    }
+  },
+  // 지금은 프로필이라서 이렇게 해도 되지만, community의 경우 한 개씩 반복해서 확인해줘야함
+  mounted() {
+    console.log(this.item, 'item')
+    let userId = this.$store.getters.getUser.userId
+    if (this.item.userId === userId) {
+      this.isEditor = true
+    } else {
+      this.isEditor = false
+    }
+    this.getLikeStatus()
+  },
+  methods: {
+    goProfile() {
+      this.$router.push({ name: 'Profile', params: { userName: this.item.userNickname }})
+      // item에서 usernickname꺼내서
+      //routerpush해서 프로필로이동
+      // alert('아직 nickname 정보가 없습니다.')
+    },
+    getLikeStatus() {
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        'Authorization': token
+      }
+      this.$axios.get(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {headers})
+      .then(res => {
+        this.likeNum = res.data.data.goodCount
+        this.likeStatus = res.data.data.userGood
+        this.writterInfo = res.data.data
+        console.log(res.data.data, '처음에 들어오는 데이터')
+      })
+    },
+    clickBook(isbn) {
+      this.$router.push({ name: 'BookDetail', params: { bookIsbn: isbn }})
+      //routerpush isbn으로 보내주기
+    },
+    addLike() {
+      console.log('addLike')
+      // 만약 로그인 안한 유저라면 addLike못함
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      if (token) {
+        this.$axios.post(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}/good`, {}, {headers})
+        .then(res => {
+          if (res.data.success) {
+            this.likeStatus = true
+            this.likeNum += 1
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    },
+    delLike() {
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      if (token) {
+        this.$axios.post(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}/good`, {}, {headers})
+        .then(res => {
+          if (res.data.success) {
+            this.likeStatus = false
+            this.likeNum -= 1
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    },
+  }
+}
+</script>
+
+<style scoped>
+  #communityItem {
+    text-align: center;
+    padding-top: 15px;
+  }
+  #communityItem .header {
+    width: 465px;
+    margin: 5px auto;
+    text-align: start;
+    display: flex;
+    align-items: center;
+  }
+  #communityItem .header .avatar {
+    border: rgba(33, 37, 41, 0.5) 1px solid;
+    margin: 0 10px;
+  } 
+  #communityItem .usernickname {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  #communityItem .sentence-img {
+    width: 465px;
+    height: 300px;
+    margin-top: 9px;
+    border-radius: 5px 5px 0 0;
+  }
+  #communityItem .sentence-text {
+    font-size: 20px;
+  }
+  #communityItem .sentence-book-title {
+    font-size: 18px; 
+    margin-top: 10px; 
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  #communityItem .footer {
+    padding: 10px 0;
+    margin: 0 auto;
+    width: 465px;
+    display: flex; 
+    justify-content: space-between; 
+    border: none;
+  }
+  #communityItem .footer .heart {
+    margin-left: -40px;
+    margin-top: -30px;
+  }
+  .like-num {
+    margin-top: -63px;
+    margin-left: 30px;
+  }
+  .footer-icon {
+    margin: 0;
+  }
+  #communityItem .detail {
+    width: 465px;
+    border-radius: 5px 5px 0 0;
+    color: black;
+    margin: 0 auto;
+    padding-bottom: 10px;
+  }
+  #communityItem .detail-sentence-text {
+    display: absolute;
+    width: 465px;
+    text-align: left;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px rgba(33, 37, 41, 0.2); 
+  }
+  #communityItem .detail-sentence-date {
+    display: absolute;
+    height: 30px;
+    right: 0;
+    text-align: end;
+    padding-right: 20px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 0 0 5px 5px;
+  }
+
+  .no-heart {
+    width: 100px;
+    height: 100px;
+    background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+  }
+  .no-heart:hover {
+    background-position: -2800px 0;
+    transition: background 1s steps(28);
+  }
+  .heart {
+    width: 100px;
+    height: 100px;
+    background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
+    background-position: -2800px 0;
+    cursor: pointer;
+  }
+  @keyframes fave-heart {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -2800px 0;
+    }
+  }
+</style>
