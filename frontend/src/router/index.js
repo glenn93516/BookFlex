@@ -93,10 +93,10 @@ const routes = [
         ],
       },
       {
-        path: '/:userName',
+        path:'/profile/:userName',
         name: 'Profile',
         component: () => import('../views/Profile.vue'),
-        redirect: '/:userName/genre',
+        redirect: '/profile/:userName/genre',
         props: true,
         children: [
           {
@@ -113,6 +113,11 @@ const routes = [
             path: 'books',
             name: 'ReadBooks',
             component: () => import('../components/Profile/ReadBooks.vue'),
+          },
+          {
+            path: 'liked',
+            name: 'LikeSentence',
+            component: () => import('../components/Profile/LikeSentence.vue'),
           },
           {
             path: 'wishlist',

@@ -11,7 +11,7 @@
       :key="idx" 
       class="custom-control"
     >
-      <Checkbox :option="option" @serveData="catchData"/>
+      <Checkbox :option="option" @serve-data="catchData"/>
     </div>
 
     <!-- 중복선택 가능하게 바꾸려면 checkedValues[0]을 checkedValues로 바꿔주세요 -->
@@ -73,8 +73,10 @@ export default {
         const idx = this.checkedValues.indexOf(option.text)
         this.checkedValues.splice(idx, 1)
       }
+      console.log(this.checkedValues, 'checkedValues')
     },
     submitUserJob(Job) {
+      console.log(Job, 'Job') 
       this.$store.dispatch('SubmitUserJob', Job)
       this.goToSubmitPic()
     },
