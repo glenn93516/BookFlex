@@ -65,9 +65,8 @@ export default {
   },
   methods: {
 		goToCollect() {			
-			// 읽음 api 요청 보내기(일단 연결 x)
+			// 읽음 api 요청 보내기
 			this.checkReadStatus()
-			this.$emit('open-modal', this.book)
 		},
 		checkReadStatus() {
 			const token = localStorage.getItem('jwt')

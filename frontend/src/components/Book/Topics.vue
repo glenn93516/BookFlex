@@ -8,7 +8,7 @@
             <b-card-img style="margin-left:10px; padding:10px; width:100px; height:140px;" :src=bookInfo.book_cover alt="Image" class="rounded-0"></b-card-img>
           </b-col>
           <b-col md="9">
-            <b-card-body>
+            <b-card-body style="cursor: pointer;" @click="goToBookDetail()">
               <b-card-text style="font-size: 14px">
                 <h4 class="bookinfo-title">{{ bookInfo.book_title }}</h4>
                 <p>저자 : {{ bookInfo.book_author }}</p>
@@ -26,11 +26,12 @@
         <RadarChart :chartData="chartData" />
       </div>
       <div v-else style="height:320px; display:flex; justify-content:center; align-items:center;">
-        <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
+        <br style="margin-bottom: 30px;">
+        <h5 style="text-align: center; color: grey;">리뷰 데이터 수집중</h5>
       </div>
     </div>
 
-    <label for="#recommend">추천도서</label>
+    <label for="#recommend" class="mb-0">추천도서</label>
     <div
       id="recommend"
       style="display: flex;
@@ -142,6 +143,9 @@
       setIsbn(isbn) {
         console.log("isbn>>",isbn)
         this.$emit("setIsbn", isbn)
+      },
+      goToBookDetail() {
+        this.$router.push({ name: 'BookDetail', params: { bookIsbn: this.bookInfo.book_isbn } })
       },
     },
   }

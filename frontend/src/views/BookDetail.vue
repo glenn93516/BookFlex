@@ -48,7 +48,7 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
   .bookdetail-box {
     background: white; 
     width: 1100px; 
