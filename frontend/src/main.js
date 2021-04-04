@@ -35,13 +35,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 
-// import 'fulllpage.js/vendors/scrolloverflow' // Optional. When using scrollOverflow: true
-// import './fullpage.scrollHorizontally.min' // Optional. When using fullpage extensions
-import VueFullPage from 'vue-fullpage.js'
-
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
-Vue.use(VueFullPage)
 
 Vue.config.productionTip = false
 Vue.prototype.$axios=axios

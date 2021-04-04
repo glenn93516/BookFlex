@@ -1,6 +1,7 @@
 <template>
   <div>
-    <full-page ref="fullpage" id="fullpage">
+    <div>
+    <!-- <full-page ref="fullpage" id="fullpage"> -->
       <div id="0" class="section first-main">
         <img src="https://i.pinimg.com/originals/3d/31/6b/3d316ba5a416f68c8627de6be9f97b68.gif" alt="">
         <div class="first-main-logo">
@@ -40,7 +41,7 @@
           여기는 3
         </p>
       </div>
-    </full-page>
+    </div>
   </div>
 </template>
 
