@@ -66,7 +66,9 @@
               <div class="profile-genre-tooltip">{{genreClassificationIcon[genre].name}}</div>
             </div>
           </div>
-
+          <b-modal v-model="genreModalShow" centered hide-footer hide-header hide-backdrop>
+            <!-- <genre-update-profile :genreList="userInfo.genres"></genre-update-profile> -->
+          </b-modal>
         </div>
       </div>
     </div>
@@ -116,6 +118,7 @@
 <script>
 import ImgUpdateProfile from '../components/Profile/ImgUpdateProfile.vue'
 import UpdateProfile from '../components/Profile/UpdateProfile.vue'
+// import GenreUpdateProfile from '../components/Profile/GenreUpdateProfile.vue'
 
 export default {
   props: {
@@ -123,6 +126,7 @@ export default {
   components: {
     UpdateProfile,
     ImgUpdateProfile,
+    // GenreUpdateProfile,
   },
   data() {
     return {
@@ -222,8 +226,9 @@ export default {
       this.jobList = false
     },
     changeGenre() {
-      this.genreModalShow = true
-      alert('장르 이모티콘 추가 작업 중입니다🛠')
+      if (this.isEditor) {
+        this.genreModalShow = true
+      }
     },
     genreClassification() {
       const classify = [-1, 0, 0, 1, 3, 5, 4, 7, -1, 1, 3, 4, 6, 3, 1, 2, 2, 4, 6, 2, 8, 3, 1, 2, 6, 7, 5, 4, 4, 4]
