@@ -74,9 +74,9 @@
     <select id="findAllOnlyPublic" resultType="HighlightDto">
         select highlight_id highlightId, highlight_content highlightContent,
                highlight_page highlightPage, highlight_cover highlightCover,
-               h.book_isbn bookIsbn, b.book_title bookTitle, user_id userId, created_date createdDate,
+               h.book_isbn bookIsbn, b.book_title bookTitle, h.user_id userId, u.user_nickname userNickname, u.user_profile_img userProfileImg, created_date createdDate,
                updated_date updatedDate, is_public isPublic
-        from highlight h join book b on b.book_isbn = h.book_isbn
+        from highlight h join book b on b.book_isbn = h.book_isbn join user u on h.user_id = u.user_id
         where is_public = 1
         ORDER BY updated_date DESC
     </select>

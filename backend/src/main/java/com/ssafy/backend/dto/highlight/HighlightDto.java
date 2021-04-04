@@ -25,6 +25,10 @@ public class HighlightDto {
     private String bookTitle;
     @ApiModelProperty(value = "문장수집 등록한 유저ID")
     private Long userId;
+    @ApiModelProperty(value = "문장수집 등록한 유저닉네임")
+    private String userNickname;
+    @ApiModelProperty(value = "문장수집 등록한 유저 프로필 이미지 URL")
+    private String userProfileImg;
     @ApiModelProperty(value = "문장 수집 생성 날짜")
     private String createdDate;
     @ApiModelProperty(value = "문장 수집 수정 날짜")
