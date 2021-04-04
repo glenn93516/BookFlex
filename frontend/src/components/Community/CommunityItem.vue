@@ -1,24 +1,35 @@
 <template>
-  <div id="communityItem">
+  <div id="communityItem" style=" border-bottom: solid 1px rgba(33, 37, 41, 0.2); margin : 0 300px">
     <header class="header">
-      <b-avatar :src="writterInfo.user.userProfileImg" class="avatar mouse-pointer" variant="white"></b-avatar>
+      <b-avatar :src="item.userProfileImg" class="avatar mouse-pointer" variant="white"></b-avatar>
       <span class="usernickname mouse-pointer" @click="goProfile()">
         {{item.userNickname}}
       </span>
     </header>
-    <img 
-      class="sentence-img" 
-      v-if="item.highlightCover"
-      :src="item.highlightCover" 
-      alt=""
-    >
-    <img 
-      class="sentence-img" 
-      v-else
-      src="@/assets/waterprint_back.jpg" 
-      alt=""
-    >
-    
+    <div style="position: relative;" >
+      <img 
+        class="sentence-img" 
+        v-if="item.highlightCover"
+        :src="item.highlightCover" 
+        alt=""
+        style="
+          position: relative;
+        "
+      >
+      <img 
+        class="sentence-img" 
+        v-else
+        src="@/assets/waterprint_back.jpg" 
+        alt=""
+        style="
+          position: relative;
+        "
+      >
+      <div class="detail-sentence-text">
+        <div class="sentence-text">{{item.highlightContent}}</div>
+        <div class="sentence-book-title mouse-pointer" @click="clickBook(item.bookIsbn)">📖 {{item.bookTitle}}-{{item.highlightPage}}p</div>
+      </div>
+    </div>
     <div class="detail">
       <div class="detail-sentence-date">
         {{item.createdDate.slice(0, 10)}}
@@ -59,10 +70,10 @@
         </div>
       </div>
       <!-- text최소 길이, 최대 길이 정해주기 -->
-      <div class="detail-sentence-text">
+      <!-- <div class="detail-sentence-text">
         <div class="sentence-text">{{item.highlightContent}}</div>
         <div class="sentence-book-title mouse-pointer" @click="clickBook(item.bookIsbn)">📖 {{item.bookTitle}}-{{item.highlightPage}}p</div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -87,7 +98,7 @@ export default {
   },
   // 지금은 프로필이라서 이렇게 해도 되지만, community의 경우 한 개씩 반복해서 확인해줘야함
   mounted() {
-    console.log(this.item, 'item')
+    // console.log(this.item, 'item')
     let userId = this.$store.getters.getUser.userId
     if (this.item.userId === userId) {
       this.isEditor = true
@@ -113,7 +124,7 @@ export default {
         this.likeNum = res.data.data.goodCount
         this.likeStatus = res.data.data.userGood
         this.writterInfo = res.data.data
-        console.log(res.data.data, '처음에 들어오는 데이터')
+        // console.log(res.data.data, '처음에 들어오는 데이터')
       })
     },
     clickBook(isbn) {
@@ -224,15 +235,22 @@ export default {
     padding-bottom: 10px;
   }
   #communityItem .detail-sentence-text {
-    display: absolute;
+    position: absolute;
     width: 465px;
-    text-align: left;
+    text-align: center;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: solid 1px rgba(33, 37, 41, 0.2); 
+    top : 0;
+    left: 22px; 
+    width:465px; 
+    height : 300px; 
+    padding-top:100px;
+    margin: 9px 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px 5px 0 0;
   }
   #communityItem .detail-sentence-date {
-    display: absolute;
+    /* position: absolute; */
     height: 30px;
     right: 0;
     text-align: end;
