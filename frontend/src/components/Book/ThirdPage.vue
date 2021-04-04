@@ -1,85 +1,99 @@
 <template>
-  <!-- 책 디테일, 구매 페이지 -->
   <div class="row">
-    <div class="col-6">
-      <div>
-        <div>
-          <h1>{{ bookInfo.book_title }}</h1>
-        </div>
+    <div 
+      class="col-6 third-detail-cover-box" 
+      style="height:700px; 
+      border-right: 1px solid rgba(121, 121, 121, 0.692);
+      "
+    >
+      <!-- 키워드 분석 : 왼쪽 페이지 -->
+      <div 
+        style="text-align: left; 
+                  margin-top: 20px; 
+                  margin-left: 20px;
+                  margin-bottom: 10px;
+                  color: rgba(100, 100, 100);
+                  ">
+        <h6 class="mr-1">키워드 분석</h6>
+        <hr style="rgba(50, 50, 50); margin-bottom: 10px;">
+      </div>
 
-        <div >
-          <img
-            style="float:left;"
-            height="165px"
-            :src=bookInfo.book_cover
-            alt=""
+      <Topic :isbn="this.$route.params.bookIsbn" @setIsbn="getIsbn" />
+    </div>
+
+    <div class="col-6 third-detail-cover-box">
+      <!-- 키워드 분석 : 오른쪽 페이지 -->
+      <div 
+        style="text-align: right; 
+                  margin-top: 20px; 
+                  margin-right: 20px;
+                  margin-bottom: 10px;
+                  color: rgba(100, 100, 100);
+                  ">
+        <h6 class="mr-1">키워드 보기</h6>
+        <hr style="rgba(50, 50, 50); margin-bottom: 10px;">
+      </div>
+
+      <div v-if="anotherIsbn && isShow">
+          <Topic :isbn="anotherIsbn" @setIsbn="getIsbn" style="margin-right: 20px;"/>
+          <span
+            style="cursor: pointer;
+            position: absolute; 
+            top:40px; 
+            right:40px" 
+            @click="closeCompare"
           >
-        </div>
-
-        <div style="height:165px">
-          <h3>책 저자</h3>
-          <div class="book-detail-text">
-            {{ bookInfo.book_author }}
-          </div>
-
-          <h3>책 출판일</h3>
-          <div class="book-detail-text">
-            {{ bookInfo.book_date }}
-          </div>
-
-          <h3>출판사</h3>
-          <div class="book-detail-text">
-            {{ bookInfo.book_publisher }}
-          </div>
-        </div>
-
-        <h3>책 목차</h3>
-        <div>
-          {{ bookInfo.book_contents }}
-        </div>
-
-        <h3>책 소개</h3>
-        <div>
-          ???
-        </div>
-
+          닫기
+          </span>
+      </div>
+      <div v-else>
+        <DetailSearch @setIsbn="getIsbn" />
       </div>
     </div>
-    <div class="col-6">
-      <div>
-        <h2>구매하기</h2>
-      </div>
-    </div>
+
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      bookInfo: {}
+  import Topic from './Topics.vue'
+  import DetailSearch from './DetailSearch.vue'
+
+  export default {
+    components: {
+      Topic,
+      DetailSearch,
+    },
+    data () {
+      return {
+        anotherIsbn: null,
+        isShow: false,
+      }
+    },
+    created() {
+    },
+    updated() { 
+      console.log('updated'); 
+      this.$nextTick(function () {  
+        this.isShow = true
+      }); 
+    },
+    methods: {
+      getIsbn(isbn) {
+        this.closeCompare()
+        this.anotherIsbn = String(isbn)
+      },
+      closeCompare() {
+        this.isShow = false
+        this.anotherIsbn = null
+      }
     }
-  },
-  created() {
-    this.$axios.get(`${this.$store.getters.getServer}/book/${this.$route.params.bookIsbn}`)
-    .then(res => {
-      this.bookInfo = res.data.data
-      console.log(res.data)
-    })
-    .catch(err => {
-      console.error(err)
-    })
-  },
-  methods: {
   }
-}
 </script>
 
 <style>
-  .book-detail-text {
-    width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+  .third-detail-cover-box {
+
   }
+
 </style>

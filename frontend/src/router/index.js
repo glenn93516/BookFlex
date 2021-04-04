@@ -166,10 +166,10 @@ const routes = [
         ],
       },
       {
-        path: '/:bookIsbn',
+        path: '/book/:bookIsbn',
         name: 'BookDetail',
         component: () => import('../views/BookDetail.vue'),
-        redirect: '/:bookIsbn/firstpage',
+        redirect: '/book/:bookIsbn/firstpage',
         props: true,
         children: [
           {
@@ -188,12 +188,6 @@ const routes = [
             path: 'thirdpage',
             name: 'ThirdPage',
             component: () => import('../components/Book/ThirdPage.vue'),
-            props: true,
-          },
-          {
-            path: 'fourthpage',
-            name: 'FourthPage',
-            component: () => import('../components/Book/FourthPage.vue'),
             props: true,
           },
         ],
