@@ -28,7 +28,6 @@
       <div v-if="item.titleData.length===0">
         <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
       </div>
-      <br>
       
       <h5> #작가명</h5>
       <div v-if="item.authorData!=null">
@@ -53,7 +52,6 @@
       <div v-if="item.authorData.length==0">
         <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
       </div>
-      <br>
       
       <h5> #도서 설명</h5>
       <div v-if="item.contentsData!=null">
