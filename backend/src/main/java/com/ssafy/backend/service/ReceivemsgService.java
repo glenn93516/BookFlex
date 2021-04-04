@@ -26,6 +26,7 @@ public class ReceivemsgService {
             UserDto findUser = userMapper.findUserByUserId(receivemsgDto.getSenderId())
                     .orElseThrow(() -> new UserNotFoundException("없는 유저입니다."));
             receivemsgDto.setSenderNickname(findUser.getUserNickname());
+            receivemsgDto.setSenderProfileImg(findUser.getUserProfileImg());
         }
 
         return receivemsgDtoList;
@@ -42,6 +43,7 @@ public class ReceivemsgService {
         UserDto findUser = userMapper.findUserByUserId(receivemsgDto.getSenderId())
                 .orElseThrow(() -> new UserNotFoundException("없는 유저입니다."));
         receivemsgDto.setSenderNickname(findUser.getUserNickname());
+        receivemsgDto.setSenderProfileImg(findUser.getUserProfileImg());
 
         return receivemsgDto;
     }
