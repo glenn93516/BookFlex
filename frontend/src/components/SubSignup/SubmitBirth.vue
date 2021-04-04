@@ -6,6 +6,7 @@
       id="datepicker" 
       v-model="birthdate"
       class="birth-datepicker"
+      placeholder="날짜를 선택해주세요"
     >
     </b-form-datepicker>
 

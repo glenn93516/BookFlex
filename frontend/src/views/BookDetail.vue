@@ -11,12 +11,7 @@
           use-router 
           class="detail_pagenation"
         >
-          <!-- <template #first-text class="bg-success"><span class="text-success bg-success">처음</span></template>
-          <template #prev-text>이전</template>
-          <template #next-text>다음</template> -->
           <template #page="{  }">
-
-
           </template>
         </b-pagination-nav>
       </div>
