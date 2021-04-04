@@ -7,10 +7,16 @@
       >
       "{{ reviewKeyword }}"</strong> 단어가 포함된 리뷰
     </h3>
-    <hr class="mt-3 mb-0 mr-3 ml-3" style="background-color: grey;">
+    <hr class="mt-3 mb-0" style="background-color: grey;">
     <!-- 리뷰 내용 -->
-    <div v-if="keywordReview">
-      <p v-for="(review, idx) in keywordReview" :key="idx"><br>{{ review.review_content }}<br></p>
+    <div v-if="keywordReview" style="overflow: scroll; height:650px">
+      <p v-for="(review, idx) in keywordReview" :key="idx"
+        style="font-size: 20px;"
+      >
+        <br>
+        "{{ review.review_content }}"
+        <br>
+      </p>
     </div>
   </div>
 </template>
