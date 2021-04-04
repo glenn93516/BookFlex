@@ -3,35 +3,44 @@
   <div class="row">
     <div class="col-6">
       <div>
-        <h2>책 정보</h2>
-
-        <h3>책 제목</h3>
         <div>
-          {{ bookInfo.book_title }}
+          <h1>{{ bookInfo.book_title }}</h1>
         </div>
 
-        <h3>책 표지</h3>
-        <div class="row justify-content-center">
+        <div >
           <img
-            height="200px"
+            style="float:left;"
+            height="165px"
             :src=bookInfo.book_cover
             alt=""
           >
         </div>
 
-        <h3>책 저자</h3>
-        <div>
-          {{ bookInfo.book_author }}
-        </div>
+        <div style="height:165px">
+          <h3>책 저자</h3>
+          <div class="book-detail-text">
+            {{ bookInfo.book_author }}
+          </div>
 
-        <h3>책 출판일</h3>
-        <div>
-          {{ bookInfo.book_date }}
+          <h3>책 출판일</h3>
+          <div class="book-detail-text">
+            {{ bookInfo.book_date }}
+          </div>
+
+          <h3>출판사</h3>
+          <div class="book-detail-text">
+            {{ bookInfo.book_publisher }}
+          </div>
         </div>
 
         <h3>책 목차</h3>
         <div>
           {{ bookInfo.book_contents }}
+        </div>
+
+        <h3>책 소개</h3>
+        <div>
+          ???
         </div>
 
       </div>
@@ -67,5 +76,10 @@ export default {
 </script>
 
 <style>
-
+  .book-detail-text {
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 </style>

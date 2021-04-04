@@ -1,18 +1,19 @@
 <template>
   <div>
-    <h2><strong>검색 결과 - BOOK</strong></h2>
-    <div v-if="item.titleData.length==0&&item.authorData.length==0&&item.contentsData.length==0" style="margin-bottom:5px;">
+    <div v-if="item.titleData.length==0&&item.authorData.length==0&&item.contentsData.length==0">
       <h4 style="text-align: center; ">😥검색된 결과가 없습니다.</h4>
     </div>
     <div v-if="item.titleData.length > 0||item.authorData.length > 0||item.contentsData.length > 0">
-      <br><h4> #도서명</h4><br>
+      
+      <h5> #도서명</h5>
       <div v-if="item.titleData!=null">
-        <div style="display : flex" >
+        <div style="display : flex">
           <book-detail 
             v-for="(book,index) in titleList" 
             v-bind:book="book" 
             v-bind:key="book.book_title"
             v-bind:index='index'
+            @setIsbn="setIsbn(book.book_isbn)"
           ></book-detail>
         </div>
         <div v-if="item.titleData.length > 0">
@@ -20,16 +21,16 @@
             pills
             v-model="titleCurrentPage"
             :total-rows="titleTotalRows"
-            :per-page="7"
-            align="center"
+            :per-page="6"
           ></b-pagination><!-- @page-click="pageClick" -->
         </div>
       </div>
       <div v-if="item.titleData.length===0">
         <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
       </div>
-      <br><br>
-      <h4> #작가명</h4><br>
+      <br>
+      
+      <h5> #작가명</h5>
       <div v-if="item.authorData!=null">
         <div style="display : flex">
           <book-detail 
@@ -37,6 +38,7 @@
             v-bind:book="book" 
             v-bind:key="book.book_title"
             v-bind:index='index'
+            @setIsbn="setIsbn(book.book_isbn)"
           ></book-detail>
         </div>
         <div v-if="authorTotalRows > 0">
@@ -44,16 +46,16 @@
             pills
             v-model="authorCurrentPage"
             :total-rows="authorTotalRows"
-            :per-page="7"
-            align="center"
+            :per-page="6"
           ></b-pagination><!-- @page-click="pageClick" -->
         </div>
       </div>
       <div v-if="item.authorData.length==0">
         <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
       </div>
-      <br><br>
-      <h4> #도서 설명</h4><br>
+      <br>
+      
+      <h5> #도서 설명</h5>
       <div v-if="item.contentsData!=null">
         <div style="display : flex">
           <book-detail 
@@ -61,6 +63,7 @@
             v-bind:book="book" 
             v-bind:key="book.book_title"
             v-bind:index='index'
+            @setIsbn="setIsbn(book.book_isbn)"
           ></book-detail>
         </div>
         <div v-if="contentsTotalRows > 0">
@@ -68,8 +71,7 @@
             pills
             v-model="contentsCurrentPage"
             :total-rows="contentsTotalRows"
-            :per-page="7"
-            align="center"
+            :per-page="6"
           ></b-pagination><!-- @page-click="pageClick" -->
         </div>
       </div>
@@ -87,7 +89,6 @@ import BookDetail from './DetailBookImg.vue'
 export default {
   components: { 
     BookDetail,
-
   },
   props: {
     item: {
@@ -114,7 +115,7 @@ export default {
       if(this.item.titleData.length===0){
         return null;
       }
-      return this.item.titleData.slice(7*(this.titleCurrentPage-1), 7*this.titleCurrentPage)
+      return this.item.titleData.slice(6*(this.titleCurrentPage-1), 6*this.titleCurrentPage)
     },
     titleTotalRows : function() {
       return this.item.titleData.length;
@@ -124,7 +125,7 @@ export default {
       if(this.item.authorData.length===0){
         return null;
       }
-      return this.item.authorData.slice(7*(this.authorCurrentPage-1), 7*this.authorCurrentPage)
+      return this.item.authorData.slice(6*(this.authorCurrentPage-1), 6*this.authorCurrentPage)
     },
     authorTotalRows : function() {
       return this.item.authorData.length;
@@ -134,13 +135,17 @@ export default {
       if(this.item.contentsData.length===0){
         return null;
       }
-      return this.item.contentsData.slice(7*(this.contentsCurrentPage-1), 7*this.contentsCurrentPage)
+      return this.item.contentsData.slice(6*(this.contentsCurrentPage-1), 6*this.contentsCurrentPage)
     },
     contentsTotalRows : function() {
       return this.item.contentsData.length;
     }
-
   },
+  methods: {
+    setIsbn(isbn) {
+      this.$emit("setIsbn", isbn)
+    },
+  }
 }
 </script>
 
