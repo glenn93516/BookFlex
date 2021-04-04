@@ -6,9 +6,12 @@
 > 개발기간 : 2021.02.22 ~ 20201.04.07 (7주)  
 > 배포 주소 : https://j4f004.p.ssafy.io
 
-# 📚[북플렉스](https://j4f004.p.ssafy.io)란? (서비스 개요)
+# 📚[북플렉스](https://j4f004.p.ssafy.io)란?
 
-설명
+나만의 맞춤 서재  
+**머신러닝을 이용한 리뷰 감성분석, 키워드 분류**를 통해 책의 정보를 더 직관적으로 확인할 수 있을 뿐만 아니라 다른 책들과 비교도 한눈에 확인 가능합니다  
+8만 8천권의 책 데이터를 기반으로 사용자가 읽은 책, 선호하는 장르등을 분석해 **사용자 맞춤 책 추천 서비스**를 제공합니다  
+책을 읽으며 감동받은 **문장을 수집**하고 이를 다른사람들과 공유할 수 있습니다
 
 # 👨‍👩‍👧‍👦팀원 소개
 
@@ -24,22 +27,25 @@
 
 ## 📃문서
 
-📃[컨벤션](http://#)  
-📃[깃 브랜치 전략](http://#)  
-📃[회의록](http://#)
+📃[컨벤션 및 Git 브랜치 전략](http://#)  
+📃[회의록](http://#)  
+📃[추천 알고리즘](http://#)
 
 ## 📁기술 스택
 
-|   분류    |                 기술                  |
-| :-------: | :-----------------------------------: |
-| Front-end |                  Vue                  |
-| Back-end  | Java8, Python 3.7, Spring Boot, Flask |
-|    DB     |              MySQL 8.021              |
-|   CI/CD   |            Docker, Jenkins            |
+|     분류      |                                                                                                                                         기술                                                                                                                                          |
+| :-----------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|   Front-end   |                                                                                                       <img src="https://img.shields.io/badge/Vue.js-2.6.12-green?logo=vue.js">                                                                                                        |
+|   Back-end    | <img src="https://img.shields.io/badge/Java-1.8-blue?logo=java">, <img src="https://img.shields.io/badge/Python-3.7-blue?logo=python">, <img src="https://img.shields.io/badge/Spring-2.4.3-green?logo=spring">, <img src="https://img.shields.io/badge/Flask-1.1.2-blue?logo=flask"> |
+|      ML       |                                                                                                        <img src="https://img.shields.io/badge/Pytorch-1.8.1-red?logo=pytorch">                                                                                                        |
+|      DB       |                                                                                                          <img src="https://img.shields.io/badge/MySQL-v8.0-blue?logo=mysql">                                                                                                          |
+|     CI/CD     |                                                                       <img src="https://img.shields.io/badge/Docker-blue?logo=docker">, <img src="https://img.shields.io/badge/Jenkins-lightgrey?logo=jenkins">                                                                       |
+| Communication |                                                                   <img src="https://img.shields.io/badge/Mattermost-blue?logo=mattermost">, <img src="https://img.shields.io/badge/Discord-lightgrey?logo=discord">                                                                   |
 
 ## 📁시스템 아키텍쳐
 
-![시스템구조](Document/system_architecture/system_arch.png)
+![시스템구조](Document/system_architecture/system_arch.png)  
+![배포과정](Document/system_architecture/배포프로세스.png)
 
 ## 📁ERD
 
@@ -131,7 +137,17 @@ frontend
 
 # 📚주요 기능
 
-기능 설명 + GIF 파일
+- 메인 페이지(읽은 책, 선호 장르, 위시리스트 기반 추천)
+- 책 상세 페이지
+  - 감성 분석 + 워드 클라우드
+  - 키워드 분류
+  - 책 비교
+- 문장 수집
+- 책 검색
+- 유저 선호 장르 분석
+- 커뮤니티
+  - 문장수집
+  - 쪽지
 
 # 🏆수상
 
