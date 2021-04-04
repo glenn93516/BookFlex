@@ -290,7 +290,6 @@ export default {
 
 <style>
   #profile {
-    font-family: 'NanumBarunpen', sans-serif;
     margin: 0;
     padding: 0;
   }

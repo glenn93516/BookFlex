@@ -23,7 +23,7 @@
         <router-link :to="{ name: 'MainBook' }" class="temp-menu">
           RECOMMEND
         </router-link>
-        <router-link :to="{ name: 'Login' }" class="temp-menu">
+        <router-link :to="{ name: 'Community' }" class="temp-menu">
           COMMUNITY
         </router-link>
         <router-link :to="{ name: 'Search' }" class="temp-menu">
