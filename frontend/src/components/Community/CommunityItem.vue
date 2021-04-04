@@ -1,9 +1,9 @@
 <template>
   <div id="communityItem">
     <header class="header">
-      <b-avatar :src="writterInfo.user.userProfileImg" class="avatar mouse-pointer" variant="white" @click="goProfile(writterInfo.user.userNickname)"></b-avatar>
-      <span class="usernickname mouse-pointer" @click="goProfile(writterInfo.user.userNickname)">
-        {{writterInfo.user.userNickname}}
+      <b-avatar :src="writterInfo.user.userProfileImg" class="avatar mouse-pointer" variant="white"></b-avatar>
+      <span class="usernickname mouse-pointer" @click="goProfile()">
+        {{item.userNickname}}
       </span>
     </header>
     <img 
@@ -19,12 +19,12 @@
       alt=""
     >
     
-    <div class="detail-dimmed">
+    <div class="detail">
       <div class="detail-sentence-date">
         {{item.createdDate.slice(0, 10)}}
       </div>
       <!-- 하트랑 수정, 삭제 들어가는 곳 -->
-      <div class="modal-footer">
+      <div class="footer">
         <div>
           <div 
             @click="delLike()"
@@ -97,9 +97,8 @@ export default {
     this.getLikeStatus()
   },
   methods: {
-    goProfile(item) {
-      this.$router.push({ name: 'Profile', params: { userName: item }})
-      console.log(item)
+    goProfile() {
+      this.$router.push({ name: 'Profile', params: { userName: this.item.userNickname }})
       // item에서 usernickname꺼내서
       //routerpush해서 프로필로이동
       // alert('아직 nickname 정보가 없습니다.')
@@ -120,9 +119,6 @@ export default {
     clickBook(isbn) {
       this.$router.push({ name: 'BookDetail', params: { bookIsbn: isbn }})
       //routerpush isbn으로 보내주기
-    },
-    closeModal() {
-      this.$emit('close-modal')
     },
     addLike() {
       console.log('addLike')
@@ -167,11 +163,6 @@ export default {
 </script>
 
 <style scoped>
-  /* #communityItem header {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 15px;
-  } */
   #communityItem {
     text-align: center;
     padding-top: 15px;
@@ -206,7 +197,7 @@ export default {
     margin-bottom: 20px;
     font-weight: bold;
   }
-  .modal-footer {
+  #communityItem .footer {
     padding: 10px 0;
     margin: 0 auto;
     width: 465px;
@@ -214,7 +205,7 @@ export default {
     justify-content: space-between; 
     border: none;
   }
-  .modal-footer .heart {
+  #communityItem .footer .heart {
     margin-left: -40px;
     margin-top: -30px;
   }
@@ -225,18 +216,14 @@ export default {
   .footer-icon {
     margin: 0;
   }
-  .detail-dimmed {
+  #communityItem .detail {
     width: 465px;
     border-radius: 5px 5px 0 0;
-    /* height: 300px; */
-    /* margin-top: -300px; */
-    /* background-color: rgba(0, 0, 0, 0.5); */
     color: black;
     margin: 0 auto;
     padding-bottom: 10px;
-    /* text-align: center; */
   }
-  .detail-sentence-text {
+  #communityItem .detail-sentence-text {
     display: absolute;
     width: 465px;
     text-align: left;
@@ -244,7 +231,7 @@ export default {
     padding-bottom: 10px;
     border-bottom: solid 1px rgba(33, 37, 41, 0.2); 
   }
-  .detail-sentence-date {
+  #communityItem .detail-sentence-date {
     display: absolute;
     height: 30px;
     right: 0;
