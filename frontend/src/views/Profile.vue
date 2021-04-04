@@ -38,7 +38,7 @@
           </span>
         </p>
         <div class="profile-badge">
-          <div class="profile-job" v-show="userInfo.userJob">
+          <!-- <div class="profile-job" v-if="!(userInfo.userJob===undefined)">
             <img
               @click="changeJob()"
               class="profile-job-img badge-icon" 
@@ -46,15 +46,15 @@
             />
             <br>
             <div class="profile-job-tooltip">{{userInfo.userJob}}</div>
-          </div>
-          <div class="profile-gender" v-show="userInfo.userGender">
+          </div> -->
+          <!-- <div class="profile-gender" v-show="userInfo.userGender">
             <img
               class="profile-gender-img badge-icon" 
               :src="genderIcon[userInfo.userGender].img"
             />
             <br>
             <div class="profile-gender-tooltip">{{genderIcon[userInfo.userGender].name}}</div>
-          </div>
+          </div> -->
           <div class="profile-genre">
             <div class="profile-genre-item" v-for="genre in genreClass" :key="genre.id">
               <img 
@@ -66,9 +66,9 @@
               <div class="profile-genre-tooltip">{{genreClassificationIcon[genre].name}}</div>
             </div>
           </div>
-          <b-modal v-model="genreModalShow" centered hide-footer hide-header hide-backdrop>
+          <!-- <b-modal v-model="genreModalShow" centered hide-footer hide-header hide-backdrop> -->
             <!-- <genre-update-profile :genreList="userInfo.genres"></genre-update-profile> -->
-          </b-modal>
+          <!-- </b-modal> -->
         </div>
       </div>
     </div>
