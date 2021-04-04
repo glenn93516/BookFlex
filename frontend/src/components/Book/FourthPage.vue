@@ -1,6 +1,10 @@
 <template>
   <div class="row">
-    <div class="col-6" style="height:700px; border-right: 1px solid rgba(121, 121, 121, 0.692);">
+    <div 
+      class="col-6" 
+      style="height:700px; 
+      border-right: 1px solid rgba(121, 121, 121, 0.692);"
+    >
       <Topic :isbn="this.$route.params.bookIsbn" @setIsbn="getIsbn" />
     </div>
 
@@ -32,11 +36,6 @@
       }
     },
     created() {
-    },
-    watch: {
-      // anotherIsbn : function() {
-      //   this.isShow = true
-      // }
     },
     updated() { 
       console.log('updated'); 
