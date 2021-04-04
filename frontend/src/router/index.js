@@ -163,13 +163,13 @@ const routes = [
             name: 'ReadReceived',
             component: () => import('../components/Message/ReadReceived.vue'),
           },
-        ]
+        ],
       },
       {
-        path: '/bookdetail',
+        path: '/:bookIsbn',
         name: 'BookDetail',
         component: () => import('../views/BookDetail.vue'),
-        redirect: '/bookdetail/firstpage',
+        redirect: '/:bookIsbn/firstpage',
         props: true,
         children: [
           {
@@ -196,7 +196,7 @@ const routes = [
             component: () => import('../components/Book/FourthPage.vue'),
             props: true,
           },
-        ]
+        ],
       },
       {
         path: 'password',
@@ -219,9 +219,9 @@ const routes = [
             name: 'PasswordReset',
             component: () => import('../components/Password/Reset.vue'),
           },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
   {
     path: '*',

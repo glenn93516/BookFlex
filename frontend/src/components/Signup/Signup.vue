@@ -58,7 +58,6 @@ export default {
       if (PageData.progress > 0) {
         this.progressPercent = PageData.progress * 25
         const progressGraph = document.querySelector('.progress-bar')
-        // progressGraph.innerHTML = this.progressPercent
         progressGraph.innerHTML = ""
       } else {
         this.progressPercent = 2

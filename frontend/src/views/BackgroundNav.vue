@@ -165,21 +165,19 @@ export default {
     tempOverImg() {
       this.checkReceivedMessage()
       this.postBox = this.openPostBox
-      console.log(this.postBox)
     },
     tempOutImg() {
       this.postBox = this.closePostBox
-      console.log(this.postBox)
     },
     showInput() {
       this.checkInput = false
     },
     hideInput() {
       this.checkInput = true
-      var path = '/search/'+this.text;
-      console.log(path)
+      // var path = '/search/'+this.text;
+      // console.log(path)
+      this.$router.push(`/search/${this.text}`);
       this.text=null
-      this.$router.push(path);
     },
     checkLogin() {
       const token = localStorage.getItem('jwt')

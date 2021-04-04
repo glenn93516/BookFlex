@@ -203,12 +203,12 @@ public class UserController {
 
             SingleDataResponse<UserDto> response = responseService.getSingleDataResponse(true, "조회 성공", findUser);
 
-            responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(response);
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (UserNotFoundException exception) {
             logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
 
-            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         }
 
         return responseEntity;

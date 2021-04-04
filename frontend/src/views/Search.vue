@@ -14,7 +14,7 @@
     </div>
     <br>
     <br>
-    <recommend-word></recommend-word><br><br>
+    <!-- <recommend-word></recommend-word><br><br> -->
     <!-- <search-bar> </search-bar> -->
     <result-user id='user' v-bind:userData="userData"></result-user><br><br>
     <result-book id='book' v-bind:item="bookData"></result-book>
@@ -24,7 +24,7 @@
 <script>
 import resultUser from '../components/Search/ResultUser.vue'
 import resultBook from '../components/Search/ResultBook.vue'
-import recommendWord from '../components/Search/RecommendWord.vue'
+// import recommendWord from '../components/Search/RecommendWord.vue'
 
 
 export default {
@@ -33,7 +33,7 @@ export default {
   components: {
     resultUser,
     resultBook,
-    recommendWord,
+    // recommendWord,
   },
   data() {
     return {
@@ -47,20 +47,24 @@ export default {
     }
   },
   created() {
-    // if(this.$route.params.word!=''){
-    //   searchClick()
-    // }
+    if(this.$route.params.word==null){
+      this.text = ''
+    }else{
+      // console.log('route : '+this.$route.params.word);
+      this.text = this.$route.params.word;
+      this.searchClick();
+    }
   },
-  mounted () {
-    // if(this.$route.params.word!=undefined){
-    //   console.log('route : '+this.$route.params.word);
-    //   this.text = this.$route.params.word;
-    //   this.searchClick()
-    // }
+  watch: {
+    $route() {
+      // console.log('watch : '+this.$route.params.word);
+      this.text = this.$route.params.word;
+      this.searchClick();
+    }
   },
   methods: {
     searchClick(){
-      if(this.text.trim==''){
+      if(this.text.trim()==''){
         alert('검색어를 입력하세요.')
       }else{
         this.searchTitle();
@@ -70,7 +74,7 @@ export default {
       }
     },
     searchTitle(){
-      var form = {
+      const form = {
         search : 'title',
         word : this.text
       };
@@ -78,7 +82,7 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: form })
         .then(res => {
           this.bookData.titleData = res.data.data;
-          console.log('this.bookData.titleData  >> ',this.bookData.titleData)
+          // console.log('this.bookData.titleData  >> ',this.bookData.titleData)
         })
         .catch(err => {
           console.error(err)
@@ -93,7 +97,7 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: this.form })
         .then(res => {
           this.bookData.authorData = res.data.data;
-          console.log('this.bookData.authorData  >> ',res.data.data)
+          // console.log('this.bookData.authorData  >> ',res.data.data)
         })
         .catch(err => {
           console.error(err)
@@ -108,21 +112,28 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: this.form })
         .then(res => {
           this.bookData.contentsData = res.data.data;
-          console.log('this.bookData.contentsData >> ',res.data.data)
+          // console.log('this.bookData.contentsData >> ',res.data.data)
         })
         .catch(err => {
           console.error(err)
         })
     },
     searchUser(){
+      var temp = null;
       this.$axios.get(`${this.$store.getters.getServer}/user/${this.text}`)
         .then(res => {
-          console.log('this.Userdata >> ',res.data.data);
+          // console.log('this.Userdata >> ',res.data.data);
           this.userData = res.data.data;
+          temp = res.data.data;
         })
-        // .catch(err => {
-        //   // console.error(err)
-        // })
+        .catch(() => {
+          this.userData = null;
+          console.log("없는 유저입니다.")
+          // console.error(err);
+        })
+      if(temp==null){
+        this.userData = null;
+      }
     }
   }
 }
