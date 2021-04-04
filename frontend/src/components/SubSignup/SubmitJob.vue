@@ -16,8 +16,8 @@
 
     <!-- 중복선택 가능하게 바꾸려면 checkedValues[0]을 checkedValues로 바꿔주세요 -->
     <b-button 
-      @click="submitUserJob(checkedValues)"
-      @keydown.enter="submitUserJob(checkedValues)"
+      @click="submitUserJob(checkedValues[0])"
+      @keydown.enter="submitUserJob(checkedValues[0])"
       block
       class="btn-success job-btn login-button"
     >
@@ -60,7 +60,6 @@ export default {
       return this.pageData
     },
     catchData(option) {
-      console.log(this.checkedValues, 'checkedValues')
       this.options[option.value].isChecked = option.isChecked
       if (option.isChecked) {
         if (this.checkedValues.length > 0) {
@@ -68,15 +67,16 @@ export default {
           alert("하나만 선택해 주세요 :(")
           this.options[option.value].isChecked = false
         } else {
-          this.checkedValues.push(option)
+          this.checkedValues.push(option.text)
         }
       } else {
-        const idx = this.checkedValues.indexOf(option)
+        const idx = this.checkedValues.indexOf(option.text)
         this.checkedValues.splice(idx, 1)
       }
+      console.log(this.checkedValues, 'checkedValues')
     },
     submitUserJob(Job) {
-      console.log(Job, 'Job')
+      console.log(Job, 'Job') 
       this.$store.dispatch('SubmitUserJob', Job)
       this.goToSubmitPic()
     },
