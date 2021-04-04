@@ -19,10 +19,12 @@ public class BookDto {
     private String book_date;
     @ApiModelProperty(value = "표지 이미지")
     private String book_cover;
+    @ApiModelProperty(value = "도서 설명")
+    private String book_description;
 
     public BookDto() {}
 
-    public BookDto(long book_isbn, String book_title, String book_author, String book_publisher, String book_contents, String book_date, String book_cover) {
+    public BookDto(long book_isbn, String book_title, String book_author, String book_publisher, String book_contents, String book_date, String book_cover, String book_description) {
         this.book_isbn = book_isbn;
         this.book_title = book_title;
         this.book_author = book_author;
@@ -30,6 +32,7 @@ public class BookDto {
         this.book_contents = book_contents;
         this.book_date = book_date;
         this.book_cover = book_cover;
+        this.book_description = book_description;
     }
 
     public long getBook_isbn() {
@@ -88,16 +91,26 @@ public class BookDto {
         this.book_cover = book_cover;
     }
 
+    public String getBook_description() {
+        return book_description;
+    }
+
+    public void setBook_description(String book_description) {
+        this.book_description = book_description;
+    }
+
     @Override
     public String toString() {
-        return "BookDto{" +
-                "book_isbn=" + book_isbn +
-                ", book_title='" + book_title + '\'' +
-                ", book_author='" + book_author + '\'' +
-                ", book_publisher='" + book_publisher + '\'' +
-                ", book_contents='" + book_contents + '\'' +
-                ", book_date='" + book_date + '\'' +
-                ", book_cover='" + book_cover + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("BookDto{");
+        sb.append("book_isbn=").append(book_isbn);
+        sb.append(", book_title='").append(book_title).append('\'');
+        sb.append(", book_author='").append(book_author).append('\'');
+        sb.append(", book_publisher='").append(book_publisher).append('\'');
+        sb.append(", book_contents='").append(book_contents).append('\'');
+        sb.append(", book_date='").append(book_date).append('\'');
+        sb.append(", book_cover='").append(book_cover).append('\'');
+        sb.append(", book_description='").append(book_description).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
