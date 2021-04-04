@@ -27,9 +27,9 @@
 
 ## 📃문서
 
-📃[컨벤션 및 Git 브랜치 전략](http://#)  
-📃[회의록](http://#)  
-📃[추천 알고리즘](http://#)
+📃[컨벤션 및 Git 브랜치 전략](https://www.notion.so/3c2d5bfe31a548628bdb70238f0e2b68)  
+📃[회의록](https://www.notion.so/SSAFY-MEETING-fb956dfd180e49a185007fc27b67d1c5)  
+📃[추천 알고리즘](https://www.notion.so/ac2bbe43b3824bceac81f3b50a5e7eda)
 
 ## 📁기술 스택
 
