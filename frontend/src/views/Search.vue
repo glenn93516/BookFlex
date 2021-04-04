@@ -14,7 +14,7 @@
     </div>
     <br>
     <br>
-    <recommend-word></recommend-word><br><br>
+    <!-- <recommend-word></recommend-word><br><br> -->
     <!-- <search-bar> </search-bar> -->
     <result-user id='user' v-bind:userData="userData"></result-user><br><br>
     <result-book id='book' v-bind:item="bookData"></result-book>
@@ -24,7 +24,7 @@
 <script>
 import resultUser from '../components/Search/ResultUser.vue'
 import resultBook from '../components/Search/ResultBook.vue'
-import recommendWord from '../components/Search/RecommendWord.vue'
+// import recommendWord from '../components/Search/RecommendWord.vue'
 
 
 export default {
@@ -33,7 +33,7 @@ export default {
   components: {
     resultUser,
     resultBook,
-    recommendWord,
+    // recommendWord,
   },
   data() {
     return {
