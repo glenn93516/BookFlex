@@ -5,8 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel
 public class ReviewDto {
-    @ApiModelProperty(value = "리뷰 ID (PK)")
-    private long review_id;
     @ApiModelProperty(value = "책 isbn")
     private long book_isbn;
     @ApiModelProperty(value = "리뷰 내용")
@@ -17,20 +15,12 @@ public class ReviewDto {
     public ReviewDto() {
     }
 
-    public ReviewDto(long review_id, long book_isbn, String review_content, int review_rating) {
-        this.review_id = review_id;
+    public ReviewDto(long book_isbn, String review_content, int review_rating) {
         this.book_isbn = book_isbn;
         this.review_content = review_content;
         this.review_rating = review_rating;
     }
 
-    public long getReview_id() {
-        return review_id;
-    }
-
-    public void setReview_id(long review_id) {
-        this.review_id = review_id;
-    }
 
     public long getBook_isbn() {
         return book_isbn;
@@ -59,7 +49,6 @@ public class ReviewDto {
     @Override
     public String toString() {
         return "ReviewDto{" +
-                "review_id=" + review_id +
                 ", book_isbn=" + book_isbn +
                 ", review_content='" + review_content + '\'' +
                 ", review_rating=" + review_rating +
