@@ -35,16 +35,25 @@
       </div>
 
       <div v-if="anotherIsbn && isShow">
-          <Topic :isbn="anotherIsbn" @setIsbn="getIsbn" style="margin-right: 20px;"/>
-          <span
+          <div
             style="cursor: pointer;
             position: absolute; 
-            top:40px; 
-            right:40px" 
+            top:2px; 
+            right:38px" 
             @click="closeCompare"
           >
-          닫기
-          </span>
+            <font-awesome-icon 
+              @click="$emit('close-modal')"
+              size="1x" 
+              class="mouse-pointer text-secondary bnt" 
+              @mouseover="closeIcon = ['fas', 'times-circle']" 
+              @mouseleave="closeIcon = ['far', 'times-circle']" 
+              :icon="closeIcon" 
+            />
+          </div>
+
+          <Topic :isbn="anotherIsbn" @setIsbn="getIsbn" style="margin-right: 20px;"/>
+          
       </div>
       <div v-else>
         <DetailSearch @setIsbn="getIsbn" />
@@ -65,6 +74,7 @@
     },
     data () {
       return {
+        closeIcon: ['far', 'times-circle'],
         anotherIsbn: null,
         isShow: false,
       }
@@ -85,15 +95,11 @@
       closeCompare() {
         this.isShow = false
         this.anotherIsbn = null
+        this.closeIcon = ['far', 'times-circle']
       }
     }
   }
 </script>
 
 <style>
-
-  .third-detail-cover-box {
-
-  }
-
 </style>
