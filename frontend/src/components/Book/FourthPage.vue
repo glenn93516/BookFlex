@@ -1,16 +1,16 @@
 <template>
   <div class="row">
     <div class="col-6" style="height:700px; border-right: 1px solid rgba(121, 121, 121, 0.692);">
-      <Topic :isbn="this.$route.params.bookIsbn" />
+      <Topic :isbn="this.$route.params.bookIsbn" @setIsbn="getIsbn" />
     </div>
 
     <div class="col-6">
-      <div v-if="anotherIsbn">
-        <Topic :isbn="anotherIsbn" />
-        <div @click="SelectAnotherBook">닫기</div>
+      <div v-if="anotherIsbn && isShow">
+          <Topic :isbn="anotherIsbn" @setIsbn="getIsbn" />
+          <h4 style="position: absolute; top:0px; right:20px" @click="closeCompare">닫기</h4>
       </div>
       <div v-else>
-        <Select :isbn="this.$route.params.bookIsbn" @setIsbn="CompareTopic" />
+        <DetailSearch @setIsbn="getIsbn" />
       </div>
     </div>
   </div>
@@ -18,25 +18,39 @@
 
 <script>
   import Topic from './Topics.vue'
-  import Select from './Select.vue'
+  import DetailSearch from './DetailSearch.vue'
 
   export default {
     components: {
       Topic,
-      Select,
+      DetailSearch,
     },
     data () {
       return {
         anotherIsbn: null,
+        isShow: false,
       }
     },
     created() {
     },
+    watch: {
+      // anotherIsbn : function() {
+      //   this.isShow = true
+      // }
+    },
+    updated() { 
+      console.log('updated'); 
+      this.$nextTick(function () {  
+        this.isShow = true
+      }); 
+    },
     methods: {
-      CompareTopic(isbn) {
+      getIsbn(isbn) {
+        this.closeCompare()
         this.anotherIsbn = String(isbn)
       },
-      SelectAnotherBook() {
+      closeCompare() {
+        this.isShow = false
         this.anotherIsbn = null
       }
     }
