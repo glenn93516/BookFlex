@@ -5,9 +5,9 @@
     <div class="col-6 detail-cover-box">
       <img :src="book.book_cover" :alt="book.book_title" class="detail-cover">
     </div>
-    <div class="col-6" style="">
 
-      <!-- 워드클라우드 : 오른쪽 페이지 -->
+    <!-- 워드클라우드 : 오른쪽 페이지 -->
+    <div class="col-6" style="">
       <div 
         style="text-align: right; 
                   margin-top: 20px; 
