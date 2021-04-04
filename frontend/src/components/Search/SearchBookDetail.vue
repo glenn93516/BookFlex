@@ -1,5 +1,5 @@
 <template>
-  <div style="width:170px;">
+  <div style="width:170px; margin:0 auto;">
     <img class="hvr-grow-shadow mouse-pointer" 
       width="150px" 
       height="200px" 
@@ -18,9 +18,17 @@ export default {
   },
   methods: {
     clickImg(){
-      this.$router.push({ name: 'FirstPage', params: { bookIsbn: this.book.book_isbn } })
+      if(this.book.book_isbn==undefined){
+        this.$router.push({ name: 'FirstPage', params: { bookIsbn: this.book.isbn } })
+      }
+      else{
+        this.$router.push({ name: 'FirstPage', params: { bookIsbn: this.book.book_isbn } })
+      }
     },
-  },            
+  },
+  mounted() {
+    console.log('props book >> ', this.book.book_isbn)
+  },         
 }
 </script>
 
