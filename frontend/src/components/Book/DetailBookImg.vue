@@ -1,13 +1,17 @@
 <template>
-  <div @click="setIsbn">
-    <img class="hvr-grow-shadow mouse-pointer" 
-      width="80px" 
-      height="100px" 
-      :src="this.book.book_cover" 
-      alt="" 
-      style="margin-left:4px; margin-right:4px;" 
-    >
-    <div class="detail-title" style="text-align: center; size : 4rem; margin-top: 5px; height:30px">{{this.book.book_title}}</div>
+  <div style="margin-right: 12px; margin-bottom: 10px;">
+    <div class="overlay-image" @click="setIsbn(book.book_isbn)">
+      <img 
+        width="90px" 
+        height="120px" 
+        :src="book.book_cover" 
+        alt="" 
+        style="cursor: pointer;"
+      >
+      <div class="hover" style="overflow: hidden;">
+        <div class="text" style="width: 90px; height: 120px;">{{ book.book_title }}</div>
+      </div>
+    </div>
   </div>
 </template>
 
