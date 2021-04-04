@@ -14,7 +14,7 @@
             v-bind:key="book.book_title"
             v-bind:index='index'
           ></search-book-detail >
-        </div>
+        </div><br>
         <div v-if="item.titleData.length > 0">
           <b-pagination
             pills
@@ -38,7 +38,7 @@
             v-bind:key="book.book_title"
             v-bind:index='index'
           ></search-book-detail >
-        </div>
+        </div><br>
         <div v-if="authorTotalRows > 0">
           <b-pagination
             pills
@@ -62,7 +62,7 @@
             v-bind:key="book.book_title"
             v-bind:index='index'
           ></search-book-detail >
-        </div>
+        </div><br>
         <div v-if="contentsTotalRows > 0">
           <b-pagination
             pills

@@ -1,15 +1,48 @@
 <template>
   <!-- 리뷰 분석, 담긴 문장 페이지 -->
-  <div>
-    <figure class="highcharts-figure">
-      <div id="container"></div>
-      <p class="highcharts-description">
-        Variable radius pie charts can be used to visualize a
-        second dimension in a pie chart. In this chart, the more
-        densely populated countries are drawn further out, while the
-        slice width is determined by the size of the country.
-      </p>
-    </figure>
+  <div class="row">
+    <!-- 왼쪽 페이지: 비지도학습 키워드 분석 -->
+    <div class="col-6 book_size" style="border-right: 1px solid rgba(121, 121, 121, 0.692); height: 700px;">
+      <div 
+        style="text-align: left; 
+                  margin-top: 20px; 
+                  margin-left: 20px;
+                  margin-bottom: 50px;
+                  color: rgba(100, 100, 100);
+                  ">
+        <h6 class="mr-1">도서 분류 분석</h6>
+        <hr style="rgba(50, 50, 50); margin-bottom: 40px;">
+      </div>
+      <div style="margin-left: 20px; width: 450px; height: auto;">
+        <figure class="highcharts-figure">
+          <div id="container"></div>
+          <p class="highcharts-description">
+            Variable radius pie charts can be used to visualize a
+            second dimension in a pie chart. In this chart, the more
+            densely populated countries are drawn further out, while the
+            slice width is determined by the size of the country.
+          </p>
+        </figure>
+      </div>
+    </div>
+
+    <!-- 오른쪽 페이지: 지도학습 긍부정 분석 + 한줄문장 -->
+    <div class="col-6 book_size">
+      <div 
+        style="text-align: right; 
+                  margin-top: 20px; 
+                  margin-right: 20px;
+                  margin-bottom: 50px;
+                  color: rgba(100, 100, 100);
+                  ">
+        <h6 class="mr-1">리뷰 감정 분석</h6>
+        <hr style="rgba(50, 50, 50); margin-bottom: 40px;">
+      </div>
+      <div style="margin-right: 20px;">
+
+      </div>
+
+    </div>
 
   </div>
 </template>
@@ -27,7 +60,7 @@ export default {
         type: 'variablepie'
       },
       title: {
-        text: 'Countries compared by population density and total area.'
+        text: ''
       },
       tooltip: {
         headerFormat: '',
@@ -78,7 +111,7 @@ export default {
 
 <style>
 #container {
-	height: 500px;
+ height: 300px;
 }
 
 .highcharts-figure, .highcharts-data-table table {
@@ -115,4 +148,7 @@ export default {
   background: #f1f7ff;
 }
 
+.book_size{
+
+}
 </style>
