@@ -48,7 +48,7 @@
                h.book_isbn bookIsbn, b.book_title bookTitle, user_id userId, created_date createdDate,
                updated_date updatedDate, is_public isPublic
         FROM highlight h JOIN book b ON h.book_isbn = b.book_isbn
-        WHERE user_id = #{userId} AND highlight_id IN (select highlight_id from good where user_id=#{userId})
+        WHERE highlight_id IN (select highlight_id from good where user_id=#{userId})
         ORDER BY created_date DESC
     </select>
 
