@@ -20,10 +20,6 @@ import { faThumbsDown } from '@fortawesome/free-regular-svg-icons'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-// import * as am4core from '@amcharts/amcharts4/core';
-// import * as am4charts from '@amcharts/amcharts4/charts';
-// import '@amcharts/amcharts4/charts';
-
 library.add(
   fasTimesCircle,
   farTimesCircle,
@@ -39,17 +35,11 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 
-// import 'fulllpage.js/vendors/scrolloverflow' // Optional. When using scrollOverflow: true
-// import './fullpage.scrollHorizontally.min' // Optional. When using fullpage extensions
-import VueFullPage from 'vue-fullpage.js'
-
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
-Vue.use(VueFullPage)
 
 Vue.config.productionTip = false
 Vue.prototype.$axios=axios
-
 
 new Vue({
   router,
