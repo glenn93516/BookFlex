@@ -119,6 +119,7 @@
 
       <!-- 여기는 우체통 -->
       <img
+        v-if="this.$route.path !== '/login' && !this.re.test(this.$route.path)"
         class="postbox"
         width="120px"
         height="120px" 
@@ -136,6 +137,7 @@
 export default {
   data() {
     return {
+      re: /signup/ ,
       checkInput: true,
       isLogin: false,
       pageName: "",
