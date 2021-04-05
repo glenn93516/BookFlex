@@ -24,12 +24,9 @@
           variant="light"
         >
         </b-avatar>
-        <!-- reset img -->
-        <!-- <b-avatar size="10rem" v-if="resetImg" src="" class="updateProfile-left"></b-avatar> -->
         <div class="upload-image">
           <input ref="imageInput" type="file" hidden @change="onChangeImages">
           <b-button variant="warning" @click="onClickImageUpload">이미지 업로드</b-button>
-          <!-- <b-button variant="primary" @click="resetImage">기본 이미지로 변경</b-button> -->
         </div>
       </div>
     </div>
@@ -44,7 +41,6 @@ export default {
   data() {
     return {
       uploadImg: null,
-      // resetImg: false,
     }
   },
   created() {
@@ -61,22 +57,6 @@ export default {
       this.uploadImg = URL.createObjectURL(file)
       this.submitImage(file)
     },
-    // resetImage() {
-    //   this.resetImg = true
-    //   this.$refs.imageInput.value=null
-    //   this.completeChange()
-    //   // const User = this.$store.getters.getUserImg
-    //   // const UserFile = this.$store.getters.getUserImgFile
-    //   // console.log(User,  'FIKE1')
-    //   // console.log(UserFile, 'FIKE2')
-    //   // this.$store.dispatch('DeleteProfileImage')
-
-    //   // const file = new File(["name"], "no-image",)
-    //   // console.log('resetImage')
-    //   // console.log(file, 'file')
-    //   // this.$store.dispatch('SubmitUserPic', file)
-    //   // this.completeChange()
-    // },
     submitImage(Img) {
       this.$store.dispatch('SubmitUserPic', Img)
       this.completeChange()

@@ -1,26 +1,35 @@
 <template>
   <div>
     <h4>프로필 사진을 등록해주세요.</h4>
-    <div style="text-align: center; margin-top: 1rem;">
-      <img width="100px" height="100px" :src="profileImage" alt="">
+    <div 
+      style="
+        text-align: center; 
+        margin-top: 2rem; 
+        display: flex; 
+        justify-content: space-around; 
+        align-items: center;
+      "
+    >
+      <b-avatar
+        :src="profileImageLink"
+        size="7rem"
+        variant="light"
+        style="margin-left: 2.3rem;"
+      >
+      </b-avatar>
+      <div class="upload-image" style="width: 100%;">
+        <input ref="imageInput" type="file" hidden @change="onChangeImages">
+        <b-button style="padding: 0.5rem 1.5rem;" variant="warning" @click="onClickImageUpload">이미지 업로드</b-button>
+      </div>
     </div>
 
-    <b-form-file
-      v-model="profileImage"
-      :state="Boolean(profileImage)"
-      :placeholder="photoName"
-      drop-placeholder="Drop file here..."
-      class="submit-PImg"
-      type='file'
-    >
-    </b-form-file>
-      <!-- <div class="mt-3">Selected file: {{ profileImage ? profileImage.name : '' }}</div> -->
 
     <b-button
       block
       class="btn-success profileImg-btn login-button" 
       @click="submitUserPic(profileImage)"
       @keydown.enter="submitUserPic(profileImage)"
+      style="margin-top: 2.3rem;"
     >
       확인
     </b-button>
@@ -35,6 +44,7 @@ export default {
         progress: 3,
         size: "back-md"
       },
+      profileImageLink: null,
       profileImage: null,
       photoName: "사진을 선택해주세요."
     }
@@ -49,11 +59,20 @@ export default {
     },
   },
   methods: {
+    onClickImageUpload() {
+      this.$refs.imageInput.click()
+    },
+    onChangeImages(e) {
+      console.log(e.target.files)
+      const file = e.target.files[0]      
+      this.profileImageLink = URL.createObjectURL(file)
+      this.profileImage = file
+    }, 
     servePageInfo() {
       return this.pageData
     },
-    submitUserPic(Img) {
-      this.$store.dispatch('SubmitUserPic', Img)
+    submitUserPic() {
+      this.$store.dispatch('SubmitUserPic', this.profileImage)
       this.goToComplete()
     },
     goToComplete() {
@@ -65,9 +84,6 @@ export default {
 </script>
 
 <style>
-  /* .custom-file-input:lang(ko) ~ .custom-file-label::after {
-    content: 'B';
-  } */
   .submit-PImg {
     margin-top: 1rem; 
     margin-bottom: 10px;
