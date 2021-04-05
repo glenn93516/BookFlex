@@ -48,8 +48,19 @@
                h.book_isbn bookIsbn, b.book_title bookTitle, user_id userId, created_date createdDate,
                updated_date updatedDate, is_public isPublic
         FROM highlight h JOIN book b ON h.book_isbn = b.book_isbn
-        WHERE user_id = #{userId} AND highlight_id IN (select highlight_id from good where user_id=#{userId})
+        WHERE highlight_id IN (select highlight_id from good where user_id=#{userId})
         ORDER BY created_date DESC
+    </select>
+
+    <select id="findOneByUserIdOrderByUpdatedDate" resultType="HighlightDto">
+        SELECT highlight_id highlightId, highlight_content highlightContent,
+               highlight_page highlightPage, highlight_cover highlightCover,
+               h.book_isbn bookIsbn, b.book_title bookTitle, user_id userId, created_date createdDate,
+               updated_date updatedDate, is_public isPublic
+        FROM highlight h JOIN book b ON h.book_isbn = b.book_isbn
+        WHERE h.user_id=#{userId}
+        ORDER BY h.updated_date DESC
+        LIMIT 1;
     </select>
 
     <select id="findByHighlightId" resultMap="HighlightDetailDto">

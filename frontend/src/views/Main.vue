@@ -27,26 +27,26 @@
           </div>
         </transition>
       </div>
-      <div style="width: 100vw; height: 40vh; background-color: black;"></div>
+      <div class="book-info-black"></div>
       <div id="bookInfo">
-        <div style="height: 22vw; width: 100vw; background-color: rgba(0, 0, 0, 0.57);">
+        <div class="book-info-background">
           <div id="book-number" style="width: 100vw;">
             <div data-aos="fade-right" class="text-center">
               <span class="white info-subtitle-size">도서</span>
-              <span class="yellow info-title-size" style="margin: 0 15px;">88,416</span>
+              <span class="yellow info-title-size info-number">88,416</span>
               <span class="white info-subtitle-size">권</span>
             </div>
           </div>
           <div id="review-number" style="width: 100vw;">
             <div data-aos="fade-left" class="white info-subtitle-size">
               <span class="white info-subtitle-size">리뷰</span>
-              <span class="salmon info-title-size" style="margin: 0 15px;">632,017</span>
+              <span class="salmon info-title-size info-number">632,017</span>
               <span class="white info-subtitle-size">개</span>
             </div>
           </div>
         </div>
       </div>
-      <div style="width: 100vw; height: 40vh; background-color: black;"></div>
+      <div class="book-info-black"></div>
 
       
       <!-- 스크롤 페이지 -->
@@ -54,8 +54,8 @@
         <div class="article">
           <div id="firstSection" class="section first-section">
             <div data-aos="fade-down" class="white section-title">추천 시스템</div>
-            <Book class="mouse-pointer" data-aos="zoom-in-down" id="book" :book="nowBookObj" style="margin: 80px 0;"></Book>
-            <div class="white text-center" style="">
+            <Book class="mouse-pointer recommend-book" data-aos="zoom-in-down" id="book" :book="nowBookObj"></Book>
+            <div class="white text-center">
               <div data-aos="fade-right">
                 <span class="highlight-size-xs">Fasttest</span>
                 <span>를 기반으로 </span> 
@@ -74,7 +74,7 @@
           </div>
           <div id="secondSection" class="section middle-section">
             <div data-aos="fade-down" class="white section-title">지도 학습</div>
-            <div class="white text-center" style="padding-top: 8vh;">
+            <div class="white text-center bert-info">
               <span data-aos="zoom-in" class="highlight-size-lg">BERT</span>
               <span data-aos="zoom-in" class="default-size">모델</span>
             </div>
@@ -89,7 +89,7 @@
           </div>
           <div id="thirdSection" class="section">
             <div data-aos="fade-down" class="white section-title">비지도 학습</div>
-            <div class="white" style="padding-top: 8vh;">
+            <div class="white bert-info">
               <div data-aos="fade-right">
                 <span style="font-size: 50px; font-weight: bold;">LDA</span>를 사용한 <span style="font-size: 27px; font-weight: bold;">리뷰 토픽 모델링</span>
               </div>
@@ -109,13 +109,15 @@
               </div>
               <br>
               <div data-aos="fade-left" style="text-align: center; position: relative;">
-                <img width="100%" height="220px" src="@/assets/bizido.png" alt="" style="border-radius: 10px;">
-                <div style="border-radius: 10px; position: absolute; background-color: rgba(0, 0, 0, 0.2); width: 100%; height: 220px; top: 0;"></div>
+                <img width="100%" height="220px" src="@/assets/bizido.png" alt="" class="bizido-img">
+                <div class="bizido-img-dimmed"></div>
               </div>
             </div>
           </div>
         </div>
-        <div style="height: 100vh;">
+        <div style="height: 20vh;">
+        </div>
+        <div style="height: 110vh;">
           <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">문장 수집</h1>
@@ -131,7 +133,7 @@
             </div>
             <img data-aos="fade-down" data-aos-duration="1000" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
           </div>
-          <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+          <div style="height: 50vh; margin-top: 5vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">나만의 서재</h1>
               <hr style="margin: 10px 0;">
@@ -147,8 +149,8 @@
             <img data-aos="fade-down" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
           </div>
         </div>
-        <div style="height: 100vh;">
-          <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+        <div style="height: 110vh;">
+          <div style="height: 50vh; margin-top: 5vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">맞춤형 추천</h1>
               <hr style="margin: 10px 0;">
@@ -163,7 +165,7 @@
             </div>
             <img data-aos="fade-down" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
           </div>
-          <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+          <div style="height: 50vh; margin-top: 5vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">커뮤니티</h1>
               <hr style="margin: 10px 0;">
@@ -401,25 +403,38 @@ import Book from '@/components/Main/Book.vue'
   .salmon {
     color: #f39189;
   }
-
-  .info-title-size {
+  
+  #main .book-info-black {
+    width: 100vw; 
+    height: 40vh; 
+    background-color: black;
+  }
+  #main .book-info-background {
+    height: 22vw; 
+    width: 100vw; 
+    background-color: rgba(0, 0, 0, 0.57);
+  }
+  #main .info-number {
+    margin: 0 15px;
+  }
+  #main .info-title-size {
     font-size: 110px;
     font-weight: bold;
     width: 100%;
     text-align: center;
   }
-  .info-subtitle-size {
+  #main .info-subtitle-size {
     font-size: 50px;
     width: 100%;
     text-align: center;
   }
-  .text-center {
+  #main .text-center {
     text-align: center;
   }
 
   #scrollPage {
     background: linear-gradient(to bottom, black, rgba(235, 234, 232, 1));
-    height: 200vh;
+    height: 250vh;
     position: relative;
     top: 0;
   }
@@ -498,56 +513,75 @@ import Book from '@/components/Main/Book.vue'
   #book .book-ul .book-moreInf {
     margin: 80px 0;
   }
+  #main .recommend-book {
+    margin: 80px 0;
+  }
 
-#main .go-main-btn{
-  background:#1AAB8A;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:60px;
-  font-size:1.6em;
-  padding:0 2em;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
-}
-#main .go-main-btn:hover{
-  background:rgba(235, 234, 232, 1);
-  color:#1AAB8A;
-}
-#main .go-main-btn:before {
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #1AAB8A;
-  transition:400ms ease all;
-}
-#main .go-main-btn:after {
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #1AAB8A;
-  transition:400ms ease all;
-}
-#main .go-main-btn:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
-}
-#main .go-main-btn:hover:before {
-  width:100%;
-  transition:800ms ease all;
-}
-#main .go-main-btn:hover:after {
-  width:100%;
-  transition:800ms ease all;
-}
+  #main .bert-info {
+    padding-top: 8vh;
+  }
+
+  #main .bizido-img {
+    border-radius: 4px;
+  }
+  #main .bizido-img-dimmed {
+    border-radius: 4px; 
+    position: absolute; 
+    background-color: rgba(0, 0, 0, 0.05); 
+    width: 100%; 
+    height: 220px; 
+    top: 0;
+  }
+
+  #main .go-main-btn{
+    background:#1AAB8A;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    font-size:1.6em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+  }
+  #main .go-main-btn:hover{
+    background:rgba(235, 234, 232, 1);
+    color:#1AAB8A;
+  }
+  #main .go-main-btn:before {
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+  }
+  #main .go-main-btn:after {
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+  }
+  #main .go-main-btn:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  #main .go-main-btn:hover:before {
+    width:100%;
+    transition:800ms ease all;
+  }
+  #main .go-main-btn:hover:after {
+    width:100%;
+    transition:800ms ease all;
+  }
 
 </style>
