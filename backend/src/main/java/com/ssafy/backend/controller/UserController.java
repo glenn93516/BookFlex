@@ -238,6 +238,7 @@ public class UserController {
     @ApiOperation(value = "유저가 작성한 또는 좋아요 누른 문장수집 조회", notes = "onlyGood이 True면 해당 유저가 좋아요 누른 글 조회")
     @GetMapping("/{userNickname}/highlight")
     public ResponseEntity getUserHighlights(@ApiParam(value = "조회할 유저 닉네임", required = true) @PathVariable String userNickname,
+                                            @ApiParam(value = "가장 최근 문장수집 1개만 조회", required = false) @RequestParam(required = true, defaultValue = "false") Boolean onlyRecent,
                                             @ApiParam(value = "좋아요 누른 문장수집만 조회", required = false) @RequestParam(required = true, defaultValue = "false") Boolean onlyGood) {
         ResponseEntity responseEntity = null;
         try {
@@ -257,6 +258,35 @@ public class UserController {
             logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+
+        return responseEntity;
+    }
+
+    /**
+     * 유저가 최근에 작성한 문장수집 조회
+     */
+    @ApiOperation(value = "유저가 마지막으로 작성한 문장수집 조회")
+    @GetMapping("/{userNickname}/highlight/recent")
+    public ResponseEntity getUserRecentHighlight(@ApiParam(value = "조회할 유저 닉네임", required = true) @PathVariable String userNickname) {
+        ResponseEntity responseEntity = null;
+        try {
+            UserDto user = userService.findUserByUserNickname(userNickname);
+
+            // 작성한 문장수집 조회
+            HighlightDto highlight = highlightService.findOneByUserIdOrderByUpdatedDate(user.getUserId());
+
+            SingleDataResponse<HighlightDto> response = responseService.getSingleDataResponse(true, "조회 성공", highlight);
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (IllegalStateException exception) {
+            logger.info(exception.getMessage());
+
+            BaseResponse response = responseService.getBaseResponse(true, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+        } catch (UserNotFoundException exception) {
+            logger.info(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
         return responseEntity;

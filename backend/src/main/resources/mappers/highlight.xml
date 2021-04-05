@@ -52,6 +52,17 @@
         ORDER BY created_date DESC
     </select>
 
+    <select id="findOneByUserIdOrderByUpdatedDate" resultType="HighlightDto">
+        SELECT highlight_id highlightId, highlight_content highlightContent,
+               highlight_page highlightPage, highlight_cover highlightCover,
+               h.book_isbn bookIsbn, b.book_title bookTitle, user_id userId, created_date createdDate,
+               updated_date updatedDate, is_public isPublic
+        FROM highlight h JOIN book b ON h.book_isbn = b.book_isbn
+        WHERE h.user_id=#{userId}
+        ORDER BY h.updated_date DESC
+        LIMIT 1;
+    </select>
+
     <select id="findByHighlightId" resultMap="HighlightDetailDto">
         select
             h.highlight_id, h.highlight_content, h.highlight_page, h.highlight_cover, h.book_isbn, b.book_title, h.created_date, h.updated_date, h.is_public,
