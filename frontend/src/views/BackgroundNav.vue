@@ -55,12 +55,13 @@
           </template>
 
           <b-dropdown-item
+            v-if="isLogin"
             @click="goToProfile"
             style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
           >
-            <span style="font-size: 0.8rem;">프로필(temp)</span>
+            <span style="font-size: 0.8rem;">프로필</span>
           </b-dropdown-item>
-          <hr class="list-hr">
+          <hr v-if="isLogin" class="list-hr">
           
           <b-dropdown-item
             v-if="!isLogin" 
