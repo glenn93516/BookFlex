@@ -1,9 +1,9 @@
 <template>
-  <div id="main" :style="mainStyle">
-
-    <div class="main-first-page">
-      <!-- 첫번째 페이지 -->
-      <div id="0" class="first-main" style="background-color: black;">
+  <div id="mainTemp"
+    :style="{backgroundImage: 'url(https://cdn.pixabay.com/photo/2017/08/03/20/00/booksm-collection-2578237_960_720.jpg)', height: '100vh', width: '100%', border: '1px solid red'}"  
+  >
+    <!-- <div style="position: absolute; top: 0;">
+      <div id="0" class="section first-main">
         <img src="https://i.pinimg.com/originals/3d/31/6b/3d316ba5a416f68c8627de6be9f97b68.gif" alt="">
         <div class="first-main-logo">
           <span class="main-logo spread-underline font-jeonnam" @click="goMain()" @mouseover="bigLetterChange()" @mouseleave="bigLetterToWhite()">
@@ -28,16 +28,16 @@
         </transition>
       </div>
 
-      <div id="bookInfo">
-        <div style="height: 20vw; width: 100vw; background-color: rgba(0, 0, 0, 0.57);">
-          <div id="book-number" style="width: 100vw;">
+      <div>
+        <div style="height: 300px; width: 100vw;">
+          <div id="book-number">
             <div data-aos="fade-right" class="text-center">
               <span class="white info-subtitle-size">도서</span>
               <span class="yellow info-title-size" style="margin: 0 15px;">88,416</span>
               <span class="white info-subtitle-size">권</span>
             </div>
           </div>
-          <div id="review-number" style="width: 100vw;">
+          <div id="review-number">
             <div data-aos="fade-left" class="white info-subtitle-size">
               <span class="white info-subtitle-size">리뷰</span>
               <span class="salmon info-title-size" style="margin: 0 15px;">632,017</span>
@@ -47,38 +47,37 @@
         </div>
       </div>
       
-      <!-- 스크롤 페이지 -->
-      <div id="scrollPage">
-        <div class="article">
-          <div id="firstSection" class="section first-section">
-            <div class="white" style="background-color: white;">여기는 title</div>
-          </div>
-          <div id="secondSection" class="section middle-section">
-          </div>
-          <div id="thirdSection" class="section"></div>
+      <div id="scrollPage" 
+        style="
+          background: linear-gradient(to bottom, black, rgba(235, 234, 232, 1));
+          height: 400vh;
+          position: relative;
+          top: 300px;
+        "
+      >
+        <div style="height: 100vh; border: 1px solid pink;">
         </div>
-        <div style="height: 100vh; border: 2px solid green;">
-
+        <div style="height: 100vh;">
         </div>
-        <div style="height: 100vh; border: 2px solid purple;">
-
+        <div style="height: 100vh;">
         </div>
-
       </div>
-      <!-- <div id="endScroll" 
+      <div id="endScroll" 
         style="
           height: 100vh;
           border: 5px orange solid;
-          background-color: rgba(235, 234, 232, 1);
         "
       >
       <b-button @click="goMain()">여기</b-button>
-      </div> -->
-    </div>
+      </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+document.querySelector('body').style.backgroundImage = "url('../assets/librarycolumn3.jpg')"
+// document.querySelector('body').style.backgroundColor = "blue"
+
 import AOS from 'aos';
 import "aos/dist/aos.css";
 
@@ -91,13 +90,7 @@ import "aos/dist/aos.css";
       return{
         bigLetter: "",
         nowTop: true,
-        mainStyle: {
-          backgroundImage: 'url(https://cdn.pixabay.com/photo/2017/08/03/20/00/booksm-collection-2578237_960_720.jpg)', 
-          height: '250vh', 
-          width: '100%', 
-          border: '1px solid red',
-          backgroundAttachment: 'fixed',
-        },
+        backgroundImg: '../assets/librarycolumn3.jpg',
       }
     },
     destroyed() {
@@ -130,22 +123,16 @@ import "aos/dist/aos.css";
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Open+Sans:wght@800&family=Roboto:wght@900&display=swap');
-  #main .main-first-page {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-  }
-  #main .font-main {
+  #mainTemp .font-main {
     font-family: 'Open Sans', sans-serif;
   }
-  #main .first-main {
+  #mainTemp .first-main {
     background-color: black;
     text-align: center;
     height: 100vh;
     width: 100vw;
   }
-  #main .first-main-logo {
+  #mainTemp .first-main-logo {
     position: absolute;
     top: 50vh;
     width: 100%;
@@ -156,25 +143,25 @@ import "aos/dist/aos.css";
     font-weight: bold;
     letter-spacing: 5px;
   }
-  #main .main-small-font {
+  #mainTemp .main-small-font {
     color: rgba(255, 255, 255, 0.8);
   }
-  #main .main-logo:hover {
+  #mainTemp .main-logo:hover {
     cursor: pointer;
     /* opacity: 0.9; */
   }
-  #main .big-letter {
+  #mainTemp .big-letter {
     color: #C21807;
     /* color: #B80F0A; */
   }
   /* 가운데서 좌우로 펼쳐지는 라인 애니메이션 */
-  #main .spread-underline {
+  #mainTemp .spread-underline {
     text-decoration: none;
     display: inline-block;
     padding: 15px 0;
     position: relative;
   }
-  #main .spread-underline:after {
+  #mainTemp .spread-underline:after {
     background: none repeat scroll 0 0 transparent;
     content: "";
     display: block;
@@ -185,23 +172,26 @@ import "aos/dist/aos.css";
     transition: width 0.3s ease 0s, left 0.3s ease 0s;
     width: 0;
   }
-  #main .spread-underline:hover:after {
+  #mainTemp .spread-underline:hover:after {
     width: 100%;
     left: 0;
   }
-  #main .scroll-link {
+  #mainTemp .scroll-link {
     margin-top: 25vh;
     margin-left: 50vw;
+    /* position: absolute; */
     bottom: 1rem;
     width: 100%;
+    /* left: 50%; */
+    /* text-align: center; */
     transform: translateX(-50%);
   }
-  #main .mouse {
+  #mainTemp .mouse {
     max-width: 2.5rem;
     width: 100%;
     height: auto;
   }
-  #main .scroll {
+  #mainTemp .scroll {
     animation-name: scroll;
     animation-duration: 1.5s;
     animation-timing-function: cubic-bezier(0.650, -0.550, 0.250, 1.500);
@@ -233,12 +223,18 @@ import "aos/dist/aos.css";
     color: white;
   }
   .yellow {
-    color: #fed049;
+    color: yellow;
   }
   .salmon {
-    color: #f39189;
+    color: salmon;
   }
 
+  #book-number {
+    /* padding: 0px 0 0 140px; */
+  }
+  #review-number {
+    /* padding: 50px 0 0 60vw; */
+  }
   .info-title-size {
     font-size: 120px;
     font-weight: bold;
@@ -252,33 +248,5 @@ import "aos/dist/aos.css";
   }
   .text-center {
     text-align: center;
-  }
-
-  #scrollPage {
-    background: linear-gradient(to bottom, black, rgba(235, 234, 232, 1));
-    height: 300vh;
-    position: relative;
-    top: 0;
-  }
-  #main .article {
-    padding-top: 6vh;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: left;
-  }
-  #main .section {
-    width: 30vw;
-    background-color: rgba(0, 0, 0, 0.5);
-    height: 80vh;
-    margin: 5vh 0;
-    border-radius: 10px;
-    padding: 10vh 5vw;
-  }
-  #main .first-section {
-    margin: 5vh 0 2vw 5vh;
-  }
-  #main .middle-section {
-    margin: 5vh 2vw;
   }
 </style>

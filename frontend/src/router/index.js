@@ -11,6 +11,11 @@ const routes = [
     component: () => import('../views/Main.vue'),
   },
   {
+    path: '/temp',
+    name: 'MainTempPage',
+    component: () => import('../views/MainTemp.vue'),
+  },
+  {
     path: '/',
     name: 'Background',
     // route level code-splitting
