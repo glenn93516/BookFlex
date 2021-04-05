@@ -2,7 +2,7 @@
   <div style="margin-left: 20px;">
 
     <div class="second-left-small row justify-content-center">
-      <div v-if="!loading && chartData.datasets[0].label" style="height:300px; display:flex; justify-content:center; align-items:center;">
+      <div v-if="!loading && !chartData.datasets[0].label" style="height:300px; display:flex; justify-content:center; align-items:center;">
         <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
       </div>
       <div v-else>
