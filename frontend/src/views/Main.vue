@@ -57,7 +57,7 @@
             <Book class="mouse-pointer recommend-book" data-aos="zoom-in-down" id="book" :book="nowBookObj"></Book>
             <div class="white text-center">
               <div data-aos="fade-right">
-                <span class="highlight-size-xs">Fasttest</span>
+                <span class="highlight-size-xs">Fasttext</span>
                 <span>를 기반으로 </span> 
                 <span class="highlight-size-xxxs">앙상블팀</span>
                 <span>이</span>
