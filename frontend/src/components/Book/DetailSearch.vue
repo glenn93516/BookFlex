@@ -3,7 +3,7 @@
     <div id="searchDiv" style="display:flex;">
       <b-form-input 
         id="input" 
-        style=" left: 0; height: 40px; margin-top: 1px; border-radius: 20px / 20px; float:left;" 
+        style=" left: 0; height: 40px; margin-top: 0px; margin-bottom: 5px; border-radius: 20px / 20px; float:left; width: 475px;" 
         class="formcolor animate__animated animate__headShake"
         placeholder="검색어를 입력하세요."
         type="text"

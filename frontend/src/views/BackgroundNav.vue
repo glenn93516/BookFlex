@@ -45,6 +45,7 @@
             type="text"
             v-model="text"
             @keypress.enter="hideInput"
+            @blur="showInput"
           ></b-form-input>
         </b-nav-item>
         <!-- 마이페이지 -->
@@ -54,12 +55,13 @@
           </template>
 
           <b-dropdown-item
+            v-if="isLogin"
             @click="goToProfile"
             style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
           >
-            <span style="font-size: 0.8rem;">프로필(temp)</span>
+            <span style="font-size: 0.8rem;">프로필</span>
           </b-dropdown-item>
-          <hr class="list-hr">
+          <hr v-if="isLogin" class="list-hr">
           
           <b-dropdown-item
             v-if="!isLogin" 
@@ -170,7 +172,7 @@ export default {
       this.postBox = this.closePostBox
     },
     showInput() {
-      this.checkInput = false
+      this.checkInput = !this.checkInput
     },
     hideInput() {
       this.checkInput = true
@@ -190,6 +192,7 @@ export default {
       localStorage.removeItem('jwt')
       this.userInfo = ""
       this.isLogin = false
+      this.$router.push({ name: 'MainPage' })
     },
     postBoxClick() {
       this.$router.push({ name: 'Received' })
@@ -217,6 +220,11 @@ export default {
       this.pageName = to.name
       this.checkLogin()
       this.userInfo = this.$store.getters.getUser
+    },
+    openPostBox(newOpenPostBox) {
+      this.openPostBox = newOpenPostBox
+      this.postBox = newOpenPostBox
+      // console.log(this.newOpenPostBox)
     }
   },
   mounted() {

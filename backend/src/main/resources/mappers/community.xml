@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.backend.mapper.CommunityMapper">
+    <select id="selectMaxReadingBook" resultType="Map">
+        select tmp.bookisbn as isbn , max(tmp.cnt) as max_count, book.book_author, book.book_contents, book.book_cover, book.book_date, book.book_description, book.book_publisher, book.book_title
+        from (SELECT book_isbn as bookisbn, count(book_isbn) as cnt
+              from user_book
+              group by book_isbn
+              order by cnt desc) as tmp left join book on tmp.bookisbn = book.book_isbn
+    </select>
+
+    <select id="selectMaxGoodBook" resultType="Map">
+        select mt.thigh highlistId, mt.max_count max_count, highlight.book_isbn isbn, highlight.highlight_content, highlight.highlight_cover, highlight.highlight_page,
+               book.book_author, book.book_contents, book.book_cover, book.book_date, book.book_description, book.book_publisher, book.book_title
+        from(select tmp.highlight_id as thigh, max(tmp.cnt) as max_count
+             from (SELECT highlight_id , count(highlight_id) as cnt
+                   from good
+                   group by highlight_id
+                   order by cnt desc) as tmp ) as mt left join highlight on mt.thigh = highlight.highlight_id left join book on highlight.book_isbn = book.book_isbn
+    </select>
+
+    <select id="selectMaxHighlightBook" resultType="Map">
+        select max(tmp.cnt) max_count, tmp.isbn isbn, book.book_author, book.book_contents, book.book_cover, book.book_date, book.book_description, book.book_publisher, book.book_title
+        from (select count(book_isbn) cnt, book_isbn isbn
+              from highlight
+              group by book_isbn
+              order by cnt desc ) as tmp left join book on tmp.isbn = book.book_isbn
+    </select>
+
+    <select id="selectMaxWishlistBook" resultType="Map">
+        select max(ctable.cnt) max_count, ctable.isbn, book.book_title, book.book_author, book.book_publisher, book.book_contents,
+               book.book_date, book.book_cover, book.book_description
+        from (select count(book_isbn) cnt, book_isbn isbn
+              from wishlist
+              group by book_isbn
+              order by cnt desc) as ctable left join book on ctable.isbn = book.book_isbn
+    </select>
+</mapper>

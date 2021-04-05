@@ -61,11 +61,13 @@ def get_sentiment(sentences):
         "total_count": 0,
         "positive": {
             "count": 0,
-            "ratio": 0.0
+            "ratio": 0.0,
+            "reviews": []
         },
         "negative": {
             "count": 0,
-            "ratio": 0.0
+            "ratio": 0.0,
+            "reviews": []
         }
     }
     if len(sentences) == 0:
@@ -85,7 +87,7 @@ def get_sentiment(sentences):
     input_ids = inputs['input_ids']
     attention_mask = inputs['attention_mask']
 
-    for input_id, attention in zip(input_ids, attention_mask):
+    for idx, (input_id, attention) in enumerate(zip(input_ids, attention_mask)):
         y_pred = model(
             input_id.unsqueeze(0),
             attention_mask=attention.unsqueeze(0)
@@ -95,8 +97,14 @@ def get_sentiment(sentences):
         book_sentiment["total_count"] += 1
         if y_pred == 1:
             book_sentiment["positive"]["count"] += 1
+
+            if len(book_sentiment["positive"]["reviews"]) < 10:
+                book_sentiment["positive"]["reviews"].append(sentences[idx])
         else:
             book_sentiment["negative"]["count"] += 1
+
+            if len(book_sentiment["negative"]["reviews"]) < 10:
+                book_sentiment["negative"]["reviews"].append(sentences[idx])
 
     book_sentiment["positive"]["ratio"] = round(
         (book_sentiment["positive"]["count"] / book_sentiment["total_count"]) * 100, 4)

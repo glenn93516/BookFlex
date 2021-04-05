@@ -1,71 +1,76 @@
 <template>
   <div style="margin-left: 20px;">
-    <div >
-      <img
-        style="float:left;"
-        height="100px"
-        :src=bookInfo.book_cover
-        alt=""
-      >
-    </div>
 
-    <div class="bookinfo-content bookinfo-text" style="height:100px">
-      <p>책 제목 : {{ bookInfo.book_title }}</p>
-      <p>책 저자 : {{ bookInfo.book_author }}</p>
-      <p>책 출판일 : {{ bookInfo.book_date }}</p>
-      <p>출판사 : {{ bookInfo.book_publisher }}</p>
-    </div>
-
-    <!-- <div>
-      <b-card no-body class="overflow-hidden" style="max-width: 540px;">
+    <div>
+      <b-card no-body class="overflow-hidden" style="margin: 0px 0px; width: 500px; height: 140px;">
         <b-row no-gutters>
-          <b-col md="6">
-            <b-card-img src="https://picsum.photos/400/400/?image=20" alt="Image" class="rounded-0"></b-card-img>
+          <b-col md="3">
+            <b-card-img style="margin-left:10px; padding:10px; width:100px; height:140px;" :src=bookInfo.book_cover alt="Image" class="rounded-0"></b-card-img>
           </b-col>
-          <b-col md="6">
-            <b-card-body title="Horizontal Card">
-              <b-card-text>
-                This is a wider card with supporting text as a natural lead-in to additional content.
-                This content is a little bit longer.
+          <b-col md="9">
+            <b-card-body style="cursor: pointer;" @click="goToBookDetail()">
+              <b-card-text style="font-size: 14px">
+                <h4 class="bookinfo-title">{{ bookInfo.book_title }}</h4>
+                <p>저자 : {{ bookInfo.book_author }}</p>
+                <p>출판일 : {{ bookInfo.book_date }}</p>
+                <p>출판사 : {{ bookInfo.book_publisher }}</p>
               </b-card-text>
             </b-card-body>
           </b-col>
         </b-row>
       </b-card>
-    </div> -->
-
-    <br><hr><br>
+    </div>
 
     <div class="small row justify-content-center">
       <div v-if="bookTopics[0]">
-        <BarChart  :chartData="chartData" ></BarChart>
+        <RadarChart :chartData="chartData" />
+        <!-- <DoughnutChart :chartData="chartData" /> -->
       </div>
-      <div v-else style="height:310px">
-        <h2>리뷰데이터가 부족하여 분석할 수 없습니다.</h2>
-        <br>
-        <h2>다른 책을 선택해주세요.</h2>
+      <div v-else style="height:320px; display:flex; justify-content:center; align-items:center;">
+        <br style="margin-bottom: 30px;">
+        <h5 style="text-align: center; color: grey;">리뷰 데이터 수집중</h5>
       </div>
     </div>
 
-    <br><hr><br>
-
-    <div style="display: flex;">
+    <label for="#recommend" class="mb-0">추천도서</label>
+    <div
+      id="recommend"
+      style="display: flex;
+      justify-content: space-between;
+      height: 142px; 
+      margin:10px; 
+      padding: 10px; 
+      border:1px solid #dadada; 
+      border-radius: 5px;"
+    >
       <div v-for="(recommend, idx) in recommends" :key="idx">
-        <div style="margin:0px 8px">
-          <img width="80px" height="120px" :src="recommend.book_cover" alt="" @click="setIsbn(recommend.book_isbn)">
-          <!-- <p class="recommend-title">{{ recommend.book_title }}</p> -->
+        <div class="overlay-image" @click="setIsbn(recommend.book_isbn)">
+          <img 
+            width="80px" 
+            height="120px" 
+            :src="recommend.book_cover" 
+            alt="" 
+            style="cursor: pointer;"
+          >
+          <div class="hover">
+            <div class="text">{{ recommend.book_title }}</div>
+          </div>
         </div>
       </div>
+
     </div>
+
   </div>
 </template>
 
 <script>
-  import BarChart from './BarChart.js'
+  import RadarChart from './RadarChart.js'
+  // import DoughnutChart from './DoughnutChart.js'
 
   export default {
     components: {
-      BarChart,
+      RadarChart,
+      // DoughnutChart,
     },
     props: {
       isbn: {
@@ -76,39 +81,21 @@
       return {
         recommends: [],
         bookInfo: {},
-        bookTopics: [],
+        bookTopics: [],        
         chartData: {
-          labels: [],
-          datasets: [
-            {
-              label: "",
-              backgroundColor: '#f87979',
-              data: [0]
-            },
-            {
-              label: "",
-              backgroundColor: '#f1f4c8',
-              data: [0]
-            },
-            {
-              label: "",
-              backgroundColor: '#ceecd5',
-              data: [0]
-            },
-            {
-              label: "",
-              backgroundColor: '#c6f0f4',
-              data: [0]
-            },
-            {
-              label: "",
-              backgroundColor: '#e6d5e6',
-              data: [0]
-            },
-          ]
-        },
-        
-        
+          labels: ["", "", "", "", ""],
+          datasets: [{
+            label: "",
+            data: [0, 0, 0, 0, 0],
+            fill: true,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgb(255, 99, 132)',
+            pointBackgroundColor: 'rgb(255, 99, 132)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgb(255, 99, 132)'
+          },]
+        }
       }
     },
     created() {
@@ -126,21 +113,20 @@
           console.error(err)
         })
 
-        this.chartData['labels'] = [this.bookInfo.book_title]
-
+        this.chartData.datasets.label = this.bookInfo.book_title
       },
       async getTopics(isbn) {
         await this.$axios.get(`${this.$store.getters.getServer}/book/${isbn}/topics`)
         .then(res => {
           if(res.data.data) {
-            const n = this.chartData.datasets.length;
+            const n = this.chartData.labels.length;
 
             this.bookTopics = res.data.data.slice(0,n)
 
             let i = 0;
             for(i = 0; i < n; i++) {
-              this.chartData.datasets[i].label = this.bookTopics[i].topic_name
-              this.chartData.datasets[i].data[0] = this.bookTopics[i].probability
+              this.chartData.labels[i] = this.bookTopics[i].topic_name
+              this.chartData.datasets[0].data[i] = this.bookTopics[i].probability
             }
           }
         })
@@ -161,33 +147,70 @@
         console.log("isbn>>",isbn)
         this.$emit("setIsbn", isbn)
       },
+      goToBookDetail() {
+        this.$router.push({ name: 'BookDetail', params: { bookIsbn: this.bookInfo.book_isbn } })
+      },
     },
   }
 </script>
 
 <style>
   .small canvas {
-    width: 400px !important;
-    height: 300px !important;
+    
+    width: 320px !important;
+    height: 320px !important;
   }
 
-  .bookinfo-text {
-    width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .bookinfo-content {
-    width: 300px;
+  .bookinfo-title {
+    width: 350px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .recommend-title {
-    width: 80px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  /* Main container */
+  .overlay-image {
+    position: relative;
+    width: 100%;
+  }
+
+  /* Original image */
+  .overlay-image .image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Original text overlay */
+  .overlay-image .text {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5em;
+    text-shadow: 2px 2px 2px #000;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+
+  /* New overlay on hover */
+  .overlay-image .hover {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+  }
+
+  /* New overlay appearance on hover */
+  .overlay-image:hover .hover {
+    opacity: 1;
+  }
+
+  .overlay-image .hover {
+    background-color: rgba(0,0,0,0.5);
   }
 </style>

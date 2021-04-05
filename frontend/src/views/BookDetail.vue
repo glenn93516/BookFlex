@@ -11,12 +11,8 @@
           use-router 
           class="detail_pagenation"
         >
-          <!-- <template #first-text>first</template>
-          <template #last-text>last</template>
-          <template #page="{ }">
-
-
-          </template> -->
+          <template #page="{  }">
+          </template>
         </b-pagination-nav>
       </div>
     </div>
@@ -47,7 +43,7 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
   .bookdetail-box {
     background: white; 
     width: 1100px; 
@@ -56,5 +52,38 @@ export default {
   }
  .detail_pagenation {
    background-color: rgba(0, 0, 0, 0);
+ }
+ .pagination > li:first-child {
+   display: none;
+ }
+  .pagination > li:last-child {
+   display: none;
+ }
+ .pagination > li:nth-child(2) > a {
+  display: none;
+ }
+.pagination .disabled {
+  display: none;
+ }
+.pagination > li:nth-child(3) > a,
+.pagination > li:nth-child(4) > a,
+.pagination > li:nth-child(5) > a 
+{
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px;
+ }
+.pagination > li:nth-child(3) > a:visited,
+.pagination > li:nth-child(4) > a:visited,
+.pagination > li:nth-child(5) > a:visited
+{
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  background-color: rgb(192, 180, 165);
+  border: 0px;
+ }
+.pagination > li:nth-child(6) > a {
+  display: none;
  }
 </style>
