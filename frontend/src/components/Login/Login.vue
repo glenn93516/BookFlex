@@ -69,7 +69,7 @@ export default {
       this.$store.dispatch('Login', user)
     },
     goToPassword() {
-      this.$router.push({ name: "Password" })
+      this.$router.push({ name: "PasswordSubmitEmail" })
     }
   },
   watch: {
