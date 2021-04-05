@@ -51,25 +51,25 @@
       <div id="scrollPage">
         <div class="article">
           <div id="firstSection" class="section first-section">
-            <div class="white section-title">추천 시스템</div>
+            <div data-aos="zoom-in-right" class="white section-title">추천 시스템</div>
           </div>
           <div id="secondSection" class="section middle-section">
-            <div data-aos="fade-up" class="white section-title">지도 학습</div>
+            <div data-aos="zoom-in-down" class="white section-title">지도 학습</div>
             <div class="white text-center" style="padding-top: 6vw;">
               <span data-aos="zoom-in" class="highlight-size">BERT</span>
               <span data-aos="zoom-in" class="default-size">모델</span>
             </div>
             <div data-aos="fade-up" class="white text-center default-size">감정분석</div>
-            <div data-aos="zoom-out-up" class="white text-center highlight-size">90.06%</div>
+            <div data-aos="zoom-out-up" class="white text-center highlight-size">90.09%</div>
             <div data-aos="fade-up" class="white text-center default-size">정확도</div>
             <br class="section-br">
             <div>
               <p data-aos="flip-left" class="white text-center info-size">인간의 직관을 넘어선 정밀한 성능의 감정분석 알고리즘</p>
-              <p data-aos="zoom-in" class="white text-center small-size">(인간의 직관 90% 기준)</p>
+              <p data-aos="zoom-in" class="white text-center small-size">(인간의 직관 88% 기준)</p>
             </div>
           </div>
           <div id="thirdSection" class="section">
-            <div class="white section-title">비지도 학습</div>
+            <div data-aos="zoom-in-left" class="white section-title">비지도 학습</div>
           </div>
         </div>
         <div style="height: 100vh; border: 2px solid green;">

@@ -1,9 +1,9 @@
 <template>
-  <div id="mainTemp"
-    :style="{backgroundImage: 'url(https://cdn.pixabay.com/photo/2017/08/03/20/00/booksm-collection-2578237_960_720.jpg)', height: '100vh', width: '100%', border: '1px solid red'}"  
-  >
-    <!-- <div style="position: absolute; top: 0;">
-      <div id="0" class="section first-main">
+  <div id="main" :style="mainStyle">
+
+    <div class="main-first-page">
+      <!-- 첫번째 페이지 -->
+      <div id="0" class="first-main" style="background-color: black;">
         <img src="https://i.pinimg.com/originals/3d/31/6b/3d316ba5a416f68c8627de6be9f97b68.gif" alt="">
         <div class="first-main-logo">
           <span class="main-logo spread-underline font-jeonnam" @click="goMain()" @mouseover="bigLetterChange()" @mouseleave="bigLetterToWhite()">
@@ -28,16 +28,16 @@
         </transition>
       </div>
 
-      <div>
-        <div style="height: 300px; width: 100vw;">
-          <div id="book-number">
+      <div id="bookInfo">
+        <div style="height: 20vw; width: 100vw; background-color: rgba(0, 0, 0, 0.57);">
+          <div id="book-number" style="width: 100vw;">
             <div data-aos="fade-right" class="text-center">
               <span class="white info-subtitle-size">도서</span>
               <span class="yellow info-title-size" style="margin: 0 15px;">88,416</span>
               <span class="white info-subtitle-size">권</span>
             </div>
           </div>
-          <div id="review-number">
+          <div id="review-number" style="width: 100vw;">
             <div data-aos="fade-left" class="white info-subtitle-size">
               <span class="white info-subtitle-size">리뷰</span>
               <span class="salmon info-title-size" style="margin: 0 15px;">632,017</span>
@@ -47,37 +47,53 @@
         </div>
       </div>
       
-      <div id="scrollPage" 
-        style="
-          background: linear-gradient(to bottom, black, rgba(235, 234, 232, 1));
-          height: 400vh;
-          position: relative;
-          top: 300px;
-        "
-      >
-        <div style="height: 100vh; border: 1px solid pink;">
+      <!-- 스크롤 페이지 -->
+      <div id="scrollPage">
+        <div class="article">
+          <div id="firstSection" class="section first-section">
+            <div data-aos="zoom-in-right" class="white section-title">추천 시스템</div>
+          </div>
+          <div id="secondSection" class="section middle-section">
+            <div data-aos="zoom-in-down" class="white section-title">지도 학습</div>
+            <div class="white text-center" style="padding-top: 6vw;">
+              <span data-aos="zoom-in" class="highlight-size">BERT</span>
+              <span data-aos="zoom-in" class="default-size">모델</span>
+            </div>
+            <div data-aos="fade-up" class="white text-center default-size">감정분석</div>
+            <div data-aos="zoom-out-up" class="white text-center highlight-size">90.09%</div>
+            <div data-aos="fade-up" class="white text-center default-size">정확도</div>
+            <br class="section-br">
+            <div>
+              <p data-aos="flip-left" class="white text-center info-size">인간의 직관을 넘어선 정밀한 성능의 감정분석 알고리즘</p>
+              <p data-aos="zoom-in" class="white text-center small-size">(인간의 직관 88% 기준)</p>
+            </div>
+          </div>
+          <div id="thirdSection" class="section">
+            <div data-aos="zoom-in-left" class="white section-title">비지도 학습</div>
+          </div>
         </div>
-        <div style="height: 100vh;">
+        <div style="height: 100vh; border: 2px solid green;">
+
         </div>
-        <div style="height: 100vh;">
+        <div style="height: 100vh; border: 2px solid purple;">
+
         </div>
+
       </div>
       <div id="endScroll" 
         style="
           height: 100vh;
           border: 5px orange solid;
+          background-color: rgba(235, 234, 232, 1);
         "
       >
-      <b-button @click="goMain()">여기</b-button>
+      <b-button @click="goMain()">여기는 메인으로 이어지는 버튼이 크게 있을 페이지</b-button>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
-document.querySelector('body').style.backgroundImage = "url('../assets/librarycolumn3.jpg')"
-// document.querySelector('body').style.backgroundColor = "blue"
-
 import AOS from 'aos';
 import "aos/dist/aos.css";
 
@@ -90,7 +106,13 @@ import "aos/dist/aos.css";
       return{
         bigLetter: "",
         nowTop: true,
-        backgroundImg: '../assets/librarycolumn3.jpg',
+        mainStyle: {
+          backgroundImage: 'url(https://cdn.pixabay.com/photo/2017/08/03/20/00/booksm-collection-2578237_960_720.jpg)', 
+          height: '250vh', 
+          width: '100%', 
+          border: '1px solid red',
+          backgroundAttachment: 'fixed',
+        },
       }
     },
     destroyed() {
@@ -123,16 +145,22 @@ import "aos/dist/aos.css";
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Open+Sans:wght@800&family=Roboto:wght@900&display=swap');
-  #mainTemp .font-main {
+  #main .main-first-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+  }
+  #main .font-main {
     font-family: 'Open Sans', sans-serif;
   }
-  #mainTemp .first-main {
+  #main .first-main {
     background-color: black;
     text-align: center;
     height: 100vh;
     width: 100vw;
   }
-  #mainTemp .first-main-logo {
+  #main .first-main-logo {
     position: absolute;
     top: 50vh;
     width: 100%;
@@ -143,25 +171,25 @@ import "aos/dist/aos.css";
     font-weight: bold;
     letter-spacing: 5px;
   }
-  #mainTemp .main-small-font {
+  #main .main-small-font {
     color: rgba(255, 255, 255, 0.8);
   }
-  #mainTemp .main-logo:hover {
+  #main .main-logo:hover {
     cursor: pointer;
     /* opacity: 0.9; */
   }
-  #mainTemp .big-letter {
+  #main .big-letter {
     color: #C21807;
     /* color: #B80F0A; */
   }
   /* 가운데서 좌우로 펼쳐지는 라인 애니메이션 */
-  #mainTemp .spread-underline {
+  #main .spread-underline {
     text-decoration: none;
     display: inline-block;
     padding: 15px 0;
     position: relative;
   }
-  #mainTemp .spread-underline:after {
+  #main .spread-underline:after {
     background: none repeat scroll 0 0 transparent;
     content: "";
     display: block;
@@ -172,26 +200,23 @@ import "aos/dist/aos.css";
     transition: width 0.3s ease 0s, left 0.3s ease 0s;
     width: 0;
   }
-  #mainTemp .spread-underline:hover:after {
+  #main .spread-underline:hover:after {
     width: 100%;
     left: 0;
   }
-  #mainTemp .scroll-link {
+  #main .scroll-link {
     margin-top: 25vh;
     margin-left: 50vw;
-    /* position: absolute; */
     bottom: 1rem;
     width: 100%;
-    /* left: 50%; */
-    /* text-align: center; */
     transform: translateX(-50%);
   }
-  #mainTemp .mouse {
+  #main .mouse {
     max-width: 2.5rem;
     width: 100%;
     height: auto;
   }
-  #mainTemp .scroll {
+  #main .scroll {
     animation-name: scroll;
     animation-duration: 1.5s;
     animation-timing-function: cubic-bezier(0.650, -0.550, 0.250, 1.500);
@@ -223,18 +248,12 @@ import "aos/dist/aos.css";
     color: white;
   }
   .yellow {
-    color: yellow;
+    color: #fed049;
   }
   .salmon {
-    color: salmon;
+    color: #f39189;
   }
 
-  #book-number {
-    /* padding: 0px 0 0 140px; */
-  }
-  #review-number {
-    /* padding: 50px 0 0 60vw; */
-  }
   .info-title-size {
     font-size: 120px;
     font-weight: bold;
@@ -248,5 +267,52 @@ import "aos/dist/aos.css";
   }
   .text-center {
     text-align: center;
+  }
+
+  #scrollPage {
+    background: linear-gradient(to bottom, black, rgba(235, 234, 232, 1));
+    height: 300vh;
+    position: relative;
+    top: 0;
+  }
+  #main .article {
+    padding-top: 6vh;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: left;
+  }
+  #main .section {
+    width: 30vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 80vh;
+    margin: 5vh 0;
+    border-radius: 10px;
+    padding: 3vh 3vw;
+  }
+  #main .first-section {
+    margin: 5vh 0 2vw 5vh;
+  }
+  #main .middle-section {
+    margin: 5vh 2vw;
+  }
+  #main .section-title {
+    font-size: 30px;
+  }
+  #main .highlight-size {
+    font-size: 110px;
+    font-weight: bold;
+  }
+  #main .default-size {
+    font-size: 27px;
+  }
+  #main .info-size {
+    font-size: 18px;
+  }
+  #main .small-size {
+    font-size: 14px;
+  }
+  #main .section-br {
+    margin: 10px 0;
   }
 </style>
