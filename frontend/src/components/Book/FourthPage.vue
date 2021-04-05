@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import Topic from './Topics.vue'
+  import Topic from './Topic.vue'
   import DetailSearch from './DetailSearch.vue'
 
   export default {

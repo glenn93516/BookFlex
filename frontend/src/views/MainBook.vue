@@ -118,7 +118,6 @@
 
 <script>
 import Book from '@/components/Main/Book.vue'
-// import BookShelf from '@/components/Main/BookShelf.vue'
 import Modal from '@/components/Element/Modal.vue'
 import CollectSentence from '@/components/Book/CollectSentence.vue'
 
@@ -126,7 +125,6 @@ export default {
   name: 'Main',
   components: {
     Book,
-    // BookShelf,
     Modal,
     CollectSentence,
   },
