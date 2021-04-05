@@ -42,6 +42,8 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+    private final String BASE_FLASK_URL = "https://j4f004.p.ssafy.io/ml/api";
+//    private final String BASE_FLASK_URL = "http://localhost:5000/ml/api";
     private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
     private final HighlightService highlightService;
@@ -201,12 +203,12 @@ public class UserController {
 
             SingleDataResponse<UserDto> response = responseService.getSingleDataResponse(true, "조회 성공", findUser);
 
-            responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(response);
+            responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (UserNotFoundException exception) {
             logger.info(exception.getMessage());
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
 
-            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            responseEntity = ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         }
 
         return responseEntity;
@@ -234,14 +236,13 @@ public class UserController {
      * 유저가 작성한 문장수집 목록 조회
      */
     @ApiOperation(value = "유저가 작성한 문장 수집 조회")
-    @GetMapping("/{userId}/highlight")
-    public ResponseEntity getUserHighlights(@ApiParam(value = "조회할 유저 아이디(PK)", required = true) @PathVariable Long userId,
-                                            @ApiParam(value = "좋아요만 누를지 여부", required = false) @RequestParam(required = true, defaultValue = "false") Boolean onlyGood) {
+    @GetMapping("/{userNickname}/highlight")
+    public ResponseEntity getUserHighlights(@ApiParam(value = "조회할 유저 닉네임", required = true) @PathVariable String userNickname,
+                                            @ApiParam(value = "좋아요 누른 문장수집만 조회", required = false) @RequestParam(required = true, defaultValue = "false") Boolean onlyGood) {
         ResponseEntity responseEntity = null;
         try {
-            UserDto user = userService.findByUserId(userId);
+            UserDto user = userService.findUserByUserNickname(userNickname);
 
-            System.out.println(onlyGood);
             // 작성한 문장수집 조회
             List<HighlightDto> highlights = new ArrayList<>();
             if (onlyGood) {
@@ -254,6 +255,30 @@ public class UserController {
             responseEntity = ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception exception) {
             logger.info(exception.getMessage());
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+
+        return responseEntity;
+    }
+
+    /**
+     * 유저의 선호 장르 통계 조회 API
+     */
+    @ApiOperation(value = "유저 선호장르 통계 조회")
+    @GetMapping("/{userNickname}/statistics")
+    public ResponseEntity getUserGenreStatistics(@ApiParam(value = "조회할 유저 닉네임", required = true) @PathVariable String userNickname) {
+        ResponseEntity responseEntity = null;
+        try {
+            UserDto user = userService.findUserByUserNickname(userNickname);
+            Long userId = user.getUserId();
+            String url = BASE_FLASK_URL + "/statistics/" + userId;
+
+            responseEntity = ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, url).build();
+        } catch (UserNotFoundException exception) {
+            // 존재하지 않는 유저인 경우
+            logger.info(exception.getMessage());
+
             BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
             responseEntity = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }

@@ -8,5 +8,5 @@ import java.util.Map;
 public interface WishlistService {
     int insertWishlist(WishlistDto wishlist) throws Exception;
     int deleteWishlist(Map map) throws Exception;
-    List<WishlistDto> selectWishlistList(long user_id) throws Exception;
+    List<Map> selectWishlistList(long user_id) throws Exception;
 }

@@ -14,7 +14,6 @@
         @mouseover="closeIcon = ['fas', 'times-circle']" 
         @mouseleave="closeIcon = ['far', 'times-circle']" 
         :icon="closeIcon" 
-        :style="{color: '#FF0000'}" 
       />
     </header>
     <div>
@@ -22,15 +21,29 @@
         class="sentence-img" 
         width="465px" 
         height="300px" 
-        :src="item.src" 
+        v-if="item.highlightCover"
+        :src="item.highlightCover" 
         alt=""
         style="margin-top: 9px;"
       >
+      <img 
+        class="sentence-img" 
+        width="465px" 
+        height="300px" 
+        v-else
+        src="@/assets/waterprint_back.jpg" 
+        alt=""
+        style="margin-top: 9px;"
+      >
+      
       <div class="detail-dimmed">
         <!-- text최소 길이, 최대 길이 정해주기 -->
         <div class="detail-sentence-text">
-          <div style="font-size: 17px;">{{item.text}}</div>
-          <div style="font-size: 20px; margin-top: 10px; font-weight: bold;">"{{item.book}}"</div>
+          <div style="font-size: 23px;">{{item.highlightContent}}</div>
+          <div style="font-size: 20px; margin-top: 10px; font-weight: bold;">"{{item.bookTitle}}"</div>
+        </div>
+        <div class="detail-sentence-date">
+          {{item.createdDate}}
         </div>
       </div>
     </div>
@@ -38,14 +51,14 @@
       <div>
         <div 
           style="margin-left: -40px; margin-top: -30px;"
-          @click="heart=false"
-          v-if="heart"
+          @click="delLike()"
+          v-if="likeStatus"
           class="heart hvr-buzz">
         </div>
         <div 
           style="margin-left: -40px; margin-top: -30px;"
-          @click="heart=true"
-          v-else
+          @click="addLike()"
+          v-if="!likeStatus"
           class="no-heart">
         </div>
         <div class="like-num">{{likeNum}}</div>
@@ -58,7 +71,7 @@
           @mouseover="editIcon = ['fas', 'edit']"
           @mouseleave="editIcon = ['far', 'edit']"
           :icon="editIcon"
-          :style="{color: '#FF0000'}"
+          v-if="isEditor"
         />
         <font-awesome-icon 
           size="2x"
@@ -66,7 +79,7 @@
           @mouseover="deleteIcon = ['fas', 'trash-alt']"
           @mouseleave="deleteIcon = ['far', 'trash-alt']"
           :icon="deleteIcon"
-          :style="{color: '#FF0000'}"
+          v-if="isEditor"
         />
       </div>
     </footer>
@@ -85,22 +98,81 @@ export default {
       deleteIcon: ['far', 'trash-alt'],
       hoverClose: false,
       heart: false,
-      likeNum: 100,
+      likeNum: 0,
+      isEditor: false,
+      likeStatus: null,
     }
   },
-  created() {
+  // 지금은 프로필이라서 이렇게 해도 되지만, community의 경우 한 개씩 반복해서 확인해줘야함
+  mounted() {
+    if (this.$store.getters.getUser.userNickname === this.$route.params.userName) {
+      this.isEditor = true
+    } else {
+      this.isEditor = false
+    }
+    this.getLikeStatus()
   },
   methods: {
+    getLikeStatus() {
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        'Authorization': token
+      }
+      this.$axios.get(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {headers})
+      .then(res => {
+        this.likeNum = res.data.data.goodCount
+        this.likeStatus = res.data.data.userGood
+        console.log(res.data.data, '처음에 들어오는 데이터')
+        console.log(res.data.data.userGood, '처음에 들어오는 데이터 userGood')
+      })
+    },
     closeModal() {
       this.$emit('close-modal')
-    }
+    },
+    addLike() {
+      console.log('addLike')
+      // 만약 로그인 안한 유저라면 addLike못함
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      if (token) {
+        this.$axios.post(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}/good`, {}, {headers})
+        .then(res => {
+          if (res.data.success) {
+            this.likeStatus = true
+            this.likeNum += 1
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    },
+    delLike() {
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      if (token) {
+        this.$axios.post(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}/good`, {}, {headers})
+        .then(res => {
+          if (res.data.success) {
+            this.likeStatus = false
+            this.likeNum -= 1
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    },
   }
 }
 </script>
 
-<style>
+<style scoped>
   .modal-footer {
-    /* background-color: blue; */
     display: flex; 
     justify-content: space-between; 
   }
@@ -117,45 +189,41 @@ export default {
     border-radius: 10px;
     height: 300px;
     top: 54px;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
     text-align: center;
   }
   .detail-sentence-text {
+    display: absolute;
     width: 465px;
-    height: 300px;
+    height: 270px;
     padding: 100px 10px 0 10px;
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
+  }
+  .detail-sentence-date {
+    display: absolute;
+    height: 30px;
+    right: 0;
+    text-align: end;
+    padding-right: 20px;
   }
 
   .no-heart {
     width: 100px;
     height: 100px;
-    /* position: relative; */
-    /* transform: translate(-50%, -50%); */
     background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
     background-position: 0 0;
     cursor: pointer;
-    /* animation: fave-heart 1s step-end infinite; */
-    /* animation: fave-heart 1s steps(28); */
+  }
+  .no-heart:hover {
+    background-position: -2800px 0;
+    transition: background 1s steps(28);
   }
   .heart {
     width: 100px;
     height: 100px;
-    /* position: relative; */
-    /* transform: translate(-50%, -50%); */
     background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
     background-position: -2800px 0;
     cursor: pointer;
-    /* transition: background 1s steps(28); */
-    /* animation: fave-heart 1s step-start infinite; */
-  }
-  .no-heart:hover {
-    background-position: -2800px 0;
-    /* animation: fave-heart 1s steps(28) infinite; */
-    transition: background 1s steps(28);
   }
   @keyframes fave-heart {
     0% {
@@ -165,5 +233,4 @@ export default {
       background-position: -2800px 0;
     }
   }
-
 </style>

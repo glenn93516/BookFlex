@@ -1,31 +1,20 @@
 <template>
-  <div 
-    style="
-      background-color: rgba(255, 255, 255, 0.5);
-      border-radius: 20px;
-  ">
-    <div 
-      style="
-        display: flex;
-        justify-content: space-around;
-        margin: 0px 40px;
-      "
-    >
-      <img width="150px" height="200px" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAKAAcAMBEQACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAgEDBP/EACkQAQACAQIGAQMFAQAAAAAAAAABAhEDEgQhMUFRcUITImEygaGx8NH/xAAaAQEBAQEBAQEAAAAAAAAAAAAAAgMBBAcF/8QAJhEBAAICAQQCAQUBAAAAAAAAAAECEUEDEiExUXGx8BMiYZHxBP/aAAwDAQACEQMRAD8A9L8l9CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATfnjPkReM4NlfH8jvRU2V8fyHRU2V/wBIdEMtTl9vKfIm1O3ZtJnHPsKpM47qFAAAAAAAJt8fYi2lCwAAE1+XsTXahQAAAAAACbda+xFtKFu/DUpfdO/T3dq3raf35clVhhy3mNTj3GFcZp6VNk0mtbbK5rFZ5992XbREJ4LWmZz7n/HmQ9LIjGfzzHKxho6AAAAAAAm3WvsRbzChbvwc60al7aFc4pMWmZxERMY6/wBflVc6Y8/RNYi3tvGRa1dLWvuzeJraLTM2iazjnn9i3tPBMRmka+N/DzpehGnGJt7GdIxMrGgAAAAAACbdY9iLTjChbvw2tpaVLxqVtfdj7MVms46ZzC6zEMOXjveYxOP7yvi9WNXQ0Jj9WdSbZnM5me5acxDnDSa3tHx9PKh6EU626dRnx7WNAAAAAAAE2615dxFtKFu3DaUak23xO2KzMTForz8c1RGWXLyTTGG8XoRpakfTi308R92cxM+4/r/paMeE8HJN4/d5cEt0U62555iKbWLAAAAAAAZaf0+xNtNFO/B6/wBHU3W3TGJmIjni2PtnGfOFVnDz8/H11/PG+7eLmbTTUrExp3rynpm0crTjM4nLtvZwRjNZ8x9a1DzoehGn1t+ZGfH5lY0AAAAAAATb4+xFtKFu/B688PqReupal88p7VntMx39KrOGHPx/qRjGY/O38OvH3m+hws7omMXxMZ8/n07bxCP+evTe/b19PGh6mRjnjzzE1xpooAAAAAABNvj7EW0oWAZnz0dMDgmvy9ia7UKAAAAAAATftPiRF+0ZbWd1c4Ha2i0ZaKAATX5exNdqFAAAAAAAAJ2wJ6IbtjwOdEembK+A6I9GyvgOiPTYiI6QKiIjw0dAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/2Q==" alt="">
-      <img width="150px" height="200px" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAKAAcAMBEQACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAgEDBP/EACkQAQACAQIGAQMFAQAAAAAAAAABAhEDEgQhMUFRcUITImEygaGx8NH/xAAaAQEBAQEBAQEAAAAAAAAAAAAAAgMBBAcF/8QAJhEBAAICAQQCAQUBAAAAAAAAAAECEUEDEiExUXGx8BMiYZHxBP/aAAwDAQACEQMRAD8A9L8l9CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATfnjPkReM4NlfH8jvRU2V8fyHRU2V/wBIdEMtTl9vKfIm1O3ZtJnHPsKpM47qFAAAAAAAJt8fYi2lCwAAE1+XsTXahQAAAAAACbda+xFtKFu/DUpfdO/T3dq3raf35clVhhy3mNTj3GFcZp6VNk0mtbbK5rFZ5992XbREJ4LWmZz7n/HmQ9LIjGfzzHKxho6AAAAAAAm3WvsRbzChbvwc60al7aFc4pMWmZxERMY6/wBflVc6Y8/RNYi3tvGRa1dLWvuzeJraLTM2iazjnn9i3tPBMRmka+N/DzpehGnGJt7GdIxMrGgAAAAAACbdY9iLTjChbvw2tpaVLxqVtfdj7MVms46ZzC6zEMOXjveYxOP7yvi9WNXQ0Jj9WdSbZnM5me5acxDnDSa3tHx9PKh6EU626dRnx7WNAAAAAAAE2615dxFtKFu3DaUak23xO2KzMTForz8c1RGWXLyTTGG8XoRpakfTi308R92cxM+4/r/paMeE8HJN4/d5cEt0U62555iKbWLAAAAAAAZaf0+xNtNFO/B6/wBHU3W3TGJmIjni2PtnGfOFVnDz8/H11/PG+7eLmbTTUrExp3rynpm0crTjM4nLtvZwRjNZ8x9a1DzoehGn1t+ZGfH5lY0AAAAAAATb4+xFtKFu/B688PqReupal88p7VntMx39KrOGHPx/qRjGY/O38OvH3m+hws7omMXxMZ8/n07bxCP+evTe/b19PGh6mRjnjzzE1xpooAAAAAABNvj7EW0oWAZnz0dMDgmvy9ia7UKAAAAAAATftPiRF+0ZbWd1c4Ha2i0ZaKAATX5exNdqFAAAAAAAAJ2wJ6IbtjwOdEembK+A6I9GyvgOiPTYiI6QKiIjw0dAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/2Q==" alt="">
-      <img width="150px" height="200px" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAKAAcAMBEQACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAgEDBP/EACkQAQACAQIGAQMFAQAAAAAAAAABAhEDEgQhMUFRcUITImEygaGx8NH/xAAaAQEBAQEBAQEAAAAAAAAAAAAAAgMBBAcF/8QAJhEBAAICAQQCAQUBAAAAAAAAAAECEUEDEiExUXGx8BMiYZHxBP/aAAwDAQACEQMRAD8A9L8l9CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATfnjPkReM4NlfH8jvRU2V8fyHRU2V/wBIdEMtTl9vKfIm1O3ZtJnHPsKpM47qFAAAAAAAJt8fYi2lCwAAE1+XsTXahQAAAAAACbda+xFtKFu/DUpfdO/T3dq3raf35clVhhy3mNTj3GFcZp6VNk0mtbbK5rFZ5992XbREJ4LWmZz7n/HmQ9LIjGfzzHKxho6AAAAAAAm3WvsRbzChbvwc60al7aFc4pMWmZxERMY6/wBflVc6Y8/RNYi3tvGRa1dLWvuzeJraLTM2iazjnn9i3tPBMRmka+N/DzpehGnGJt7GdIxMrGgAAAAAACbdY9iLTjChbvw2tpaVLxqVtfdj7MVms46ZzC6zEMOXjveYxOP7yvi9WNXQ0Jj9WdSbZnM5me5acxDnDSa3tHx9PKh6EU626dRnx7WNAAAAAAAE2615dxFtKFu3DaUak23xO2KzMTForz8c1RGWXLyTTGG8XoRpakfTi308R92cxM+4/r/paMeE8HJN4/d5cEt0U62555iKbWLAAAAAAAZaf0+xNtNFO/B6/wBHU3W3TGJmIjni2PtnGfOFVnDz8/H11/PG+7eLmbTTUrExp3rynpm0crTjM4nLtvZwRjNZ8x9a1DzoehGn1t+ZGfH5lY0AAAAAAATb4+xFtKFu/B688PqReupal88p7VntMx39KrOGHPx/qRjGY/O38OvH3m+hws7omMXxMZ8/n07bxCP+evTe/b19PGh6mRjnjzzE1xpooAAAAAABNvj7EW0oWAZnz0dMDgmvy9ia7UKAAAAAAATftPiRF+0ZbWd1c4Ha2i0ZaKAATX5exNdqFAAAAAAAAJ2wJ6IbtjwOdEembK+A6I9GyvgOiPTYiI6QKiIjw0dAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/2Q==" alt="">
-      <img width="150px" height="200px" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAKAAcAMBEQACEQEDEQH/xAAYAAEBAQEBAAAAAAAAAAAAAAAAAgEDBP/EACkQAQACAQIGAQMFAQAAAAAAAAABAhEDEgQhMUFRcUITImEygaGx8NH/xAAaAQEBAQEBAQEAAAAAAAAAAAAAAgMBBAcF/8QAJhEBAAICAQQCAQUBAAAAAAAAAAECEUEDEiExUXGx8BMiYZHxBP/aAAwDAQACEQMRAD8A9L8l9CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATfnjPkReM4NlfH8jvRU2V8fyHRU2V/wBIdEMtTl9vKfIm1O3ZtJnHPsKpM47qFAAAAAAAJt8fYi2lCwAAE1+XsTXahQAAAAAACbda+xFtKFu/DUpfdO/T3dq3raf35clVhhy3mNTj3GFcZp6VNk0mtbbK5rFZ5992XbREJ4LWmZz7n/HmQ9LIjGfzzHKxho6AAAAAAAm3WvsRbzChbvwc60al7aFc4pMWmZxERMY6/wBflVc6Y8/RNYi3tvGRa1dLWvuzeJraLTM2iazjnn9i3tPBMRmka+N/DzpehGnGJt7GdIxMrGgAAAAAACbdY9iLTjChbvw2tpaVLxqVtfdj7MVms46ZzC6zEMOXjveYxOP7yvi9WNXQ0Jj9WdSbZnM5me5acxDnDSa3tHx9PKh6EU626dRnx7WNAAAAAAAE2615dxFtKFu3DaUak23xO2KzMTForz8c1RGWXLyTTGG8XoRpakfTi308R92cxM+4/r/paMeE8HJN4/d5cEt0U62555iKbWLAAAAAAAZaf0+xNtNFO/B6/wBHU3W3TGJmIjni2PtnGfOFVnDz8/H11/PG+7eLmbTTUrExp3rynpm0crTjM4nLtvZwRjNZ8x9a1DzoehGn1t+ZGfH5lY0AAAAAAATb4+xFtKFu/B688PqReupal88p7VntMx39KrOGHPx/qRjGY/O38OvH3m+hws7omMXxMZ8/n07bxCP+evTe/b19PGh6mRjnjzzE1xpooAAAAAABNvj7EW0oWAZnz0dMDgmvy9ia7UKAAAAAAATftPiRF+0ZbWd1c4Ha2i0ZaKAATX5exNdqFAAAAAAAAJ2wJ6IbtjwOdEembK+A6I9GyvgOiPTYiI6QKiIjw0dAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/2Q==" alt="">
-    </div>
-    <!-- 책 놔두는 곳 -->
-    <div 
-      id="bookBottom"
-      style="
-        background-color: red;
-        width: 1108px;
-        height: 55px;
-        border-radius: 10px;
-      "
-    >
+  <div id="readbook">
+    <div>
+      <div 
+        v-for="book in readBooks" 
+        :key="book.index"
+        class="readbook-item" 
+      >
+        <img 
+          width="200px" 
+          height="270px" 
+          :src="book.book_cover" 
+          alt="" 
+          class="hvr-grow-shadow mouse-pointer"
+          @click="clickReadBook()"
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -35,40 +24,44 @@ export default {
   data() {
     return {
       readBooks: [],
+      displayImg: false,
     }
   },
   mounted() {
     this.getBookData()
+
   },
   methods: {
-    // loadBookData() {
-    //   const token = this.$store.getters.getAccessToken
-    //   if (token != undefined) {
-    //     this.getBookData()
-    //   } else {
-    //     this.getBookData()
-    //   }
-    // },
     getBookData() {
-      this.$axios.get(`${this.$store.getters.getServer}/book`)
+      this.$axios.get(`${this.$store.getters.getServer}/bookshelf/${this.$route.params.userName}`)
       .then(res => {
-        let bookList = []
-        bookList.append('1')
-        for (let i=0; i<20; i++) {
-          if (res.data.data[i].book_cover !== undefined) {
-            bookList.append(res.data.data[i].book_cover)
-          }
-        }
-        // console.log(bookList.data[5], typeof(bookList))
-        // console.log(bookList.slice(0, 4))
-        // this.readBooks = res.data.data.slice(0, 4)
+        console.log(res.data.data, '유저 읽음 res.data.data')
+        this.readBooks = res.data.data
       })
       console.log(this.readBooks, 'readBookds')
-    }
+    },
+    clickReadBook() {
+      alert('읽은 책입니다(～￣▽￣)～✨')
+    },
   }
 }
 </script>
 
 <style>
-
+#readbook {
+  display: inline-block;
+  border-radius: 20px;
+  width: 1110px;
+}
+.readbook-item {
+  display: inline-block; 
+  margin-left: 27px;
+  margin-top: 30px;
+}
+#readbook div:nth-child(5n+1) {
+  margin-left: 0;
+} 
+.readbook-item > img {
+  box-shadow: 5px 5px 10px -5px grey;
+}
 </style>

@@ -20,6 +20,7 @@
         <result column="highlight_page" property="highlightPage" />
         <result column="highlight_cover" property="highlightCover" />
         <result column="book_isbn" property="bookIsbn" />
+        <result column="book_title" property="bookTitle" />
         <result column="created_date" property="createdDate" />
         <result column="updated_date" property="updatedDate" />
         <result column="is_public" property="isPublic" />
@@ -34,9 +35,9 @@
     <select id="findAllByUserId" resultType="HighlightDto">
         SELECT highlight_id highlightId, highlight_content highlightContent,
                highlight_page highlightPage, highlight_cover highlightCover,
-               book_isbn bookIsbn, user_id userId, created_date createdDate,
+               h.book_isbn bookIsbn, b.book_title bookTitle, user_id userId, created_date createdDate,
                updated_date updatedDate, is_public isPublic
-        FROM highlight
+        FROM highlight h JOIN book b ON h.book_isbn = b.book_isbn
         WHERE user_id = #{userId}
         ORDER BY created_date DESC
     </select>
@@ -44,19 +45,20 @@
     <select id="findAllByUserIdOnlyGood" resultType="HighlightDto">
         SELECT highlight_id highlightId, highlight_content highlightContent,
                highlight_page highlightPage, highlight_cover highlightCover,
-               book_isbn bookIsbn, user_id userId, created_date createdDate,
+               h.book_isbn bookIsbn, b.book_title bookTitle, user_id userId, created_date createdDate,
                updated_date updatedDate, is_public isPublic
-        FROM highlight
+        FROM highlight h JOIN book b ON h.book_isbn = b.book_isbn
         WHERE user_id = #{userId} AND highlight_id IN (select highlight_id from good where user_id=#{userId})
         ORDER BY created_date DESC
     </select>
 
     <select id="findByHighlightId" resultMap="HighlightDetailDto">
         select
-            h.highlight_id, h.highlight_content, h.highlight_page, h.highlight_cover, h.book_isbn, h.created_date, h.updated_date, h.is_public,
+            h.highlight_id, h.highlight_content, h.highlight_page, h.highlight_cover, h.book_isbn, b.book_title, h.created_date, h.updated_date, h.is_public,
             u.user_id, u.user_email, u.user_nickname, u.user_job, u.user_profile_img, u.user_birth
         from highlight h
             join user u on u.user_id = h.user_id
+            join book b on h.book_isbn = b.book_isbn
         where highlight_id = #{highlightId}
     </select>
 
@@ -72,9 +74,9 @@
     <select id="findAllOnlyPublic" resultType="HighlightDto">
         select highlight_id highlightId, highlight_content highlightContent,
                highlight_page highlightPage, highlight_cover highlightCover,
-               book_isbn bookIsbn, user_id userId, created_date createdDate,
+               h.book_isbn bookIsbn, b.book_title bookTitle, h.user_id userId, u.user_nickname userNickname, u.user_profile_img userProfileImg, created_date createdDate,
                updated_date updatedDate, is_public isPublic
-        from highlight
+        from highlight h join book b on b.book_isbn = h.book_isbn join user u on h.user_id = u.user_id
         where is_public = 1
         ORDER BY updated_date DESC
     </select>

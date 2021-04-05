@@ -6,6 +6,7 @@
       id="datepicker" 
       v-model="birthdate"
       class="birth-datepicker"
+      placeholder="날짜를 선택해주세요"
     >
     </b-form-datepicker>
 
@@ -51,6 +52,9 @@ export default {
   .birth-datepicker {
     margin-top: 40px; 
     margin-bottom: 40px;
+  }
+  #datepicker__dialog_ {
+    background-color: white;
   }
   .birth-btn {
     margin-top: 5rem;

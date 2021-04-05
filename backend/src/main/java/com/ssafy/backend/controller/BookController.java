@@ -14,8 +14,6 @@ import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -198,11 +196,63 @@ public class BookController {
         return responseEntity;
     }
 
-    // 도서 정보 조회
+    // 관련 도서 조회
     @ApiOperation(value = "현재 책이랑 비슷한 추천 도서 조회", notes = "현재 책이랑 유사한 책 20개 추천")
     @GetMapping(value = "/{book_isbn}/recommend")
-    public ResponseEntity getSimilarBooks(@ApiParam(value = "선택한 책 isbn", required = true, example = "8954672213") @PathVariable(name = "book_isbn") Long book_isbn) {
+    public ResponseEntity getSimilarBooks(@ApiParam(value = "선택한 책 isbn", required = true, example = "9791136202772") @PathVariable(name = "book_isbn") Long book_isbn) {
         String url = BASE_FLASK_URL + "/recommend/book/" + book_isbn;
         return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, url).build();
+    }
+
+    // 도서 감정 분석
+    @ApiOperation(value = "책의 감정 분석 데이터 조회", notes = "현재 책 리뷰를 감성분석한 결과 전달")
+    @GetMapping(value = "/{book_isbn}/sentiment")
+    public ResponseEntity getBookSentiment(@ApiParam(value = "선택한 책 isbn", required = true, example = "9791136202772") @PathVariable(name = "book_isbn") Long book_isbn) {
+        String url = BASE_FLASK_URL + "/book/" + book_isbn + "/sentiment";
+        return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, url).build();
+    }
+
+    // 도서 워드클라우드 조회
+    @ApiOperation(value = "현재 책 워드클라우드 데이터 조회", notes = "리뷰의 키워드와 키워드 개수 데이터 전달")
+    @GetMapping(value = "/{book_isbn}/wordcloud")
+    public ResponseEntity getBookWordCloud(@ApiParam(value = "조회할 책 isbn", required = true, example = "9791136202772") @PathVariable(name = "book_isbn") Long book_isbn) {
+        ResponseEntity responseEntity = null;
+        String url = BASE_FLASK_URL + "/book/" + book_isbn + "/wordcloud";
+        try {
+            BookDto bookDto = bookService.selectBook(book_isbn);
+            if (bookDto == null) {
+                throw new IllegalStateException("잘못된 책 ISBN 입니다");
+            }
+            responseEntity =  ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, url).build();
+        } catch (Exception exception) {
+            // 잘못된 책 ISBN인 경우
+            logger.info(exception.getMessage());
+
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+        return responseEntity;
+    }
+
+    // 도서 토픽 분석 조회
+    @ApiOperation(value = "현재 책 토픽 분석 데이터 조회", notes = "책의 토픽 분류와 해당 토픽에 속하는 키워드 조회")
+    @GetMapping(value = "/{book_isbn}/topics")
+    public ResponseEntity getBookTopics(@ApiParam(value = "조회할 책 isbn", required = true, example = "9791136202772") @PathVariable(name = "book_isbn") Long book_isbn) {
+        ResponseEntity responseEntity = null;
+        String url = BASE_FLASK_URL + "/book/" + book_isbn + "/topics";
+        try {
+            BookDto bookDto = bookService.selectBook(book_isbn);
+            if (bookDto == null) {
+                throw new IllegalStateException("잘못된 책 ISBN 입니다");
+            }
+            responseEntity =  ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, url).build();
+        } catch (Exception exception) {
+            // 잘못된 책 ISBN인 경우
+            logger.info(exception.getMessage());
+
+            BaseResponse response = responseService.getBaseResponse(false, exception.getMessage());
+            responseEntity = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+        return responseEntity;
     }
 }

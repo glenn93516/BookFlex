@@ -16,7 +16,6 @@
         id="first-shelf-tag"
         class="tag"
       >
-        <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px; color: black;" alt="제목태그"> -->
         <div 
           class="tag-name"
         >
@@ -47,7 +46,6 @@
         id="second-shelf-tag"
         class="tag"
       >
-        <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그"> -->
         <div 
           class="tag-name"
         >
@@ -77,7 +75,6 @@
         id="third-shelf-tag"
         class="tag"
       >
-        <!-- <img src="@/assets/tag.png" style="width: 50px; margin-bottom: 10px;" alt="제목태그"> -->
         <div 
           class="tag-name"
         >
@@ -112,7 +109,7 @@
 
           <!-- 바디 자리 -->
           <template #body>
-            <CollectSentence v-if="step === 'collectSentence' " :book=selectedBook :mode="0"/>
+            <CollectSentence v-if="step === 'collectSentence' " :book="selectedBook" :mode="0" @close-modal="closeModal"/>
           </template>
       </Modal> 
     </div>
@@ -154,11 +151,17 @@ export default {
   methods: {
     // 책을 로드하는 함수
     loadBookData() {
-      const token = localStorage.getItem('jwt')
+      // 플라스크 서버 처리 이후 수정
+      // const token = localStorage.getItem('jwt')
+      const token = null
+      const headers = {
+        "Authorization": token
+      }
       console.log(token)
       if (token) {
-        this.$axios.get(`${this.$store.getters.getServer}/recommend`, {token})
+        this.$axios.get(`${this.$store.getters.getServer}/recommend`, {headers})
         .then(res => {
+          console.log(res.data)
           this.suitRecommend = res.data.data.customized_by_user
           this.genreRecommend = res.data.data.customized_by_genre.customized_books
           this.userGenre = res.data.data.customized_by_genre.genre.genre_name

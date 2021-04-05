@@ -27,6 +27,12 @@
         SET user_password = #{userPassword}, user_nickname = #{userNickname}, user_job = #{userJob}, user_birth = #{userBirth}, user_gender = #{userGender}, user_profile_img = #{userProfileImg}
         WHERE user_id = #{userId}
     </update>
+
+    <update id="saveNewPassword">
+        UPDATE user
+        SET user_password = #{newPassword}
+        WHERE user_id = #{userId}
+    </update>
     
     <insert id="save" parameterType="UserDto">
         INSERT INTO user (user_email, user_password, user_nickname, user_job, user_gender, user_profile_img, user_birth)

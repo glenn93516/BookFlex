@@ -1,14 +1,14 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 // import Home from '../views/Home.vue'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path:'/',
+    path: '/',
     name: 'MainPage',
-    component: () => import('../views/Main.vue')
+    component: () => import('../views/Main.vue'),
   },
   {
     path: '/',
@@ -19,17 +19,17 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/BackgroundNav.vue'),
     children: [
       {
-        path:'/main',
+        path: '/main',
         name: 'MainBook',
-        component: () => import('../views/MainBook.vue')
+        component: () => import('../views/MainBook.vue'),
       },
       {
-        path:'/login',
+        path: '/login',
         name: 'Login',
-        component: () => import('../components/Login/Login.vue')
+        component: () => import('../components/Login/Login.vue'),
       },
       {
-        path:'/signup',
+        path: '/signup',
         name: 'Signup',
         component: () => import('../components/Signup/Signup.vue'),
         children: [
@@ -58,10 +58,10 @@ const routes = [
             name: 'SignupComplete',
             component: () => import('../components/Signup/SignupComplete.vue'),
           },
-        ]
+        ],
       },
       {
-        path:'/subsignup',
+        path: '/subsignup',
         name: 'SubSignup',
         component: () => import('../components/SubSignup/SubSignup.vue'),
         children: [
@@ -90,13 +90,14 @@ const routes = [
             name: 'SubSignComplete',
             component: () => import('../components/SubSignup/SubSignComplete.vue'),
           },
-        ]
+        ],
       },
       {
-        path:'/profile',
+        path:'/profile/:userName',
         name: 'Profile',
         component: () => import('../views/Profile.vue'),
-        redirect: '/profile/genre',
+        redirect: '/profile/:userName/genre',
+        props: true,
         children: [
           {
             path: 'genre',
@@ -114,14 +115,25 @@ const routes = [
             component: () => import('../components/Profile/ReadBooks.vue'),
           },
           {
+            path: 'liked',
+            name: 'LikeSentence',
+            component: () => import('../components/Profile/LikeSentence.vue'),
+          },
+          {
             path: 'wishlist',
             name: 'WishList',
             component: () => import('../components/Profile/WishList.vue'),
           },
-        ]
+        ],
       },
       {
-        path:'/message',
+        path: '/search/:word?',
+        name: 'Search',
+        component: () => import('../views/Search.vue'),
+        children: [],
+      },
+      {
+        path: '/message',
         name: 'Message',
         component: () => import('../components/Message/Message.vue'),
         redirect: '/message/received',
@@ -151,22 +163,77 @@ const routes = [
             name: 'ReadReceived',
             component: () => import('../components/Message/ReadReceived.vue'),
           },
-        ]
-      }
-    ]
+        ],
+      },
+      {
+        path: '/book/:bookIsbn',
+        name: 'BookDetail',
+        component: () => import('../views/BookDetail.vue'),
+        redirect: '/book/:bookIsbn/firstpage',
+        props: true,
+        children: [
+          {
+            path: 'firstpage',
+            name: 'FirstPage',
+            component: () => import('../components/Book/FirstPage.vue'),
+            props: true,
+          },
+          {
+            path: 'secondpage',
+            name: 'SecondPage',
+            component: () => import('../components/Book/SecondPage.vue'),
+            props: true,
+          },
+          {
+            path: 'thirdpage',
+            name: 'ThirdPage',
+            component: () => import('../components/Book/ThirdPage.vue'),
+            props: true,
+          },
+        ],
+      },
+      {
+        path: 'password',
+        name: 'Password',
+        component: () => import('../components/Password/Password.vue'),
+        redirect: 'password/submitEmail',
+        children: [
+          {
+            path: 'submitEmail',
+            name: 'PasswordSubmitEmail',
+            component: () => import('../components/Password/SubmitEmail.vue'),
+          },
+          {
+            path: 'checkEmail',
+            name: 'PasswordCheckEmail',
+            component: () => import('../components/Password/CheckEmail.vue'),
+          },
+          {
+            path: 'reset',
+            name: 'PasswordReset',
+            component: () => import('../components/Password/Reset.vue'),
+          },
+        ],
+      },
+      {
+        path: '/community',
+        name: 'Community',
+        component: () => import('../views/Community.vue'),
+      },
+    ],
   },
   {
-    path:'*',
+    path: '*',
     name: 'NotFound',
-    component: () => import('../views/NotFound.vue')
+    component: () => import('../views/NotFound.vue'),
   },
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 // router guard로 이메일 인증 건너뛰기 막아줘야함
 
-export default router
+export default router;
