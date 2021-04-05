@@ -6,7 +6,7 @@
         <DoughnutChart :chartData="chartData" />
       </div>
       <div v-else style="height:300px; display:flex; justify-content:center; align-items:center;">
-        <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
+        <h5 style="text-align: center;">리뷰 데이터 수집중</h5>
       </div>
     </div>
 

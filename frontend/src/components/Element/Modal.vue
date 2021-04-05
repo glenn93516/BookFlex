@@ -35,6 +35,7 @@
 
 <script>
 export default {
+  name: "Modal",
   data() {
     return {
       modalName: "Book",

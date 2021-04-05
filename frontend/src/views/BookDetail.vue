@@ -11,8 +11,6 @@
           use-router 
           class="detail_pagenation"
         >
-          <template #page="{  }">
-          </template>
         </b-pagination-nav>
       </div>
     </div>
@@ -22,6 +20,7 @@
 <script>
 export default {
   props: {
+
   },
   data() {
     return {

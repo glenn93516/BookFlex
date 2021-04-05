@@ -11,7 +11,7 @@
             <h5 style="text-align: right; margin-bottom: 10px;">{{ book.book_author }}</h5>
             <h6 style="text-align: right;">{{ book.book_publisher }} | {{ book.book_date }}</h6>
             <br>
-            <h v-html="book.book_description"></h>
+            <h6 v-html="book.book_description"></h6>
             <br>
           </div>
         </div>
@@ -23,16 +23,18 @@
         style="text-align: right; 
                   margin-top: 20px; 
                   margin-right: 20px;
-                  margin-bottom: 50px;
+                  margin-bottom: 20px;
                   color: rgba(100, 100, 100);
                   ">
         <h6 class="mr-1">키워드 보기</h6>
         <hr style="rgba(50, 50, 50); margin-bottom: 40px;">
       </div>
-      <div>
+      <div style="margin-bottom: 20px;">
         <WordCloud :isbn="isbn" @open-modal="openModal"/>
       </div>
       <div style="margin-right: 20px;">
+        <b-button class="FirstPage_Btn" @click="checkRead">읽음</b-button>
+        <b-button class="FirstPage_Btn" @click="addToWishlist">위시리스트</b-button>
         <img 
           style="width: 30px; 
                     height: 30px; 
@@ -48,6 +50,7 @@
         />
       </div>
     </div>
+
     <div>
       <Modal v-show="isModalViewed" @close-modal="closeModal">
           <!-- 컨텐츠 컴포넌트 자리 -->
@@ -57,7 +60,8 @@
           </template>
           <!-- 바디 자리 -->
           <template #body>
-            <ReviewList :reviewList="reviewList" :reviewKeyword="reviewKeyword"/>            
+            <ReviewList v-if="step === 'checkReview'" :reviewList="reviewList" :reviewKeyword="reviewKeyword"/>   
+            <CollectSentence v-if="step === 'collectSentence' " :book="book" :mode="0" @close-modal="closeModal"/>         
           </template>
       </Modal> 
     </div>
@@ -68,14 +72,16 @@
 import WordCloud from '@/components/Element/WordCloud.vue'
 import Modal from '@/components/Element/Modal.vue'
 import ReviewList from '@/components/Book/ReviewList.vue'
+import CollectSentence from '@/components/Book/CollectSentence.vue'
 
 export default {
   props: {
   },
   components: {
-    WordCloud,
-    Modal,
-    ReviewList,
+    "WordCloud": WordCloud,
+    "Modal": Modal,
+    "ReviewList": ReviewList,
+    "CollectSentence": CollectSentence,
   },
   data() {
     ReviewList
@@ -85,7 +91,8 @@ export default {
       isModalViewed: false,
       reviewKeyword: "",
       reviewList: [],
-      informationText: "1. 단어를 클릭해보세요. 단어를 포함한 리뷰를 보여드릴게요 \n 2. 책에 마우스를 가져가면 디테일한 정보를 확인할 수 있습니다."
+      informationText: "1. 단어를 클릭해보세요. 단어를 포함한 리뷰를 보여드릴게요 \n 2. 책에 마우스를 가져가면 디테일한 정보를 확인할 수 있습니다.",
+      step: "",
     }
   },
   created() {
@@ -99,7 +106,7 @@ export default {
     getBookData(isbn) {
       this.$axios.get(`${this.$store.getters.getServer}/book/${isbn}`)
       .then(res => {
-        console.log(res.data.data)
+        // console.log(res.data.data)
         this.book = res.data.data
       })
       .catch(err => {
@@ -111,19 +118,77 @@ export default {
     },
     // 워드클라우드 단어 클릭시 연결
     openModal(keyword) {
-      this.isModalViewed = true
-      this.reviewKeyword = keyword
+      if (keyword != undefined) {
+        this.reviewKeyword = keyword
+        this.step = 'checkReview'
+        this.isModalViewed = true
+        console.log(keyword)
+      } else {
+        this.step = 'collectSentence'
+        this.isModalViewed = true
+      }
     },
     // 리뷰 리스트 불러오기
     getReviewList(isbn) {
       this.$axios.get(`${this.$store.getters.getServer}/book/${isbn}/review`)
       .then(res => {
-        console.log('리뷰리스트', res.data.data)
+        // console.log('리뷰리스트', res.data.data)
         this.reviewList = res.data.data
       })
       .catch(err => {
         console.error(err)
       })
+    },
+    // 읽음 표시
+    checkRead() {
+      const token = localStorage.getItem('jwt')
+			const headers = {
+				"Authorization": token,
+			}
+			if (token) {
+				this.$axios.post(`${this.$store.getters.getServer}/bookshelf`, {
+					"bookIsbn": this.book.book_isbn,
+					"userId": this.$store.getters.getUser.userId
+				},
+				{
+					headers,
+				})
+				.then(res => {
+					alert('읽기 목록에 담겼습니다 :)')
+					console.log(res)
+					// 문장수집으로 이동
+          this.openModal()
+				})
+				.catch(err => {
+					console.error(err)
+          alert('이미 읽으셨군요! 문장을 수집해보세요.')
+          this.openModal()
+				})
+			} else {
+				alert('로그인 후 이용하세요!')
+			}
+    },
+    // 위시리스트에 담기
+    addToWishlist() {
+      const token = localStorage.getItem('jwt')
+			const headers = {
+				"Authorization": token
+			}
+			if (token) {
+				this.$axios.post(`${this.$store.getters.getServer}/wishlist/${this.book.book_isbn}`, {}, 
+					{
+						headers
+					})
+				.then(res => {
+					console.log(res)
+					alert('위시리스트에 담겼습니다 :)')
+				})
+				.catch(err => {
+					console.error(err)
+				})
+			} else {
+				alert('로그인 후 이용하세요!')
+			}
     }
   }
 }
@@ -152,5 +217,16 @@ export default {
     color: white;
     background-color: rgba(0, 0, 0, 0.7);
     transition: 0.3s;
+  }
+  .FirstPage_Btn {
+    margin-top: 5px;
+    margin-right: 10px;
+    background-color: white;
+    border: 0px;
+    color: black;
+  }
+  .FirstPage_Btn:hover {
+    background-color: rgb(192, 180, 165);
+    color: rgb(255, 255, 255);
   }
 </style>

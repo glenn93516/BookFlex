@@ -9,7 +9,7 @@
     </h3>
     <hr class="mt-3 mb-0" style="background-color: grey;">
     <!-- 리뷰 내용 -->
-    <div v-if="keywordReview" style="overflow: scroll; height:650px">
+    <div v-if="keywordReview" style="overflow: auto; height:650px">
       <p v-for="(review, idx) in keywordReview" :key="idx"
         style="font-size: 20px;"
       >
@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  name: "ReviewList",
   props: {
     reviewKeyword: String,
     reviewList: Array,
@@ -32,9 +33,11 @@ export default {
       keywordReview: [],
     }
   },
+  created() {
+    this.pickKeywordReview()
+  },
   beforeUpdate() {
     this.pickKeywordReview()
-    // console.log(this.reviewList)
   },
   methods: {
     pickKeywordReview() {
