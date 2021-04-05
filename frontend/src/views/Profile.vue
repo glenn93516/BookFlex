@@ -12,7 +12,7 @@
         >
         </b-avatar>
         <div class="img-update-btn update-btn" @click="imgUpdateModal=true" v-if="isEditor"><span>프로필 수정</span></div>
-        <b-modal v-model="imgUpdateModal" centered hide-footer hide-header hide-backdrop>
+        <b-modal v-model="imgUpdateModal" centered hide-footer hide-header hide-backdrop @hide="reload">
           <img-update-profile :profileImg="userInfo.userProfileImg"></img-update-profile>
         </b-modal>
       </div>
@@ -219,6 +219,9 @@ export default {
     }
   },
   methods: {
+    reload(){
+      this.$router.go(this.$router.currentRoute)
+    },
     changeJob() {
       alert('직업은 편집 버튼을 이용해서 편집하기🛠')
     },
