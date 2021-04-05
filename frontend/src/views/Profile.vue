@@ -12,7 +12,7 @@
         >
         </b-avatar>
         <div class="img-update-btn update-btn" @click="imgUpdateModal=true" v-if="isEditor"><span>프로필 수정</span></div>
-        <b-modal v-model="imgUpdateModal" centered hide-footer hide-header hide-backdrop>
+        <b-modal v-model="imgUpdateModal" centered hide-footer hide-header hide-backdrop @hide="reload">
           <img-update-profile :profileImg="userInfo.userProfileImg"></img-update-profile>
         </b-modal>
       </div>
@@ -219,6 +219,9 @@ export default {
     }
   },
   methods: {
+    reload(){
+      this.$router.go(this.$router.currentRoute)
+    },
     changeJob() {
       alert('직업은 편집 버튼을 이용해서 편집하기🛠')
     },
@@ -239,13 +242,13 @@ export default {
           this.genreClass.push(classId)
         }
       }
-      console.log(this.genreClass, 'genreClass 갯수')
+      // console.log(this.genreClass, 'genreClass 갯수')
     },
   },
   created() {
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}`)
     .then(res => {
-      console.log(res, 'res')
+      // console.log(res, 'res')
       if (res.status === 200) {
         this.nowUserName = this.$store.state.user.userNickname
       } else {
@@ -262,7 +265,7 @@ export default {
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}`)
     .then(res => {
       this.userInfo = res.data.data
-      console.log(this.userInfo, 'userInfo')
+      // console.log(this.userInfo, 'userInfo')
       this.genreClassification()
     })
     .catch(err => {

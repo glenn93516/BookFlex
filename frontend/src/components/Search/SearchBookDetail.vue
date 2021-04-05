@@ -26,9 +26,9 @@ export default {
       }
     },
   },
-  mounted() {
-    console.log('props book >> ', this.book.book_isbn)
-  },         
+  // mounted() {
+  //   console.log('props book >> ', this.book.book_isbn)
+  // },         
 }
 </script>
 
