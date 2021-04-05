@@ -51,11 +51,26 @@
       <div id="scrollPage">
         <div class="article">
           <div id="firstSection" class="section first-section">
-            <div class="white" style="background-color: white;">여기는 title</div>
+            <div class="white section-title">추천 시스템</div>
           </div>
           <div id="secondSection" class="section middle-section">
+            <div data-aos="fade-up" class="white section-title">지도 학습</div>
+            <div class="white text-center" style="padding-top: 6vw;">
+              <span data-aos="zoom-in" class="highlight-size">BERT</span>
+              <span data-aos="zoom-in" class="default-size">모델</span>
+            </div>
+            <div data-aos="fade-up" class="white text-center default-size">감정분석</div>
+            <div data-aos="zoom-out-up" class="white text-center highlight-size">90.06%</div>
+            <div data-aos="fade-up" class="white text-center default-size">정확도</div>
+            <br class="section-br">
+            <div>
+              <p data-aos="flip-left" class="white text-center info-size">인간의 직관을 넘어선 정밀한 성능의 감정분석 알고리즘</p>
+              <p data-aos="zoom-in" class="white text-center small-size">(인간의 직관 90% 기준)</p>
+            </div>
           </div>
-          <div id="thirdSection" class="section"></div>
+          <div id="thirdSection" class="section">
+            <div class="white section-title">비지도 학습</div>
+          </div>
         </div>
         <div style="height: 100vh; border: 2px solid green;">
 
@@ -65,15 +80,15 @@
         </div>
 
       </div>
-      <!-- <div id="endScroll" 
+      <div id="endScroll" 
         style="
           height: 100vh;
           border: 5px orange solid;
           background-color: rgba(235, 234, 232, 1);
         "
       >
-      <b-button @click="goMain()">여기</b-button>
-      </div> -->
+      <b-button @click="goMain()">여기는 메인으로 이어지는 버튼이 크게 있을 페이지</b-button>
+      </div>
     </div>
   </div>
 </template>
@@ -273,12 +288,31 @@ import "aos/dist/aos.css";
     height: 80vh;
     margin: 5vh 0;
     border-radius: 10px;
-    padding: 10vh 5vw;
+    padding: 3vh 3vw;
   }
   #main .first-section {
     margin: 5vh 0 2vw 5vh;
   }
   #main .middle-section {
     margin: 5vh 2vw;
+  }
+  #main .section-title {
+    font-size: 30px;
+  }
+  #main .highlight-size {
+    font-size: 110px;
+    font-weight: bold;
+  }
+  #main .default-size {
+    font-size: 27px;
+  }
+  #main .info-size {
+    font-size: 18px;
+  }
+  #main .small-size {
+    font-size: 14px;
+  }
+  #main .section-br {
+    margin: 10px 0;
   }
 </style>
