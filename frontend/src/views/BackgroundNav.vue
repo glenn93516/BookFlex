@@ -232,10 +232,10 @@ export default {
     if (token) {
       this.$axios.get(`${this.$store.getters.getServer}/user`, {headers})
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.userInfo = res.data.data
         this.$store.commit('UpdateUserInfo', res.data.data)
-        console.log(this.userInfo)
+        // console.log(this.userInfo)
       })
       .catch(err => {
         console.error(err)
