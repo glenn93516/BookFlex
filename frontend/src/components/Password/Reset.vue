@@ -25,6 +25,18 @@ export default {
     }
   },
   created() {
+    console.log(this.$store.state.signupInfo.userEmail)
+    this.$axios.post(`${this.$store.getters.getServer}/email/password`, {},{
+      params: {
+        'userEmail': this.$store.state.signupInfo.userEmail,
+      }
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.error(err)
+    })
   },
   methods: {
   }
