@@ -117,7 +117,7 @@
         </div>
         <div style="height: 20vh;">
         </div>
-        <div style="height: 120vh;">
+        <div style="height: 110vh;">
           <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">문장 수집</h1>
@@ -133,7 +133,7 @@
             </div>
             <img data-aos="fade-down" data-aos-duration="1000" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
           </div>
-          <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+          <div style="height: 50vh; margin-top: 5vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">나만의 서재</h1>
               <hr style="margin: 10px 0;">
@@ -149,8 +149,8 @@
             <img data-aos="fade-down" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
           </div>
         </div>
-        <div style="height: 100vh;">
-          <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+        <div style="height: 110vh;">
+          <div style="height: 50vh; margin-top: 5vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">맞춤형 추천</h1>
               <hr style="margin: 10px 0;">
@@ -165,7 +165,7 @@
             </div>
             <img data-aos="fade-down" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
           </div>
-          <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+          <div style="height: 50vh; margin-top: 5vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">커뮤니티</h1>
               <hr style="margin: 10px 0;">
