@@ -15,8 +15,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://ssafy:ssafyssafy@field-
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['SQLALCHEMY_POOL_RECYCLE'] = 600
 app.config['SQLALCHEMY_POOL_TIMEOUT'] = 10
-app.config['SQLALCHEMY_POOL_SIZE'] = 20
-app.config['SQLALCHEMY_MAX_OVERFLOW'] = 5
+app.config['SQLALCHEMY_POOL_SIZE'] = 30
+app.config['SQLALCHEMY_MAX_OVERFLOW'] = 10
 db = SQLAlchemy(app, session_options={'autocommit': True})
 
 # CORS 설정
