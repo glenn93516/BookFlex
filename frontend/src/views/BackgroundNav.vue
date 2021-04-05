@@ -192,6 +192,7 @@ export default {
       localStorage.removeItem('jwt')
       this.userInfo = ""
       this.isLogin = false
+      this.$router.push({ name: 'MainPage' })
     },
     postBoxClick() {
       this.$router.push({ name: 'Received' })

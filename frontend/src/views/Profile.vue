@@ -242,13 +242,13 @@ export default {
           this.genreClass.push(classId)
         }
       }
-      console.log(this.genreClass, 'genreClass 갯수')
+      // console.log(this.genreClass, 'genreClass 갯수')
     },
   },
   created() {
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}`)
     .then(res => {
-      console.log(res, 'res')
+      // console.log(res, 'res')
       if (res.status === 200) {
         this.nowUserName = this.$store.state.user.userNickname
       } else {
@@ -265,7 +265,7 @@ export default {
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}`)
     .then(res => {
       this.userInfo = res.data.data
-      console.log(this.userInfo, 'userInfo')
+      // console.log(this.userInfo, 'userInfo')
       this.genreClassification()
     })
     .catch(err => {
