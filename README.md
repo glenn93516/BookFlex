@@ -10,7 +10,7 @@
 
 나만의 맞춤 서재  
 **머신러닝을 이용한 리뷰 감성분석, 키워드 분류**를 통해 책의 정보를 더 직관적으로 확인할 수 있을 뿐만 아니라 다른 책들과 비교도 한눈에 확인 가능합니다  
-8만 8천권의 책 데이터를 기반으로 사용자가 읽은 책, 선호하는 장르등을 분석해 **사용자 맞춤 책 추천 서비스**를 제공합니다  
+**8만 8천권8**의 책 데이터를 기반으로 사용자가 읽은 책, 선호하는 장르등을 분석해 **사용자 맞춤 책 추천 서비스**를 제공합니다  
 책을 읽으며 감동받은 **문장을 수집**하고 이를 다른사람들과 공유할 수 있습니다
 
 # 👨‍👩‍👧‍👦팀원 소개
@@ -31,16 +31,22 @@
 📃[회의록](https://www.notion.so/SSAFY-MEETING-fb956dfd180e49a185007fc27b67d1c5)  
 📃[추천 알고리즘](https://www.notion.so/ac2bbe43b3824bceac81f3b50a5e7eda)
 
+## 📁프로젝트 실행 방법
+
+```bash
+docker-compose up
+```
+
 ## 📁기술 스택
 
-|     분류      |                                                                                                                                         기술                                                                                                                                          |
-| :-----------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|   Front-end   |                                                                                                       <img src="https://img.shields.io/badge/Vue.js-2.6.12-green?logo=vue.js">                                                                                                        |
-|   Back-end    | <img src="https://img.shields.io/badge/Java-1.8-blue?logo=java">, <img src="https://img.shields.io/badge/Python-3.7-blue?logo=python">, <img src="https://img.shields.io/badge/Spring-2.4.3-green?logo=spring">, <img src="https://img.shields.io/badge/Flask-1.1.2-blue?logo=flask"> |
-|      ML       |                                                                                                        <img src="https://img.shields.io/badge/Pytorch-1.8.1-red?logo=pytorch">                                                                                                        |
-|      DB       |                                                                                                          <img src="https://img.shields.io/badge/MySQL-v8.0-blue?logo=mysql">                                                                                                          |
-|     CI/CD     |                                                                       <img src="https://img.shields.io/badge/Docker-blue?logo=docker">, <img src="https://img.shields.io/badge/Jenkins-lightgrey?logo=jenkins">                                                                       |
-| Communication |                                                                   <img src="https://img.shields.io/badge/Mattermost-blue?logo=mattermost">, <img src="https://img.shields.io/badge/Discord-lightgrey?logo=discord">                                                                   |
+|     분류      |                                                                                                                                        기술                                                                                                                                         |
+| :-----------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|   Front-end   |                                                                                                      <img src="https://img.shields.io/badge/Vue.js-2.6.12-green?logo=vue.js">                                                                                                       |
+|   Back-end    | <img src="https://img.shields.io/badge/Java-1.8-blue?logo=java"> <img src="https://img.shields.io/badge/Python-3.7-blue?logo=python"> <img src="https://img.shields.io/badge/Spring-2.4.3-green?logo=spring">, <img src="https://img.shields.io/badge/Flask-1.1.2-blue?logo=flask"> |
+|      ML       |                                                                    <img src="https://img.shields.io/badge/Pytorch-1.8.1-red?logo=pytorch"> <img src="https://img.shields.io/badge/Python-3.7-blue?logo=python">                                                                     |
+|      DB       |                                                                                                         <img src="https://img.shields.io/badge/MySQL-v8.0-blue?logo=mysql">                                                                                                         |
+|     CI/CD     |                                                                      <img src="https://img.shields.io/badge/Docker-blue?logo=docker"> <img src="https://img.shields.io/badge/Jenkins-lightgrey?logo=jenkins">                                                                       |
+| Communication |                                                                  <img src="https://img.shields.io/badge/Mattermost-blue?logo=mattermost"> <img src="https://img.shields.io/badge/Discord-lightgrey?logo=discord">                                                                   |
 
 ## 📁시스템 아키텍쳐
 
