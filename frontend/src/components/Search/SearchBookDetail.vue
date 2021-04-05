@@ -18,9 +18,17 @@ export default {
   },
   methods: {
     clickImg(){
-      this.$router.push({ name: 'FirstPage', params: { bookIsbn: this.book.book_isbn } })
+      if(this.book.book_isbn==undefined){
+        this.$router.push({ name: 'FirstPage', params: { bookIsbn: this.book.isbn } })
+      }
+      else{
+        this.$router.push({ name: 'FirstPage', params: { bookIsbn: this.book.book_isbn } })
+      }
     },
-  },            
+  },
+  mounted() {
+    console.log('props book >> ', this.book.book_isbn)
+  },         
 }
 </script>
 
