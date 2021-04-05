@@ -105,9 +105,6 @@ export default {
     }
   },
   methods: {
-    servePageInfo() {
-      return this.pageData
-    },
     // 이메일 형태 유효성 검사
     isValidEmail() {
       const reg_email = /^([0-9a-zA-Z_\\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
@@ -151,6 +148,7 @@ export default {
       }
     },
     goToPasswordCheckEmail() {
+      this.$store.dispatch("Logout")
       const user = {userEmail: this.email}
       this.$store.dispatch("SetEmail", user)
       this.$router.push({ name: "PasswordCheckEmail" })
