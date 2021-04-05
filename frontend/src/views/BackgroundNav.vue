@@ -45,6 +45,7 @@
             type="text"
             v-model="text"
             @keypress.enter="hideInput"
+            @blur="showInput"
           ></b-form-input>
         </b-nav-item>
         <!-- 마이페이지 -->
@@ -170,7 +171,7 @@ export default {
       this.postBox = this.closePostBox
     },
     showInput() {
-      this.checkInput = false
+      this.checkInput = !this.checkInput
     },
     hideInput() {
       this.checkInput = true
