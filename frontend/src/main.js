@@ -16,6 +16,8 @@ import { faEdit as fasEdit } from '@fortawesome/free-solid-svg-icons'
 import { faEdit as farEdit } from '@fortawesome/free-regular-svg-icons'
 import { faTrashAlt as fasTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt as farTrashAlt } from '@fortawesome/free-regular-svg-icons'
+import { faThumbsDown } from '@fortawesome/free-regular-svg-icons'
+import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 // import * as am4core from '@amcharts/amcharts4/core';
@@ -29,6 +31,8 @@ library.add(
   farEdit,
   fasTrashAlt,
   farTrashAlt,
+  faThumbsDown,
+  faThumbsUp,
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

@@ -2,7 +2,7 @@
   <!-- 리뷰 분석, 담긴 문장 페이지 -->
   <div class="row">
     <!-- 왼쪽 페이지: 비지도학습 키워드 분석 -->
-    <div class="col-6 book_size" style="border-right: 1px solid rgba(121, 121, 121, 0.692); height: 700px;">
+    <div class="col-6" style="border-right: 1px solid rgba(121, 121, 121, 0.692); height: 700px;">
       <div 
         style="text-align: left; 
                   margin-top: 20px; 
@@ -14,10 +14,11 @@
         <hr style="rgba(50, 50, 50); margin-bottom: 40px;">
       </div>
       <SecondLeft :isbn="this.$route.params.bookIsbn" />
+      <SecondLeft2 :isbn="this.$route.params.bookIsbn" @setBookSentiment="getBookSentiment" />
     </div>
 
     <!-- 오른쪽 페이지: 지도학습 긍부정 분석 + 한줄문장 -->
-    <div class="col-6 book_size" style="float: right">
+    <div class="col-6">
       <div 
         style="text-align: right; 
                   margin-top: 20px; 
@@ -28,7 +29,8 @@
         <h6 class="mr-1">리뷰 감정 분석</h6>
         <hr style="rgba(50, 50, 50); margin-bottom: 40px;">
       </div>
-      <SecondRight :isbn="this.$route.params.bookIsbn" />
+      
+      <SecondRight v-if="bookSentiment.positive" :bookSentiment="bookSentiment" />
     </div>
 
   </div>
@@ -36,12 +38,24 @@
 
 <script>
 import SecondLeft from './SecondLeft.vue'
+import SecondLeft2 from './SecondLeft2.vue'
 import SecondRight from './SecondRight.vue'
 
 export default {
   components: {
     SecondLeft,
+    SecondLeft2,
     SecondRight,
+  },
+  data() {
+    return {
+      bookSentiment: {}
+    }
+  },
+  methods: {
+    getBookSentiment(bookSentiment) {
+      this.bookSentiment = bookSentiment
+    }
   }
 }
 </script>
