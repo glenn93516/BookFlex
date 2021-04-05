@@ -27,9 +27,9 @@
           </div>
         </transition>
       </div>
-
+      <div style="width: 100vw; height: 40vh; background-color: black;"></div>
       <div id="bookInfo">
-        <div style="height: 20vw; width: 100vw; background-color: rgba(0, 0, 0, 0.57);">
+        <div style="height: 44vh; width: 100vw; background-color: rgba(0, 0, 0, 0.57);">
           <div id="book-number" style="width: 100vw;">
             <div data-aos="fade-right" class="text-center">
               <span class="white info-subtitle-size">도서</span>
@@ -46,21 +46,20 @@
           </div>
         </div>
       </div>
+      <div style="width: 100vw; height: 40vh; background-color: black;"></div>
+
       
       <!-- 스크롤 페이지 -->
       <div id="scrollPage">
         <div class="article">
-          <div id="firstSection" class="section first-section">
-            <div data-aos="zoom-in-right" class="white section-title">추천 시스템</div>
-          </div>
-          <div id="secondSection" class="section middle-section">
-            <div data-aos="zoom-in-down" class="white section-title">지도 학습</div>
+          <div data-aos="fade-left" id="firstSection" class="section first-section">
+            <div data-aos="zoom-in-up" class="white section-title">지도 학습</div>
             <div class="white text-center" style="padding-top: 6vw;">
-              <span data-aos="zoom-in" class="highlight-size">BERT</span>
+              <span data-aos="zoom-in" class="highlight-size-lg">BERT</span>
               <span data-aos="zoom-in" class="default-size">모델</span>
             </div>
             <div data-aos="fade-up" class="white text-center default-size">감정분석</div>
-            <div data-aos="zoom-out-up" class="white text-center highlight-size">90.09%</div>
+            <div data-aos="zoom-out-up" class="white text-center highlight-size-lg">90.09%</div>
             <div data-aos="fade-up" class="white text-center default-size">정확도</div>
             <br class="section-br">
             <div>
@@ -68,15 +67,49 @@
               <p data-aos="zoom-in" class="white text-center small-size">(인간의 직관 88% 기준)</p>
             </div>
           </div>
-          <div id="thirdSection" class="section">
-            <div data-aos="zoom-in-left" class="white section-title">비지도 학습</div>
+          <div style="aligh-items: center; position: relative;">
+            <img height="600vh" style="margin-top:5vh; margin-left: 300px;" src="@/assets/bertModel.png" alt="">
+            <img style="position: absolute; top: 28vh; left: 230px;" src="@/assets/bertModel2.png" alt="">
+            <!-- <h1 class="white">여기에는 이미지가 들어갈 것</h1> -->
           </div>
         </div>
         <div style="height: 100vh; border: 2px solid green;">
-
+          <div class="article">
+            <div data-aos="fade-left" id="secondSection" class="section first-section">
+              <div data-aos="zoom-in-up" class="white section-title">비지도 학습</div>
+              <div class="white text-center" style="padding-top: 6vw;">
+                <span data-aos="zoom-in" class="highlight-size-lg">BERT</span>
+                <span data-aos="zoom-in" class="default-size">모델</span>
+              </div>
+              <div data-aos="fade-up" class="white text-center default-size">감정분석</div>
+              <div data-aos="zoom-out-up" class="white text-center highlight-size-lg">90.09%</div>
+              <div data-aos="fade-up" class="white text-center default-size">정확도</div>
+              <br class="section-br">
+              <div>
+                <p data-aos="flip-left" class="white text-center info-size">인간의 직관을 넘어선 정밀한 성능의 감정분석 알고리즘</p>
+                <p data-aos="zoom-in" class="white text-center small-size">(인간의 직관 88% 기준)</p>
+              </div>
+            </div>
+          </div>
         </div>
         <div style="height: 100vh; border: 2px solid purple;">
-
+          <div class="article">
+            <div data-aos="fade-right" id="thirdSection" class="section first-section">
+              <div data-aos="zoom-in-up" class="white section-title">추천 시스템</div>
+              <div class="white text-center" style="padding-top: 6vw;">
+                <div data-aos="zoom-in" class="highlight-size-lg">Fasttext</div>
+                <div data-aos="zoom-in" class="default-size">기반</div>
+              </div>
+              <div data-aos="fade-up" class="white text-center highlight-size-md">한국어로</div>
+              <div data-aos="zoom-out-up" class="white text-center default-size">사전학습된</div>
+              <div data-aos="fade-up" class="white text-center default-size">모델</div>
+              <br class="section-br">
+              <div>
+                <p data-aos="flip-left" class="white text-center info-size">인간의 직관을 넘어선 정밀한 성능의 감정분석 알고리즘</p>
+                <p data-aos="zoom-in" class="white text-center small-size">(인간의 직관 88% 기준)</p>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -205,7 +238,8 @@ import "aos/dist/aos.css";
     left: 0;
   }
   #main .scroll-link {
-    margin-top: 25vh;
+    /* position: relative; */
+    margin-top: 10vh;
     margin-left: 50vw;
     bottom: 1rem;
     width: 100%;
@@ -255,13 +289,13 @@ import "aos/dist/aos.css";
   }
 
   .info-title-size {
-    font-size: 120px;
+    font-size: 110px;
     font-weight: bold;
     width: 100%;
     text-align: center;
   }
   .info-subtitle-size {
-    font-size: 60px;
+    font-size: 50px;
     width: 100%;
     text-align: center;
   }
@@ -297,20 +331,24 @@ import "aos/dist/aos.css";
     margin: 5vh 2vw;
   }
   #main .section-title {
-    font-size: 30px;
+    font-size: 25px;
   }
-  #main .highlight-size {
-    font-size: 110px;
+  #main .highlight-size-lg {
+    font-size: 90px;
+    font-weight: bold;
+  }
+  #main .highlight-size-md {
+    font-size: 80px;
     font-weight: bold;
   }
   #main .default-size {
-    font-size: 27px;
+    font-size: 22px;
   }
   #main .info-size {
-    font-size: 18px;
+    font-size: 15px;
   }
   #main .small-size {
-    font-size: 14px;
+    font-size: 12px;
   }
   #main .section-br {
     margin: 10px 0;

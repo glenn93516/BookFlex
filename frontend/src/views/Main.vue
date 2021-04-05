@@ -27,9 +27,9 @@
           </div>
         </transition>
       </div>
-
+      <div style="width: 100vw; height: 40vh; background-color: black;"></div>
       <div id="bookInfo">
-        <div style="height: 20vw; width: 100vw; background-color: rgba(0, 0, 0, 0.57);">
+        <div style="height: 22vw; width: 100vw; background-color: rgba(0, 0, 0, 0.57);">
           <div id="book-number" style="width: 100vw;">
             <div data-aos="fade-right" class="text-center">
               <span class="white info-subtitle-size">도서</span>
@@ -46,21 +46,40 @@
           </div>
         </div>
       </div>
+      <div style="width: 100vw; height: 40vh; background-color: black;"></div>
+
       
       <!-- 스크롤 페이지 -->
       <div id="scrollPage">
         <div class="article">
           <div id="firstSection" class="section first-section">
-            <div data-aos="zoom-in-right" class="white section-title">추천 시스템</div>
+            <div data-aos="fade-down" class="white section-title">추천 시스템</div>
+            <Book class="mouse-pointer" data-aos="zoom-in-down" id="book" :book="nowBookObj" style="margin: 80px 0;"></Book>
+            <div class="white text-center" style="">
+              <div data-aos="fade-right">
+                <span class="highlight-size-xs">Fasttest</span>
+                <span>를 기반으로 </span> 
+                <span class="highlight-size-xxxs">앙상블팀</span>
+                <span>이</span>
+              </div>
+              <div data-aos="fade-left">
+                <span>직접 </span>
+                <span class="highlight-size-xxxs">한국어</span>
+                <span>로 </span>
+                <span class="highlight-size-xxxs">사전 학습</span>
+                <span>시킨 </span>
+                <span>모델 활용</span>
+              </div>
+            </div>
           </div>
           <div id="secondSection" class="section middle-section">
-            <div data-aos="zoom-in-down" class="white section-title">지도 학습</div>
-            <div class="white text-center" style="padding-top: 6vw;">
-              <span data-aos="zoom-in" class="highlight-size">BERT</span>
+            <div data-aos="fade-down" class="white section-title">지도 학습</div>
+            <div class="white text-center" style="padding-top: 8vh;">
+              <span data-aos="zoom-in" class="highlight-size-lg">BERT</span>
               <span data-aos="zoom-in" class="default-size">모델</span>
             </div>
             <div data-aos="fade-up" class="white text-center default-size">감정분석</div>
-            <div data-aos="zoom-out-up" class="white text-center highlight-size">90.09%</div>
+            <div data-aos="zoom-out-up" class="white text-center highlight-size-lg">90.09%</div>
             <div data-aos="fade-up" class="white text-center default-size">정확도</div>
             <br class="section-br">
             <div>
@@ -69,25 +88,114 @@
             </div>
           </div>
           <div id="thirdSection" class="section">
-            <div data-aos="zoom-in-left" class="white section-title">비지도 학습</div>
+            <div data-aos="fade-down" class="white section-title">비지도 학습</div>
+            <div class="white" style="padding-top: 8vh;">
+              <div data-aos="fade-right">
+                <span style="font-size: 50px; font-weight: bold;">LDA</span>를 사용한 <span style="font-size: 27px; font-weight: bold;">리뷰 토픽 모델링</span>
+              </div>
+              <div data-aos="fade-left" style="font-size: 13px;">
+                <span style="font-size: 25px; font-weight: bold;">Coherence</span>와 
+                <span style="font-size: 25px; font-weight: bold;">Perplexity</span> 테스트를 통해
+                <div>
+                  추출한 <span style="font-size: 23px; font-weight: bold;">최적</span>의 토픽 수, 
+                  <span style="font-size: 25px; font-weight: bold;">17</span>개
+                </div> 
+              </div>
+              <div data-aos="fade-right" style="font-size: 13px;">
+                 <span style="font-size: 25px; font-weight: bold;">Passes</span> 테스트를 통해 얻은 <span style="font-size: 23px; font-weight: bold;">최적</span>의 훈련 수, <span style="font-size: 25px; font-weight: bold;">8</span>회
+              </div>
+              <div data-aos="fade-right">
+                한 눈에 볼 수 있는 독자들의 리뷰 분석
+              </div>
+              <br>
+              <div data-aos="fade-left" style="text-align: center; position: relative;">
+                <img width="100%" height="220px" src="@/assets/bizido.png" alt="" style="border-radius: 10px;">
+                <div style="border-radius: 10px; position: absolute; background-color: rgba(0, 0, 0, 0.2); width: 100%; height: 220px; top: 0;"></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div style="height: 100vh; border: 2px solid green;">
-
+        <div style="height: 100vh;">
+          <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+            <div>
+              <h1 data-aos="fade-right" style="font-weight: bold;">문장 수집</h1>
+              <hr style="margin: 10px 0;">
+              <p data-aos="fade-left" style="width: 400px;">
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+              </p>
+            </div>
+            <img data-aos="fade-down" data-aos-duration="1000" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
+          </div>
+          <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+            <div>
+              <h1 data-aos="fade-right" style="font-weight: bold;">나만의 서재</h1>
+              <hr style="margin: 10px 0;">
+              <p data-aos="fade-left" style="width: 400px;">
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+              </p>
+            </div>
+            <img data-aos="fade-down" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
+          </div>
         </div>
-        <div style="height: 100vh; border: 2px solid purple;">
-
+        <div style="height: 100vh;">
+          <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+            <div>
+              <h1 data-aos="fade-right" style="font-weight: bold;">맞춤형 추천</h1>
+              <hr style="margin: 10px 0;">
+              <p data-aos="fade-left" style="width: 400px;">
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+              </p>
+            </div>
+            <img data-aos="fade-down" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
+          </div>
+          <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+            <div>
+              <h1 data-aos="fade-right" style="font-weight: bold;">커뮤니티</h1>
+              <hr style="margin: 10px 0;">
+              <p data-aos="fade-left" style="width: 400px;">
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+              </p>
+            </div>
+            <img data-aos="fade-down" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
+          </div>
         </div>
 
       </div>
       <div id="endScroll" 
         style="
           height: 100vh;
-          border: 5px orange solid;
           background-color: rgba(235, 234, 232, 1);
         "
       >
-      <b-button @click="goMain()">여기는 메인으로 이어지는 버튼이 크게 있을 페이지</b-button>
+      </div>
+      <!-- <b-button>여기로</b-button> -->
+      <div style="width: 100vw; height: 10vh; justify-content: center; text-align: center; align-items: center;">
+        <button class="go-main-btn" @click="goMain()">북플렉스로 이동</button>
+      </div>
+      <div style="height: 6vh; width: 100vw;background-color: rgba(235, 234, 232, 1);">
+        <p class="footer-content">
+          Copyright © 앙상블. All Rights Reserved.
+        </p>
       </div>
     </div>
   </div>
@@ -97,10 +205,18 @@
 import AOS from 'aos';
 import "aos/dist/aos.css";
 
+import Book from '@/components/Main/Book.vue'
+
   export default {
+    components: {
+      Book,
+    },
     created() {
       AOS.init()
       window.addEventListener('scroll', this.handleScroll)
+    },
+    mounted() {
+      this.randomPickBook()
     },
     data() {
       return{
@@ -113,6 +229,22 @@ import "aos/dist/aos.css";
           border: '1px solid red',
           backgroundAttachment: 'fixed',
         },
+        booklists: [
+          '머리부터 천천히',
+          '우리의 사람들',
+          '그럼 무얼 부르지',
+          '도시의 시간',
+          '인터내셔널의 밤',
+          '모든 저녁이 저물 때',
+          '저녁의 구애',
+          '저녁의 게임',
+          '아침의 노래 저녁의 시',
+          '상냥한 폭력의 시대',
+          '여름의 맛',
+          '그믐, 또는 당신이 세계를 기억하는 방식',
+          '국경시장',
+        ],
+        nowBookObj: {},
       }
     },
     destroyed() {
@@ -138,7 +270,22 @@ import "aos/dist/aos.css";
         } else {
           this.nowTop = true
         }
-      }
+      },
+      randomPickBook() {
+        const num = Math.floor(Math.random() * (this.booklists.length))
+        
+        this.$axios.get(`${this.$store.getters.getServer}/book`, {params: {
+          search: 'title',
+          word: this.booklists[num]
+        }})
+        .then(res => {
+          this.nowBookObj = res.data.data[0]
+          // console.log(res.data.data[0], 'res.data.data[0]')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      },
     }
   }
 </script>
@@ -205,7 +352,8 @@ import "aos/dist/aos.css";
     left: 0;
   }
   #main .scroll-link {
-    margin-top: 25vh;
+    /* position: relative; */
+    margin-top: 10vh;
     margin-left: 50vw;
     bottom: 1rem;
     width: 100%;
@@ -255,13 +403,13 @@ import "aos/dist/aos.css";
   }
 
   .info-title-size {
-    font-size: 120px;
+    font-size: 110px;
     font-weight: bold;
     width: 100%;
     text-align: center;
   }
   .info-subtitle-size {
-    font-size: 60px;
+    font-size: 50px;
     width: 100%;
     text-align: center;
   }
@@ -271,7 +419,7 @@ import "aos/dist/aos.css";
 
   #scrollPage {
     background: linear-gradient(to bottom, black, rgba(235, 234, 232, 1));
-    height: 300vh;
+    height: 200vh;
     position: relative;
     top: 0;
   }
@@ -297,22 +445,109 @@ import "aos/dist/aos.css";
     margin: 5vh 2vw;
   }
   #main .section-title {
-    font-size: 30px;
+    font-size: 20px;
   }
-  #main .highlight-size {
-    font-size: 110px;
+  #main .highlight-size-lg {
+    font-size: 90px;
+    font-weight: bold;
+  }
+  #main .highlight-size-md {
+    font-size: 80px;
+    font-weight: bold;
+  }
+  #main .highlight-size-sm {
+    font-size: 60px;
+    font-weight: bold;
+  }
+  #main .highlight-size-xs {
+    font-size: 50px;
+    font-weight: bold;
+  }
+  #main .highlight-size-xxs {
+    font-size: 40px;
     font-weight: bold;
   }
   #main .default-size {
-    font-size: 27px;
-  }
-  #main .info-size {
     font-size: 18px;
   }
+  #main .info-size {
+    font-size: 15px;
+  }
   #main .small-size {
-    font-size: 14px;
+    font-size: 12px;
   }
   #main .section-br {
     margin: 10px 0;
   }
+  #main .highlight-size-xxxs {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  #book .book {
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+  }
+  #book .book-ul .book-readcheck {
+    display: none;
+  }
+  #book .book-ul .book-wishlist {
+    display: none;
+  }
+  #book .book-ul .book-moreInf {
+    margin: 80px 0;
+  }
+
+#main .go-main-btn{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+#main .go-main-btn:hover{
+  background:rgba(235, 234, 232, 1);
+  color:#1AAB8A;
+}
+#main .go-main-btn:before {
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+#main .go-main-btn:after {
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+#main .go-main-btn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#main .go-main-btn:hover:before {
+  width:100%;
+  transition:800ms ease all;
+}
+#main .go-main-btn:hover:after {
+  width:100%;
+  transition:800ms ease all;
+}
+
 </style>
