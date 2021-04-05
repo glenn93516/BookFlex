@@ -34,7 +34,7 @@
             </div>
             <input 
               type='text' 
-              placeholder="Enter" 
+              placeholder="앤터" 
               class='tag-input__text' 
               @keydown.enter='addTag' 
               @keydown.188='addTag'
@@ -265,9 +265,9 @@ export default {
 
   .tag-input {
     width: 100%;
+    height: 50px;
     border: 1px solid #eee;
     font-size: 0.9em;
-    height: 50px;
     box-sizing: border-box;
     padding: 0 10px;
     border: none;
@@ -289,6 +289,7 @@ export default {
   }
 
   .tag-input__text {
+    width: 100px;
     border: none;
     outline: none;
     font-size: 0.9em;
