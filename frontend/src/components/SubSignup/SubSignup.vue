@@ -43,10 +43,8 @@
 </template>
 
 <script>
-// import SubmitEmail from './SubmitEmail.vue'
 export default {
   components: {
-    // SubmitEmail,
   },
   data() {
     return {

@@ -19,10 +19,10 @@ export default {
   methods: {
     clickImg(){
       if(this.book.book_isbn==undefined){
-        this.$router.push({ name: 'FirstPage', params: { bookIsbn: this.book.isbn } })
+        this.$router.push({ name: 'FirstPage', params: { bookIsbn: String(this.book.isbn) } })
       }
       else{
-        this.$router.push({ name: 'FirstPage', params: { bookIsbn: this.book.book_isbn } })
+        this.$router.push({ name: 'FirstPage', params: { bookIsbn: String(this.book.book_isbn) } })
       }
     },
   },
