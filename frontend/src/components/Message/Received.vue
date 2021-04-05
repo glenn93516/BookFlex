@@ -29,7 +29,10 @@
 
           <div class="received-message">
             <div class="mouse-pointer" style="padding-right: 10px;">
-              <b-avatar size="40px" src="https://placekitten.com/300/300"></b-avatar>
+              <b-avatar :id="receivedMessage.senderNickname" size="40px" :src="receivedMessage.senderProfileImg"></b-avatar>
+              <b-tooltip :target="receivedMessage.senderNickname" triggers="hover">
+                {{ receivedMessage.senderNickname }}
+              </b-tooltip>
             </div>
             <div 
               class="mouse-pointer received-content"

@@ -220,6 +220,11 @@ export default {
       this.pageName = to.name
       this.checkLogin()
       this.userInfo = this.$store.getters.getUser
+    },
+    openPostBox(newOpenPostBox) {
+      this.openPostBox = newOpenPostBox
+      this.postBox = newOpenPostBox
+      // console.log(this.newOpenPostBox)
     }
   },
   mounted() {
