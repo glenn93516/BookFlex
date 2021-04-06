@@ -65,7 +65,6 @@ export default {
     },
     userLogin() {
       const user = { userEmail: this.email, userPassword: this.password, mode: 1 }
-      console.log('userLogin', user)
       this.$store.dispatch('Login', user)
     },
     goToPassword() {
