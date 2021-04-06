@@ -141,7 +141,7 @@ export default new Vuex.Store({
       axios.get(`${SERVER_URL}/user`, {headers})
       .then(res => {
         context.commit("GetUserInfo", res.data.data)
-        console.log(res.data.data)
+        // console.log(res.data.data)
         if (data.mode) {
           router.push({ name: "MainBook" })
         } 
@@ -181,7 +181,7 @@ export default new Vuex.Store({
       console.log('put전')
       axios.put(`${SERVER_URL}/user`, data, {headers})
       .then(res => {
-        console.log(res)
+        // console.log(res)
         const data = {
           "token": localStorage.getItem('jwt'),
           "mode": 0

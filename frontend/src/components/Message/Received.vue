@@ -87,7 +87,7 @@ export default {
       }
       this.$axios.get(`${this.$store.getters.getServer}/receivemsg`,{headers})
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.receivedMessages = res.data.data
       })
       .catch(err => {
