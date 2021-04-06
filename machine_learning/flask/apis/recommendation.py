@@ -1,4 +1,5 @@
 import random
+import timeit
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
@@ -37,8 +38,6 @@ def calculate_score(similarity):
     '''
     score = 1
     if similarity >= 0.9:
-        score = 2
-    elif similarity >= 0.8:
         score = 1.5
     elif similarity >= 0.7:
         score = 1
@@ -195,11 +194,11 @@ def recommend_random_books():
 @recommendation.route("/<int:userId>", methods=["GET"])
 def recommend_by_user(userId):
     read_books = [book.book_isbn for book in UserBook.query.filter_by(
-        user_id=userId).all()]
+        user_id=userId).order_by(UserBook.user_book_id.desc()).limit(10).all()]
     user_genres = [genre.genre_id for genre in UserGenre.query.filter_by(
         user_id=userId).all()]
     wishlists = [wishlist.book_isbn for wishlist in Wishlist.query.filter_by(
-        user_id=userId).all()]
+        user_id=userId).order_by(Wishlist.wishlist_date.desc()).limit(10).all()]
     customized_genre_id, customized_genre_name \
         = find_customized_genre(read_books, user_genres)
 
@@ -215,7 +214,8 @@ def recommend_by_user(userId):
         customized_by_user = recommend(read_books)
 
     # 장르 기반 추천
-    customized_by_genre = recommend(read_books, [customized_genre_id])
+    customized_by_genre = recommend(
+        read_books, [customized_genre_id])
 
     # 위시리스트 기반 추천 (위시리스트에 책 없으면 빈칸으로 보냄)
     if len(wishlists) > 0:

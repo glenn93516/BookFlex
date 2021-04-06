@@ -181,7 +181,7 @@ export default new Vuex.Store({
       console.log('put전')
       axios.put(`${SERVER_URL}/user`, data, {headers})
       .then(res => {
-        // console.log(res)
+        console.log(res)
         const data = {
           "token": localStorage.getItem('jwt'),
           "mode": 0
