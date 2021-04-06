@@ -58,6 +58,7 @@ export default {
   display: inline-block; 
   margin-left: 27px;
   margin-top: 30px;
+  margin-bottom: 1rem;
 }
 #readbook div:nth-child(5n+1) {
   margin-left: 0;

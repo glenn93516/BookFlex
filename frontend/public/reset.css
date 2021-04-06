@@ -47,10 +47,11 @@ a:hover {
 }
 .footer-content {
   font-family: 'NanumBarunpen', sans-serif;
-  font-size: 10px;
+  font-size: 0.6rem;
+  padding-top: 2rem;
   text-align: center;
-  margin-top: 30px;
-  padding-bottom: 30px;
+  position: relative;
+  bottom: 0.5rem;
 }
 /* font 설정 */
 .font-nanumpen {

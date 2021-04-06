@@ -19,9 +19,16 @@
         <div 
           class="tag-name"
         >
-          <span id="first-tag">
+          <span v-if="loginState" id="first-tag">
             맞춤형 추천
           </span>
+          <div v-else>
+            <span id="first-tag">
+              실시간 도서
+            </span>
+            <span>맞춤형 추천은 <span @click="goToLogin">로그인</span>시에만 가능합니다.</span>
+          </div>
+
         </div>
       </div>
       <div 
@@ -49,9 +56,10 @@
         <div 
           class="tag-name"
         >
-          <span id="second-tag">
+          <span v-if="loginState" id="second-tag">
             {{ userGenre }}
           </span>
+          <span v-else style="height: 51px;"></span>
         </div>
       </div>
       <div 
@@ -78,9 +86,10 @@
         <div 
           class="tag-name"
         >
-          <span id="third-tag">
+          <span v-if="loginState" id="third-tag">
             위시리스트
           </span>
+          <span v-else style="height: 51px;"></span>
         </div>
       </div>
       <div
@@ -138,6 +147,14 @@ export default {
       selectedBook: "",
       step: "",
       isLoading: true,
+      loginState: false,
+    }
+  },
+  created() {
+    if (localStorage.getItem('jwt')) {
+      this.loginState = true
+    } else {
+      this.loginState = false
     }
   },
   mounted() {
@@ -159,7 +176,7 @@ export default {
       if (token) {
         this.$axios.get(`${this.$store.getters.getServer}/recommend`, {headers})
         .then(res => {
-          console.log(res.data)
+          // console.log(res.data)
           this.suitRecommend = res.data.data.customized_by_user
           this.genreRecommend = res.data.data.customized_by_genre.customized_books
           this.userGenre = res.data.data.customized_by_genre.genre.genre_name
@@ -171,7 +188,7 @@ export default {
       } else {
         this.$axios.get(`${this.$store.getters.getServer}/recommend`)
         .then(res => {
-          console.log(res)
+          // console.log(res)
           this.suitRecommend = res.data.data.customized_by_user
           this.genreRecommend = res.data.data.customized_by_genre.customized_books
           this.userGenre = res.data.data.customized_by_genre.genre.genre_name
@@ -216,6 +233,9 @@ export default {
     },
     goToCollect() {
       this.step = "collectSentence"
+    },
+    goToLogin() {
+      this.$router.push({ name: "Login" })
     }
   }
 }
