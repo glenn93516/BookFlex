@@ -6,7 +6,7 @@
         {{item.userNickname}}
       </span>
     </header>
-    <div style="position: relative;" >
+    <div class="image-part" style="position: relative;" >
       <img 
         class="sentence-img" 
         v-if="item.highlightCover"
@@ -202,11 +202,11 @@ export default {
   #communityItem .sentence-img {
     width: 465px;
     height: 300px;
-    margin-top: 9px;
     border-radius: 5px 5px 0 0;
   }
   #communityItem .sentence-text {
     font-size: 20px;
+    padding: 0 30px;
   }
   #communityItem .sentence-book-title {
     font-size: 18px; 
@@ -244,14 +244,15 @@ export default {
     position: absolute;
     width: 465px;
     text-align: center;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
+    justify-content: center;
     top : 0;
-    left: 22px; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
     width:465px; 
     height : 300px; 
     padding-top:100px;
-    margin: 9px 0;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px 5px 0 0;
   }
