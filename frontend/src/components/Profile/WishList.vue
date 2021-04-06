@@ -12,7 +12,7 @@
           :src="book.book_cover" 
           alt=""
           class="hvr-grow-shadow mouse-pointer"
-          @click="clickWishBook()"
+          @click="clickWishBook(book.book_isbn)"
         >
       </div>
     </div>
@@ -44,8 +44,8 @@ export default {
         this.wishLists = res.data.data
       })
     },
-    clickWishBook() {
-      alert('위시리스트 책입니닷')
+    clickWishBook(isbn) {
+      this.$router.push({name: 'BookDetail', params: {bookIsbn: isbn}})
     },
   }
 }
