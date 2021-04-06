@@ -6,7 +6,7 @@
         <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
       </div>
       <div v-else>
-        <div v-if="bookSentiment['positive']">
+        <div v-if="bookSentiment['positive'].count || bookSentiment['negative'].count">
           <DoughnutChart :chartData="chartData" />
         </div>
         <div v-else>
@@ -58,10 +58,10 @@
         await this.$axios.get(`${this.$store.getters.getServer}/book/${isbn}/sentiment`)
         .then(res => {
           this.loading = false
-          console.log(this.loading)
+          
           if(res.data.data) {
             this.bookSentiment = res.data.data.sentiment
-
+            console.log(this.bookSentiment)
 
             this.chartData.labels[0] = "긍정"
             this.chartData.datasets[0].data[0] = this.bookSentiment.positive.ratio
