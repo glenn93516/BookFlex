@@ -40,7 +40,7 @@ export default {
     };
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`,{ params: form })
     .then(res => {
-      console.log(res.data.data)
+      console.log(res.data, ' <<   like ')
       this.defaultItems = res.data.data
       // this.showItems = this.defaultItems.slice(0, 6)
       if (this.defaultItems.length > 6) {
