@@ -60,8 +60,8 @@
             style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
           >
             <span style="font-size: 0.8rem;">나의 서재</span>
+            <hr v-if="isLogin" class="list-hr">
           </b-dropdown-item>
-          <hr v-if="isLogin" class="list-hr">
           
           <b-dropdown-item
             v-if="!isLogin" 
@@ -69,6 +69,7 @@
             style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
           >
             <span style="font-size: 0.8rem;">로그인</span>
+            <hr class="list-hr">
           </b-dropdown-item>
 
           <b-dropdown-item
@@ -78,7 +79,6 @@
           >
             <span style="font-size: 0.8rem;">로그아웃</span>
           </b-dropdown-item>
-            <hr class="list-hr">
 
             <!-- <hr class="list-hr"> -->
 
