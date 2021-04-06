@@ -93,9 +93,8 @@ export default {
       writterInfo: null,
     }
   },
-  // 지금은 프로필이라서 이렇게 해도 되지만, community의 경우 한 개씩 반복해서 확인해줘야함
   mounted() {
-    console.log(this.item, 'item')
+    // console.log(this.item, 'item')
     let userId = this.$store.getters.getUser.userId
     if (this.item.userId === userId) {
       this.isEditor = true
@@ -107,9 +106,6 @@ export default {
   methods: {
     goProfile() {
       this.$router.push({ name: 'Profile', params: { userName: this.item.userNickname }})
-      // item에서 usernickname꺼내서
-      //routerpush해서 프로필로이동
-      // alert('아직 nickname 정보가 없습니다.')
     },
     getLikeStatus() {
       const token = localStorage.getItem('jwt')
@@ -121,16 +117,12 @@ export default {
         this.likeNum = res.data.data.goodCount
         this.likeStatus = res.data.data.userGood
         this.writterInfo = res.data.data
-        // console.log(res.data.data, '처음에 들어오는 데이터')
       })
     },
     clickBook(isbn) {
       this.$router.push({ name: 'BookDetail', params: { bookIsbn: isbn }})
-      //routerpush isbn으로 보내주기
     },
     addLike() {
-      console.log('addLike')
-      // 만약 로그인 안한 유저라면 addLike못함
       const token = localStorage.getItem('jwt')
       const headers = {
         "Authorization": token

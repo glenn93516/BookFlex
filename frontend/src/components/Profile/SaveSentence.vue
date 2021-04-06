@@ -1,5 +1,5 @@
 <template>
-  <div class="temp" style="margin-top: 20px;">
+  <div id="saveSentence" class="temp" style="margin-top: 20px;">
     <div 
       class="sentence-item" 
       v-for="item in showItems" 
@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <b-modal v-model="showDetail" centered hide-footer hide-header hide-backdrop>
+    <b-modal v-model="showDetail" centered hide-footer hide-header hide-backdrop class="modal-detail">
       <sentence-detail :item="nowItem" @close-modal="showDetail=false"></sentence-detail>
     </b-modal>
     <div class="more">
@@ -84,6 +84,9 @@ export default {
 </script>
 
 <style scoped>
+  #saveSentence .modal-content {
+    min-width: 500px;
+  }
   .sentence-item {
     display: inline-block;
     position: relative;

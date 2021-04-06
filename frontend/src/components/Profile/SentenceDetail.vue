@@ -24,7 +24,7 @@
         v-if="item.highlightCover"
         :src="item.highlightCover" 
         alt=""
-        style="margin-top: 9px; border-radius: 10px 10px 0 0;"
+        style="margin-top: 9px; border-radius: 10px 10px 0 0; min-width: 465px;"
       >
       <img 
         class="sentence-img" 
@@ -33,7 +33,7 @@
         v-else
         src="@/assets/waterprint_back.jpg" 
         alt=""
-        style="margin-top: 9px; border-radius: 10px 10px 0 0;"
+        style="margin-top: 9px; border-radius: 10px 10px 0 0; min-width: 465px;"
       >
       
       <div class="detail-dimmed">
@@ -203,6 +203,7 @@ export default {
     top: 54px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
+    min-width: 465px;
     text-align: center;
   }
   .detail-sentence-text {
@@ -214,6 +215,8 @@ export default {
   }
   .detail-sentence-date {
     display: absolute;
+    min-width: 465px;
+    width: 465px;
     height: 30px;
     right: 0;
     text-align: end;
