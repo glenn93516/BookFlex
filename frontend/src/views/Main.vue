@@ -551,7 +551,7 @@ import Book from '@/components/Main/Book.vue'
     display: none;
   }
   #book .book-ul .book-moreInf {
-    margin: 4rem 0;
+    display: none;
   }
   #main .recommend-book {
     margin: 4rem 0;

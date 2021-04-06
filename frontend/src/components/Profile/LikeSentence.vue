@@ -5,13 +5,28 @@
       v-for="item in showItems" 
       :key="item.index" 
     >
-      <!-- <good-highlight :item="item"></good-highlight> -->
-      <goodhigh :item="item"></goodhigh>
-      <!-- 좋아요한 문장들 -->
+      <img v-if="item.highlightCover" class="sentence-img" width="340px" height="250px" :src="item.highlightCover" alt="bookImg">
+      <img v-else class="sentence-img" width="340px" height="250px" src='@/assets/waterprint_back.jpg' alt="bookImg">
+      <div @click="sentenceDetail(item)" class="dimmed">
+        <div class="sentence-text">
+          <div 
+            style="
+              font-size: 20px; 
+              height: 90px; 
+              overflow: hidden; 
+              text-overflow: ellipsis; 
+              display: -webkit-box; 
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical; 
+              word-wrap:break-word; 
+            "
+          >{{item.highlightContent}}</div>
+          <div style="margin-top: 10px; font-weight: bold; font-size: 18px;">📖{{item.bookTitle}}-{{item.highlightPage}}p</div>
+        </div>
+      </div>
     </div>
     <b-modal v-model="showDetail" centered hide-footer hide-header hide-backdrop>
-    <!-- <b-modal v-model="showDetail" centered hide-footer hide-header> -->
-      <!-- <sentence-detail :item="nowItem" @close-modal="showDetail=false"></sentence-detail> -->
+      <sentence-detail :item="nowItem" @close-modal="showDetail=false"></sentence-detail>
     </b-modal>
     <div class="more">
       <img 
@@ -26,23 +41,22 @@
 </template>
 
 <script>
-// import goodHighlight from './GoodHighLight.vue'
-import goodhigh from './GoodHighLightItem.vue'
+import SentenceDetail from './SentenceDetail.vue'
 
 export default {
   components: {
-    // goodHighlight
-    goodhigh
+    SentenceDetail,
   },
   mounted() {
-    var form = {
-      onlyGood : true
-    };
-    this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`,{ params: form })
+    console.log(this.$route.params.userName, 'savesentence')
+    const form = {
+      'onlyGood': true
+    }
+    this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`, {params: form})
     .then(res => {
-      console.log(res.data, ' <<   like ')
+      console.log(res.data.data, '이거 115')
       this.defaultItems = res.data.data
-      // this.showItems = this.defaultItems.slice(0, 6)
+      this.showItems = this.defaultItems.slice(0, 6)
       if (this.defaultItems.length > 6) {
         this.moreBtn = true
       } else {
@@ -52,7 +66,7 @@ export default {
   },
   data() {
     return {
-      // showItems: [],
+      showItems: [],
       defaultItems: [],
       moreBtn: false,
       showDetail: false,
@@ -61,25 +75,14 @@ export default {
       nowBookTitle: "",
     }
   },
-  computed : {
-    showItems : function(){
-      if(this.moreBtn==true){
-        return this.defaultItems.slice(0,6)
-      }else{
-        return this.defaultItems;
-      }
-    }
-  },
   methods: {
     more() {
-      // this.showItems = this.defaultItems
+      this.showItems = this.defaultItems
       this.moreBtn = false
     },
     sentenceDetail(item) {
       this.showDetail = true
       this.nowItem = item
-      // 여기서 자기껀지 아닌지 확인해주자.
-      // 현재 highlight의 작성자와 현재 로그인된 계정 사람이 같은지
     },
   },
 }
@@ -92,7 +95,9 @@ export default {
     margin-left: 45px;
     margin-bottom: 30px;
   }
-
+  .sentence-img {
+    border-radius: 10px;
+  }
   .temp div:nth-child(3n+1) {
     margin-left: 0;
   }
@@ -114,7 +119,15 @@ export default {
     color: white;
     cursor: pointer;
   }
-
+  .sentence-text {
+    margin-top: 80px;
+    padding-left: 60px;
+    width: 280px;
+    height: 150px;
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+  }
   .more {
     display: flex;
     justify-content: center;
