@@ -103,25 +103,16 @@
         right: 50px;
       "  
     >
-      <!-- <img
-        width="120px"
-        height="120px"
-        :src="postBox"
-        @mouseover="postBox = openPostBox"
-      /> -->
-
-      <!-- 여기는 우체통 -->
       <img
         v-if="this.$route.path !== '/login' && !this.re.test(this.$route.path)"
         class="postbox"
         width="120px"
-        height="120px" 
+        height="120px"
         :src="postBox"
         @mouseover="tempOverImg()"
         @mouseout="tempOutImg()"
         @click="postBoxClick" 
       />
-
     </aside>
   </div>
 </template>
@@ -332,6 +323,12 @@ export default {
     margin-top: 5px;
     margin-bottom: 5px;
     /* background-color: white; */
+  }
+  .postbox {
+    position: fixed;
+    bottom: 0;
+    right: 6rem;
+    z-index: 2;
   }
   .postbox:hover {
     cursor: pointer;

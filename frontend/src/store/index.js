@@ -104,8 +104,6 @@ export default new Vuex.Store({
     SubmitPref(state, payload) {
       state.signupInfo.genres = payload
       state.user.genres = payload
-      console.log(payload)
-      console.log(state.user.genres)
     },
     Logout(state) {
       state.accessToken = ""
@@ -175,14 +173,13 @@ export default new Vuex.Store({
       data.append('userBirth', User.userBirth)
       data.append('userGender', User.userGender)
       data.append('userJob', User.userJob)
-      for (let val of data.values()) {
-        console.log(val)
-      }
+      // for (let val of data.values()) {
+      //   console.log(val)
+      // }
       const token = localStorage.getItem('jwt')
       const headers = {
         "Authorization": token
       }
-      console.log('put전')
       axios.put(`${SERVER_URL}/user`, data, {headers})
       .then(res => {
         console.log(res)
