@@ -270,7 +270,6 @@ import Book from '@/components/Main/Book.vue'
         mainStyle: {
           backgroundImage: 'url(https://cdn.pixabay.com/photo/2017/08/03/20/00/booksm-collection-2578237_960_720.jpg)', 
           height: '250vh', 
-          width: '100%', 
           border: '1px solid red',
           backgroundAttachment: 'fixed',
         },
@@ -305,11 +304,8 @@ import Book from '@/components/Main/Book.vue'
       goMain() {
         this.$router.push({ path: 'main' })
       },
-      handleScroll(event) {
-        // let scrollPageStart = document.getElementById('scrollPage').offsetTop;
-        console.log(event, 'event')
+      handleScroll() {
         let _documentY = window.pageYOffset
-        // let _documentY = event.srcElemnt.scrollingElement.scrollTop;
         if (_documentY > window.innerHeight/8) {
           this.nowTop = false
         } else {
@@ -325,7 +321,6 @@ import Book from '@/components/Main/Book.vue'
         }})
         .then(res => {
           this.nowBookObj = res.data.data[0]
-          // console.log(res.data.data[0], 'res.data.data[0]')
         })
         .catch(err => {
           console.log(err)
