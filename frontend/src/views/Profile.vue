@@ -23,7 +23,7 @@
             <h1 class="profile-name">
               {{ $route.params.userName }}
             </h1>
-            <img width="40px" :src="medal.first" />
+            <img class="profile-medal" :src="medal.first" />
           </div>
           <!-- <span class="update-btn" @click="updateModal=true" v-if="isEditor"><span>편집</span></span> -->
         </div>
@@ -227,6 +227,7 @@ export default {
     .then(res => {
       if (res.status === 200) {
         this.nowUserName = this.$store.state.user.userNickname
+        console.log(this.nowUserName, 'nowUserName')
       } else {
         if (res.status === 202) {
           this.$router.push('not-exist')
@@ -319,11 +320,8 @@ export default {
     background-color: rgba(255, 255, 255, 0.5);
   }
   .update-btn:hover {
-    /* background-color: gold; */
-    /* background-color: #ffa9a9; */
     background-color: rgb(127, 102, 91);
     font-weight: bold;
-    /* color: black; */
     color: white;
   }
   .update-btn:active {
@@ -355,16 +353,16 @@ export default {
     align-items: center;
   }
   .profile-name {
-    font-size: 50px;
+    font-size: 3rem;
     font-weight: bold;
     margin-right: 10px;
     letter-spacing: 3px;
     display: inline-block;
   }
+  .profile-medal {
+    width: 3rem;
+  }
   .profile-singleline {
-    /* white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; */
     width: 750px;
     margin: 20px 0;
     font-size: 20px;
@@ -379,12 +377,8 @@ export default {
   .profile-badge > div {
     margin-left: 15px;
   }
-  /* .profile-badge div:first-child {
-    margin-left: 0;
-  } */
   .profile-genre-item div[class*="tooltip"] {
-    /* color: red; */
-    /* display: inline-block; */
+
     display: none;
   }
   .badge-icon {
@@ -466,6 +460,7 @@ export default {
   .profile-nav-line {
     display: flex;
     justify-content: center;
+    min-width: 1110px;
   }
   .profile-nav-item {
     font-family: 'S-CoreDream-2ExtraLight', sans-serif;
