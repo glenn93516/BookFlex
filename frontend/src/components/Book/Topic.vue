@@ -28,7 +28,7 @@
       </div>
       <div v-else style="height:320px; display:flex; justify-content:center; align-items:center;">
         <br style="margin-bottom: 30px;">
-        <h5 style="text-align: center; color: grey;">리뷰 데이터 수집중</h5>
+        <h5 style="text-align: center; color: grey;">리뷰 데이터가 충분하지 않습니다.</h5>
       </div>
     </div>
 

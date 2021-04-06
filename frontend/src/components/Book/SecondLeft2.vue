@@ -3,7 +3,7 @@
 
     <div class="second-left-small row justify-content-center">
       <div v-if="!loading && !chartData.datasets[0].label" style="height:300px; display:flex; justify-content:center; align-items:center;">
-        <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
+        <h5 style="text-align: center; color: grey;">리뷰 데이터가 충분하지 않습니다.</h5>
       </div>
       <div v-else>
         <div v-if="loading" style="height:300px; display:flex; justify-content:center; align-items:center;">
@@ -78,7 +78,7 @@
 
 <style>
   .second-left-small canvas {
-    width: 275px !important;
-    height: 275px !important;
+    width: 250px !important;
+    height: 250px !important;
   }
 </style>

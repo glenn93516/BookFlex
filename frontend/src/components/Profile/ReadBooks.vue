@@ -12,7 +12,7 @@
           :src="book.book_cover" 
           alt="" 
           class="hvr-grow-shadow mouse-pointer"
-          @click="clickReadBook()"
+          @click="clickReadBook(book.book_isbn)"
         >
       </div>
     </div>
@@ -40,8 +40,9 @@ export default {
       })
       console.log(this.readBooks, 'readBookds')
     },
-    clickReadBook() {
-      alert('읽은 책입니다(～￣▽￣)～✨')
+    clickReadBook(isbn) {
+      // alert('읽은 책입니다(～￣▽￣)～✨')
+      this.$router.push({ name: 'FirstPage', params: { bookIsbn: isbn } })
     },
   }
 }
