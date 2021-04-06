@@ -139,7 +139,6 @@ export default {
     contentsTotalRows : function() {
       return this.item.contentsData.length;
     }
-
   },
 }
 </script>

@@ -41,13 +41,11 @@
     <!-- 리뷰 데이터 부재시 보여줄 화면 -->
     <div 
       v-else 
-      style="height: 550px; width: 450px; z-index: 10;"
+      style="height: 275px; width: 450px; z-index: 10; text-align: center;"
     >
-      <h1>
-        리뷰데이터가 없어요 ㅠ
-        <br>
-        (이미지, 일러스트로 대체)
-      </h1>
+      <h2 style="margin-top: 300px; margin-bottom: 0px; font-weight: bold; color: grey; margin-left: 50px;">
+        리뷰 데이터 수집중 :)
+      </h2>
     </div>
   </div>
 </template>
@@ -58,6 +56,7 @@ let Chance = require('chance')
 let chance = new Chance();
 
 export default {
+  name: "WordCloud",
   props: {
     isbn: String,
   },
@@ -136,10 +135,10 @@ export default {
     getWordCloud(isbn) {
       this.$axios.get(`${this.$store.getters.getServer}/book/${isbn}/wordcloud`)
       .then(res => {
-        console.log(res.data.data)
+        // console.log(res.data.data)
         this.words = res.data.data.slice(0, 30)
         this.isEmpty = res.data.data.length
-        console.log(this.isEmpty)
+        // console.log(this.isEmpty)
       })
       .catch(err => {
         console.error(err)
