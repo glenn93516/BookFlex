@@ -1,7 +1,7 @@
 <template>
   <div style="margin-left: 20px;">
 
-    <div class="small row justify-content-center">
+    <div class="small2 row justify-content-center">
       <div v-if="bookTopics[0]">
         <DoughnutChart :chartData="chartData" />
       </div>
@@ -77,7 +77,7 @@
 </script>
 
 <style>
-  .small canvas {
+  .small2 canvas {
     
     width: 250px !important;
     height: 250px !important;
