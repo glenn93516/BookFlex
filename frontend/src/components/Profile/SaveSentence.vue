@@ -5,11 +5,9 @@
       v-for="item in showItems" 
       :key="item.index" 
     >
-      <!-- <img class="sentence-img" width="340px" height="250px" src="@/assets/waterprint_back.jpg" alt="bookImg"> -->
       <img v-if="item.highlightCover" class="sentence-img" width="340px" height="250px" :src="item.highlightCover" alt="bookImg">
       <img v-else class="sentence-img" width="340px" height="250px" src='@/assets/waterprint_back.jpg' alt="bookImg">
       <div @click="sentenceDetail(item)" class="dimmed">
-        <!-- text최소 길이, 최대 길이 정해주기 -->
         <div class="sentence-text">
           <div 
             style="
@@ -25,11 +23,9 @@
           >{{item.highlightContent}}</div>
           <div style="margin-top: 10px; font-weight: bold; font-size: 18px;">📖{{item.bookTitle}}-{{item.highlightPage}}p</div>
         </div>
-        <!-- <div class="sentence-book">{{item.book}}</div> -->
       </div>
     </div>
     <b-modal v-model="showDetail" centered hide-footer hide-header hide-backdrop>
-    <!-- <b-modal v-model="showDetail" centered hide-footer hide-header> -->
       <sentence-detail :item="nowItem" @close-modal="showDetail=false"></sentence-detail>
     </b-modal>
     <div class="more">
@@ -53,8 +49,6 @@ export default {
   },
   mounted() {
     console.log(this.$route.params.userName, 'savesentence')
-    // 문장 요청 보내기
-    // 지금은 숫자로 요청해야함
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`)
     .then(res => {
       console.log(res.data.data, '이거 115')
@@ -86,8 +80,6 @@ export default {
     sentenceDetail(item) {
       this.showDetail = true
       this.nowItem = item
-      // 여기서 자기껀지 아닌지 확인해주자.
-      // 현재 highlight의 작성자와 현재 로그인된 계정 사람이 같은지
     },
   },
 }
