@@ -54,6 +54,7 @@
           <font-awesome-icon 
             size="2x"
             class="text-primary mouse-pointer"
+            @click="modifySentence()"
             @mouseover="editIcon = ['fas', 'edit']"
             @mouseleave="editIcon = ['far', 'edit']"
             :icon="editIcon"
@@ -62,6 +63,7 @@
           <font-awesome-icon 
             size="2x"
             class="text-danger mouse-pointer ml-2"
+            @click="deleteSentence()"
             @mouseover="deleteIcon = ['fas', 'trash-alt']"
             @mouseleave="deleteIcon = ['far', 'trash-alt']"
             :icon="deleteIcon"
@@ -69,11 +71,6 @@
           />
         </div>
       </div>
-      <!-- text최소 길이, 최대 길이 정해주기 -->
-      <!-- <div class="detail-sentence-text">
-        <div class="sentence-text">{{item.highlightContent}}</div>
-        <div class="sentence-book-title mouse-pointer" @click="clickBook(item.bookIsbn)">📖 {{item.bookTitle}}-{{item.highlightPage}}p</div>
-      </div> -->
     </div>
   </div>
 </template>
@@ -168,6 +165,23 @@ export default {
           console.log(err)
         })
       }
+    },
+    deleteSentence() {
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      console.log(this.item, '여기는 아이템')
+      this.$axios.delete(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {}, {headers})
+      .then(res => {
+        console.log(res, '삭제 성공')
+      })
+      .catch(err => {
+        console.log(err, '삭제 실패')
+      })
+    },
+    modifySentence() {
+
     },
   }
 }

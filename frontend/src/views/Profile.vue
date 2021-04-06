@@ -63,7 +63,9 @@
                 :src="genreClassificationIcon[genre].img"
               />
               <br>
-              <div class="profile-genre-tooltip">{{genreClassificationIcon[genre].name}}</div>
+              <div class="profile-genre-tooltip">
+                {{genreClassificationIcon[genre].name}}
+              </div>
             </div>
           </div>
           <!-- <b-modal v-model="genreModalShow" centered hide-footer hide-header hide-backdrop> -->
@@ -407,7 +409,7 @@ export default {
   /* .profile-badge div:first-child {
     margin-left: 0;
   } */
-  div[class*="tooltip"] {
+  .profile-genre-item div[class*="tooltip"] {
     /* color: red; */
     /* display: inline-block; */
     display: none;

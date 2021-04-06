@@ -159,7 +159,7 @@ export default {
       if (token) {
         this.$axios.get(`${this.$store.getters.getServer}/recommend`, {headers})
         .then(res => {
-          console.log(res.data)
+          // console.log(res.data)
           this.suitRecommend = res.data.data.customized_by_user
           this.genreRecommend = res.data.data.customized_by_genre.customized_books
           this.userGenre = res.data.data.customized_by_genre.genre.genre_name
@@ -171,7 +171,7 @@ export default {
       } else {
         this.$axios.get(`${this.$store.getters.getServer}/recommend`)
         .then(res => {
-          console.log(res)
+          // console.log(res)
           this.suitRecommend = res.data.data.customized_by_user
           this.genreRecommend = res.data.data.customized_by_genre.customized_books
           this.userGenre = res.data.data.customized_by_genre.genre.genre_name

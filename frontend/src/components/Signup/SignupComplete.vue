@@ -51,7 +51,7 @@ export default {
     this.$axios.post(`${this.$store.getters.getServer}/user/join`, signupInfo)
     .then(res => {
       console.log('회원가입 결과!')
-      console.log(res)
+      // console.log(res)
       this.login()
     })
     .catch(err => {
