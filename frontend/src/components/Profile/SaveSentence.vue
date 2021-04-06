@@ -11,8 +11,19 @@
       <div @click="sentenceDetail(item)" class="dimmed">
         <!-- text최소 길이, 최대 길이 정해주기 -->
         <div class="sentence-text">
-          <div style="font-size: 20px; height: 90px; overflow: hidden; text-overflow: ellipsis;">{{item.highlightContent}}</div>
-          <div style="margin-top: 10px; font-weight: bold; font-size: 18px;">"{{item.bookTitle}}"</div>
+          <div 
+            style="
+              font-size: 20px; 
+              height: 90px; 
+              overflow: hidden; 
+              text-overflow: ellipsis; 
+              display: -webkit-box; 
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical; 
+              word-wrap:break-word; 
+            "
+          >{{item.highlightContent}}</div>
+          <div style="margin-top: 10px; font-weight: bold; font-size: 18px;">📖{{item.bookTitle}}-{{item.highlightPage}}p</div>
         </div>
         <!-- <div class="sentence-book">{{item.book}}</div> -->
       </div>
