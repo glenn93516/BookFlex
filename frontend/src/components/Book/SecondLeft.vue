@@ -6,7 +6,7 @@
         <DoughnutChart :chartData="chartData" />
       </div>
       <div v-else style="height:300px; display:flex; justify-content:center; align-items:center;">
-        <h5 style="text-align: center; ">리뷰 데이터 수집중</h5>
+        <h5 style="text-align: center; color: grey;">리뷰 데이터가 충분하지 않습니다.</h5>
       </div>
     </div>
 
@@ -79,7 +79,7 @@
 <style>
   .small canvas {
     
-    width: 300px !important;
-    height: 300px !important;
+    width: 250px !important;
+    height: 250px !important;
   }
 </style>
