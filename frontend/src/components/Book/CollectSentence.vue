@@ -42,7 +42,7 @@
         <b-form-textarea
           id="textarea"
           v-model="text"
-          placeholder="Enter something..."
+          placeholder="간직할 문장을 이곳에 담아주세요"
           rows="3"
           max-rows="6"
         ></b-form-textarea>
@@ -53,9 +53,10 @@
           id="sentence-img"
           v-model="file"
           :state="Boolean(file)"
-          placeholder="Choose a file or drop it here..."
-          drop-placeholder="Drop file here..."
+          placeholder="파일을 선택하거나 끌어서 넣어주세요"
+          drop-placeholder="사진 담을 곳"
         >
+        <b-button type="submit" for="sentence-img">사진 찾기</b-button>
         </b-form-file>
           <div class="mt-3" style="display: inline-block; margin-right: 50px;">
             <label for="sentencePage" class="mt-3" style="font-size: 18px; margin-right: 5px; width: 70px;">페이지 : </label>
