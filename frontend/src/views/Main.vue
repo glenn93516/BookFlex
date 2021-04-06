@@ -27,17 +27,17 @@
           </div>
         </transition>
       </div>
-      <div class="book-info-black"></div>
+      <div class="book-info-black main-interval"></div>
       <div id="bookInfo">
         <div class="book-info-background">
-          <div id="book-number" style="width: 100vw;">
+          <div id="book-number">
             <div data-aos="fade-right" class="text-center">
               <span class="white info-subtitle-size">도서</span>
               <span class="yellow info-title-size info-number">88,416</span>
               <span class="white info-subtitle-size">권</span>
             </div>
           </div>
-          <div id="review-number" style="width: 100vw;">
+          <div id="review-number">
             <div data-aos="fade-left" class="white info-subtitle-size">
               <span class="white info-subtitle-size">리뷰</span>
               <span class="salmon info-title-size info-number">632,017</span>
@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <div class="book-info-black"></div>
+      <div class="book-info-black main-interval"></div>
 
       
       <!-- 스크롤 페이지 -->
@@ -109,83 +109,126 @@
               </div>
               <br>
               <div data-aos="fade-left" style="text-align: center; position: relative;">
-                <img width="100%" height="220px" src="@/assets/bizido.png" alt="" class="bizido-img">
+                <img src="@/assets/bizido.png" alt="" class="bizido-img">
                 <div class="bizido-img-dimmed"></div>
               </div>
             </div>
           </div>
         </div>
-        <div style="height: 20vh;">
+        <div class="main-interval">
         </div>
-        <div style="height: 110vh;">
-          <div style="height: 50vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+        <div>
+          <div class="info-section">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">문장 수집</h1>
-              <hr style="margin: 10px 0;">
-              <p data-aos="fade-left" style="width: 400px;">
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+              <hr class="headline">
+              <p data-aos="fade-left" class="info-paragraph">
+                문장을 모으고, 기록하고, 공유해보세요.
+                <br>
+                책을 읽는 동안 마음을 울리는 문장들이 있지 않으셨나요?
+                <br>
+                아름다운 카드와 글귀로 책을 기억속에 간직한다면
+                <br>
+                책을 읽었던 시간이 더 가치있게 보관될 수 있을거에요. 
+                <br>
+                수집한 문장은 모두와 공유할 수도 있고, 혼자 간직할 수도 있습니다.
               </p>
             </div>
-            <img data-aos="fade-down" data-aos-duration="1000" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
+            <img 
+              data-aos="fade-down" 
+              data-aos-duration="1000" 
+              class="book-info-img"
+              src="@/assets/profileSaveSentence.png" 
+              alt="">
           </div>
-          <div style="height: 50vh; margin-top: 5vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+          <div class="info-section">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">나만의 서재</h1>
-              <hr style="margin: 10px 0;">
-              <p data-aos="fade-left" style="width: 400px;">
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+              <hr class="headline">
+              <p data-aos="fade-left" class="info-paragraph">
+                나만의 서재를 만들어보세요.
+                <br>
+                그 동안 어떤 책을 읽었는지, 
+                어떤 책이 읽고 싶은지,
+                <br>
+                목록을 통해 한 눈에 확인할 수 있습니다.
+                <br>
+                위시리스트도 관리할 수 있어요.
+                <br>
+                나만의 서재에 등록된 책들을 통해 
+                <br>
+                추천 페이지에서 맞춤형 추천 서비스도 이용할 수 있습니다.
               </p>
             </div>
-            <img data-aos="fade-down" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
+            <img 
+              data-aos="fade-down" 
+              class="book-info-img"
+              src="@/assets/profileReadBook.png" 
+              alt=""
+            >
           </div>
         </div>
-        <div style="height: 110vh;">
-          <div style="height: 50vh; margin-top: 5vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+        <div>
+          <div class="info-section">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">맞춤형 추천</h1>
-              <hr style="margin: 10px 0;">
-              <p data-aos="fade-left" style="width: 400px;">
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+              <hr class="headline">
+              <p data-aos="fade-left" class="info-paragraph">
+                어떤 책을 읽을지 고민하지 마세요.
+                <br>
+                북플렉스가 대신 고민하고, 추천해드립니다.
+                <br>
+                초기 회원 가입을 통해 수집된 선호 장르와
+                <br>
+                나만의 서재에 등록된 읽은 책 리스트, 
+                <br>
+                그리고 위시리스트까지
+                <br>
+                사용자의 모든 정보를 종합하여
+                <br>
+                사용자 맞춤형 책 추천 서비스를 제공해드립니다.
               </p>
             </div>
-            <img data-aos="fade-down" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
+            <img 
+              data-aos="fade-down" 
+              class="book-info-img"
+              src="@/assets/wishlist.png" 
+              alt=""
+            >
           </div>
-          <div style="height: 50vh; margin-top: 5vh; padding: 3vh 2vw; display: flex; justify-content: space-around; align-items: center;">
+          <div class="info-section">
             <div>
               <h1 data-aos="fade-right" style="font-weight: bold;">커뮤니티</h1>
-              <hr style="margin: 10px 0;">
-              <p data-aos="fade-left" style="width: 400px;">
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
-                나만의 문장 수집 기능을 통한 어쩌구 저쩌구 
+              <hr class="headline">
+              <p data-aos="fade-left" class="info-paragraph">
+                혼자 알기 아까운 책이 있으신가요?
+                <br>
+                그렇다면 커뮤니티 서비스를 이용해보세요.
+                <br>
+                공개로 작성한 한 줄 문장과
+                <br>
+                다른 유저들이 가장 많이 읽은 도서, 
+                <br>
+                좋아요가 가장 많은 문장의 도서,
+                <br>
+                위시리스트에 가장 많이 담긴 도서,
+                <br>
+                문장 수집이 가장 많이 된 도서를 확인할 수 있습니다.
               </p>
             </div>
-            <img data-aos="fade-down" style="border-radius: 10px; box-shadow: 5px 5px 10px -5px grey;" width="575px" height="90%" src="@/assets/highlightpage.png" alt="">
+            <img 
+              data-aos="fade-down" 
+              class="book-info-img"
+              src="@/assets/community.png" 
+              alt=""
+            >
           </div>
         </div>
 
       </div>
       <div id="endScroll" 
         style="
-          height: 100vh;
+          height: 85vh;
           background-color: rgba(235, 234, 232, 1);
         "
       >
@@ -405,28 +448,28 @@ import Book from '@/components/Main/Book.vue'
   .salmon {
     color: #f39189;
   }
-  
+
+  #main .main-interval {
+    height: 15vh;
+  }
+
   #main .book-info-black {
     width: 100vw; 
-    height: 20vh; 
     background-color: black;
   }
   #main .book-info-background {
-    height: 22vw; 
-    width: 100vw; 
     background-color: rgba(0, 0, 0, 0.57);
   }
   #main .info-number {
-    margin: 0 15px;
+    margin: 0 1rem;
   }
   #main .info-title-size {
-    font-size: 110px;
+    font-size: 7rem;
     font-weight: bold;
-    width: 100%;
     text-align: center;
   }
   #main .info-subtitle-size {
-    font-size: 50px;
+    font-size: 3rem;
     width: 100%;
     text-align: center;
   }
@@ -442,7 +485,7 @@ import Book from '@/components/Main/Book.vue'
   }
   #main .article {
     padding-top: 6vh;
-    height: 100vh;
+    /* height: 100vh; */
     width: 100vw;
     display: flex;
     justify-content: left;
@@ -450,10 +493,10 @@ import Book from '@/components/Main/Book.vue'
   #main .section {
     width: 30vw;
     background-color: rgba(0, 0, 0, 0.5);
-    height: 80vh;
+    /* height: 80vh; */
     margin: 5vh 0;
-    border-radius: 10px;
-    padding: 3vh 3vw;
+    border-radius: 0.5rem;
+    padding: 3vh 3vw 3vh 3vw;
   }
   #main .first-section {
     margin: 5vh 0 2vw 5vh;
@@ -462,42 +505,42 @@ import Book from '@/components/Main/Book.vue'
     margin: 5vh 2vw;
   }
   #main .section-title {
-    font-size: 20px;
+    font-size: 1rem;
   }
   #main .highlight-size-lg {
-    font-size: 90px;
+    font-size: 6rem;
     font-weight: bold;
   }
   #main .highlight-size-md {
-    font-size: 80px;
+    font-size: 4rem;
     font-weight: bold;
   }
   #main .highlight-size-sm {
-    font-size: 60px;
+    font-size: 3rem;
     font-weight: bold;
   }
   #main .highlight-size-xs {
-    font-size: 50px;
+    font-size: 2.5rem;
     font-weight: bold;
   }
   #main .highlight-size-xxs {
-    font-size: 40px;
+    font-size: 2rem;
     font-weight: bold;
   }
   #main .default-size {
-    font-size: 18px;
+    font-size: 1.3rem;
   }
   #main .info-size {
-    font-size: 15px;
+    font-size: 0.9rem;
   }
   #main .small-size {
-    font-size: 12px;
+    font-size: 0.7rem;
   }
   #main .section-br {
-    margin: 10px 0;
+    margin: 0.7rem 0;
   }
   #main .highlight-size-xxxs {
-    font-size: 20px;
+    font-size: 1rem;
     font-weight: bold;
   }
 
@@ -513,10 +556,10 @@ import Book from '@/components/Main/Book.vue'
     display: none;
   }
   #book .book-ul .book-moreInf {
-    margin: 80px 0;
+    margin: 4rem 0;
   }
   #main .recommend-book {
-    margin: 80px 0;
+    margin: 4rem 0;
   }
 
   #main .bert-info {
@@ -524,15 +567,36 @@ import Book from '@/components/Main/Book.vue'
   }
 
   #main .bizido-img {
-    border-radius: 4px;
+    border-radius: 0.2rem;
+    height: 15rem;
   }
   #main .bizido-img-dimmed {
-    border-radius: 4px; 
+    border-radius: 0.2rem; 
     position: absolute; 
     background-color: rgba(0, 0, 0, 0.05); 
-    width: 100%; 
-    height: 220px; 
+    height: 15rem; 
     top: 0;
+  }
+
+  #main .info-paragraph {
+    width: 30rem;
+  }
+  #main .book-info-img {
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px -5px grey;
+    width: 40rem;
+  }
+  #main .headline {
+    margin: 1rem 0;
+  }
+
+  #main .info-section {
+    height: 50vh;
+    margin-top: 3vh;
+    padding: 3vh 2vw;
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
   }
 
   #main .go-main-btn{
@@ -540,7 +604,7 @@ import Book from '@/components/Main/Book.vue'
     color:#fff;
     border:none;
     position:relative;
-    height:60px;
+    height:4rem;
     font-size:1.6em;
     padding:0 2em;
     cursor:pointer;
