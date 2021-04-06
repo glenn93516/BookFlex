@@ -165,7 +165,7 @@ export default {
     loadBookData() {
       let bucket = new Set()
       while (bucket.size < 4) {
-        let num = Math.floor(Math.random() * (20))
+        let num = Math.floor(Math.random() * (19))
         bucket.add(num)
       }
       const array = [...bucket]
