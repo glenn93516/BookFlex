@@ -407,7 +407,7 @@ export default {
   /* .profile-badge div:first-child {
     margin-left: 0;
   } */
-  div[class*="tooltip"] {
+  #profile div[class*="tooltip"] {
     /* color: red; */
     /* display: inline-block; */
     display: none;
