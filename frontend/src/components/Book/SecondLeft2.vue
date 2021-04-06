@@ -2,15 +2,15 @@
   <div style="margin-left: 20px;">
 
     <div class="second-left-small row justify-content-center">
-      <div v-if="!loading && !chartData.datasets[0].label" style="height:300px; display:flex; justify-content:center; align-items:center;">
-        <h5 style="text-align: center; color: grey;">리뷰 데이터가 충분하지 않습니다.</h5>
+      <div v-if="loading" style="height:250px; display:flex; justify-content:center; align-items:center;">
+        <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
       </div>
       <div v-else>
-        <div v-if="loading" style="height:300px; display:flex; justify-content:center; align-items:center;">
-          <b-spinner style="width: 3rem; height: 3rem;" label="Large Spinner"></b-spinner>
+        <div v-if="bookSentiment['positive']">
+          <DoughnutChart :chartData="chartData" />
         </div>
         <div v-else>
-          <DoughnutChart :chartData="chartData" />
+          <h5 style="height:250px; display:flex; justify-content:center; align-items:center;">리뷰 데이터가 충분하지 않습니다.</h5>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
         positiveReviews: [],
         negativeReviews: [],   
         chartData: {
-          labels: ["긍정", "부정"],
+          labels: ["", ""],
           datasets: [{
             label: "",
             data: [0, 0],
@@ -58,12 +58,16 @@
         await this.$axios.get(`${this.$store.getters.getServer}/book/${isbn}/sentiment`)
         .then(res => {
           this.loading = false
+          console.log(this.loading)
           if(res.data.data) {
             this.bookSentiment = res.data.data.sentiment
 
+
+            this.chartData.labels[0] = "긍정"
             this.chartData.datasets[0].data[0] = this.bookSentiment.positive.ratio
+            
+            this.chartData.labels[1] = "부정"
             this.chartData.datasets[0].data[1] = this.bookSentiment.negative.ratio
-            this.chartData.datasets[0].label = " "
 
             this.$emit("setBookSentiment", this.bookSentiment)
           }
