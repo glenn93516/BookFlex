@@ -32,6 +32,7 @@ export default new Vuex.Store({
       userRole: "",
     },
     selectedBook: "",
+    RecommendList: "",
   },
   getters: {
     getServer(state) {
@@ -50,8 +51,10 @@ export default new Vuex.Store({
       return state.signupInfo
     },
     getSelectedBook(state) {
-      console.log('이거 되는겨?1')
       return state.selectedBook
+    },
+    getRecommendList(state) {
+      return state.RecommendList
     }
   },
   mutations: {
@@ -106,10 +109,13 @@ export default new Vuex.Store({
     },
     Logout(state) {
       state.accessToken = ""
+      state.user = ""
     },
     SelectBook(state, payload) {
-      console.log('이거 되는겨?2')
       state.selectedBook = payload
+    },
+    SaveRecommendList(state, payload) {
+      state.RecommendList = payload
     }
   },
   actions: {
@@ -141,7 +147,6 @@ export default new Vuex.Store({
       axios.get(`${SERVER_URL}/user`, {headers})
       .then(res => {
         context.commit("GetUserInfo", res.data.data)
-        // console.log(res.data.data)
         if (data.mode) {
           router.push({ name: "MainBook" })
         } 
@@ -163,7 +168,6 @@ export default new Vuex.Store({
       context.commit("SubmitUserPic", Img)
     },
     UpdateUserInfo(context, User) {
-      // let FormData = require('form-data')
       let data = new FormData()
       data.append('userProfileImgFile', User.userProfileImgFile)
       data.append('userEmail', User.userEmail)
@@ -190,7 +194,6 @@ export default new Vuex.Store({
       })
       .catch(err => {
         console.error(err)
-        console.log('actions에서 오류')
       })
     },
     SetEmail(context, Email) {
@@ -202,6 +205,5 @@ export default new Vuex.Store({
     Logout(context) {
       context.commit('Logout')
     },
-    
   }
 })
