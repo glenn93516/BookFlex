@@ -58,7 +58,8 @@ export default {
             minSize: '15%',
             maxSize: '130%',
             zMin: 0,
-            zMax: 100,
+            zMax: 20,
+            // zMax: 100,
             layoutAlgorithm: {
               splitSeries: false,
               gravitationalConstant: 0.02
@@ -71,7 +72,8 @@ export default {
                 // y value가 10이상인 것만 보여주겠다 (인덱스 이름)
                 property: 'y',
                 operator: '>',
-                value: 20
+                value: 5
+                // value: 20
               },
               style: {
                 color: 'black',
