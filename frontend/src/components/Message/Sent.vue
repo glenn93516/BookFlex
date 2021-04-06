@@ -29,7 +29,11 @@
 
           <div class="sent-message">
             <div class="mouse-pointer" style="padding-right: 10px;">
-              <b-avatar size="40px" src="https://placekitten.com/300/300"></b-avatar>
+              <b-avatar :id="sentMessage.sendmsgDate" size="40px" :src="sentMessage.receiverProfileImg"></b-avatar>
+
+              <b-tooltip :target="sentMessage.sendmsgDate" triggers="hover">
+                {{ sentMessage.receiverNickname }}
+              </b-tooltip>
             </div>
             <div class="mouse-pointer sent-content"
               @click="goToReadSent(sentMessage.sendmsgId)"
@@ -38,10 +42,6 @@
             </div>
             <div class="sent-date">
               <p>{{ sentMessage.sendmsgDate }}</p>
-              <!-- <img
-                width="20px"
-                src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIHN0eWxlPSJmaWxsOiNBNUVCNzg7IiBkPSJNNDMzLjEzOSw2Ny4xMDhMMjAxLjI5NCwyOTguOTUzYy02LjI0OSw2LjI0OS0xNi4zODEsNi4yNDktMjIuNjMsMEw3OC44NjEsMTk5LjE1TDAsMjc4LjAxMQ0KCWwxNTAuNTQ3LDE1MC41NDljMTAuNDU4LDEwLjQ1OCwyNC42NDIsMTYuMzMzLDM5LjQzMSwxNi4zMzNsMCwwYzE0Ljc4OCwwLDI4Ljk3My01Ljg3NiwzOS40My0xNi4zMzNMNTEyLDE0NS45NjhMNDMzLjEzOSw2Ny4xMDh6Ig0KCS8+DQo8ZyBzdHlsZT0ib3BhY2l0eTowLjE7Ij4NCgk8cGF0aCBkPSJNNDg1LjkyMSwxMTkuODg4TDE4Ny41OSw0MTguMjJjLTguMjU0LDguMjUzLTE4LjYzMywxMy44ODItMjkuODQ3LDE2LjM5MWM5LjM2Myw2LjYzNSwyMC42MDgsMTAuMjgsMzIuMjM1LDEwLjI4bDAsMA0KCQljMTQuNzg4LDAsMjguOTczLTUuODc2LDM5LjQzLTE2LjMzM0w1MTIsMTQ1Ljk2Nkw0ODUuOTIxLDExOS44ODh6Ii8+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==" 
-              /> -->
             </div>
           </div>
 

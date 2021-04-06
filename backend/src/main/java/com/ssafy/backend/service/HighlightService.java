@@ -86,4 +86,9 @@ public class HighlightService {
     public List<HighlightDto> findAllByUserIdOnlyGood(Long userId) {
         return highlightMapper.findAllByUserIdOnlyGood(userId);
     }
+
+    public HighlightDto findOneByUserIdOrderByUpdatedDate(Long userId) {
+        return highlightMapper.findOneByUserIdOrderByUpdatedDate(userId)
+                .orElseThrow(() -> new IllegalStateException("작성한 문장수집이 없습니다"));
+    }
 }

@@ -14,6 +14,7 @@
         <hr style="rgba(50, 50, 50); margin-bottom: 40px;">
       </div>
       <SecondLeft :isbn="this.$route.params.bookIsbn" />
+      <br><br>
       <SecondLeft2 :isbn="this.$route.params.bookIsbn" @setBookSentiment="getBookSentiment" />
     </div>
 

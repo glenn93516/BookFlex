@@ -55,12 +55,13 @@
           </template>
 
           <b-dropdown-item
+            v-if="isLogin"
             @click="goToProfile"
             style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
           >
-            <span style="font-size: 0.8rem;">프로필(temp)</span>
+            <span style="font-size: 0.8rem;">나의 서재</span>
           </b-dropdown-item>
-          <hr class="list-hr">
+          <hr v-if="isLogin" class="list-hr">
           
           <b-dropdown-item
             v-if="!isLogin" 
@@ -79,13 +80,6 @@
           </b-dropdown-item>
             <hr class="list-hr">
 
-          <b-dropdown-item 
-            v-if="isLogin" 
-            @click="goToProfile"
-            style="flex: inline-block; width: 100px; text-align: center; justify-content: center; margin: 0;"
-          >
-            <span style="font-size: 0.8rem;">나의서재</span>
-          </b-dropdown-item>
             <!-- <hr class="list-hr"> -->
 
           <b-dropdown-item 
@@ -118,6 +112,7 @@
 
       <!-- 여기는 우체통 -->
       <img
+        v-if="this.$route.path !== '/login' && !this.re.test(this.$route.path)"
         class="postbox"
         width="120px"
         height="120px" 
@@ -135,6 +130,7 @@
 export default {
   data() {
     return {
+      re: /signup/ ,
       checkInput: true,
       isLogin: false,
       pageName: "",
@@ -191,6 +187,7 @@ export default {
       localStorage.removeItem('jwt')
       this.userInfo = ""
       this.isLogin = false
+      this.$router.push({ name: 'MainPage' })
     },
     postBoxClick() {
       this.$router.push({ name: 'Received' })
@@ -218,6 +215,11 @@ export default {
       this.pageName = to.name
       this.checkLogin()
       this.userInfo = this.$store.getters.getUser
+    },
+    openPostBox(newOpenPostBox) {
+      this.openPostBox = newOpenPostBox
+      this.postBox = newOpenPostBox
+      // console.log(this.newOpenPostBox)
     }
   },
   mounted() {
@@ -230,10 +232,10 @@ export default {
     if (token) {
       this.$axios.get(`${this.$store.getters.getServer}/user`, {headers})
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.userInfo = res.data.data
         this.$store.commit('UpdateUserInfo', res.data.data)
-        console.log(this.userInfo)
+        // console.log(this.userInfo)
       })
       .catch(err => {
         console.error(err)

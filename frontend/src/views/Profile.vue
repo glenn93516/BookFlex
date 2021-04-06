@@ -12,7 +12,7 @@
         >
         </b-avatar>
         <div class="img-update-btn update-btn" @click="imgUpdateModal=true" v-if="isEditor"><span>프로필 수정</span></div>
-        <b-modal v-model="imgUpdateModal" centered hide-footer hide-header hide-backdrop>
+        <b-modal v-model="imgUpdateModal" centered hide-footer hide-header hide-backdrop @hide="reload">
           <img-update-profile :profileImg="userInfo.userProfileImg"></img-update-profile>
         </b-modal>
       </div>
@@ -132,8 +132,8 @@ export default {
     return {
       profileMedal: "",
       profileSingleLine: {
-        sentence: "내가 종일 열심히 일하는 것은 책 읽을 시간을 내기 위해서다.",
-        book: "연애의 온도",
+        sentence: "아직 수집된 문장이 없어요😥",
+        book: "문장을 수집해 보세요!",
       },
       medal: {
         first: "data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PGc+PHBhdGggZD0ibTE1NS4wMjggMzU1LjExNC0yMC4yOTguOTktMzkuMzU0IDExMy4wNjZjLTEuMjU0IDMuNjAxIDEuNjY0IDcuMjg0IDUuNDU3IDYuODg2bDU1LjE2My01Ljc3NmMxLjU0MS0uMTYxIDMuMDczLjM3MiA0LjE4MSAxLjQ1NWwzOS42NTUgMzguNzc5YzIuNzI2IDIuNjY2IDcuMyAxLjU5MSA4LjU1My0yLjAxbDM5LjYxMS0xMTMuODA1LTExLjY4LTExLjMzNnoiIGZpbGw9IiNmZjQ3NTUiLz48cGF0aCBkPSJtMjQ3Ljk5NiAzOTQuNjk5IDguMDA0LTIyLjk5NS0xMTMuMjktMzguNTI2LTcuOTggMjIuOTI3YzMyLjE3IDIyLjk1NSA3MS4xMjIgMzcuMDA3IDExMy4yNjYgMzguNTk0eiIgZmlsbD0iI2ZjMmIzYSIvPjxwYXRoIGQ9Im0zNTYuOTcyIDM1NS4xMTQgMjAuMjk4Ljk5IDM5LjM1NCAxMTMuMDY2YzEuMjU0IDMuNjAxLTEuNjY0IDcuMjg0LTUuNDU3IDYuODg2bC01NS4xNjMtNS43NzZjLTEuNTQxLS4xNjEtMy4wNzMuMzcyLTQuMTggMS40NTVsLTM5LjY1NSAzOC43NzljLTIuNzI2IDIuNjY2LTcuMyAxLjU5MS04LjU1My0yLjAxbC0zOS42MTEtMTEzLjgwNSAxMS42OC0xMS4zMzZ6IiBmaWxsPSIjZmY0NzU1Ii8+PHBhdGggZD0ibTI2NC4wMDQgMzk0LjY5OS04LjAwNC0yMi45OTUgMTEzLjI5LTM4LjUyNiA3Ljk4IDIyLjkyN2MtMzIuMTcgMjIuOTU1LTcxLjEyMiAzNy4wMDctMTEzLjI2NiAzOC41OTR6IiBmaWxsPSIjZmMyYjNhIi8+PHBhdGggZD0ibTI1NiAzNjAuMTE2Yy0xODUuODUyIDAtMTg1Ljc3NC0xODAuNTI5LTE4NS42Mi0xODMuNjMyIDQuODc5LTk4LjI5IDg2LjExOC0xNzYuNDg0IDE4NS42Mi0xNzYuNDg0czE4MC43NDEgNzguMTk0IDE4NS42MiAxNzYuNDg1Yy4xNTQgMy4xMDMuMjMyIDE4My42MzEtMTg1LjYyIDE4My42MzF6IiBmaWxsPSIjZmZlMjdhIi8+PHBhdGggZD0ibTI1NiAzNTIuOTY5Yy05OS41MDIgMC0xODAuNzM4LTc4LjE5NC0xODUuNjE4LTE3Ni40ODUtLjE1NCAzLjEwMy0uMjM0IDYuMjI2LS4yMzQgOS4zNjcgMCAxMDIuNjQzIDgzLjIwOSAxODUuODUyIDE4NS44NTIgMTg1Ljg1MnMxODUuODUyLTgzLjIwOSAxODUuODUyLTE4NS44NTJjMC0zLjE0Mi0uMDgtNi4yNjQtLjIzNC05LjM2Ny00Ljg4IDk4LjI5MS04Ni4xMTYgMTc2LjQ4NS0xODUuNjE4IDE3Ni40ODV6IiBmaWxsPSIjZjljZjU4Ii8+PHBhdGggZD0ibTI1NiAzMjAuMTI2Yy0xNDYuMTE3IDAtMTQ2LjMxMy0xNDMuNjgyLTE0Ni4xMTctMTQ2Ljc4IDQuODMxLTc2LjQ5NiA2OC40MDMtMTM3LjA0NCAxNDYuMTE3LTEzNy4wNDRzMTQxLjI4NiA2MC41NDggMTQ2LjExNyAxMzcuMDQ0Yy4xOTYgMy4wOTcgMCAxNDYuNzgtMTQ2LjExNyAxNDYuNzh6IiBmaWxsPSIjZmZiYTU3Ii8+PHBhdGggZD0ibTI1NiAzMTMuNTI5Yy03Ny43MTMgMC0xNDEuMjc0LTYwLjU1LTE0Ni4xMDUtMTM3LjA0NS0uMTk2IDMuMDk4LS4zMDcgNi4yMi0uMzA3IDkuMzY3IDAgODAuODYxIDY1LjU1MSAxNDYuNDEyIDE0Ni40MTIgMTQ2LjQxMnMxNDYuNDEyLTY1LjU1MSAxNDYuNDEyLTE0Ni40MTJjMC0zLjE0OC0uMTExLTYuMjY5LS4zMDctOS4zNjctNC44MzEgNzYuNDk1LTY4LjM5MiAxMzcuMDQ1LTE0Ni4xMDUgMTM3LjA0NXoiIGZpbGw9IiNmZmFjM2UiLz48cGF0aCBkPSJtMjY0LjM1IDI3Mi44MmMtMTAuMTY1IDAtMTguNDA2LTguMjQtMTguNDA2LTE4LjQwNnYtOS43MzUtOTMuNDE2cy0xMS4wMTMgMTEuMDQ1LTI0LjE5IDQuNDE4Yy0xMC4yNzQtNS4xNjctMTAuMjc0LTE4LjQ2Ni0xMC4yNzQtMTguNDY2bDIyLjY5My0zOC4zMDZjMy4zMTQtNS41OTQgOS4zMzQtOS4wMjUgMTUuODM2LTkuMDI1aDE0LjM0MWMxMC4xNjUgMCAxOC40MDYgOC4yNCAxOC40MDYgMTguNDA2djEzNi4zODkgOS43MzVjMCAxMC4xNjYtOC4yNDEgMTguNDA2LTE4LjQwNiAxOC40MDZ6IiBmaWxsPSIjZmZlMjdhIi8+PGcgZmlsbD0iI2Y5Y2Y1OCI+PHBhdGggZD0ibTI0My40MTUgMTM2LjhjLTQuODg1IDguMjQ3LTE1LjI3MiAxMS44MjMtMjMuOTM1IDcuNzE4LTMuNTA2LTEuNjYxLTYuMjA5LTQuMjQyLTguMDA2LTcuMjktNS4xMTEgOC42NDYtMi4zNDQgMTkuNzY5IDYuMTY2IDI1LjAyNCA4Ljc3NiA1LjQyIDIwLjUwMyAyLjE4NCAyNS43NTktNi42OTFsMi41NDYtNC4yOTl2LTEzLjc3MWMwLTEuMzgyLTEuODI1LTEuODgxLTIuNTMtLjY5MXoiLz48cGF0aCBkPSJtMjY0LjM1IDI2My4wODVjLTEwLjE2NSAwLTE4LjQwNi04LjI0LTE4LjQwNi0xOC40MDZ2MTguNzM1YzAgMTAuMTY2IDguMjQxIDE4LjQwNiAxOC40MDYgMTguNDA2czE4LjQwNi04LjI0IDE4LjQwNi0xOC40MDZ2LTE4LjczNWMwIDEwLjE2Ni04LjI0MSAxOC40MDYtMTguNDA2IDE4LjQwNnoiLz48L2c+PC9nPjwvZz48L3N2Zz4=",
@@ -219,6 +219,9 @@ export default {
     }
   },
   methods: {
+    reload(){
+      this.$router.go(this.$router.currentRoute)
+    },
     changeJob() {
       alert('직업은 편집 버튼을 이용해서 편집하기🛠')
     },
@@ -239,13 +242,13 @@ export default {
           this.genreClass.push(classId)
         }
       }
-      console.log(this.genreClass, 'genreClass 갯수')
+      // console.log(this.genreClass, 'genreClass 갯수')
     },
   },
   created() {
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}`)
     .then(res => {
-      console.log(res, 'res')
+      // console.log(res, 'res')
       if (res.status === 200) {
         this.nowUserName = this.$store.state.user.userNickname
       } else {
@@ -257,12 +260,23 @@ export default {
     .catch(err => {
       console.log(err)
     })
+
+    this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight/recent`)
+    .then(res => {
+      if(typeof(res.data)==='object'){
+        this.profileSingleLine.sentence = res.data.data.highlightContent;
+        this.profileSingleLine.book = res.data.data.bookTitle;
+      }
+    })
+    .catch(err => {
+      console.log(err, 'err')
+    })
   },
   mounted() {
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}`)
     .then(res => {
       this.userInfo = res.data.data
-      console.log(this.userInfo, 'userInfo')
+      // console.log(this.userInfo, 'userInfo')
       this.genreClassification()
     })
     .catch(err => {
