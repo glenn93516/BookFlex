@@ -154,7 +154,7 @@ export default {
       
         this.$axios.get(`${this.$store.getters.getServer}/user/${nickname}`,{},token)
         .then(res => {
-          console.log(res.data)
+          // console.log(res.data)
           this.tags.push(res.data.data)
         })
         .catch(err => {

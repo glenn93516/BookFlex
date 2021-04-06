@@ -133,7 +133,7 @@ export default {
       }
       this.$axios.get(`${this.$store.getters.getServer}/sendmsg/${this.$route.params.id}`,{headers})
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.messageInfo = res.data.data
       })
       .catch(err => {

@@ -198,7 +198,7 @@ export default {
       }
       this.$axios.get(`${this.$store.getters.getServer}/receivemsg`,{headers})
       .then(res => {
-        console.log(res.data.data)
+        // console.log(res.data.data)
         if(res.data.data.length) {
           this.openPostBox = this.openFullPostBox
         } else {
