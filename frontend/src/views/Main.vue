@@ -304,6 +304,7 @@ import Book from '@/components/Main/Book.vue'
     font-family: 'Open Sans', sans-serif;
   }
   #main .first-main {
+    position: relative;
     background-color: black;
     text-align: center;
     height: 100vh;
@@ -311,7 +312,7 @@ import Book from '@/components/Main/Book.vue'
   }
   #main .first-main-logo {
     position: absolute;
-    top: 50vh;
+    bottom: 30vh;
     width: 100%;
     z-index: 10;
     color: white;
@@ -354,8 +355,9 @@ import Book from '@/components/Main/Book.vue'
     left: 0;
   }
   #main .scroll-link {
-    /* position: relative; */
-    margin-top: 10vh;
+    position: absolute;
+    /* margin-top: 10vh; */
+    bottom: 5vh;
     margin-left: 50vw;
     bottom: 1rem;
     width: 100%;
@@ -406,7 +408,7 @@ import Book from '@/components/Main/Book.vue'
   
   #main .book-info-black {
     width: 100vw; 
-    height: 40vh; 
+    height: 20vh; 
     background-color: black;
   }
   #main .book-info-background {
