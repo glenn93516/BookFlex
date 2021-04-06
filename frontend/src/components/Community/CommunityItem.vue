@@ -95,7 +95,7 @@ export default {
   },
   // 지금은 프로필이라서 이렇게 해도 되지만, community의 경우 한 개씩 반복해서 확인해줘야함
   mounted() {
-    // console.log(this.item, 'item')
+    console.log(this.item, 'item')
     let userId = this.$store.getters.getUser.userId
     if (this.item.userId === userId) {
       this.isEditor = true

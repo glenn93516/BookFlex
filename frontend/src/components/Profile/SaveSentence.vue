@@ -48,7 +48,6 @@ export default {
     SentenceDetail,
   },
   mounted() {
-    console.log(this.$route.params.userName, 'savesentence')
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`)
     .then(res => {
       console.log(res.data.data, '이거 115')
