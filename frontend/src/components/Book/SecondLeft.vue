@@ -5,7 +5,7 @@
       <div v-if="bookTopics[0]">
         <DoughnutChart :chartData="chartData" />
       </div>
-      <div v-else style="height:300px; display:flex; justify-content:center; align-items:center;">
+      <div v-else style="height:250px; display:flex; justify-content:center; align-items:center;">
         <h5 style="text-align: center; color: grey;">리뷰 데이터가 충분하지 않습니다.</h5>
       </div>
     </div>
