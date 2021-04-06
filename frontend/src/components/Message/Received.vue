@@ -29,8 +29,8 @@
 
           <div class="received-message">
             <div class="mouse-pointer" style="padding-right: 10px;">
-              <b-avatar :id="receivedMessage.senderNickname" size="40px" :src="receivedMessage.senderProfileImg"></b-avatar>
-              <b-tooltip :target="receivedMessage.senderNickname" triggers="hover">
+              <b-avatar :id="receivedMessage.receivemsgDate" size="40px" :src="receivedMessage.senderProfileImg"></b-avatar>
+              <b-tooltip :target="receivedMessage.receivemsgDate" triggers="hover">
                 {{ receivedMessage.senderNickname }}
               </b-tooltip>
             </div>
