@@ -54,7 +54,6 @@
           <font-awesome-icon 
             size="2x"
             class="text-primary mouse-pointer"
-            @click="modifySentence()"
             @mouseover="editIcon = ['fas', 'edit']"
             @mouseleave="editIcon = ['far', 'edit']"
             :icon="editIcon"
@@ -63,7 +62,6 @@
           <font-awesome-icon 
             size="2x"
             class="text-danger mouse-pointer ml-2"
-            @click="deleteSentence()"
             @mouseover="deleteIcon = ['fas', 'trash-alt']"
             @mouseleave="deleteIcon = ['far', 'trash-alt']"
             :icon="deleteIcon"
@@ -71,6 +69,11 @@
           />
         </div>
       </div>
+      <!-- text최소 길이, 최대 길이 정해주기 -->
+      <!-- <div class="detail-sentence-text">
+        <div class="sentence-text">{{item.highlightContent}}</div>
+        <div class="sentence-book-title mouse-pointer" @click="clickBook(item.bookIsbn)">📖 {{item.bookTitle}}-{{item.highlightPage}}p</div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -166,23 +169,6 @@ export default {
         })
       }
     },
-    deleteSentence() {
-      const token = localStorage.getItem('jwt')
-      const headers = {
-        "Authorization": token
-      }
-      console.log(this.item, '여기는 아이템')
-      this.$axios.delete(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {}, {headers})
-      .then(res => {
-        console.log(res, '삭제 성공')
-      })
-      .catch(err => {
-        console.log(err, '삭제 실패')
-      })
-    },
-    modifySentence() {
-
-    },
   }
 }
 </script>
@@ -193,7 +179,7 @@ export default {
     padding-top: 15px;
   }
   #communityItem .header {
-    width: 465px;
+    width: 340px;
     margin: 5px auto;
     text-align: start;
     display: flex;
@@ -208,8 +194,8 @@ export default {
     font-weight: bold;
   }
   #communityItem .sentence-img {
-    width: 465px;
-    height: 300px;
+    width: 340px;
+    height: 250px;
     margin-top: 9px;
     border-radius: 5px 5px 0 0;
   }
@@ -225,7 +211,7 @@ export default {
   #communityItem .footer {
     padding: 10px 0;
     margin: 0 auto;
-    width: 465px;
+    width: 340px;
     display: flex; 
     justify-content: space-between; 
     border: none;
@@ -242,7 +228,7 @@ export default {
     margin: 0;
   }
   #communityItem .detail {
-    width: 465px;
+    width: 340px;
     border-radius: 5px 5px 0 0;
     color: black;
     margin: 0 auto;
@@ -250,14 +236,14 @@ export default {
   }
   #communityItem .detail-sentence-text {
     position: absolute;
-    width: 465px;
+    width: 340px;
     text-align: center;
     margin-bottom: 10px;
     padding-bottom: 10px;
     top : 0;
     left: 22px; 
-    width:465px; 
-    height : 300px; 
+    width:340px; 
+    height : 250px; 
     padding-top:100px;
     margin: 9px 0;
     background-color: rgba(255, 255, 255, 0.5);

@@ -7,53 +7,36 @@
         font-size: 15px;
       "
     >
-      <font-awesome-icon 
-        @click="closeModal()" 
-        size="2x" 
-        class="mouse-pointer text-secondary" 
-        @mouseover="closeIcon = ['fas', 'times-circle']" 
-        @mouseleave="closeIcon = ['far', 'times-circle']" 
-        :icon="closeIcon" 
-      />
     </header>
     <div>
       <img 
         class="sentence-img" 
-        width="465px" 
-        height="300px" 
+        width="340px" 
+        height="250px" 
         v-if="item.highlightCover"
         :src="item.highlightCover" 
         alt=""
-        style="margin-top: 9px; border-radius: 10px 10px 0 0;"
+        style="margin-top: 9px;"
       >
       <img 
         class="sentence-img" 
-        width="465px" 
-        height="300px" 
+        width="340px" 
+        height="250px" 
         v-else
         src="@/assets/waterprint_back.jpg" 
         alt=""
-        style="margin-top: 9px; border-radius: 10px 10px 0 0;"
+        style="margin-top: 9px;"
       >
       
       <div class="detail-dimmed">
         <!-- text최소 길이, 최대 길이 정해주기 -->
         <div class="detail-sentence-text">
           <div style="font-size: 23px;">{{item.highlightContent}}</div>
-          <div 
-            class="mouse-pointer hvr-grow"
-            @click="goBook(item)"
-            style="
-              font-size: 20px; 
-              margin-top: 10px; 
-              font-weight: bold;
-          ">
-            📖{{item.bookTitle}}-{{item.highlightPage}}p
-          </div>
+          <div style="font-size: 20px; margin-top: 10px; font-weight: bold;">"{{item.bookTitle}}"</div>
         </div>
-      </div>
-      <div class="detail-sentence-date" style="background-color: black; color: white; border-radius: 0 0 10px 10px;">
-        {{item.createdDate}}
+        <div class="detail-sentence-date">
+          {{item.createdDate}}
+        </div>
       </div>
     </div>
     <footer class="modal-footer">
@@ -114,6 +97,7 @@ export default {
   },
   // 지금은 프로필이라서 이렇게 해도 되지만, community의 경우 한 개씩 반복해서 확인해줘야함
   mounted() {
+    console.log('mounted  >>>   ',this.item)
     if (this.$store.getters.getUser.userNickname === this.$route.params.userName) {
       this.isEditor = true
     } else {
@@ -131,8 +115,6 @@ export default {
       .then(res => {
         this.likeNum = res.data.data.goodCount
         this.likeStatus = res.data.data.userGood
-        console.log(res.data.data, '처음에 들어오는 데이터')
-        console.log(res.data.data.userGood, '처음에 들어오는 데이터 userGood')
       })
     },
     closeModal() {
@@ -176,9 +158,6 @@ export default {
         })
       }
     },
-    goBook(item) {
-      console.log(item.bookIsbn, 'item.bookIsbn')
-    }
   }
 }
 </script>
@@ -197,9 +176,9 @@ export default {
   }
   .detail-dimmed {
     position: absolute;
-    width: 465px;
-    border-radius: 10px 10px 0 0;
-    height: 300px;
+    width: 340px;
+    border-radius: 10px;
+    height: 250px;
     top: 54px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
@@ -207,10 +186,9 @@ export default {
   }
   .detail-sentence-text {
     display: absolute;
-    width: 465px;
-    height: 270px;
+    width: 340px;
+    height: 250px;
     padding: 100px 10px 0 10px;
-    border-radius: 10px 10px 0 0;
   }
   .detail-sentence-date {
     display: absolute;
