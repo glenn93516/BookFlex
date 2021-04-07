@@ -14,7 +14,7 @@
                   margin-bottom: 10px;
                   color: rgba(100, 100, 100);
                   ">
-        <h6 class="mr-1">도서 비교하기</h6>
+        <h6 class="mr-1 font-bold">도서 비교하기</h6>
         <hr style="rgba(50, 50, 50); margin-bottom: 10px;">
       </div>
 
@@ -47,7 +47,7 @@
         </div>
         <!-- 검색하기 -->
         <div v-else>
-          <h6 class="mr-1">검색하기</h6>
+          <h6 class="mr-1 font-bold">검색하기</h6>
         </div>
         <hr style="rgba(50, 50, 50); margin-bottom: 10px;">
       </div>
@@ -99,10 +99,13 @@
         this.isShow = false
         this.anotherIsbn = null
         this.closeIcon = ['far', 'times-circle']
-      }
+      },
     }
   }
 </script>
 
 <style>
+  .font-bold {
+    font-weight: bold;
+  }
 </style>

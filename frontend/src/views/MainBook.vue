@@ -164,22 +164,28 @@ export default {
     // 책을 로드하는 함수
     loadBookData() {
       let bucket = new Set()
-      while (bucket.size < 4) {
+      while (bucket.size < 12) {
         let num = Math.floor(Math.random() * (19))
         bucket.add(num)
       }
       const array = [...bucket]
       // 플라스크 서버 처리 이후 수정
       const RecommendList = this.$store.getters.getRecommendList
+      let i = 0;
+
       if (RecommendList) {
-        // 응답값 확인 후 랜덤 메서드 넣기 -----------------------------------------------
-        for (let i of array) {
-          this.suitRecommend.push(RecommendList.customized_by_user[i])
-          this.genreRecommend.push(RecommendList.customized_by_genre.customized_books[i])
+        // 응답값 확인 후 랜덤 메서드 넣기 -----------------------------------------------^_^
+        this.suitRecommend = []
+        this.genreRecommend = []
+        this.wishRecommend = []
+        for (i = 0; i < 4; i++) {
+          this.suitRecommend.push(RecommendList.customized_by_user[array[i]])
+          this.genreRecommend.push(RecommendList.customized_by_genre.customized_books[array[i + 4]])
           if (RecommendList.customized_by_wishlist.length) {
-            this.wishRecommend.push(RecommendList.customized_by_wishlist[i])
+            this.wishRecommend.push(RecommendList.customized_by_wishlist[array[i + 8]])
           }
         }
+            
         this.userGenre = RecommendList.customized_by_genre.genre.genre_name
         setTimeout(() => {
           this.isLoading = false
@@ -194,11 +200,11 @@ export default {
           this.$axios.get(`${this.$store.getters.getServer}/recommend`, {headers})
           .then(res => {
             // 랜덤 값 추출 추가해야함 ------------------------------------------------------
-            for (let i of array) {
-              this.suitRecommend.push(res.data.data.customized_by_user[i])
-              this.genreRecommend.push(res.data.data.customized_by_genre.customized_books[i])
+            for (i = 0; i < 4; i++) {
+              this.suitRecommend.push(res.data.data.customized_by_user[array[i]])
+              this.genreRecommend.push(res.data.data.customized_by_genre.customized_books[array[i + 4]])
               if (res.data.data.customized_by_wishlist.length) {
-                this.wishRecommend.push(res.data.data.customized_by_wishlist[i])
+                this.wishRecommend.push(res.data.data.customized_by_wishlist[array[i + 8]])
               }
             }
             this.userGenre = res.data.data.customized_by_genre.genre.genre_name
@@ -213,11 +219,11 @@ export default {
           this.$axios.get(`${this.$store.getters.getServer}/recommend`)
           .then(res => {
             // 랜덤 값 추출 추가해야함 ------------------------------------------------------
-            for (let i of array) {
-              this.suitRecommend.push(res.data.data.customized_by_user[i])
-              this.genreRecommend.push(res.data.data.customized_by_genre.customized_books[i])
+            for (i = 0; i < 4; i++) {
+              this.suitRecommend.push(res.data.data.customized_by_user[array[i]])
+              this.genreRecommend.push(res.data.data.customized_by_genre.customized_books[array[i + 4]])
               if (res.data.data.customized_by_wishlist.length) {
-                this.wishRecommend.push(res.data.data.customized_by_wishlist[i])
+                this.wishRecommend.push(res.data.data.customized_by_wishlist[array[i + 8]])
               }
             }
             this.userGenre = res.data.data.customized_by_genre.genre.genre_name
