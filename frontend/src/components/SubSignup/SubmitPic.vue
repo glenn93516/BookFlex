@@ -63,7 +63,7 @@ export default {
       this.$refs.imageInput.click()
     },
     onChangeImages(e) {
-      console.log(e.target.files)
+      // console.log(e.target.files)
       const file = e.target.files[0]      
       this.profileImageLink = URL.createObjectURL(file)
       this.profileImage = file
@@ -76,7 +76,7 @@ export default {
       this.goToComplete()
     },
     goToComplete() {
-      console.log('담겼나?', this.$store.getters.getUser)
+      // console.log('담겼나?', this.$store.getters.getUser)
       this.$router.push({ name: "SubSignComplete" })
     }
   }
