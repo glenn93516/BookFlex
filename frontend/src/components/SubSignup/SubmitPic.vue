@@ -67,12 +67,15 @@ export default {
       const file = e.target.files[0]      
       this.profileImageLink = URL.createObjectURL(file)
       this.profileImage = file
-    }, 
+      
+    },
     servePageInfo() {
       return this.pageData
     },
     submitUserPic() {
-      this.$store.dispatch('SubmitUserPic', this.profileImage)
+      if(this.profileImageLink != null){
+        this.$store.dispatch('SubmitUserPic', this.profileImage)
+      }
       this.goToComplete()
     },
     goToComplete() {
