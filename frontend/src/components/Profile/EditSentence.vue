@@ -51,8 +51,8 @@
           id="sentence-img"
           v-model="file"
           :state="Boolean(file)"
-          placeholder="Choose a file or drop it here..."
-          drop-placeholder="Drop file here..."
+          placeholder="파일을 선택하거나 끌어서 넣어주세요"
+          drop-placeholder=""
         >
         </b-form-file>
           <div class="mt-3" style="display: inline-block; margin-right: 50px;">
