@@ -6,7 +6,7 @@
         {{item.userNickname}}
       </span>
     </header>
-    <div style="position: relative;" >
+    <div class="image-part" style="position: relative;" >
       <img 
         class="sentence-img" 
         v-if="item.highlightCover"
@@ -54,6 +54,7 @@
           <font-awesome-icon 
             size="2x"
             class="text-primary mouse-pointer"
+            @click="modifySentence()"
             @mouseover="editIcon = ['fas', 'edit']"
             @mouseleave="editIcon = ['far', 'edit']"
             :icon="editIcon"
@@ -62,6 +63,7 @@
           <font-awesome-icon 
             size="2x"
             class="text-danger mouse-pointer ml-2"
+            @click="deleteSentence()"
             @mouseover="deleteIcon = ['fas', 'trash-alt']"
             @mouseleave="deleteIcon = ['far', 'trash-alt']"
             :icon="deleteIcon"
@@ -69,11 +71,6 @@
           />
         </div>
       </div>
-      <!-- text최소 길이, 최대 길이 정해주기 -->
-      <!-- <div class="detail-sentence-text">
-        <div class="sentence-text">{{item.highlightContent}}</div>
-        <div class="sentence-book-title mouse-pointer" @click="clickBook(item.bookIsbn)">📖 {{item.bookTitle}}-{{item.highlightPage}}p</div>
-      </div> -->
     </div>
   </div>
 </template>
@@ -96,7 +93,6 @@ export default {
       writterInfo: null,
     }
   },
-  // 지금은 프로필이라서 이렇게 해도 되지만, community의 경우 한 개씩 반복해서 확인해줘야함
   mounted() {
     // console.log(this.item, 'item')
     let userId = this.$store.getters.getUser.userId
@@ -110,9 +106,6 @@ export default {
   methods: {
     goProfile() {
       this.$router.push({ name: 'Profile', params: { userName: this.item.userNickname }})
-      // item에서 usernickname꺼내서
-      //routerpush해서 프로필로이동
-      // alert('아직 nickname 정보가 없습니다.')
     },
     getLikeStatus() {
       const token = localStorage.getItem('jwt')
@@ -124,16 +117,12 @@ export default {
         this.likeNum = res.data.data.goodCount
         this.likeStatus = res.data.data.userGood
         this.writterInfo = res.data.data
-        // console.log(res.data.data, '처음에 들어오는 데이터')
       })
     },
     clickBook(isbn) {
       this.$router.push({ name: 'BookDetail', params: { bookIsbn: isbn }})
-      //routerpush isbn으로 보내주기
     },
     addLike() {
-      console.log('addLike')
-      // 만약 로그인 안한 유저라면 addLike못함
       const token = localStorage.getItem('jwt')
       const headers = {
         "Authorization": token
@@ -169,6 +158,23 @@ export default {
         })
       }
     },
+    deleteSentence() {
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      console.log(this.item, '여기는 아이템')
+      this.$axios.delete(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {}, {headers})
+      .then(res => {
+        console.log(res, '삭제 성공')
+      })
+      .catch(err => {
+        console.log(err, '삭제 실패')
+      })
+    },
+    modifySentence() {
+
+    },
   }
 }
 </script>
@@ -196,11 +202,11 @@ export default {
   #communityItem .sentence-img {
     width: 465px;
     height: 300px;
-    margin-top: 9px;
     border-radius: 5px 5px 0 0;
   }
   #communityItem .sentence-text {
     font-size: 20px;
+    padding: 0 30px;
   }
   #communityItem .sentence-book-title {
     font-size: 18px; 
@@ -238,14 +244,15 @@ export default {
     position: absolute;
     width: 465px;
     text-align: center;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
+    justify-content: center;
     top : 0;
-    left: 22px; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
     width:465px; 
     height : 300px; 
     padding-top:100px;
-    margin: 9px 0;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px 5px 0 0;
   }

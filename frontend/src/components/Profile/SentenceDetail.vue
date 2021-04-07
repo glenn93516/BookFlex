@@ -24,7 +24,7 @@
         v-if="item.highlightCover"
         :src="item.highlightCover" 
         alt=""
-        style="margin-top: 9px;"
+        style="margin-top: 9px; border-radius: 10px 10px 0 0; min-width: 465px;"
       >
       <img 
         class="sentence-img" 
@@ -33,18 +33,27 @@
         v-else
         src="@/assets/waterprint_back.jpg" 
         alt=""
-        style="margin-top: 9px;"
+        style="margin-top: 9px; border-radius: 10px 10px 0 0; min-width: 465px;"
       >
       
       <div class="detail-dimmed">
         <!-- text최소 길이, 최대 길이 정해주기 -->
         <div class="detail-sentence-text">
           <div style="font-size: 23px;">{{item.highlightContent}}</div>
-          <div style="font-size: 20px; margin-top: 10px; font-weight: bold;">"{{item.bookTitle}}"</div>
+          <div 
+            class="mouse-pointer hvr-grow"
+            @click="goBook(item)"
+            style="
+              font-size: 20px; 
+              margin-top: 10px; 
+              font-weight: bold;
+          ">
+            📖{{item.bookTitle}}-{{item.highlightPage}}p
+          </div>
         </div>
-        <div class="detail-sentence-date">
-          {{item.createdDate}}
-        </div>
+      </div>
+      <div class="detail-sentence-date" style="background-color: black; color: white; border-radius: 0 0 10px 10px;">
+        {{item.createdDate}}
       </div>
     </div>
     <footer class="modal-footer">
@@ -172,6 +181,7 @@ export default {
         })
       }
     },
+    
     editSentence() {
       this.$emit("editSentence")
     },
@@ -189,6 +199,11 @@ export default {
         console.error(err)
       })
     },
+    
+    goBook(item) {
+      console.log(item.bookIsbn, 'item.bookIsbn')
+    }
+    
   }
 }
 </script>
@@ -208,11 +223,12 @@ export default {
   .detail-dimmed {
     position: absolute;
     width: 465px;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     height: 300px;
     top: 54px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
+    min-width: 465px;
     text-align: center;
   }
   .detail-sentence-text {
@@ -220,9 +236,12 @@ export default {
     width: 465px;
     height: 270px;
     padding: 100px 10px 0 10px;
+    border-radius: 10px 10px 0 0;
   }
   .detail-sentence-date {
     display: absolute;
+    min-width: 465px;
+    width: 465px;
     height: 30px;
     right: 0;
     text-align: end;
