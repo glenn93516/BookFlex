@@ -32,7 +32,7 @@
       :item="nowItem" 
       @close-modal="showDetail=false" 
       @editSentence="showDetail=false;showEdit=true;"
-      @delSentence="getSentence"
+      @delSentence="delSentence"
       ></sentence-detail>
     </b-modal>
     <Modal v-if="showEdit" @close-modal="showEdit=false">
@@ -68,6 +68,7 @@ export default {
     // console.log(this.$route.params.userName, 'savesentence')
     // 문장 요청 보내기
     // 지금은 숫자로 요청해야함
+
     this.getSentence()
   },
   data() {
@@ -106,6 +107,10 @@ export default {
       this.showDetail = true
       this.nowItem = item
     },
+    delSentence() {
+      this.$router.go(this.$router.currentRoute)
+      this.getSentence()
+    }
   },
 }
 </script>

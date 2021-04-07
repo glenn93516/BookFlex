@@ -36,7 +36,7 @@
           :key="item.index" 
           :item="item" 
           @editSentence="showEditModal(item)"
-          @delSentence="getHighlightList">
+          @delSentence="delSentence">
         </community-item>
       </div>
       <Modal v-if="showEdit" @close-modal="showEdit=false">
@@ -78,19 +78,28 @@ export default {
     }
   },
   created() {
+    const token = localStorage.getItem('jwt')
+    const headers = {
+      "Authorization" : token
+    }
+    // console.log('token', token)
+    if (token) {
+      this.$axios.get(`${this.$store.getters.getServer}/user`, {headers})
+      .then(res => {
+        this.userInfo = res.data.data
+        this.$store.commit('UpdateUserInfo', res.data.data)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    } 
+
     this.getHighlightList();
     this.getReadBook();
     this.getGoodBook();
     this.getWishListBook();
     this.getHighLightBook();
   },
-  updated() { 
-    console.log('updated'); 
-    this.$nextTick(function () { 
-      this.getHighlightList()
-    }); 
-  },
-
   methods: {
     getHighlightList(){
       this.$axios.get(`${this.$store.getters.getServer}/highlight`)
@@ -144,9 +153,13 @@ export default {
       this.nowItem = item
       this.showEdit = true
     },
-    editSentence(){
+    editSentence() {
       this.showEdit=false
       this.getHighlightList()
+    },
+    delSentence() {
+      this.$router.go(this.$router.currentRoute)
+      this.getHighLightBook()
     }
   },
 
