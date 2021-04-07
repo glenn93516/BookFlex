@@ -153,11 +153,11 @@
                 <br>
                 목록을 통해 한 눈에 확인할 수 있습니다.
                 <br>
-                위시리스트도 관리할 수 있어요.
+                선호 장르와 읽은 책 기준으로 산정되는 뱃지를 활용하여
                 <br>
-                나만의 서재에 등록된 책들을 통해 
+                나만의 서재를 더욱 화려하게 꾸밀 수 있어요.
                 <br>
-                추천 페이지에서 맞춤형 추천 서비스도 이용할 수 있습니다.
+                서재에 등록된 책을 기반으로 맞춤형 추천 서비스가 제공됩니다.
               </p>
             </div>
             <img 
@@ -280,13 +280,13 @@ import Book from '@/components/Main/Book.vue'
           '도시의 시간',
           '인터내셔널의 밤',
           '모든 저녁이 저물 때',
-          '저녁의 구애',
           '저녁의 게임',
           '아침의 노래 저녁의 시',
           '상냥한 폭력의 시대',
           '여름의 맛',
           '그믐, 또는 당신이 세계를 기억하는 방식',
           '국경시장',
+          '더 포스터 북 by 이슬아',
         ],
         nowBookObj: {},
       }
@@ -551,7 +551,7 @@ import Book from '@/components/Main/Book.vue'
     display: none;
   }
   #book .book-ul .book-moreInf {
-    margin: 4rem 0;
+    display: none;
   }
   #main .recommend-book {
     margin: 4rem 0;

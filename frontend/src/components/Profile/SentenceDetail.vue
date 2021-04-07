@@ -24,7 +24,7 @@
         v-if="item.highlightCover"
         :src="item.highlightCover" 
         alt=""
-        style="margin-top: 9px; border-radius: 10px 10px 0 0;"
+        style="margin-top: 9px; border-radius: 10px 10px 0 0; min-width: 465px;"
       >
       <img 
         class="sentence-img" 
@@ -33,7 +33,7 @@
         v-else
         src="@/assets/waterprint_back.jpg" 
         alt=""
-        style="margin-top: 9px; border-radius: 10px 10px 0 0;"
+        style="margin-top: 9px; border-radius: 10px 10px 0 0; min-width: 465px;"
       >
       
       <div class="detail-dimmed">
@@ -81,6 +81,7 @@
           @mouseleave="editIcon = ['far', 'edit']"
           :icon="editIcon"
           v-if="isEditor"
+          @click="editSentence"
         />
         <font-awesome-icon 
           size="2x"
@@ -89,14 +90,18 @@
           @mouseleave="deleteIcon = ['far', 'trash-alt']"
           :icon="deleteIcon"
           v-if="isEditor"
+          @click="delSentence"
         />
       </div>
     </footer>
+
   </div>
 </template>
 
 <script>
 export default {
+  components: {
+  },
   props: {
     item: Object,
   },
@@ -176,9 +181,29 @@ export default {
         })
       }
     },
+    
+    editSentence() {
+      this.$emit("editSentence")
+    },
+    delSentence() {
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      this.$axios.delete(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {headers})
+      .then(res => {
+        console.log(res)
+        this.$emit("delSentence")
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    },
+    
     goBook(item) {
       console.log(item.bookIsbn, 'item.bookIsbn')
     }
+    
   }
 }
 </script>
@@ -203,6 +228,7 @@ export default {
     top: 54px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
+    min-width: 465px;
     text-align: center;
   }
   .detail-sentence-text {
@@ -214,6 +240,8 @@ export default {
   }
   .detail-sentence-date {
     display: absolute;
+    min-width: 465px;
+    width: 465px;
     height: 30px;
     right: 0;
     text-align: end;
