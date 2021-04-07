@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     getPageInfo() {
-      console.log(" getPageInfo 실행!")
+      // console.log(" getPageInfo 실행!")
       const PageData = this.$refs.progress.servePageInfo()
       if (PageData.progress > 0) {
         this.progressPercent = PageData.progress * 25
@@ -79,7 +79,7 @@ export default {
   watch: {
     $route(to) {
       this.urlName = to.name // url이름이 필요할 때 사용(불필요하면 지우도 괜찮음)
-      console.log(this.urlName)
+      // console.log(this.urlName)
       if (this.urlName=="SubSignComplete") {
         this.signupTitle = false
       } else {

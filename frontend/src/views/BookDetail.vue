@@ -32,12 +32,14 @@ export default {
     }
   },
   methods: {
-    linkGen(pageNum) {
-      console.log(pageNum)
+    // linkGen(pageNum) {
+    //   console.log(pageNum)
+    // },
+    linkGen() {
     }
   },
   created() {
-    console.log(this.book)
+    // console.log(this.book)
   }
 }
 </script>

@@ -144,7 +144,7 @@ export default {
       }
     },
     goToProfile() {
-      console.log(this.userInfo)
+      // console.log(this.userInfo)
       this.$router.push({ name: 'Profile', params: {userName: this.userInfo.userNickname}})
     },
     goToMain() {
@@ -219,7 +219,7 @@ export default {
     const headers = {
       "Authorization" : token
     }
-    console.log('token', token)
+    // console.log('token', token)
     if (token) {
       this.$axios.get(`${this.$store.getters.getServer}/user`, {headers})
       .then(res => {

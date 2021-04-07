@@ -35,10 +35,10 @@ export default {
     getBookData() {
       this.$axios.get(`${this.$store.getters.getServer}/bookshelf/${this.$route.params.userName}`)
       .then(res => {
-        console.log(res.data.data, '유저 읽음 res.data.data')
+        // console.log(res.data.data, '유저 읽음 res.data.data')
         this.readBooks = res.data.data
       })
-      console.log(this.readBooks, 'readBookds')
+      // console.log(this.readBooks, 'readBookds')
     },
     clickReadBook(isbn) {
       // alert('읽은 책입니다(～￣▽￣)～✨')

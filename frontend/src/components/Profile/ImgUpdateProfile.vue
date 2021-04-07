@@ -43,16 +43,16 @@ export default {
       uploadImg: null,
     }
   },
-  created() {
-    const User = this.$store.getters.getUser
-    console.log(User)
-  },
+  // created() {
+  //   const User = this.$store.getters.getUser
+  //   console.log(User)
+  // },
   methods: {
     onClickImageUpload() {
       this.$refs.imageInput.click()
     },
     onChangeImages(e) {
-      console.log(e.target.files)
+      // console.log(e.target.files)
       const file = e.target.files[0]
       this.uploadImg = URL.createObjectURL(file)
       this.submitImage(file)

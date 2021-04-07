@@ -136,15 +136,15 @@ export default {
       .then(res => {
         this.likeNum = res.data.data.goodCount
         this.likeStatus = res.data.data.userGood
-        console.log(res.data.data, '처음에 들어오는 데이터')
-        console.log(res.data.data.userGood, '처음에 들어오는 데이터 userGood')
+        // console.log(res.data.data, '처음에 들어오는 데이터')
+        // console.log(res.data.data.userGood, '처음에 들어오는 데이터 userGood')
       })
     },
     closeModal() {
       this.$emit('close-modal')
     },
     addLike() {
-      console.log('addLike')
+      // console.log('addLike')
       // 만약 로그인 안한 유저라면 addLike못함
       const token = localStorage.getItem('jwt')
       const headers = {
@@ -191,8 +191,8 @@ export default {
         "Authorization": token
       }
       this.$axios.delete(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {headers})
-      .then(res => {
-        console.log(res)
+      .then(() => {
+        // console.log(res)
         this.$emit("delSentence")
       })
       .catch(err => {
@@ -201,7 +201,8 @@ export default {
     },
     
     goBook(item) {
-      console.log(item.bookIsbn, 'item.bookIsbn')
+      // console.log(item.bookIsbn, 'item.bookIsbn')
+      this.$router.push({ name: 'FirstPage', params: { bookIsbn: String(item.bookIsbn) } })
     }
     
   }

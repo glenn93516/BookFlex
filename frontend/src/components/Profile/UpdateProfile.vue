@@ -43,10 +43,10 @@ export default {
       // resetImg: false,
     }
   },
-  created() {
-    const User = this.$store.getters.getUser
-    console.log(User)
-  },
+  // created() {
+  //   const User = this.$store.getters.getUser
+  //   // console.log(User)
+  // },
   // mounted() {
   //   this.getGenreInfo()
   // },

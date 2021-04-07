@@ -1,5 +1,4 @@
 import random
-import timeit
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
@@ -124,6 +123,9 @@ def select_book_only_genres(genre_ids):
     - return
         - list : 선호 장르를 기준으로 뽑아낸 랜덤한 20개 책
     '''
+    if len(genre_ids) == 0:
+        genre_ids.append(get_random_genre())
+
     books_by_genre = pd.DataFrame()
     for genre in genre_ids:
         current_books = books[books['book_genres'].str.contains(
@@ -188,6 +190,10 @@ def recommend_random_books():
     response = [result.as_simple_dict(idx + 1)
                 for idx, result in enumerate(results)]
     return response
+
+
+def get_random_genre():
+    return random.randint(1, 29)
 # API Endpoints
 
 

@@ -75,7 +75,7 @@ export default {
         }
       )
       .then(res => {
-        // console.log(res.data.data, '인증번호')
+        console.log(res.data.data, '인증번호')
         this.mailNum = res.data.data
         alert(`인증번호가 발송되었습니다. ${ this.timeMin }분 이내에 발급받은 인증 번호를 입력해주세요.`)      
         this.start()
@@ -86,7 +86,7 @@ export default {
       })
     },
     servePageInfo() {
-      console.log("여기는 페이지 체크")
+      // console.log("여기는 페이지 체크")
       return this.pageData
     },
     start() {
@@ -99,7 +99,7 @@ export default {
           this.timeStop()
         }
       }, 1000)
-      console.log(this.polling, 'polling')
+      // console.log(this.polling, 'polling')
     },
     prettyTime() {
       let time = this.timeCounter

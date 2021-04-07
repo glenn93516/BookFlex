@@ -81,9 +81,9 @@ export default {
 				{
 					headers,
 				})
-				.then(res => {
+				.then(() => {
 					alert('읽기 목록에 담겼습니다 :)')
-					console.log(res)
+					// console.log(res)
 					// 읽은 책은 추천 목록에서 삭제 => 부모로 신호보내서 데이터 삭제하기
 					this.$emit('delete-readBook', this.book.book_isbn)
 					// 문장수집으로 이동
@@ -109,8 +109,8 @@ export default {
 					{
 						headers
 					})
-				.then(res => {
-					console.log(res)
+				.then(() => {
+					// console.log(res)
 					alert('위시리스트에 담겼습니다 :)')
 				})
 				.catch(err => {

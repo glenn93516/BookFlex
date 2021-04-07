@@ -98,7 +98,7 @@ export default {
   created() {
     this.$axios.get(`${this.$store.getters.getServer}/book/${this.item.bookIsbn}`)
     .then(res => {
-      console.log(res.data.data)
+      // console.log(res.data.data)
       this.book = res.data.data
     })
     .catch(err => {
@@ -121,13 +121,13 @@ export default {
         data.append('highlightCover', this.file)
         data.append('highlightPage', this.sentencePage)
         data.append('isPublic', this.selected)
-        console.log(headers, data)
+        // console.log(headers, data)
         this.$axios.put(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, data, 
         {
           headers
         })
-        .then(res => {
-          console.log(res)
+        .then(() => {
+          // console.log(res)
           alert('문장이 잘 수정 되었어요 :)')
           this.text = ""
           this.sentencePage = 0

@@ -124,7 +124,7 @@ export default {
       if(this.item.titleData.length===0){
         return null;
       }
-      return this.item.titleData.slice(this.perPage*(this.titleCurrentPage-1), this.perPage * this.titleCurrentPage)
+      return this.item.titleData.slice(7*(this.titleCurrentPage-1), 7*this.titleCurrentPage)
     },
     titleTotalRows : function() {
       return this.item.titleData.length;
@@ -134,7 +134,7 @@ export default {
       if(this.item.authorData.length===0){
         return null;
       }
-      return this.item.authorData.slice(this.perPage*(this.authorCurrentPage-1), this.perPage * this.authorCurrentPage)
+      return this.item.authorData.slice(7*(this.authorCurrentPage-1), 7*this.authorCurrentPage)
     },
     authorTotalRows : function() {
       return this.item.authorData.length;
@@ -144,7 +144,7 @@ export default {
       if(this.item.contentsData.length===0){
         return null;
       }
-      return this.item.contentsData.slice(this.perPage*(this.contentsCurrentPage-1), this.perPage * this.contentsCurrentPage)
+      return this.item.contentsData.slice(7*(this.contentsCurrentPage-1), 7*this.contentsCurrentPage)
     },
     contentsTotalRows : function() {
       return this.item.contentsData.length;

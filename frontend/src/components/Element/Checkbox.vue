@@ -47,7 +47,7 @@ export default {
       this.serveData()
     },
     serveData() {
-      console.log('this.option', this.option)
+      // console.log('this.option', this.option)
       this.$emit("serve-data", this.option)
     }
   }

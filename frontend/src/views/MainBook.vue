@@ -38,7 +38,7 @@
         <div class="d-flex justify-content-around books" style="margin-right: 40px;">
           <!-- 클릭할때 객체를 스토어에 저장 commit -->
           <Book 
-            v-for="(book, idx) in suitRecommend.slice(0, 4)" 
+            v-for="(book, idx) in suitRecommend" 
             :key="idx" 
             class="book-component mouse-pointer" 
             :book="book" 
@@ -68,7 +68,7 @@
       >
         <div class="d-flex justify-content-around books" style="margin-left: 40px;">
           <Book 
-            v-for="(book, idx) in genreRecommend.slice(0, 4)" 
+            v-for="(book, idx) in genreRecommend" 
             :key="idx" 
             class="book-component mouse-pointer" 
             :book="book" 
@@ -98,7 +98,7 @@
       >
         <div class="d-flex justify-content-around books" style="margin-right: 40px;">
           <Book 
-            v-for="(book, idx) in suitRecommend.slice(5, 9)" 
+            v-for="(book, idx) in wishRecommend" 
             :key="idx" 
             class="book-component mouse-pointer" 
             :book="book" 
@@ -159,51 +159,81 @@ export default {
   },
   mounted() {
     this.loadBookData()
-    setTimeout(() => {
-      this.isLoading = false
-    }, 1000);
   },
   methods: {
     // 책을 로드하는 함수
     loadBookData() {
-      // 플라스크 서버 처리 이후 수정
-      // const token = localStorage.getItem('jwt')
-      const token = null
-      const headers = {
-        "Authorization": token
+      let bucket = new Set()
+      while (bucket.size < 4) {
+        let num = Math.floor(Math.random() * (19))
+        bucket.add(num)
       }
-      console.log(token)
-      if (token) {
-        this.$axios.get(`${this.$store.getters.getServer}/recommend`, {headers})
-        .then(res => {
-          // console.log(res.data)
-          this.suitRecommend = res.data.data.customized_by_user
-          this.genreRecommend = res.data.data.customized_by_genre.customized_books
-          this.userGenre = res.data.data.customized_by_genre.genre.genre_name
-          console.log(this.userGenre)
-        })
-        .catch(err => {
-          console.error(err)
-        })
+      const array = [...bucket]
+      // 플라스크 서버 처리 이후 수정
+      const RecommendList = this.$store.getters.getRecommendList
+      if (RecommendList) {
+        // 응답값 확인 후 랜덤 메서드 넣기 -----------------------------------------------
+        for (let i of array) {
+          this.suitRecommend.push(RecommendList.customized_by_user[i])
+          this.genreRecommend.push(RecommendList.customized_by_genre.customized_books[i])
+          if (RecommendList.customized_by_wishlist.length) {
+            this.wishRecommend.push(RecommendList.customized_by_wishlist[i])
+          }
+        }
+        this.userGenre = RecommendList.customized_by_genre.genre.genre_name
+        setTimeout(() => {
+          this.isLoading = false
+        }, 500);
       } else {
-        this.$axios.get(`${this.$store.getters.getServer}/recommend`)
-        .then(res => {
-          // console.log(res)
-          this.suitRecommend = res.data.data.customized_by_user
-          this.genreRecommend = res.data.data.customized_by_genre.customized_books
-          this.userGenre = res.data.data.customized_by_genre.genre.genre_name
-        })
-        .catch(err => {
-          console.error(err)
-        })
+        // 없다면 책정보 요청하기
+        const token = localStorage.getItem('jwt')
+        const headers = {
+          "Authorization": token
+        }
+        if (token) {
+          this.$axios.get(`${this.$store.getters.getServer}/recommend`, {headers})
+          .then(res => {
+            // 랜덤 값 추출 추가해야함 ------------------------------------------------------
+            for (let i of array) {
+              this.suitRecommend.push(res.data.data.customized_by_user[i])
+              this.genreRecommend.push(res.data.data.customized_by_genre.customized_books[i])
+              if (res.data.data.customized_by_wishlist.length) {
+                this.wishRecommend.push(res.data.data.customized_by_wishlist[i])
+              }
+            }
+            this.userGenre = res.data.data.customized_by_genre.genre.genre_name
+            // 받아온 책을 store에 저장
+            this.$store.commit('SaveRecommendList', res.data.data)
+            this.isLoading = false
+          })
+          .catch(err => {
+            console.error(err)
+          })
+        } else {
+          this.$axios.get(`${this.$store.getters.getServer}/recommend`)
+          .then(res => {
+            // 랜덤 값 추출 추가해야함 ------------------------------------------------------
+            for (let i of array) {
+              this.suitRecommend.push(res.data.data.customized_by_user[i])
+              this.genreRecommend.push(res.data.data.customized_by_genre.customized_books[i])
+              if (res.data.data.customized_by_wishlist.length) {
+                this.wishRecommend.push(res.data.data.customized_by_wishlist[i])
+              }
+            }
+            this.userGenre = res.data.data.customized_by_genre.genre.genre_name
+            this.isLoading = false
+          })
+          .catch(err => {
+            console.error(err)
+          })
+        }
       }
     },
     closeModal() {
       this.isModalViewed = false
-      console.log('닫아')
+      // console.log('닫아')
     },
     openModal(book) {
-      console.log(book)
       // 선택한객체를 변수와 store에 모두 저장
       // 변수는 책 선택시 바로 커버를 띄울 목적
       this.selectedBook = book
@@ -211,10 +241,11 @@ export default {
       this.selectBook(book)
       this.step = 'collectSentence'
       this.isModalViewed = true
-      console.log('열어')
+      // console.log('열어')
     },
-    deleteReadBook(isbn) {
-      console.log(isbn)
+    // deleteReadBook(isbn) {
+    deleteReadBook() {
+      // console.log(isbn)
       // 읽은 책 목록 삭제하기
       // 1. 위시리스트 기반 추천이 완료되면 data 분리(현재 유저기반 공유중)
       // 2. 각 추천별 id 부여 => props로 전달
@@ -222,7 +253,7 @@ export default {
       // 4. 해당 data리스트에서 책 삭제하기
     },
     goToReaction() {
-      console.log('되나?')
+      // console.log('되나?')
       this.step = "bookReaction"
     },
     selectBook(book) {

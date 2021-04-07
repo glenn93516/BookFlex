@@ -122,7 +122,7 @@ export default {
         this.reviewKeyword = keyword
         this.step = 'checkReview'
         this.isModalViewed = true
-        console.log(keyword)
+        // console.log(keyword)
       } else {
         this.step = 'collectSentence'
         this.isModalViewed = true
@@ -153,9 +153,9 @@ export default {
 				{
 					headers,
 				})
-				.then(res => {
+				.then(() => {
 					alert('읽기 목록에 담겼습니다 :)')
-					console.log(res)
+					// console.log(res)
 					// 문장수집으로 이동
           this.openModal()
 				})
@@ -179,8 +179,8 @@ export default {
 					{
 						headers
 					})
-				.then(res => {
-					console.log(res)
+				.then(() => {
+					// console.log(res)
 					alert('위시리스트에 담겼습니다 :)')
 				})
 				.catch(err => {
