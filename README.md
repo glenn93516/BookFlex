@@ -156,7 +156,7 @@ frontend
 
 ### 감정 분석 + 토픽 분석
 
-![상세2](Document/images/book_detail_2.gif)
+![상세2](Document/images/book_detail.gif)
 
 ### 책 비교
 
