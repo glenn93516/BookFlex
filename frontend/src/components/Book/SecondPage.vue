@@ -7,15 +7,14 @@
         style="text-align: left; 
                   margin-top: 20px; 
                   margin-left: 20px;
-                  margin-bottom: 50px;
+                  margin-bottom: 20px;
                   color: rgba(100, 100, 100);
                   ">
-        <h6 class="mr-1">도서 분류 분석</h6>
-        <hr style="rgba(50, 50, 50); margin-bottom: 40px;">
+        <h6 class="mr-1 font-bold" >도서 분류 분석</h6>
+        <hr style="rgba(50, 50, 50);">
       </div>
-      <SecondLeft :isbn="this.$route.params.bookIsbn" />
-      <br><br>
-      <SecondLeft2 :isbn="this.$route.params.bookIsbn" @setBookSentiment="getBookSentiment" />
+      <SecondLeft :isbn="this.$route.params.bookIsbn" style="margin-top: 3rem;"/>
+      <SecondLeft2 :isbn="this.$route.params.bookIsbn" @setBookSentiment="getBookSentiment" style="margin-top: 3rem;"/>
     </div>
 
     <!-- 오른쪽 페이지: 지도학습 긍부정 분석 + 한줄문장 -->
@@ -24,11 +23,11 @@
         style="text-align: right; 
                   margin-top: 20px; 
                   margin-right: 20px;
-                  margin-bottom: 50px;
+                  margin-bottom: 20px;
                   color: rgba(100, 100, 100);
                   ">
-        <h6 class="mr-1">리뷰 감정 분석</h6>
-        <hr style="rgba(50, 50, 50); margin-bottom: 40px;">
+        <h6 class="mr-1 font-bold">리뷰 감정 분석</h6>
+        <hr style="rgba(50, 50, 50);">
       </div>
       
       <SecondRight v-if="bookSentiment.positive" :bookSentiment="bookSentiment" />
@@ -99,5 +98,7 @@ export default {
 .highcharts-data-table tr:hover {
   background: #f1f7ff;
 }
-
+.font-bold {
+  font-weight: bold;
+}
 </style>
