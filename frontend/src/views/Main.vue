@@ -287,6 +287,8 @@ import Book from '@/components/Main/Book.vue'
           '그믐, 또는 당신이 세계를 기억하는 방식',
           '국경시장',
           '더 포스터 북 by 이슬아',
+          'Tripful 트립풀 런던',
+          '분할패턴 1 (소장용)',
         ],
         nowBookObj: {},
       }

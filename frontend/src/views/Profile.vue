@@ -195,8 +195,6 @@ export default {
           ,'name': '남성'
         },
       },
-
-
       dataLength : 0, //highlight res.data 
     }
   },
