@@ -128,7 +128,7 @@ export default {
   watch: {
   },
   methods: {
-    sendMessages() {
+    async sendMessages() {
       const headers = {
         "Authorization": localStorage.getItem('jwt')
       }
@@ -289,7 +289,7 @@ export default {
   }
 
   .tag-input__text {
-    width: 200px;
+    width: 70px;
     border: none;
     outline: none;
     font-size: 0.9em;
