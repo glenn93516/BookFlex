@@ -154,7 +154,12 @@ frontend
     ![상세3](Document/images/book_detail_3.gif)
 - 문장 수집
 - 책 검색
-- 유저 선호 장르 분석
+  ![검색](Document/images/book_search.gif)
+- 유저 페이지
+  - 선호 장르 분석
+    ![선호장르](Document/images/user_genre.gif)
+  - 읽은 책 & 수집한 문장
+    ![프로필](Document/images/user_profile.gif)
 - 커뮤니티
   - 문장수집
     ![문장수집](Document/images/community.png)
