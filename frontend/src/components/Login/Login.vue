@@ -76,10 +76,10 @@ export default {
     email(){
       if (this.email.length > 0) {
         if (this.isEmail(this.email)) {
-          console.log('email isVisible false')
+          // console.log('email isVisible false')
           this.isVisible = false
         } else {
-          console.log('email isVisible true')
+          // console.log('email isVisible true')
           this.isVisible = true
         }
       } else {

@@ -85,7 +85,7 @@
     created() {
     },
     updated() { 
-      console.log('updated'); 
+      // console.log('updated'); 
       this.$nextTick(function () {  
         this.isShow = true
       }); 

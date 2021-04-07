@@ -136,7 +136,7 @@ export default {
           }
         })
         .catch(err => {
-          console.log(err)
+          console.error(err)
         })
       }
     },
@@ -154,7 +154,7 @@ export default {
           }
         })
         .catch(err => {
-          console.log(err)
+          console.error(err)
         })
       }
     },
@@ -163,13 +163,13 @@ export default {
       const headers = {
         "Authorization": token
       }
-      console.log(this.item, '여기는 아이템')
+      // console.log(this.item, '여기는 아이템')
       this.$axios.delete(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {}, {headers})
-      .then(res => {
-        console.log(res, '삭제 성공')
+      .then(() => {
+        // console.log(res, '삭제 성공')
       })
       .catch(err => {
-        console.log(err, '삭제 실패')
+        console.error(err, '삭제 실패')
       })
     },
     modifySentence() {

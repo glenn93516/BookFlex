@@ -59,7 +59,7 @@
             const n = this.chartData.labels.length;
 
             this.bookTopics = res.data.data.slice(0,n)
-            console.log(this.bookTopics)
+            // console.log(this.bookTopics)
 
             let i = 0;
             for(i = 0; i < n; i++) {

@@ -34,7 +34,7 @@
             </div>
             <input 
               type='text' 
-              placeholder="앤터" 
+              placeholder="닉네임 입력" 
               class='tag-input__text' 
               @keydown.enter='addTag' 
               @keydown.188='addTag'
@@ -139,7 +139,7 @@ export default {
           "senderId": this.$store.getters.getUser.userId,
           "sendmsgContent": this.content,
         }
-        console.log(message)
+        // console.log(message)
         this.$axios.post(`${this.$store.getters.getServer}/sendmsg`,message,{headers})
       })
 
@@ -289,7 +289,7 @@ export default {
   }
 
   .tag-input__text {
-    width: 100px;
+    width: 200px;
     border: none;
     outline: none;
     font-size: 0.9em;
