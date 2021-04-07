@@ -1,5 +1,14 @@
 @charset "utf-8";
+
 @import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css');
+@font-face {
+  font-family: 'S-CoreDream-2ExtraLight';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 body,
 h1,
@@ -25,6 +34,9 @@ a:hover {
   text-decoration: none;
 }
 /* font 설정 */
+.font-coredream {
+  font-family: 'S-CoreDream-2ExtraLight', sans-serif;
+}
 .font-jeonnam {
   font-family: 'PureunJeonnam', sans-serif;
 }
@@ -40,15 +52,17 @@ body {
   position: relative;
   padding-bottom: 20px;
 }
-.footer-content {
-  position: absolute;
+footer[class=footer-content] {
+  /* position: absolute; */
   font-size: 0.6rem;
-  padding-top: 2rem;
+  margin: 2rem 0;
   text-align: center;
-  bottom: 0;
+  /* bottom: 0;
   left: 0;
-  right: 0;
+  right: 0; */
+  min-width: 1100px;
 }
+
 * {
   font-family: 'PureunJeonnam', sans-serif;
   

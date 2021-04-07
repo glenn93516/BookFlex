@@ -237,6 +237,9 @@
       <div style="width: 100vw; height: 10vh; justify-content: center; text-align: center; align-items: center;">
         <button class="go-main-btn" @click="goMain()">북플렉스로 이동</button>
       </div>
+    <footer class="footer-content">
+      Copyright © 앙상블. All Rights Reserved.
+    </footer>
     </div>
   </div>
 </template>

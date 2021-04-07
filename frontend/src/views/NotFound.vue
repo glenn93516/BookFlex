@@ -7,7 +7,7 @@
           존재하지 않는 페이지 입니다.</p>
       <a href='/' class="back">메인 페이지로 이동하기</a>
     </div>
-    <footer>
+    <footer class="footer-content">
       Copyright © 앙상블. All Rights Reserved.
     </footer>
   </div>
