@@ -1,25 +1,4 @@
 @charset "utf-8";
-
-@font-face {
-  font-family: 'NanumBarunpen';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumBarunpen.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'S-CoreDream-2ExtraLight';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* @font-face {
-  font-family: 'PureunJeonnam', sans-serif;
-  src: url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css');
-} */
 @import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css');
 
 body,
@@ -45,28 +24,37 @@ li {
 a:hover {
   text-decoration: none;
 }
-.footer-content {
-  font-family: 'NanumBarunpen', sans-serif;
-  font-size: 0.6rem;
-  padding-top: 2rem;
-  text-align: center;
-  position: relative;
-  bottom: 0.5rem;
-}
 /* font 설정 */
-.font-nanumpen {
-  font-family: 'NanumBarunpen', sans-serif;
-}
-.font-coredream {
-  font-family: 'S-CoreDream-2ExtraLight', sans-serif;
-}
 .font-jeonnam {
   font-family: 'PureunJeonnam', sans-serif;
 }
 
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+}
+.app {
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 20px;
+}
+.footer-content {
+  position: absolute;
+  font-size: 0.6rem;
+  padding-top: 2rem;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 * {
   font-family: 'PureunJeonnam', sans-serif;
+  
 }
+
+
 
 /* 자주 사용하는 mouse-pointer */
 .mouse-pointer {
