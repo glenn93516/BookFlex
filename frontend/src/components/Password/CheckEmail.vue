@@ -82,11 +82,11 @@ export default {
         this.btnDisabled = false
       })
       .catch(err => {
-        console.log(err)
+        console.error(err)
       })
     },
     servePageInfo() {
-      console.log("여기는 페이지 체크")
+      // console.log("여기는 페이지 체크")
       return this.pageData
     },
     start() {
@@ -99,7 +99,7 @@ export default {
           this.timeStop()
         }
       }, 1000)
-      console.log(this.polling, 'polling')
+      // console.log(this.polling, 'polling')
     },
     prettyTime() {
       let time = this.timeCounter

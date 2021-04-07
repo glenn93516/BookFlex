@@ -144,7 +144,7 @@ export default {
           console.error(err)
         })
       } else {
-        console.log('여기에는 뭘 넣을까')
+        // console.log('여기에는 뭘 넣을까')
       }
     },
     goToPasswordCheckEmail() {

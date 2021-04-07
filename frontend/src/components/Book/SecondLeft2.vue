@@ -61,7 +61,7 @@
           
           if(res.data.data) {
             this.bookSentiment = res.data.data.sentiment
-            console.log(this.bookSentiment)
+            // console.log(this.bookSentiment)
 
             this.chartData.labels[0] = "긍정"
             this.chartData.datasets[0].data[0] = this.bookSentiment.positive.ratio

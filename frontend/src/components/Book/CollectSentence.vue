@@ -99,7 +99,7 @@ export default {
     }
   },
   created() {
-    console.log(this.book)
+    // console.log(this.book)
   }, 
   methods: {
     collectSentence() {
@@ -121,8 +121,8 @@ export default {
         {
           headers
         })
-        .then(res => {
-          console.log(res)
+        .then(() => {
+          // console.log(res)
           alert('문장이 잘 담겼어요 :)')
           this.text = ""
           this.sentencePage = 0

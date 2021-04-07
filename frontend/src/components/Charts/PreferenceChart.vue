@@ -22,11 +22,11 @@ export default {
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/statistics`)
     .then(res => {
       this.userInfo = res.data
-      console.log(this.userInfo, 'userInfo')
+      // console.log(this.userInfo, 'userInfo')
       this.makeChart()
     })
     .catch(err => {
-      console.log(err, 'err')
+      console.error(err, 'err')
     })
   },
   methods: {
