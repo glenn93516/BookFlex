@@ -36,6 +36,7 @@ const routes = [
         path: '/signup',
         name: 'Signup',
         component: () => import('../components/Signup/Signup.vue'),
+        redirect: '/signup/1',
         beforeEnter: (to, from, next) => {
           if (localStorage.getItem('jwt')) {
             next({name: 'MainBook'})
@@ -107,7 +108,16 @@ const routes = [
       {
         path: '/subsignup',
         name: 'SubSignup',
+        redirect: '/subsignup/1',
         component: () => import('../components/SubSignup/SubSignup.vue'),
+        beforeEnter: (to, from, next) => {
+          if (from.name==='SignupComplete') {
+            next()
+          } else {
+            next({name: 'MainBook'})
+            alert('잘못된 접근입니다.')
+          }
+        },
         children: [
           {
             path: '1',
