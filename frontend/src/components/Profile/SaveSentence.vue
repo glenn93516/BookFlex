@@ -17,10 +17,23 @@
         <!-- <div class="sentence-book">{{item.book}}</div> -->
       </div>
     </div>
-    <b-modal v-model="showDetail" centered hide-footer hide-header hide-backdrop>
+
     <!-- <b-modal v-model="showDetail" centered hide-footer hide-header> -->
-      <sentence-detail :item="nowItem" @close-modal="showDetail=false"></sentence-detail>
+    <b-modal v-model="showDetail" centered hide-footer hide-header hide-backdrop>
+      <sentence-detail 
+      :item="nowItem" 
+      @close-modal="showDetail=false" 
+      @editSentence="showDetail=false;showEdit=true;"
+      @delSentence="getSentence"
+      ></sentence-detail>
     </b-modal>
+    <Modal v-if="showEdit" @close-modal="showEdit=false">
+      <template #header></template>
+      <template #body>
+      <EditSentence :item="nowItem" @close-modal="getSentence"/>
+      </template>
+    </Modal>
+
     <div class="more">
       <img 
         @click="more()"
@@ -35,39 +48,49 @@
 
 <script>
 import SentenceDetail from './SentenceDetail.vue'
+import Modal from '@/components/Element/Modal.vue'
+import EditSentence from './EditSentence.vue'
 
 export default {
   components: {
     SentenceDetail,
+    EditSentence,
+    Modal,
   },
   mounted() {
     console.log(this.$route.params.userName, 'savesentence')
     // 문장 요청 보내기
     // 지금은 숫자로 요청해야함
-    this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`)
-    .then(res => {
-      console.log(res.data.data, '이거 115')
-      this.defaultItems = res.data.data
-      this.showItems = this.defaultItems.slice(0, 6)
-      if (this.defaultItems.length > 6) {
-        this.moreBtn = true
-      } else {
-        this.moreBtn = false
-      }
-    })
+    this.getSentence()
   },
   data() {
     return {
+      showEdit: false,
+      showDetail: false,
       showItems: [],
       defaultItems: [],
       moreBtn: false,
-      showDetail: false,
       userInfo: {},
       nowItem: "",
       nowBookTitle: "",
     }
   },
   methods: {
+    getSentence() {
+      this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`)
+      .then(res => {
+        console.log(res.data.data, '이거 115')
+        this.defaultItems = res.data.data
+        this.showItems = this.defaultItems.slice(0, 6)
+        if (this.defaultItems.length > 6) {
+          this.moreBtn = true
+        } else {
+          this.moreBtn = false
+        }
+        this.showEdit=false
+        this.showDetail=false
+      })
+    },
     more() {
       this.showItems = this.defaultItems
       this.moreBtn = false

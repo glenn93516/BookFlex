@@ -72,6 +72,7 @@
           @mouseleave="editIcon = ['far', 'edit']"
           :icon="editIcon"
           v-if="isEditor"
+          @click="editSentence"
         />
         <font-awesome-icon 
           size="2x"
@@ -80,14 +81,18 @@
           @mouseleave="deleteIcon = ['far', 'trash-alt']"
           :icon="deleteIcon"
           v-if="isEditor"
+          @click="delSentence"
         />
       </div>
     </footer>
+
   </div>
 </template>
 
 <script>
 export default {
+  components: {
+  },
   props: {
     item: Object,
   },
@@ -166,6 +171,23 @@ export default {
           console.log(err)
         })
       }
+    },
+    editSentence() {
+      this.$emit("editSentence")
+    },
+    delSentence() {
+      const token = localStorage.getItem('jwt')
+      const headers = {
+        "Authorization": token
+      }
+      this.$axios.delete(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {headers})
+      .then(res => {
+        console.log(res)
+        this.$emit("delSentence")
+      })
+      .catch(err => {
+        console.error(err)
+      })
     },
   }
 }
