@@ -11,7 +11,7 @@
         <h4 class="result-subtitle">도서명</h4>
       </div>      
       <!-- <br><h4> #도서명</h4><br> -->
-      <div v-if="item.titleData!=null">
+      <div v-if="item.authorData.length!=0" class="search-result-bg">
         <div style="display : flex" >
           <search-book-detail  
             v-for="(book,index) in titleList" 
@@ -19,7 +19,7 @@
             v-bind:key="book.book_title"
             v-bind:index='index'
           ></search-book-detail >
-        </div><br>
+        </div>
         <div v-if="item.titleData.length > 0">
           <b-pagination
             pills
@@ -33,11 +33,10 @@
       <div v-if="item.titleData.length===0">
         <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
       </div>
-      <br><br>
       <div id="pointer-orange" class="pointer">
         <h4 class="result-subtitle">작가명</h4>
       </div>     
-      <div v-if="item.authorData!=null">
+      <div v-if="item.authorData.length!=0" class="search-result-bg">
         <div style="display : flex">
           <search-book-detail 
             v-for="(book,index) in authorList" 
@@ -59,11 +58,10 @@
       <div v-if="item.authorData.length==0">
         <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
       </div>
-      <br><br>
       <div id="pointer-green" class="pointer">
         <h4 class="result-subtitle">도서 설명</h4>
       </div>   
-      <div v-if="item.contentsData!=null">
+      <div v-if="item.contentsData.length!=0" class="search-result-bg">
         <div style="display : flex">
           <search-book-detail  
             v-for="(book,index) in contentsList" 
@@ -249,5 +247,10 @@ li.page-item.disabled .page-link {
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
     align-items: center;
+  }
+  .search-result-bg {
+    background-color: rgba(255, 255, 255, 0.5); 
+    border-radius: 1rem; 
+    padding: 1rem;
   }
 </style>
