@@ -26,7 +26,7 @@
                   margin-bottom: 20px;
                   color: rgba(100, 100, 100);
                   ">
-        <h6 class="mr-1">키워드 보기</h6>
+        <h6 class="mr-1 font-bold">키워드 보기</h6>
         <hr style="rgba(50, 50, 50); margin-bottom: 40px;">
       </div>
       <div style="margin-bottom: 20px;">
@@ -228,5 +228,8 @@ export default {
   .FirstPage_Btn:hover {
     background-color: rgb(192, 180, 165);
     color: rgb(255, 255, 255);
+  }
+  .font-bold {
+  font-weight: bold;
   }
 </style>
