@@ -104,7 +104,7 @@ export default {
   methods: {
     collectSentence() {
       // 토큰, isbn, 문장 수집 내용(text), 이미지 파일, 책 페이지, 공개 여부
-      if (!this.file || !this.text || !this.sentencePage) {
+      if ( !this.text || !this.sentencePage) { //!this.file ||
         alert("카드를 채워주세요!!")
       } else {
         const token = localStorage.getItem('jwt')
@@ -114,7 +114,9 @@ export default {
         let data = new FormData()
         data.append('bookIsbn', this.book.book_isbn)
         data.append('highlightContent', this.text)
-        data.append('highlightCover', this.file)
+        if(this.file != null){
+          data.append('highlightCover', this.file)
+        }
         data.append('highlightPage', this.sentencePage)
         data.append('isPublic', this.selected)
         this.$axios.post(`${this.$store.getters.getServer}/highlight`, data, 
