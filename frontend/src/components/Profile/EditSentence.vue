@@ -126,7 +126,7 @@ export default {
         {
           headers
         })
-        .then(res => {
+        .then(() => {
           // console.log(res)
           alert('문장이 잘 수정 되었어요 :)')
           this.text = ""
