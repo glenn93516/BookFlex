@@ -1,11 +1,16 @@
 <template>
   <div>
-    <h2><strong>검색 결과 - BOOK</strong></h2>
+    <!-- <div id="pointer-orange" class="pointer"> -->
+    <h2 class="result-title">BOOK</h2>
+    <!-- </div> -->
     <div v-if="item.titleData.length==0&&item.authorData.length==0&&item.contentsData.length==0" style="margin-bottom:5px;">
       <h4 style="text-align: center; ">😥검색된 결과가 없습니다.</h4>
     </div>
     <div v-if="item.titleData.length > 0||item.authorData.length > 0||item.contentsData.length > 0">
-      <br><h4> #도서명</h4><br>
+      <div id="pointer-pink" class="pointer">
+        <h4 class="result-subtitle">도서명</h4>
+      </div>      
+      <!-- <br><h4> #도서명</h4><br> -->
       <div v-if="item.titleData!=null">
         <div style="display : flex" >
           <search-book-detail  
@@ -29,7 +34,9 @@
         <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
       </div>
       <br><br>
-      <h4> #작가명</h4><br>
+      <div id="pointer-orange" class="pointer">
+        <h4 class="result-subtitle">작가명</h4>
+      </div>     
       <div v-if="item.authorData!=null">
         <div style="display : flex">
           <search-book-detail 
@@ -53,7 +60,9 @@
         <h5 style="text-align: center; ">😥검색된 결과가 없습니다.</h5>
       </div>
       <br><br>
-      <h4> #도서 설명</h4><br>
+      <div id="pointer-green" class="pointer">
+        <h4 class="result-subtitle">도서 설명</h4>
+      </div>   
       <div v-if="item.contentsData!=null">
         <div style="display : flex">
           <search-book-detail  
@@ -159,4 +168,86 @@ li.page-item.disabled .page-link {
   color: rgb(0, 0, 0);
   border: 0px;
 }
+
+  .pointer:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid rgba(237, 234, 232, 1);
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    align-items: center;
+  }
+  #pointer-pink {
+    width: 110px;
+    height: 40px;
+    position: relative;
+    background: rgba(254, 72, 193, 0.5);
+    margin: 1rem 0;
+    align-items: center;
+  }
+  #pointer-pink:before {
+    content: "";
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid rgba(254, 72, 193, 0.5);
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    align-items: center;
+  }
+  .result-title {
+    font-weight: bold;
+  }
+  .result-subtitle {
+    font-weight: bold;
+    margin-left: 30px;
+    line-height: inherit;
+  }
+
+  #pointer-orange {
+    width: 110px;
+    height: 40px;
+    position: relative;
+    background: rgba(253, 154, 93, 0.5);
+    align-items: center;
+    margin: 1rem 0;
+  }
+  #pointer-orange:before {
+    content: "";
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid rgba(253, 154, 93, 0.5);
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    align-items: center;
+  }
+  #pointer-green {
+    width: 130px;
+    height: 40px;
+    position: relative;
+    background: rgba(146, 208, 80, 0.5);
+    align-items: center;
+    margin: 1rem 0;
+  }
+  #pointer-green:before {
+    content: "";
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 20px solid rgba(146, 208, 80, 0.5);
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    align-items: center;
+  }
 </style>

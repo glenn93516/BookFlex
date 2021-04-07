@@ -30,10 +30,21 @@
     <section id="sentence-timeline">
       <header class="title">실시간 수집된 문장</header>
       <hr>
-      <!-- <community-item :item="showItems[0]"></community-item> -->
       <div id="itemContainer">
-        <community-item v-for="item in showItems" :key="item.index" :item="item"></community-item>
+        <community-item 
+          v-for="item in showItems" 
+          :key="item.index" 
+          :item="item" 
+          @editSentence="showEditModal(item)"
+          @delSentence="getHighlightList">
+        </community-item>
       </div>
+      <Modal v-if="showEdit" @close-modal="showEdit=false">
+        <template #header></template>
+        <template #body>
+        <EditSentence :item="nowItem" @close-modal="editSentence"/>
+        </template>
+      </Modal>
     </section>
   </div>
 </template>
@@ -42,16 +53,22 @@
 // import Book from '@/components/Main/Book.vue'
 import CommunityItem from '../components/Community/CommunityItem.vue'
 import CommunityBook from '../components/Search/SearchBookDetail.vue'
+import Modal from '@/components/Element/Modal.vue'
+import EditSentence from '@/components/Profile/EditSentence.vue'
 
 
 export default {
   components: {
     // Book,
     CommunityItem,
-    CommunityBook
+    CommunityBook,
+    Modal,
+    EditSentence,
   },
   data() {
     return {
+      nowItem: {},
+      showEdit:false,
       showItems: [],
       readBook : [],
       highlightBook : [],
@@ -67,11 +84,17 @@ export default {
     this.getWishListBook();
     this.getHighLightBook();
   },
+  updated() { 
+    console.log('updated'); 
+    this.$nextTick(function () { 
+      this.getHighlightList()
+    }); 
+  },
+
   methods: {
     getHighlightList(){
       this.$axios.get(`${this.$store.getters.getServer}/highlight`)
       .then(res => {
-        // console.log(res.data.data, 'res')
         this.showItems = res.data.data
       })
       .catch(err => {
@@ -116,6 +139,14 @@ export default {
         console.log(err)
       })
 
+    },
+    showEditModal(item) {
+      this.nowItem = item
+      this.showEdit = true
+    },
+    editSentence(){
+      this.showEdit=false
+      this.getHighlightList()
     }
   },
 

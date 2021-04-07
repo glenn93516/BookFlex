@@ -231,7 +231,7 @@ export default {
     },
     closeModal() {
       this.isModalViewed = false
-      console.log('닫아')
+      // console.log('닫아')
     },
     openModal(book) {
       // 선택한객체를 변수와 store에 모두 저장
@@ -241,10 +241,11 @@ export default {
       this.selectBook(book)
       this.step = 'collectSentence'
       this.isModalViewed = true
-      console.log('열어')
+      // console.log('열어')
     },
-    deleteReadBook(isbn) {
-      console.log(isbn)
+    // deleteReadBook(isbn) {
+    deleteReadBook() {
+      // console.log(isbn)
       // 읽은 책 목록 삭제하기
       // 1. 위시리스트 기반 추천이 완료되면 data 분리(현재 유저기반 공유중)
       // 2. 각 추천별 id 부여 => props로 전달
@@ -252,7 +253,7 @@ export default {
       // 4. 해당 data리스트에서 책 삭제하기
     },
     goToReaction() {
-      console.log('되나?')
+      // console.log('되나?')
       this.step = "bookReaction"
     },
     selectBook(book) {

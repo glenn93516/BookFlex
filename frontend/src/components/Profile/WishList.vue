@@ -12,7 +12,7 @@
           :src="book.book_cover" 
           alt=""
           class="hvr-grow-shadow mouse-pointer"
-          @click="clickWishBook()"
+          @click="clickWishBook(book.book_isbn)"
         >
       </div>
     </div>
@@ -39,13 +39,13 @@ export default {
       }
       this.$axios.get(`${this.$store.getters.getServer}/wishlist`, {headers})
       .then(res => {
-        console.log(res)
-        console.log(res.data.data, '위시리스트')
+        // console.log(res)
+        // console.log(res.data.data, '위시리스트')
         this.wishLists = res.data.data
       })
     },
-    clickWishBook() {
-      alert('위시리스트 책입니닷')
+    clickWishBook(isbn) {
+      this.$router.push({name: 'BookDetail', params: {bookIsbn: isbn}})
     },
   }
 }
@@ -61,6 +61,7 @@ export default {
   display: inline-block; 
   margin-left: 27px;
   margin-top: 30px;
+  margin-bottom: 1rem;
 }
 #wishlist div:nth-child(5n+1) {
   margin-left: 0;

@@ -35,10 +35,10 @@ export default {
     getBookData() {
       this.$axios.get(`${this.$store.getters.getServer}/bookshelf/${this.$route.params.userName}`)
       .then(res => {
-        console.log(res.data.data, '유저 읽음 res.data.data')
+        // console.log(res.data.data, '유저 읽음 res.data.data')
         this.readBooks = res.data.data
       })
-      console.log(this.readBooks, 'readBookds')
+      // console.log(this.readBooks, 'readBookds')
     },
     clickReadBook(isbn) {
       // alert('읽은 책입니다(～￣▽￣)～✨')
@@ -58,6 +58,7 @@ export default {
   display: inline-block; 
   margin-left: 27px;
   margin-top: 30px;
+  margin-bottom: 1rem;
 }
 #readbook div:nth-child(5n+1) {
   margin-left: 0;
