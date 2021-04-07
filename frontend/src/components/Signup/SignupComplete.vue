@@ -45,13 +45,13 @@ export default {
   },
   created() {
     this.signupComplete()
-    console.log(this.$store.getters.getUser)
+    // console.log(this.$store.getters.getUser)
     const signupInfo = this.$store.getters.getSignupInfo
-    console.log(signupInfo, 'signupInfo')
+    // console.log(signupInfo, 'signupInfo')
     this.$axios.post(`${this.$store.getters.getServer}/user/join`, signupInfo)
-    .then(res => {
-      console.log('회원가입 결과!')
-      console.log(res)
+    .then(() => {
+      // console.log('회원가입 결과!')
+      // console.log(res)
       this.login()
     })
     .catch(err => {
@@ -63,7 +63,7 @@ export default {
       this.$emit('nowPage', "signupComplete")
     },
     servePageInfo() {
-      console.log("여기는 회원가입완료")
+      // console.log("여기는 회원가입완료")
       return this.pageData
     },
     login() {

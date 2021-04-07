@@ -73,15 +73,15 @@ export default {
         const idx = this.checkedValues.indexOf(option.text)
         this.checkedValues.splice(idx, 1)
       }
-      console.log(this.checkedValues, 'checkedValues')
+      // console.log(this.checkedValues, 'checkedValues')
     },
     submitUserJob(Job) {
-      console.log(Job, 'Job') 
+      // console.log(Job, 'Job') 
       this.$store.dispatch('SubmitUserJob', Job)
       this.goToSubmitPic()
     },
     goToSubmitPic() {
-      console.log('담겼나?', this.$store.getters.getUser)
+      // console.log('담겼나?', this.$store.getters.getUser)
       this.$router.push({ name: 'SubmitPic'})
     }
   },

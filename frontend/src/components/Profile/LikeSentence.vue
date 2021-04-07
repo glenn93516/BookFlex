@@ -47,13 +47,13 @@ export default {
     SentenceDetail,
   },
   mounted() {
-    console.log(this.$route.params.userName, 'savesentence')
+    // console.log(this.$route.params.userName, 'savesentence')
     const form = {
       'onlyGood': true
     }
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`, {params: form})
     .then(res => {
-      console.log(res.data.data, '이거 115')
+      // console.log(res.data.data, '이거 115')
       this.defaultItems = res.data.data
       this.showItems = this.defaultItems.slice(0, 6)
       if (this.defaultItems.length > 6) {

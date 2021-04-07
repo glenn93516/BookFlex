@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     servePageInfo() {
-      console.log("여기는 선호장르")
+      // console.log("여기는 선호장르")
       return this.pageData
     },
     // 사용자가 선택한 항목의 체크표시
@@ -64,7 +64,7 @@ export default {
         const idx = this.checkedValues.indexOf(option)
         this.checkedValues.splice(idx, 1)
       }
-      console.log(this.checkedValues)
+      // console.log(this.checkedValues)
     },
     goToComplete() {
       this.changeGenreState()
@@ -74,7 +74,7 @@ export default {
     // 모여있는 장르데이터를 분해해서 넣어주기
     changeGenreState() {
       for (let option of this.checkedValues) {
-        console.log(option)
+        // console.log(option)
         if (option.value == 0) {
           this.checkedGenres.push(
             {"genreId": 1, "genreName": "가정/요리/뷰티"},
@@ -132,7 +132,7 @@ export default {
           )
         }
       }
-      console.log(this.checkedGenres)
+      // console.log(this.checkedGenres)
       this.$store.commit('SubmitPref', this.checkedGenres)
       this.$router.push({ name: "SignupComplete" })
     }
