@@ -32,7 +32,7 @@
       :item="nowItem" 
       @close-modal="showDetail=false" 
       @editSentence="showDetail=false;showEdit=true;"
-      @delSentence="getSentence"
+      @delSentence="delSentence"
       ></sentence-detail>
     </b-modal>
     <Modal v-if="showEdit" @close-modal="showEdit=false">
@@ -106,6 +106,10 @@ export default {
       this.showDetail = true
       this.nowItem = item
     },
+    delSentence() {
+      this.$router.go(this.$router.currentRoute)
+      this.getSentence()
+    }
   },
 }
 </script>
