@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import Home from '../views/Home.vue'
 
 Vue.use(VueRouter);
 
@@ -13,9 +12,6 @@ const routes = [
   {
     path: '/',
     name: 'Background',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/BackgroundNav.vue'),
     children: [
       {
@@ -27,11 +23,27 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: () => import('../components/Login/Login.vue'),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.getItem('jwt')) {
+            next({name: 'MainBook'})
+            alert('잘못된 접근입니다.')
+          } else {
+            next()
+          }
+        }
       },
       {
         path: '/signup',
         name: 'Signup',
         component: () => import('../components/Signup/Signup.vue'),
+        beforeEnter: (to, from, next) => {
+          if (localStorage.getItem('jwt')) {
+            next({name: 'MainBook'})
+            alert('잘못된 접근입니다.')
+          } else {
+            next()
+          }
+        },
         children: [
           {
             path: '1',
@@ -42,21 +54,53 @@ const routes = [
             path: '2',
             name: 'CheckEmail',
             component: () => import('../components/Signup/CheckEmail.vue'),
+            beforeEnter: (to, from, next) => {
+              if (from.name==='SubmitEmail') {
+                next()
+              } else {
+                next({name: 'MainBook'})
+                alert('잘못된 접근입니다.')
+              }
+            }
           },
           {
             path: '3',
             name: 'InputName',
             component: () => import('../components/Signup/InputName.vue'),
+            beforeEnter: (to, from, next) => {
+              if (from.name==='CheckEmail') {
+                next()
+              } else {
+                next({name: 'MainBook'})
+                alert('잘못된 접근입니다.')
+              }
+            }
           },
           {
             path: '4',
             name: 'SubmitPref',
             component: () => import('../components/Signup/SubmitPref.vue'),
+            beforeEnter: (to, from, next) => {
+              if (from.name==='InputName') {
+                next()
+              } else {
+                next({name: 'MainBook'})
+                alert('잘못된 접근입니다.')
+              }
+            }
           },
           {
             path: '5',
             name: 'SignupComplete',
             component: () => import('../components/Signup/SignupComplete.vue'),
+            beforeEnter: (to, from, next) => {
+              if (from.name==='SubmitPref') {
+                next()
+              } else {
+                next({name: 'MainBook'})
+                alert('잘못된 접근입니다.')
+              }
+            }
           },
         ],
       },
@@ -69,26 +113,66 @@ const routes = [
             path: '1',
             name: 'SubmitGender',
             component: () => import('../components/SubSignup/SubmitGender.vue'),
+            beforeEnter: (to, from, next) => {
+              if (from.name==='SignupComplete' || from.name==='SubmitBirth') {
+                next()
+              } else {
+                next({name: 'MainBook'})
+                alert('잘못된 접근입니다.')
+              }
+            }
           },
           {
             path: '2',
             name: 'SubmitBirth',
             component: () => import('../components/SubSignup/SubmitBirth.vue'),
+            beforeEnter: (to, from, next) => {
+              if (from.name==='SubmitGender' || from.name==='SubmitJob') {
+                next()
+              } else {
+                next({name: 'MainBook'})
+                alert('잘못된 접근입니다.')
+              }
+            }
           },
           {
             path: '3',
             name: 'SubmitJob',
             component: () => import('../components/SubSignup/SubmitJob.vue'),
+            beforeEnter: (to, from, next) => {
+              if (from.name==='SubmitBirth' || from.name==='SubmitPic') {
+                next()
+              } else {
+                next({name: 'MainBook'})
+                alert('잘못된 접근입니다.')
+              }
+            }
           },
           {
             path: '4',
             name: 'SubmitPic',
             component: () => import('../components/SubSignup/SubmitPic.vue'),
+            beforeEnter: (to, from, next) => {
+              if (from.name==='SubmitJob') {
+                next()
+              } else {
+                next({name: 'MainBook'})
+                alert('잘못된 접근입니다.')
+              }
+            }
           },
           {
             path: '5',
             name: 'SubSignComplete',
             component: () => import('../components/SubSignup/SubSignComplete.vue'),
+            beforeEnter: (to, from, next) => {
+              if (from.name==='SubmitPic') {
+                next()
+              } else {
+                next({name: 'MainBook'})
+                alert('잘못된 접근입니다.')
+              }
+            }
           },
         ],
       },
@@ -97,6 +181,14 @@ const routes = [
         name: 'Profile',
         component: () => import('../views/Profile.vue'),
         redirect: '/profile/:userName/genre',
+        beforeEnter: (to, from, next) => {
+          if (localStorage.getItem('jwt')) {
+            next()
+          } else {
+            next({name: 'Login'})
+            alert('로그인이 필요한 서비스입니다.')
+          }
+        },
         props: true,
         children: [
           {
@@ -137,6 +229,14 @@ const routes = [
         name: 'Message',
         component: () => import('../components/Message/Message.vue'),
         redirect: '/message/received',
+        beforeEnter: (to, from, next) => {
+          if (localStorage.getItem('jwt')) {
+            next()
+          } else {
+            next({name: 'Login'})
+            alert('로그인이 필요한 서비스입니다.')
+          }
+        },
         children: [
           {
             path: 'received',
@@ -197,6 +297,14 @@ const routes = [
         name: 'Password',
         component: () => import('../components/Password/Password.vue'),
         redirect: 'password/submitEmail',
+        beforeEnter: (to, from, next) => {
+          if (localStorage.getItem('jwt')) {
+            next({name: 'MainBook'})
+            alert('잘못된 접근입니다.')
+          } else {
+            next()
+          }
+        },
         children: [
           {
             path: 'submitEmail',
@@ -234,6 +342,5 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
-// router guard로 이메일 인증 건너뛰기 막아줘야함
 
 export default router;

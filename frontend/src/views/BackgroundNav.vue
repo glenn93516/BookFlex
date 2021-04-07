@@ -114,6 +114,9 @@
         @click="postBoxClick" 
       />
     </aside>
+    <footer class="footer-content">
+      Copyright © 앙상블. All Rights Reserved.
+    </footer>
   </div>
 </template>
 
