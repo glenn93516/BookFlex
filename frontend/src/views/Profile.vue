@@ -195,6 +195,9 @@ export default {
           ,'name': '남성'
         },
       },
+
+
+      dataLength : 0, //highlight res.data 
     }
   },
   methods: {
@@ -245,7 +248,7 @@ export default {
     .then(res => {
       if (res.status === 200) {
         this.nowUserName = this.$store.state.user.userNickname
-        console.log(this.nowUserName, 'nowUserName')
+        // console.log(this.nowUserName, 'nowUserName')
       } else {
         if (res.status === 202) {
           this.$router.push('not-exist')
@@ -271,7 +274,7 @@ export default {
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}`)
     .then(res => {
       this.userInfo = res.data.data
-      console.log(this.userInfo, 'this.userInfo')
+      // console.log(this.userInfo, 'this.userInfo')
       this.genreClassification()
     })
     .catch(err => {
@@ -280,7 +283,8 @@ export default {
 
     this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`)
     .then(res => {
-      console.log(res.data.length, '이거 갯수 세야함')
+      // console.log(res.data.length, '이거 갯수 세야함')
+      this.dataLength = res.data.length
     })
 
     this.setMedal()

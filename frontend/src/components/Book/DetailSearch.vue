@@ -37,16 +37,16 @@ export default {
     }
   },
   computed() {
-    console.log(this.$rout.params.word);
-    if(this.$route.params.word!=undefined){
-      console.log('route : '+this.$route.params.word);
-      this.text = this.$route.params.word;
-      this.searchClick()
-    }
+    // console.log(this.$rout.params.word);
+    // if(this.$route.params.word!=undefined){
+    //   // console.log('route : '+this.$route.params.word);
+    //   this.text = this.$route.params.word;
+    //   this.searchClick()
+    // }
   },
   methods: {
     setIsbn(isbn) {
-      console.log("isbn>>",isbn)
+      // console.log("isbn>>",isbn)
       this.$emit("setIsbn", isbn)
     },
     searchClick(){
@@ -67,7 +67,7 @@ export default {
       this.$axios.get(`${this.$store.getters.getServer}/book`,{ params: form })
         .then(res => {
           this.bookData.titleData = res.data.data;
-          console.log('this.bookData.titleData  >> ',this.bookData.titleData)
+          // console.log('this.bookData.titleData  >> ',this.bookData.titleData)
         })
         .catch(err => {
           console.error(err)

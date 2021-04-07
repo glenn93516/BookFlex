@@ -144,15 +144,20 @@ frontend
 # 📚주요 기능
 
 - 메인 페이지(읽은 책, 선호 장르, 위시리스트 기반 추천)
+  ![메인페이지](Document/images/mainpage.png)
 - 책 상세 페이지
-  - 감성 분석 + 워드 클라우드
-  - 키워드 분류
-  - 책 비교
+  - 키워드 분석  
+    ![상세1](Document/images/book_detail_1.gif)
+  - 김정 분석 + 토픽 분석  
+    ![상세2](Document/images/book_detail_2.gif)
+  - 책 비교  
+    ![상세3](Document/images/book_detail_3.gif)
 - 문장 수집
 - 책 검색
 - 유저 선호 장르 분석
 - 커뮤니티
   - 문장수집
+    ![문장수집](Document/images/community.png)
   - 쪽지
 
 # 🏆수상

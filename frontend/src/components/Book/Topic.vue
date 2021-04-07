@@ -144,7 +144,7 @@
         })
       },
       setIsbn(isbn) {
-        console.log("isbn>>",isbn)
+        // console.log("isbn>>",isbn)
         this.$emit("setIsbn", isbn)
       },
       goToBookDetail() {

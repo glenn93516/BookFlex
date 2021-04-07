@@ -128,7 +128,7 @@ export default {
         })
         .catch(() => {
           this.userData = null;
-          console.log("없는 유저입니다.")
+          // console.log("없는 유저입니다.")
           // console.error(err);
         })
       if(temp==null){

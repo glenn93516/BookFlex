@@ -65,7 +65,7 @@ export default {
     Modal,
   },
   mounted() {
-    console.log(this.$route.params.userName, 'savesentence')
+    // console.log(this.$route.params.userName, 'savesentence')
     // 문장 요청 보내기
     // 지금은 숫자로 요청해야함
     this.getSentence()
@@ -86,7 +86,7 @@ export default {
     getSentence() {
       this.$axios.get(`${this.$store.getters.getServer}/user/${this.$route.params.userName}/highlight`)
       .then(res => {
-        console.log(res.data.data, '이거 115')
+        // console.log(res.data.data, '이거 115')
         this.defaultItems = res.data.data
         this.showItems = this.defaultItems.slice(0, 6)
         if (this.defaultItems.length > 6) {
