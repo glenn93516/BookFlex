@@ -287,6 +287,7 @@ import Book from '@/components/Main/Book.vue'
           '더 포스터 북 by 이슬아',
           'Tripful 트립풀 런던',
           '분할패턴 1 (소장용)',
+          '감사하면 달라지는 것들',
         ],
         nowBookObj: {},
       }

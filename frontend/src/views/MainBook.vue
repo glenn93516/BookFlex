@@ -26,7 +26,7 @@
             <span id="first-tag">
               실시간 도서
             </span>
-            <span>맞춤형 추천은 <span @click="goToLogin">로그인</span>시에만 가능합니다.</span>
+            <span class="no-login">맞춤형 추천은 <span @click="goToLogin" class="login-letter hvr-grow">로그인</span>시에만 가능합니다.</span>
           </div>
 
         </div>
@@ -279,6 +279,17 @@ export default {
 </script>
 
 <style>
+  .no-login {
+    font-size: 1rem;
+    font-weight: normal;
+  }
+  .login-letter {
+    font-weight: bold;
+  }
+  .login-letter:hover {
+    cursor: pointer;
+    color: #006ea1;
+  }
   .recommend-back {
     /* background-image: url('../assets/waterprint_back.jpg'); */
     background-repeat: no-repeat;
