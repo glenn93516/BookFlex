@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     getPageInfo() {
-      console.log(" getPageInfo 실행!")
+      // console.log(" getPageInfo 실행!")
       const PageData = this.$refs.progress.servePageInfo()
       const progressGraph = document.querySelector('.progress-bar')
       progressGraph.innerHTML = ""

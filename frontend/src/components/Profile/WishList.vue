@@ -39,8 +39,8 @@ export default {
       }
       this.$axios.get(`${this.$store.getters.getServer}/wishlist`, {headers})
       .then(res => {
-        console.log(res)
-        console.log(res.data.data, '위시리스트')
+        // console.log(res)
+        // console.log(res.data.data, '위시리스트')
         this.wishLists = res.data.data
       })
     },
