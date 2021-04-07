@@ -237,11 +237,9 @@
       <div style="width: 100vw; height: 10vh; justify-content: center; text-align: center; align-items: center;">
         <button class="go-main-btn" @click="goMain()">북플렉스로 이동</button>
       </div>
-      <div style="height: 6vh; width: 100vw;background-color: rgba(235, 234, 232, 1);">
-        <p class="footer-content">
-          Copyright © 앙상블. All Rights Reserved.
-        </p>
-      </div>
+    <footer class="footer-content">
+      Copyright © 앙상블. All Rights Reserved.
+    </footer>
     </div>
   </div>
 </template>
@@ -287,6 +285,8 @@ import Book from '@/components/Main/Book.vue'
           '그믐, 또는 당신이 세계를 기억하는 방식',
           '국경시장',
           '더 포스터 북 by 이슬아',
+          'Tripful 트립풀 런던',
+          '분할패턴 1 (소장용)',
         ],
         nowBookObj: {},
       }
@@ -488,7 +488,7 @@ import Book from '@/components/Main/Book.vue'
   #main .section {
     width: 30vw;
     background-color: rgba(0, 0, 0, 0.5);
-    /* height: 80vh; */
+    height: 80vh;
     margin: 5vh 0;
     border-radius: 0.5rem;
     padding: 3vh 3vw 3vh 3vw;

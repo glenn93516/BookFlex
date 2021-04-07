@@ -226,7 +226,7 @@ export default {
     width: 465px;
     border-radius: 10px 10px 0 0;
     height: 300px;
-    top: 54px;
+    top: 55px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     min-width: 465px;

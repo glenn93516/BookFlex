@@ -169,7 +169,9 @@ export default new Vuex.Store({
     },
     UpdateUserInfo(context, User) {
       let data = new FormData();
-      data.append('userProfileImgFile', User.userProfileImgFile);
+      if (User.userProfileImgFile != null) {
+        data.append('userProfileImgFile', User.userProfileImgFile);
+      }
       data.append('userEmail', User.userEmail);
       data.append('userNickname', User.userNickname);
       data.append('userBirth', User.userBirth);
