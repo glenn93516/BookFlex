@@ -54,7 +54,7 @@
           <font-awesome-icon 
             size="2x"
             class="text-primary mouse-pointer"
-            @click="modifySentence()"
+            @click="editSentence()"
             @mouseover="editIcon = ['fas', 'edit']"
             @mouseleave="editIcon = ['far', 'edit']"
             :icon="editIcon"
@@ -164,16 +164,18 @@ export default {
         "Authorization": token
       }
       // console.log(this.item, '여기는 아이템')
-      this.$axios.delete(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {}, {headers})
+      this.$axios.delete(`${this.$store.getters.getServer}/highlight/${this.item.highlightId}`, {headers})
       .then(() => {
         // console.log(res, '삭제 성공')
       })
       .catch(err => {
         console.error(err, '삭제 실패')
       })
-    },
-    modifySentence() {
 
+      this.$emit("delSentence")
+    },
+    editSentence() {
+      this.$emit("editSentence")
     },
   }
 }

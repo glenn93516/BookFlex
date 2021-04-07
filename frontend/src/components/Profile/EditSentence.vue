@@ -51,8 +51,8 @@
           id="sentence-img"
           v-model="file"
           :state="Boolean(file)"
-          placeholder="Choose a file or drop it here..."
-          drop-placeholder="Drop file here..."
+          placeholder="파일을 선택하거나 끌어서 넣어주세요"
+          drop-placeholder=""
         >
         </b-form-file>
           <div class="mt-3" style="display: inline-block; margin-right: 50px;">
@@ -108,7 +108,7 @@ export default {
   methods: {
     editSentence() {
       // 토큰, isbn, 문장 수집 내용(text), 이미지 파일, 책 페이지, 공개 여부
-      if (!this.file || !this.text || !this.sentencePage) {
+      if (!this.text || !this.sentencePage) {
         alert("카드를 채워주세요!!")
       } else {
         const token = localStorage.getItem('jwt')
