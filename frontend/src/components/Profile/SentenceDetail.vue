@@ -201,7 +201,8 @@ export default {
     },
     
     goBook(item) {
-      console.log(item.bookIsbn, 'item.bookIsbn')
+      // console.log(item.bookIsbn, 'item.bookIsbn')
+      this.$router.push({ name: 'FirstPage', params: { bookIsbn: String(item.bookIsbn) } })
     }
     
   }
