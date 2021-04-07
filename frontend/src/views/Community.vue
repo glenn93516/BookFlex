@@ -78,6 +78,22 @@ export default {
     }
   },
   created() {
+    const token = localStorage.getItem('jwt')
+    const headers = {
+      "Authorization" : token
+    }
+    // console.log('token', token)
+    if (token) {
+      this.$axios.get(`${this.$store.getters.getServer}/user`, {headers})
+      .then(res => {
+        this.userInfo = res.data.data
+        this.$store.commit('UpdateUserInfo', res.data.data)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    } 
+
     this.getHighlightList();
     this.getReadBook();
     this.getGoodBook();
