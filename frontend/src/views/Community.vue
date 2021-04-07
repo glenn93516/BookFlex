@@ -36,7 +36,7 @@
           :key="item.index" 
           :item="item" 
           @editSentence="showEditModal(item)"
-          @delSentence="getHighlightList">
+          @delSentence="delSentence">
         </community-item>
       </div>
       <Modal v-if="showEdit" @close-modal="showEdit=false">
@@ -84,13 +84,6 @@ export default {
     this.getWishListBook();
     this.getHighLightBook();
   },
-  updated() { 
-    console.log('updated'); 
-    this.$nextTick(function () { 
-      this.getHighlightList()
-    }); 
-  },
-
   methods: {
     getHighlightList(){
       this.$axios.get(`${this.$store.getters.getServer}/highlight`)
@@ -144,9 +137,13 @@ export default {
       this.nowItem = item
       this.showEdit = true
     },
-    editSentence(){
+    editSentence() {
       this.showEdit=false
       this.getHighlightList()
+    },
+    delSentence() {
+      this.$router.go(this.$router.currentRoute)
+      this.getHighLightBook()
     }
   },
 
