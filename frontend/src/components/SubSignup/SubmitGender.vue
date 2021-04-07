@@ -59,7 +59,7 @@ export default {
     },
     submitUserGender(gender) {
       this.$store.dispatch('SubmitUserGender', gender)
-      console.log('담겼나?', this.$store.getters.getUser)
+      // console.log('담겼나?', this.$store.getters.getUser)
       this.$router.push({ name: "SubmitBirth" })
     }
   },
