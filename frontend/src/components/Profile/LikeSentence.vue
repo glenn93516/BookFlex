@@ -56,6 +56,7 @@ export default {
       // console.log(res.data.data, '이거 115')
       this.defaultItems = res.data.data
       this.showItems = this.defaultItems.slice(0, 6)
+      console.log(this.showItems, 'this.showItems')
       if (this.defaultItems.length > 6) {
         this.moreBtn = true
       } else {
