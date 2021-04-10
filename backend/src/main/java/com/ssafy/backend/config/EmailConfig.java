@@ -20,7 +20,7 @@ public class EmailConfig {
     private boolean starttls;
     @Value("${spring.mail.username}")
     private String username;
-    private final String password = "@rkdfla5278";
+    private final String password = "PASSWORD";
 
     @Bean
     public JavaMailSender javaMailSender() {
