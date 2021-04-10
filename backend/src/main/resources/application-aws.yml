@@ -1,7 +1,7 @@
 cloud:
   aws:
     s3:
-      bucket: fieldproject
+      bucket: BUCKET_NAME
     region:
       static: ap-northeast-2
     stack:
