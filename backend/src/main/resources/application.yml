@@ -17,7 +17,7 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: dev.leekangrim@gmail.com
+    username: USERNAME
     password:
     smtp:
       auth: true
@@ -50,7 +50,7 @@ spring:
 spring:
   profiles: prod
   datasource:
-    url: jdbc:mysql://field-ensemble.cqwzhdgaabxu.ap-northeast-2.rds.amazonaws.com:3306/fieldproject?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
-    username: ssafy
-    password: ssafyssafy
+    url: RDS_URL
+    username: USERNAME
+    password: PASSWORD
     driver-class-name: com.mysql.cj.jdbc.Driver
