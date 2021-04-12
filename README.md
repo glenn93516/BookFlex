@@ -146,7 +146,13 @@ frontend
 
 ## 메인 페이지(읽은 책, 선호 장르, 위시리스트 기반 추천)
 
-![메인페이지](Document/images/mainpage.png)
+### 👩유저 A (문학, 예술, 여행 관련 도서 선호)
+
+![추천_A](Document/images/recommend_user_a.gif)
+
+### 🧑유저 B (프로그래밍 관련 도서 선호)
+
+![추천_B](Document/images/recommend_user_b.gif)
 
 ## 책 상세 페이지
 
